@@ -25,7 +25,7 @@ public class BaseAspect {
     }
 
 
-    @Pointcut("execution(* cn.com.flaginfo.platform.terminal.controller.*.*(..))")
+    @Pointcut("execution(* cn.com.cubic.platform.a_book.controller.*.*(..))")
     public void pointcut(){
     }
 

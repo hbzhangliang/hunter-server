@@ -1,6 +1,6 @@
 package cn.com.cubic.platform.utils.Exception;
 
-import cn.com.cubic.platform.utils.resp.TerminalBaseResponse;
+import cn.com.cubic.platform.utils.resp.HunterBaseResponse;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +26,7 @@ public class GlobalExceptionHandler {
 	// 添加全局异常处理流程，根据需要设置需要处理的异常
 	@ExceptionHandler(value = IllegalArgumentException.class)
 	public Object MethodArgumentNotValidHandler(HttpServletRequest request, IllegalArgumentException exception) {
-		return TerminalBaseResponse.error(exception.getMessage());
+		return HunterBaseResponse.error(exception.getMessage());
 	}
 
 	@ExceptionHandler(value = Exception.class)
@@ -35,10 +35,10 @@ public class GlobalExceptionHandler {
 		for( Throwable throwable : ExceptionUtils.getThrowableList(e) ){
 			logger.debug("Error : [{}]", throwable.getClass().getName());
 			if( throwable instanceof TerminalException ){
-				return TerminalBaseResponse.error(throwable.getMessage());
+				return HunterBaseResponse.error(throwable.getMessage());
 			}
 		}
 		logger.error("GlobalDefaultExceptionHandler.defaultErrorHandler", e);
-		return TerminalBaseResponse.error("未知异常");
+		return HunterBaseResponse.error("未知异常");
 	}
 }
