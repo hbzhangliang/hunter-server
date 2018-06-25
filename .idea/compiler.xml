@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="book-server" />
+        <module name="hunter-center" />
+        <module name="hunter-server" />
+        <module name="terminal-center" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel target="1.8">
+      <module name="book-server" target="1.8" />
+      <module name="hunter-center" target="1.8" />
+      <module name="hunter-server" target="1.8" />
+      <module name="terminal-center" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

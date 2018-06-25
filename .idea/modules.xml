@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/hunter-center.iml" filepath="$PROJECT_DIR$/hunter-center.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hunter-server.iml" filepath="$PROJECT_DIR$/hunter-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hunterserver/hunterserver.iml" filepath="$PROJECT_DIR$/hunterserver/hunterserver.iml" />
+    </modules>
+  </component>
+</project>
