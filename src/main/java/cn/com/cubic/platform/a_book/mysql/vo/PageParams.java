@@ -10,29 +10,35 @@ import java.util.Map;
  */
 public class PageParams<T> implements Serializable {
 
-    //页码
-    private Integer page=1;
-    //每页记录数
+    private Integer currentPage=1;
+
     private Integer pageSize=10;
-    //记录总数
-    private Integer tatalRows=0;
-    //总页数
-    private Integer totalPage=1;
+
+    private Integer totalPage;
+
+    private Integer totalRows;
+
+    private String orderField="id";
+
+    private String orderDirection="asc";
 
     private List<T> data;
 
     private T bean;
 
-    //临时参数
-    private Map<String,Object> params=new HashMap<>(10);
+    //查询参数
+    private Map<String, Object> params = new HashMap<>(10);
+
+    //临时传递参数
+    private Map<String, String> tmpParams = new HashMap<String, String>(10);
 
 
-    public Integer getPage() {
-        return page;
+    public Integer getCurrentPage() {
+        return currentPage;
     }
 
-    public void setPage(Integer page) {
-        this.page = page;
+    public void setCurrentPage(Integer currentPage) {
+        this.currentPage = currentPage;
     }
 
     public Integer getPageSize() {
@@ -43,20 +49,36 @@ public class PageParams<T> implements Serializable {
         this.pageSize = pageSize;
     }
 
-    public Integer getTatalRows() {
-        return tatalRows;
-    }
-
-    public void setTatalRows(Integer tatalRows) {
-        this.tatalRows = tatalRows;
-    }
-
     public Integer getTotalPage() {
         return totalPage;
     }
 
     public void setTotalPage(Integer totalPage) {
         this.totalPage = totalPage;
+    }
+
+    public Integer getTotalRows() {
+        return totalRows;
+    }
+
+    public void setTotalRows(Integer totalRows) {
+        this.totalRows = totalRows;
+    }
+
+    public String getOrderField() {
+        return orderField;
+    }
+
+    public void setOrderField(String orderField) {
+        this.orderField = orderField;
+    }
+
+    public String getOrderDirection() {
+        return orderDirection;
+    }
+
+    public void setOrderDirection(String orderDirection) {
+        this.orderDirection = orderDirection;
     }
 
     public List<T> getData() {
@@ -81,5 +103,13 @@ public class PageParams<T> implements Serializable {
 
     public void setParams(Map<String, Object> params) {
         this.params = params;
+    }
+
+    public Map<String, String> getTmpParams() {
+        return tmpParams;
+    }
+
+    public void setTmpParams(Map<String, String> tmpParams) {
+        this.tmpParams = tmpParams;
     }
 }

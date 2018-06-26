@@ -354,8 +354,8 @@ public class AuthorApiImpl implements AuthorApi {
     public BaseResponse<PageParams<Author>> authorList(PageForm pageForm) {
         BaseResponse<PageParams<Author>> result = null;
         try {
-            int startPoint=(pageForm.getPage()-1)*pageForm.getPageSize();
-            int length=pageForm.getPageSize();
+            int startPoint=(pageForm.getPageNum()-1)*pageForm.getNumPerPage();
+            int length=pageForm.getNumPerPage();
             String authorName=pageForm.getParams().get("name")==null?null:pageForm.getParams().get("name").toString();
             Criteria criteria=new Criteria();
             if(StringUtils.isNotEmpty(authorName)){
@@ -373,9 +373,9 @@ public class AuthorApiImpl implements AuthorApi {
             int count=(int)authorRepo.count(new Query(criteria));
             PageParams<Author> tmp=new PageParams<>();
             tmp.setData(authors);
-            tmp.setPage(pageForm.getPage());
-            tmp.setPageSize(pageForm.getPageSize());
-            tmp.setTatalRows(count);
+            tmp.setCurrentPage(pageForm.getPageNum());
+//            tmp.setNumPerPage(pageForm.getNumPerPage());
+//            tmp.setTotalCount(count);
             tmp.setTotalPage(count/length+1);
             result=new BaseResponse<PageParams<Author>>("查询数据成功",tmp);
         }

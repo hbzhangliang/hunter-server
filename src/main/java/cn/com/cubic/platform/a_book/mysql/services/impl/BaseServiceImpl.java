@@ -6,6 +6,7 @@ import cn.com.cubic.platform.a_book.mysql.mapper.BaseMapper;
 import cn.com.cubic.platform.a_book.mysql.services.BaseService;
 import cn.com.cubic.platform.a_book.mysql.vo.PageForm;
 import cn.com.cubic.platform.a_book.mysql.vo.PageParams;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -63,18 +64,22 @@ public abstract class BaseServiceImpl<P extends BaseEntity,Q extends BaseExample
     }
 
     @Override
-    public PageParams<P> listPage(Q example, PageForm pageForm) {
+    public PageParams<P> listPage(Q example, PageParams pageParams) {
         PageParams<P> result=new PageParams<>();
-        int currentPage=pageForm.getPage(),pageSize=pageForm.getPageSize();
+        int currentPage=pageParams.getCurrentPage(),pageSize=pageParams.getPageSize();
         RowBounds rowBounds=new RowBounds((currentPage-1)*pageSize,pageSize);
         List<P> list=mapper.selectByExampleWithRowbounds(example,rowBounds);
         result.setData(list);
-        result.setPage(currentPage);
-        result.setPageSize(pageSize);
+        result.setCurrentPage(currentPage);
+        result.setTotalPage(pageSize);
         int totalRows=mapper.countByExample(example),totalPage=(totalRows-1)/pageSize+1;
         result.setTotalPage(totalPage);
-        result.setTatalRows(totalRows);
-        result.setParams(pageForm.getParams());
+        result.setTotalRows(totalRows);
+        result.setParams(pageParams.getParams());
+        result.setOrderField(pageParams.getOrderField());
+        if(StringUtils.isNotBlank(pageParams.getOrderDirection())&&pageParams.getOrderDirection().equals("desc")){
+            result.setOrderDirection("desc");
+        }
         return result;
     }
 

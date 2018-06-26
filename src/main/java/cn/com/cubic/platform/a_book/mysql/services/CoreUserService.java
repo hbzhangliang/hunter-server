@@ -14,7 +14,7 @@ import java.util.List;
 
 public interface CoreUserService extends BaseService<CoreUser,CoreUserExample>{
 
-    BaseResponse<PageParams<CoreUser>> list(PageForm pageForm);
+    BaseResponse<PageParams<CoreUser>> list(PageParams pageParams);
 
     BaseResponse<CoreUser> findById(Long id);
 

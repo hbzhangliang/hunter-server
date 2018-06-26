@@ -36,9 +36,9 @@ public interface BaseService<P extends BaseEntity,Q extends BaseExample> {
      * example 查询条件，pageForm分页数据
      * pageForm包含了查询条件
      * @param example
-     * @param pageForm
+     * @param
      * @return
      */
-    PageParams<P> listPage(Q example, PageForm pageForm);
+    PageParams<P> listPage(Q example, PageParams pageParams);
 
 }

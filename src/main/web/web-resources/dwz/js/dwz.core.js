@@ -198,12 +198,12 @@ var DWZ = {
 			var $this = $(this);
 
 			$this.trigger(DWZ.eventType.pageClear);
-			
 			$.ajax({
 				type: op.type || 'GET',
 				url: op.url,
 				data: op.data,
 				cache: false,
+                // contentType:"application/json",
 				success: function(response){
 					var json = DWZ.jsonEval(response);
 					

@@ -26,8 +26,8 @@ public class BookApiImpl implements BookApi {
     public BaseResponse<PageParams<Book>> bookList(PageForm pageForm) {
         BaseResponse<PageParams<Book>> result = null;
         try {
-            int startPoint=(pageForm.getPage()-1)*pageForm.getPageSize();
-            int length=pageForm.getPageSize();
+            int startPoint=(pageForm.getPageNum()-1)*pageForm.getNumPerPage();
+            int length=pageForm.getNumPerPage();
             String bookName=pageForm.getParams().get("name")==null?null:pageForm.getParams().get("name").toString();
             Criteria criteria=new Criteria();
             if(StringUtils.isNotEmpty(bookName)){
@@ -49,9 +49,9 @@ public class BookApiImpl implements BookApi {
             int count=(int)bookRepo.count(new Query(criteria));
             PageParams<Book> tmp=new PageParams<>();
             tmp.setData(books);
-            tmp.setPage(pageForm.getPage());
-            tmp.setPageSize(pageForm.getPageSize());
-            tmp.setTatalRows(count);
+            tmp.setCurrentPage(pageForm.getPageNum());
+//            tmp.setNumPerPage(pageForm.getNumPerPage());
+//            tmp.setTotalCount(count);
             tmp.setTotalPage(count/length+1);
             result=new BaseResponse<PageParams<Book>>("查询数据成功",tmp);
         }

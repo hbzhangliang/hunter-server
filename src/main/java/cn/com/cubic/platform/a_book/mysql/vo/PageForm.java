@@ -9,30 +9,52 @@ import java.util.Map;
  */
 public class PageForm implements Serializable {
     //页码
-    private Integer page=1;
+    private Integer pageNum = 1;
     //每页记录数
-    private Integer pageSize=10;
+    private Integer numPerPage = 10;
+
+    private String orderField;
+
+    private String orderDirection;
+
 
     //查询参数
-    private Map<String,Object> params = new HashMap<>(10);
+    private Map<String, Object> params = new HashMap<>(10);
 
     //临时传递参数
     private Map<String, String> tmpParams = new HashMap<String, String>(10);
 
-    public Integer getPage() {
-        return page;
+
+    public Integer getPageNum() {
+        return pageNum;
     }
 
-    public void setPage(Integer page) {
-        this.page = page;
+    public void setPageNum(Integer pageNum) {
+        this.pageNum = pageNum;
     }
 
-    public Integer getPageSize() {
-        return pageSize;
+    public Integer getNumPerPage() {
+        return numPerPage;
     }
 
-    public void setPageSize(Integer pageSize) {
-        this.pageSize = pageSize;
+    public void setNumPerPage(Integer numPerPage) {
+        this.numPerPage = numPerPage;
+    }
+
+    public String getOrderField() {
+        return orderField;
+    }
+
+    public void setOrderField(String orderField) {
+        this.orderField = orderField;
+    }
+
+    public String getOrderDirection() {
+        return orderDirection;
+    }
+
+    public void setOrderDirection(String orderDirection) {
+        this.orderDirection = orderDirection;
     }
 
     public Map<String, Object> getParams() {

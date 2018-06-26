@@ -6,6 +6,7 @@ import cn.com.cubic.platform.a_book.mysql.services.CoreUserService;
 import cn.com.cubic.platform.a_book.mysql.vo.PageForm;
 import cn.com.cubic.platform.a_book.mysql.vo.PageParams;
 import cn.com.flaginfo.platform.api.common.base.BaseResponse;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -23,13 +24,21 @@ public class CoreUserServiceImpl extends BaseServiceImpl<CoreUser,CoreUserExampl
     private final static Logger log = LoggerFactory.getLogger(CoreUserServiceImpl.class);
 
     @Override
-    public BaseResponse<PageParams<CoreUser>> list(PageForm pageForm) {
+    public BaseResponse<PageParams<CoreUser>> list(PageParams pageParams) {
         CoreUserExample example = new CoreUserExample();
-        Map<String, Object> map = pageForm.getParams();
+        Map<String, Object> map = pageParams.getParams();
         if (null != map && null != map.get("name")) {
             example.createCriteria().andNameLike(map.get("name").toString());
         }
-        return new BaseResponse<>("查询数据成功", this.listPage(example, pageForm));
+        if(StringUtils.isNotEmpty(pageParams.getOrderField())){
+            if(StringUtils.isNotBlank(pageParams.getOrderDirection())&&pageParams.getOrderDirection().equals("desc")){
+                example.setOrderByClause(pageParams.getOrderField()+" desc");
+            }
+            else {
+                example.setOrderByClause(pageParams.getOrderField());
+            }
+        }
+        return new BaseResponse<>("查询数据成功", this.listPage(example, pageParams));
     }
 
     @Override

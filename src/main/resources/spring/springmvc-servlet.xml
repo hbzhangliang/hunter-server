@@ -15,7 +15,7 @@
     </context:component-scan>
 
     <mvc:annotation-driven>
-        <mvc:message-converters register-defaults="false">
+        <mvc:message-converters register-defaults="true">
             <bean class="org.springframework.http.converter.StringHttpMessageConverter">
                 <property name="supportedMediaTypes">
                     <list>
@@ -24,6 +24,7 @@
                         <value>text/plain;</value>
                         <value>text/json;charset=utf-8</value>
                         <value>application/json;charset=UTF-8</value>
+                        <value>application/x-www-form-urlencoded;charset=UTF-8</value>
                     </list>
                 </property>
             </bean>
@@ -37,6 +38,14 @@
     <mvc:resources location="/" mapping="/**/*.jpg"/>
     <mvc:resources location="/" mapping="/**/*.gif"/>
     <mvc:resources location="/" mapping="/**/*.ico"/>
+
+
+    <bean id="stringHttpMessageConverter"
+          class="org.springframework.http.converter.StringHttpMessageConverter" />
+    <bean id="jsonHttpMessageConverter"
+          class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
+
+
 
     <!-- 定义视图解析器 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"

@@ -87,7 +87,7 @@
                     <ul class="tree treeFolder">
                         <li><a>我的测试</a>
                             <ul>
-                                <li><a href="test/main.html" target="navTab" rel="main">我的测试</a></li>
+                                <li><a href="${base}/test/list.htm" target="navTab" rel="main">我的测试</a></li>
                             </ul>
                         </li>
                         <li><a href="tabsPage.html" target="navTab">主框架面板</a>

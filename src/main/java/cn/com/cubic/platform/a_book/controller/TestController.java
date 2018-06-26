@@ -4,10 +4,16 @@ package cn.com.cubic.platform.a_book.controller;
 import cn.com.cubic.platform.a_book.mysql.entity.CoreUser;
 import cn.com.cubic.platform.a_book.mysql.services.CoreUserService;
 import cn.com.cubic.platform.a_book.mysql.vo.PageForm;
+import cn.com.cubic.platform.a_book.mysql.vo.PageParams;
 import cn.com.cubic.platform.utils.RedisUtils;
+import com.alibaba.fastjson.JSONObject;
+import com.sun.istack.internal.Nullable;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Required;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,7 +21,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
 
@@ -35,13 +43,14 @@ public class TestController {
 
     /**
      * mysql 操作
-     * @param pageForm
+     * @param
      * @return
      */
     @RequestMapping(value = "/1")
     @ResponseBody
-    public Object test1(@RequestBody PageForm pageForm){
-        return coreUserService.list(pageForm);
+    public Object test1(){
+        return  null;
+//        return JSONObject.toJSONString(coreUserService.list(pageForm));
     }
 
     @RequestMapping(value = "/2")
@@ -81,13 +90,38 @@ public class TestController {
 
     @RequestMapping(value = "/6")
     public Object test6(){
-        PageForm pageForm=new PageForm();
         return new ModelAndView("index")
-                .addObject("obj",coreUserService.list(pageForm))
                 .addObject("flag","1");
     }
 
 
+
+    @RequestMapping(value = "/list")
+    public Object list(HttpServletRequest request){
+        PageParams pageParams=this.paramsToPageForm(request);
+        return new ModelAndView("test/main")
+                .addObject("obj",coreUserService.list(pageParams))
+                .addObject("flag","1");
+    }
+
+
+    private PageParams paramsToPageForm(HttpServletRequest request){
+        PageParams pageParams=new PageParams();
+        Enumeration enu=request.getParameterNames();
+        while(enu.hasMoreElements()){
+            String paraName=(String)enu.nextElement();
+            String value=request.getParameter(paraName);
+            if(StringUtils.isNotBlank(value))
+            switch (paraName){
+                case "pageNum":pageParams.setCurrentPage(Integer.valueOf(value));break;
+                case "pageSize":pageParams.setPageSize(Integer.valueOf(value));break;
+                case "orderField":pageParams.setOrderField(value);break;
+                case "orderDirection":pageParams.setOrderDirection(value);break;
+            }
+        }
+        return pageParams;
+
+    }
 
 
     @Autowired
