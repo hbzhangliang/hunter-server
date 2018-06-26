@@ -10,12 +10,22 @@
 
     <!-- 启用spring mvc 注解 -->
     <context:annotation-config />
-    <context:component-scan base-package="cn.com.cubic.platform"/>
+    <context:component-scan base-package="cn.com.cubic.platform">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
 
     <mvc:annotation-driven>
-        <mvc:message-converters register-defaults="true">
+        <mvc:message-converters register-defaults="false">
             <bean class="org.springframework.http.converter.StringHttpMessageConverter">
-                <property name="supportedMediaTypes" value="text/html;charset=UTF-8"/>
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>text/html;charset=utf-8</value>
+                        <value>text/xml;charset=utf-8</value>
+                        <value>text/plain;</value>
+                        <value>text/json;charset=utf-8</value>
+                        <value>application/json;charset=UTF-8</value>
+                    </list>
+                </property>
             </bean>
         </mvc:message-converters>
     </mvc:annotation-driven>

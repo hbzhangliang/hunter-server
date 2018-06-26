@@ -13,6 +13,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +25,7 @@ import java.util.Map;
  */
 @Validated
 @Controller
-@RequestMapping(value = "/test",produces = "application/json; charset=utf-8")
+@RequestMapping(value = "/test")
 public class TestController {
 
 
@@ -37,12 +38,10 @@ public class TestController {
      * @param pageForm
      * @return
      */
-
     @RequestMapping(value = "/1")
     @ResponseBody
     public Object test1(@RequestBody PageForm pageForm){
         return coreUserService.list(pageForm);
-
     }
 
     @RequestMapping(value = "/2")
@@ -77,6 +76,15 @@ public class TestController {
         String v=map.get("key");
         redisUtils.setObj("aa",v,"COMMON");
         return redisUtils.getObj("aa");
+    }
+
+
+    @RequestMapping(value = "/6")
+    public Object test6(){
+        PageForm pageForm=new PageForm();
+        return new ModelAndView("index")
+                .addObject("obj",coreUserService.list(pageForm))
+                .addObject("flag","1");
     }
 
 
