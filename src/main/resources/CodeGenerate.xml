@@ -15,13 +15,13 @@
                         connectionURL="jdbc:mysql://127.0.0.1:3306/all?serverTimezone=GMT&amp;useSSL=false&amp;nullNamePatternMatchesAll=true"
                         userId="all"
                         password="all" />
-        <javaModelGenerator targetPackage="cn.com.cubic.platform.a_book.mysql.entity" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="cn.com.cubic.platform.hunter.mysql.entity" targetProject="src/main/java">
             <property name="enableSubPackages" value="true" />
         </javaModelGenerator>
         <sqlMapGenerator targetPackage="mappers"  targetProject="src/main/resources" >
             <property name="enableSubPackages" value="true" />
         </sqlMapGenerator>
-        <javaClientGenerator targetPackage="cn.com.cubic.platform.a_book.mysql.mapper" targetProject="src/main/java" type="XMLMAPPER" >
+        <javaClientGenerator targetPackage="cn.com.cubic.platform.hunter.mysql.mapper" targetProject="src/main/java" type="XMLMAPPER" >
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
         <table schema="all" tableName="t_core_user" domainObjectName="CoreUser"

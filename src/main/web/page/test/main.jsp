@@ -21,10 +21,10 @@
 
 
 <form id="pagerForm" method="post" action="#rel#">
+    <input type="hidden" name="name" value="1" />
     <input type="hidden" name="pageNum" value="1" />
-    <input type="hidden" name="pageSize" value="${obj.data.pageSize}" />
-    <input type="hidden" name="orderField" value="${obj.data.orderField}" />
-    <input type="hidden" name="orderDirection" value="${obj.data.orderDirection}" />
+    <input type="hidden" name="numPerPage" value="${model.numPerPage}" />
+    <input type="hidden" name="orderField" value="${param.orderField}" />
 </form>
 
 <div class="pageHeader">
@@ -87,17 +87,18 @@
     <div class="panelBar">
         <div class="pages">
             <span>显示</span>
-            <select class="combox" name="pageSize" onchange="navTabPageBreak({pageSize:this.value})">
+            <select class="combox" name="numPerPage" onchange="navTabPageBreak({numPerPage:this.value})">
                 <option value="20">20</option>
                 <option value="50">50</option>
                 <option value="100">100</option>
+                <option value="150">150</option>
                 <option value="200">200</option>
+                <option value="250">250</option>
             </select>
-            <span>条，共${obj.data.totalRows}条</span>
+            <span>条，共${totalCount}条</span>
         </div>
 
-        <div class="pagination" targetType="navTab" totalCount="${obj.data.totalRows}" pageSize="${obj.data.pageSize}" pageNumShown="${obj.data.totalPage}" currentPage="${obj.data.currentPage}"></div>
-
+        <div class="pagination" targetType="navTab" totalCount="200" numPerPage="20" pageNumShown="10" currentPage="1"></div>
     </div>
 </div>
 
