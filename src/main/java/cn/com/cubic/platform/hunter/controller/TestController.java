@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -25,12 +27,8 @@ import java.util.Map;
 @Controller
 @RequestMapping(value = "/test",produces = "application/json; charset=utf-8")
 @ResponseBody
-public class TestController {
-
-
-
+public class TestController extends BaseController{
     private static final Logger log = LoggerFactory.getLogger(TestController.class);
-
 
     /**
      * mysql 操作
@@ -89,6 +87,9 @@ public class TestController {
             }
         });
         thread.start();
+
+        log.info(BaseController.getIp(this.request));
+
         return null;
     }
 
