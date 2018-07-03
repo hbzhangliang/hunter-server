@@ -30,14 +30,6 @@ public interface BaseService<P extends BaseEntity,Q extends BaseExample> {
 
     int updateByExample(@Param("record") P record, @Param("example") Q example);
 
-
-    /**
-     * example 查询条件，pageForm分页数据
-     * pageForm包含了查询条件
-     * @param example
-     * @param
-     * @return
-     */
-    PageParams<P> listPage(Q example, PageParams pageParams);
+    PageParams<P> listPage(Q example,PageParams<P> pageParams);
 
 }

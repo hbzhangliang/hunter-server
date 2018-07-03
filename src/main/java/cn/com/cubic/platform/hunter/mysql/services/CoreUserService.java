@@ -4,6 +4,7 @@ import cn.com.cubic.platform.hunter.mysql.entity.CoreUser;
 import cn.com.cubic.platform.hunter.mysql.entity.CoreUserExample;
 import cn.com.cubic.platform.hunter.mysql.vo.PageParams;
 import cn.com.flaginfo.platform.api.common.base.BaseResponse;
+import com.sun.istack.internal.NotNull;
 
 import java.util.List;
 
@@ -13,12 +14,14 @@ import java.util.List;
 
 public interface CoreUserService extends BaseService<CoreUser,CoreUserExample>{
 
-    BaseResponse<PageParams<CoreUser>> list(PageParams pageParams);
+    CoreUserExample construct(CoreUser coreUser);
 
-    BaseResponse<CoreUser> findById(Long id);
+    PageParams<CoreUser> list(PageParams<CoreUser> pageParams);
 
-    BaseResponse<Boolean> del(List<Long> ids);
+    CoreUser findById(@NotNull Long id);
 
-    BaseResponse<Boolean> saveOrUpdate(CoreUser coreUser);
+    Boolean del(List<Long> ids);
+
+    Boolean saveOrUpdate(CoreUser coreUser);
 
 }

@@ -1,6 +1,7 @@
 package cn.com.cubic.platform.hunter.controller;
 
 
+import cn.com.cubic.platform.hunter.mysql.entity.BaseEntity;
 import cn.com.cubic.platform.hunter.mysql.entity.CoreUser;
 import cn.com.cubic.platform.hunter.mysql.services.CoreUserService;
 import cn.com.cubic.platform.hunter.mysql.vo.PageParams;
@@ -27,7 +28,8 @@ import java.util.Map;
  */
 @Validated
 @Controller
-@RequestMapping(value = "/test")
+@RequestMapping(value = "/test",produces = "application/json; charset=utf-8")
+@ResponseBody
 public class TestController {
 
 
@@ -41,31 +43,26 @@ public class TestController {
      * @return
      */
     @RequestMapping(value = "/1")
-    @ResponseBody
-    public Object test1(){
-        return  null;
-//        return JSONObject.toJSONString(coreUserService.list(pageForm));
+    public Object test1(@RequestBody PageParams<CoreUser> pageParams){
+        return  coreUserService.list(pageParams);
     }
 
     @RequestMapping(value = "/2")
-    @ResponseBody
     public Object test2(@RequestBody Map<String,Object> map){
         Long id=Long.valueOf(map.get("id").toString());
         return coreUserService.findById(id);
     }
 
     @RequestMapping(value = "/3")
-    @ResponseBody
     public Object test3(@RequestBody Map<String,Object> map){
         List<Long> ids=(List) map.get("ids");
         return coreUserService.del(ids);
     }
 
     @RequestMapping(value = "/4")
-    @ResponseBody
     public Object test4(@RequestBody CoreUser coreUser){
         coreUserService.saveOrUpdate(coreUser);
-        return coreUserService.selectByExample(null);
+        return coreUser;
     }
 
 
@@ -74,7 +71,6 @@ public class TestController {
      */
 
     @RequestMapping(value = "/5")
-    @ResponseBody
     public Object test5(@RequestBody Map<String,String> map){
         String v=map.get("key");
         redisUtils.setObj("aa",v,"COMMON");
@@ -90,35 +86,6 @@ public class TestController {
 
 
 
-    @RequestMapping(value = "/list")
-    public Object list(HttpServletRequest request){
-        PageParams pageParams=this.paramsToPageForm(request);
-        return new ModelAndView("test/main")
-                .addObject("obj",coreUserService.list(pageParams))
-                .addObject("flag","1");
-    }
-
-
-    private PageParams paramsToPageForm(HttpServletRequest request){
-        PageParams pageParams=new PageParams();
-        Enumeration enu=request.getParameterNames();
-        while(enu.hasMoreElements()){
-            String paraName=(String)enu.nextElement();
-            String value=request.getParameter(paraName);
-            if(StringUtils.isNotBlank(value))
-            switch (paraName){
-                case "pageNum":{
-                    pageParams.setPageNum(Integer.valueOf(value));
-                    pageParams.setCurrentPage(Integer.valueOf(value));
-                }break;
-                case "numPerPage":pageParams.setNumPerPage(Integer.valueOf(value));break;
-                case "orderField":pageParams.setOrderField(value);break;
-                case "orderDirection":pageParams.setOrderDirection(value);break;
-            }
-        }
-        return pageParams;
-
-    }
 
 
     @Autowired

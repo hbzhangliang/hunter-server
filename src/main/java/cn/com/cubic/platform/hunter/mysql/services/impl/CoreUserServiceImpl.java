@@ -4,6 +4,8 @@ import cn.com.cubic.platform.hunter.mysql.entity.CoreUser;
 import cn.com.cubic.platform.hunter.mysql.entity.CoreUserExample;
 import cn.com.cubic.platform.hunter.mysql.services.CoreUserService;
 import cn.com.cubic.platform.hunter.mysql.vo.PageParams;
+import cn.com.cubic.platform.utils.Exception.HunterException;
+import cn.com.cubic.platform.utils.resp.HunterBaseResponse;
 import cn.com.flaginfo.platform.api.common.base.BaseResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -22,51 +24,53 @@ public class CoreUserServiceImpl extends BaseServiceImpl<CoreUser,CoreUserExampl
 
     private final static Logger log = LoggerFactory.getLogger(CoreUserServiceImpl.class);
 
+
     @Override
-    public BaseResponse<PageParams<CoreUser>> list(PageParams pageParams) {
-        CoreUserExample example = new CoreUserExample();
-        Map<String, Object> map = pageParams.getParams();
-        if (null != map && null != map.get("name")) {
-            example.createCriteria().andNameLike(map.get("name").toString());
-        }
-        if(StringUtils.isNotEmpty(pageParams.getOrderField())){
-            if(StringUtils.isNotBlank(pageParams.getOrderDirection())&&pageParams.getOrderDirection().equals("desc")){
-                example.setOrderByClause(pageParams.getOrderField()+" desc");
+    public CoreUserExample construct(CoreUser coreUser) {
+        CoreUserExample example=new CoreUserExample();
+        if(null!=coreUser){
+            CoreUserExample.Criteria criteria = example.createCriteria();
+            if(null!=coreUser.getId()){
+                criteria.andIdEqualTo(coreUser.getId());
             }
-            else {
-                example.setOrderByClause(pageParams.getOrderField());
+            if(null!=coreUser.getName()) {
+                criteria.andNameLike(coreUser.getName());
             }
         }
-        return new BaseResponse<>("查询数据成功", this.listPage(example, pageParams));
+        return example;
     }
 
     @Override
-    public BaseResponse<CoreUser> findById(Long id) {
+    public PageParams<CoreUser> list(PageParams<CoreUser> pageParams) {
+        //查询参数
+        CoreUserExample example=this.construct(pageParams.getFilter());
+        //排序
+        String strOrder=String.format("%s %s",pageParams.getOrderBy(),pageParams.getDirection());
+        example.setOrderByClause(strOrder);
+        return this.listPage(example,pageParams);
+    }
+
+    @Override
+    public CoreUser findById(Long id) {
         CoreUserExample example = new CoreUserExample();
         example.createCriteria().andIdEqualTo(id);
         List<CoreUser> list = this.selectByExample(example);
-        if (null != list && 1 == list.size()) {
-            return new BaseResponse<>("查询数据成功", list.get(0));
+        if (null != list && 1 != list.size()) {
+            throw new HunterException("查询错误");
         }
-        return new BaseResponse<>("未查询到数据或多条数据", null);
+        return list.get(0);
     }
 
     @Override
-    public BaseResponse<Boolean> del(List<Long> ids) {
-        try {
-            CoreUserExample example = new CoreUserExample();
-            example.createCriteria().andIdIn(ids);
-            this.deleteByExample(example);
-            return new BaseResponse<>("删除数据成功",true);
-        }
-        catch (Exception e){
-            e.printStackTrace();
-            return new BaseResponse<>("删除数据失败",false);
-        }
+    public Boolean del(List<Long> ids) {
+        CoreUserExample example = new CoreUserExample();
+        example.createCriteria().andIdIn(ids);
+        this.deleteByExample(example);
+        return true;
     }
 
     @Override
-    public BaseResponse<Boolean> saveOrUpdate(CoreUser coreUser) {
+    public Boolean saveOrUpdate(CoreUser coreUser) {
         if (null != coreUser.getId()) {
             CoreUserExample example = new CoreUserExample();
             example.createCriteria().andIdEqualTo(coreUser.getId());
@@ -74,6 +78,6 @@ public class CoreUserServiceImpl extends BaseServiceImpl<CoreUser,CoreUserExampl
         } else {
             this.insert(coreUser);
         }
-        return new BaseResponse<>("保存或更新数据成功", true);
+        return true;
     }
 }

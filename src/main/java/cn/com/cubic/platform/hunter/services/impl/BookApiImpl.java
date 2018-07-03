@@ -49,7 +49,7 @@ public class BookApiImpl implements BookApi {
             int count=(int)bookRepo.count(new Query(criteria));
             PageParams<Book> tmp=new PageParams<>();
             tmp.setData(books);
-            tmp.setCurrentPage(pageForm.getPageNum());
+//            tmp.setCurrentPage(pageForm.getPageNum());
 //            tmp.setNumPerPage(pageForm.getNumPerPage());
 //            tmp.setTotalCount(count);
 //            tmp.setTotalPage(count/length+1);

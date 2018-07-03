@@ -373,7 +373,7 @@ public class AuthorApiImpl implements AuthorApi {
             int count=(int)authorRepo.count(new Query(criteria));
             PageParams<Author> tmp=new PageParams<>();
             tmp.setData(authors);
-            tmp.setCurrentPage(pageForm.getPageNum());
+//            tmp.setCurrentPage(pageForm.getPageNum());
 //            tmp.setNumPerPage(pageForm.getNumPerPage());
 //            tmp.setTotalCount(count);
 //            tmp.setTotalPage(count/length+1);

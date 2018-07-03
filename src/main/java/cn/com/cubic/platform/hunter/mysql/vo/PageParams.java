@@ -9,89 +9,61 @@ import java.util.Map;
  * Created by liang_zhang on 2017/11/1.
  */
 public class PageParams<T> implements Serializable {
-
-    private Integer pageNum=1;
-    //当前页码
-    private Integer currentPage=1;
-
+    //页码
+    private Integer page=1;
     //每页记录数
-    private Integer numPerPage=10;
-
-    //总页码
-    private Integer pageNumShown;
-
-    //总记录数
-    private Integer totalCount;
-
-    private String orderField="id";
-
-    private String orderDirection="asc";
+    private Integer pageSize=10;
+    //记录总数
+    private Integer totalRows=0;
+    //总页数
+    private Integer totalPage=1;
 
     private List<T> data;
 
-    private T bean;
+    //查询参数放在此
+    private T filter;
 
-    //查询参数
-    private Map<String, Object> params = new HashMap<>(10);
+    //排序的参数
+    private String orderBy="id";
+    //排序方位 desc asc
+    private String direction="desc";
 
-    //临时传递参数
-    private Map<String, String> tmpParams = new HashMap<String, String>(10);
+    //
+    private  Map<String,Object> params=new HashMap<>(10);
 
+    //临时变量
+    private Map<String,Object> tempParams=new HashMap<>(10);
 
-    public Integer getPageNum() {
-        return pageNum;
+    public Integer getPage() {
+        return page;
     }
 
-    public void setPageNum(Integer pageNum) {
-        this.pageNum = pageNum;
+    public void setPage(Integer page) {
+        this.page = page;
     }
 
-    public Integer getCurrentPage() {
-        return currentPage;
+    public Integer getPageSize() {
+        return pageSize;
     }
 
-    public void setCurrentPage(Integer currentPage) {
-        this.currentPage = currentPage;
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
     }
 
-    public Integer getNumPerPage() {
-        return numPerPage;
+    public Integer getTotalRows() {
+        return totalRows;
     }
 
-    public void setNumPerPage(Integer numPerPage) {
-        this.numPerPage = numPerPage;
+    public void setTotalRows(Integer totalRows) {
+        this.totalRows = totalRows;
     }
 
-    public Integer getPageNumShown() {
-        return pageNumShown;
+    public Integer getTotalPage() {
+        return totalPage;
     }
 
-    public void setPageNumShown(Integer pageNumShown) {
-        this.pageNumShown = pageNumShown;
-    }
-
-    public Integer getTotalCount() {
-        return totalCount;
-    }
-
-    public void setTotalCount(Integer totalCount) {
-        this.totalCount = totalCount;
-    }
-
-    public String getOrderField() {
-        return orderField;
-    }
-
-    public void setOrderField(String orderField) {
-        this.orderField = orderField;
-    }
-
-    public String getOrderDirection() {
-        return orderDirection;
-    }
-
-    public void setOrderDirection(String orderDirection) {
-        this.orderDirection = orderDirection;
+    public void setTotalPage(Integer totalPage) {
+        this.totalPage = totalPage;
     }
 
     public List<T> getData() {
@@ -102,12 +74,12 @@ public class PageParams<T> implements Serializable {
         this.data = data;
     }
 
-    public T getBean() {
-        return bean;
+    public T getFilter() {
+        return filter;
     }
 
-    public void setBean(T bean) {
-        this.bean = bean;
+    public void setFilter(T filter) {
+        this.filter = filter;
     }
 
     public Map<String, Object> getParams() {
@@ -118,11 +90,27 @@ public class PageParams<T> implements Serializable {
         this.params = params;
     }
 
-    public Map<String, String> getTmpParams() {
-        return tmpParams;
+    public Map<String, Object> getTempParams() {
+        return tempParams;
     }
 
-    public void setTmpParams(Map<String, String> tmpParams) {
-        this.tmpParams = tmpParams;
+    public void setTempParams(Map<String, Object> tempParams) {
+        this.tempParams = tempParams;
+    }
+
+    public String getOrderBy() {
+        return orderBy;
+    }
+
+    public void setOrderBy(String orderBy) {
+        this.orderBy = orderBy;
+    }
+
+    public String getDirection() {
+        return direction;
+    }
+
+    public void setDirection(String direction) {
+        this.direction = direction;
     }
 }

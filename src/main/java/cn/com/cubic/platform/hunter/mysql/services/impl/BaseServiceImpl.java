@@ -63,23 +63,15 @@ public abstract class BaseServiceImpl<P extends BaseEntity,Q extends BaseExample
     }
 
     @Override
-    public PageParams<P> listPage(Q example, PageParams pageParams) {
-        PageParams<P> result=new PageParams<>();
-        int currentPage=pageParams.getCurrentPage(),pageSize=1;
+    public PageParams<P> listPage(Q example, PageParams<P> pageParams) {
+        int currentPage=pageParams.getPage(),pageSize=pageParams.getPageSize();
         RowBounds rowBounds=new RowBounds((currentPage-1)*pageSize,pageSize);
         List<P> list=mapper.selectByExampleWithRowbounds(example,rowBounds);
-        result.setData(list);
-        result.setCurrentPage(currentPage);
-//        result.setTotalPage(pageSize);
-//        int totalRows=mapper.countByExample(example),totalPage=(totalRows-1)/pageSize+1;
-//        result.setTotalPage(totalPage);
-//        result.setTotalRows(totalRows);
-        result.setParams(pageParams.getParams());
-        result.setOrderField(pageParams.getOrderField());
-        if(StringUtils.isNotBlank(pageParams.getOrderDirection())&&pageParams.getOrderDirection().equals("desc")){
-            result.setOrderDirection("desc");
-        }
-        return result;
+        pageParams.setData(list);
+        int totalRows=mapper.countByExample(example);
+        int totalPage=(totalRows-1)/pageSize+1;
+        pageParams.setTotalPage(totalPage);
+        pageParams.setTotalRows(totalRows);
+        return pageParams;
     }
-
 }
