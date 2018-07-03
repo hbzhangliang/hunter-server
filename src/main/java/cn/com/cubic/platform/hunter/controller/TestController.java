@@ -75,8 +75,21 @@ public class TestController {
 
     @RequestMapping(value = "/6")
     public Object test6(){
-        return new ModelAndView("index")
-                .addObject("flag","1");
+        Thread thread= new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    int p=0;
+                    System.out.println(15/p);
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                    log.error("run error");
+                }
+            }
+        });
+        thread.start();
+        return null;
     }
 
 
