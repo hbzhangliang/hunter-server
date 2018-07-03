@@ -9,11 +9,6 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
 
 @Aspect
 @Component
@@ -21,7 +16,7 @@ public class BaseAspect {
 
     private static final Logger log = LoggerFactory.getLogger(BaseAspect.class);
 
-    @Pointcut("execution(* cn.com.cubic.platform.hunter.controller.TestController.*(..))")
+    @Pointcut("execution(* cn.com.cubic.platform.hunter.controller.*Controller.*(..))")
     public void pointcut(){
     }
 
