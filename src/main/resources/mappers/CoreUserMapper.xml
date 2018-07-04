@@ -258,4 +258,19 @@
       order by ${orderByClause}
     </if>
   </select>
+
+
+
+
+  <select id="selectById" resultMap="BaseResultMap" parameterType="Long" >
+    select  * from t_core_user
+    where id=#{id}
+  </select>
+
+
+  <select id="storeProc" resultMap="BaseResultMap" >
+    call test1()
+  </select>
+
+
 </mapper>

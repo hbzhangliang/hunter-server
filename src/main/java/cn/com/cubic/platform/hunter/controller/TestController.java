@@ -94,6 +94,17 @@ public class TestController extends BaseController{
     }
 
 
+    @RequestMapping(value = "/7")
+    public Object test7(@RequestBody Map<String,String> map){
+        String strId=map.get("id");
+        return coreUserService.selectById(Long.valueOf(strId));
+    }
+
+
+    @RequestMapping(value = "/8")
+    public Object test8(){
+        return coreUserService.callProc();
+    }
 
 
 

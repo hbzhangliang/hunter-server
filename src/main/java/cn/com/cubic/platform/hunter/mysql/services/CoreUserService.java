@@ -24,4 +24,10 @@ public interface CoreUserService extends BaseService<CoreUser,CoreUserExample>{
 
     Boolean saveOrUpdate(CoreUser coreUser);
 
+
+    CoreUser selectById(Long id);
+
+
+    List<CoreUser> callProc();
+
 }
