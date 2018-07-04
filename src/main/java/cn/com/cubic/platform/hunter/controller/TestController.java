@@ -1,6 +1,7 @@
 package cn.com.cubic.platform.hunter.controller;
 
 
+import cn.com.cubic.platform.hunter.mongo.repo.TmpRepo;
 import cn.com.cubic.platform.hunter.mysql.entity.CoreUser;
 import cn.com.cubic.platform.hunter.mysql.services.CoreUserService;
 import cn.com.cubic.platform.hunter.mysql.vo.PageParams;
@@ -106,6 +107,16 @@ public class TestController extends BaseController{
         return coreUserService.callProc();
     }
 
+
+
+    @RequestMapping(value = "/9")
+    public Object test9(){
+        return tmpRepo.list();
+    }
+
+
+    @Autowired
+    private TmpRepo tmpRepo;
 
 
     @Autowired

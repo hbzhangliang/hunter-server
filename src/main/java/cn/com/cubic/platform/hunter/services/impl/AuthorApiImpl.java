@@ -6,7 +6,6 @@ import cn.com.cubic.platform.hunter.mongo.repo.ErrorDataRepo;
 import cn.com.cubic.platform.utils.*;
 import cn.com.flaginfo.platform.api.common.base.BaseResponse;
 import cn.com.cubic.platform.hunter.mongo.repo.BookRepo;
-import cn.com.cubic.platform.hunter.mysql.vo.PageForm;
 import cn.com.cubic.platform.hunter.mysql.vo.PageParams;
 import cn.com.cubic.platform.hunter.services.AuthorApi;
 import com.alibaba.fastjson.JSON;
@@ -350,41 +349,41 @@ public class AuthorApiImpl implements AuthorApi {
      * @param pageForm
      * @return
      */
-    @Override
-    public BaseResponse<PageParams<Author>> authorList(PageForm pageForm) {
-        BaseResponse<PageParams<Author>> result = null;
-        try {
-            int startPoint=(pageForm.getPageNum()-1)*pageForm.getNumPerPage();
-            int length=pageForm.getNumPerPage();
-            String authorName=pageForm.getParams().get("name")==null?null:pageForm.getParams().get("name").toString();
-            Criteria criteria=new Criteria();
-            if(StringUtils.isNotEmpty(authorName)){
-                criteria=Criteria.where("name").regex(".*?\\" +authorName+ ".*");
-            }
-
-            DBObject dbObject = new BasicDBObject();
-            BasicDBObject fieldsObject=new BasicDBObject();
-            fieldsObject.put("_id", true);
-            fieldsObject.put("name", true);
-            Query query = new BasicQuery(dbObject,fieldsObject).addCriteria(criteria).with(new Sort(Sort.Direction.DESC,"id")).skip(startPoint).limit(length);
-
-
-            List<Author> authors=authorRepo.list(query);
-            int count=(int)authorRepo.count(new Query(criteria));
-            PageParams<Author> tmp=new PageParams<>();
-            tmp.setData(authors);
-//            tmp.setCurrentPage(pageForm.getPageNum());
-//            tmp.setNumPerPage(pageForm.getNumPerPage());
-//            tmp.setTotalCount(count);
-//            tmp.setTotalPage(count/length+1);
-            result=new BaseResponse<PageParams<Author>>("查询数据成功",tmp);
-        }
-        catch (Exception e){
-            e.printStackTrace();
-            result=new BaseResponse<>(e.getMessage(),null);
-        }
-        return result;
-    }
+//    @Override
+//    public BaseResponse<PageParams<Author>> authorList(PageForm pageForm) {
+//        BaseResponse<PageParams<Author>> result = null;
+//        try {
+//            int startPoint=(pageForm.getPageNum()-1)*pageForm.getNumPerPage();
+//            int length=pageForm.getNumPerPage();
+//            String authorName=pageForm.getParams().get("name")==null?null:pageForm.getParams().get("name").toString();
+//            Criteria criteria=new Criteria();
+//            if(StringUtils.isNotEmpty(authorName)){
+//                criteria=Criteria.where("name").regex(".*?\\" +authorName+ ".*");
+//            }
+//
+//            DBObject dbObject = new BasicDBObject();
+//            BasicDBObject fieldsObject=new BasicDBObject();
+//            fieldsObject.put("_id", true);
+//            fieldsObject.put("name", true);
+//            Query query = new BasicQuery(dbObject,fieldsObject).addCriteria(criteria).with(new Sort(Sort.Direction.DESC,"id")).skip(startPoint).limit(length);
+//
+//
+//            List<Author> authors=authorRepo.list(query);
+//            int count=(int)authorRepo.count(new Query(criteria));
+//            PageParams<Author> tmp=new PageParams<>();
+//            tmp.setData(authors);
+////            tmp.setCurrentPage(pageForm.getPageNum());
+////            tmp.setNumPerPage(pageForm.getNumPerPage());
+////            tmp.setTotalCount(count);
+////            tmp.setTotalPage(count/length+1);
+//            result=new BaseResponse<PageParams<Author>>("查询数据成功",tmp);
+//        }
+//        catch (Exception e){
+//            e.printStackTrace();
+//            result=new BaseResponse<>(e.getMessage(),null);
+//        }
+//        return result;
+//    }
 
 
     @Override
