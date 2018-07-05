@@ -26,11 +26,6 @@ public class JSONHelper {
 
     private static String apiKey;
 
-    @Value("${platform6.api.key}")
-    public void setApiKey(String apiKey) {
-        JSONHelper.apiKey = apiKey;
-        log.info("platform6.api.key is [{}]",JSONHelper.apiKey);
-    }
 
     private static final Logger log = LoggerFactory.getLogger(JSONHelper.class);
 

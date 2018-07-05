@@ -1,7 +1,8 @@
 package cn.com.cubic.platform.hunter.controller;
 
 
-import cn.com.cubic.platform.hunter.mongo.repo.TmpRepo;
+import cn.com.cubic.platform.hunter.mongo.models.User;
+import cn.com.cubic.platform.hunter.mongo.repo.UserRepo;
 import cn.com.cubic.platform.hunter.mysql.entity.CoreUser;
 import cn.com.cubic.platform.hunter.mysql.services.CoreUserService;
 import cn.com.cubic.platform.hunter.mysql.vo.PageParams;
@@ -9,14 +10,14 @@ import cn.com.cubic.platform.utils.RedisUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -111,12 +112,24 @@ public class TestController extends BaseController{
 
     @RequestMapping(value = "/9")
     public Object test9(){
-        return tmpRepo.list();
+        return userRepo.list();
+    }
+
+    @RequestMapping(value = "/10")
+    public Object test10(){
+        List<User> users=new ArrayList<>(10);
+        for(int i=0;i<10;i++){
+            User user=new User();
+            user.setName("第"+i+"条数据");
+            users.add(user);
+        }
+        userRepo.saveBatch(users);
+        return userRepo.list(new Query());
     }
 
 
     @Autowired
-    private TmpRepo tmpRepo;
+    private UserRepo userRepo;
 
 
     @Autowired
