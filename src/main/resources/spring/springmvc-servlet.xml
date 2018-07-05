@@ -10,9 +10,8 @@
 
     <!-- 启用spring mvc 注解 -->
     <context:annotation-config />
-    <context:component-scan base-package="cn.com.cubic.platform">
-        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-    </context:component-scan>
+    <context:component-scan base-package="cn.com.cubic.platform"/>
+
 
     <mvc:annotation-driven>
         <mvc:message-converters register-defaults="true">
