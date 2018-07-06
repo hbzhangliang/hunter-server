@@ -1,4 +1,4 @@
-package cn.com.cubic.platform.hunter.controller.aop;
+package cn.com.cubic.platform.utils.interceptor;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;

@@ -1,4 +1,4 @@
-package cn.com.cubic.platform.hunter.controller.aop;
+package cn.com.cubic.platform.utils.filter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,10 +1,5 @@
 package cn.com.cubic.platform.test;
 
-import cn.com.cubic.platform.utils.JSONHelper;
-import com.alibaba.fastjson.JSON;
-
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by liang_zhang on 2017/10/14.
