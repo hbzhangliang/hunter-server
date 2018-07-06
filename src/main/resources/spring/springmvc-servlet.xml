@@ -3,52 +3,37 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
-        http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+        http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <!-- 启用spring mvc 注解 -->
     <context:annotation-config />
     <context:component-scan base-package="cn.com.cubic.platform"/>
 
+    <!-- 启用aop -->
+    <aop:aspectj-autoproxy proxy-target-class="true" />
+
+
 
     <mvc:annotation-driven>
         <mvc:message-converters register-defaults="true">
             <bean class="org.springframework.http.converter.StringHttpMessageConverter">
-                <property name="supportedMediaTypes">
-                    <list>
-                        <value>text/html;charset=utf-8</value>
-                        <value>text/xml;charset=utf-8</value>
-                        <value>text/plain;</value>
-                        <value>text/json;charset=utf-8</value>
-                        <value>application/json;charset=UTF-8</value>
-                        <value>application/x-www-form-urlencoded;charset=UTF-8</value>
-                    </list>
-                </property>
+                <property name="supportedMediaTypes" value="text/html;charset=UTF-8"/>
             </bean>
         </mvc:message-converters>
     </mvc:annotation-driven>
 
-    <mvc:resources location="/" mapping="/**/*.html"/>
-    <mvc:resources location="/" mapping="/**/*.js"/>
-    <mvc:resources location="/" mapping="/**/*.css"/>
-    <mvc:resources location="/" mapping="/**/*.png"/>
-    <mvc:resources location="/" mapping="/**/*.jpg"/>
-    <mvc:resources location="/" mapping="/**/*.gif"/>
-    <mvc:resources location="/" mapping="/**/*.ico"/>
 
 
-    <bean id="stringHttpMessageConverter"
-          class="org.springframework.http.converter.StringHttpMessageConverter" />
-    <bean id="jsonHttpMessageConverter"
-          class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
-
-
-
-    <!-- 定义视图解析器 -->
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-          p:prefix="/page/" p:suffix=".jsp"/>
-
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="cn.com.cubic.platform.hunter.controller.aop.CORSInterceptor"></bean>
+        </mvc:interceptor>
+        <!-- 当设置多个拦截器时，先按顺序调用preHandle方法，然后逆序调用每个拦截器的postHandle和afterCompletion方法 -->
+    </mvc:interceptors>
 
 </beans>
