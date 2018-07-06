@@ -37,6 +37,19 @@
     </servlet-mapping>
 
 
+
+    <filter>
+        <filter-name>loginFilter</filter-name>
+        <filter-class>cn.com.cubic.platform.hunter.controller.aop.LoginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>loginFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <!-- /*是对所有的文件进行拦截 -->
+    </filter-mapping>
+
+
+
     <!-- Spring刷新Interceptor防止内存泄漏  -->
     <listener>
         <description>Introspector</description>
