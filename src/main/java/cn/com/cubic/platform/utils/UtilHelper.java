@@ -20,10 +20,10 @@ public class UtilHelper {
             StringBuilder sb=new StringBuilder();
             for (Object p : args) {
                 if (null != p&&StringUtils.isNotBlank(String.valueOf(p))) {
-                    sb.append(index+String.valueOf(p));
+                    sb.append(index+String.valueOf(p)+":");
                 }
                 else {
-                    sb.append(index+"_");
+                    sb.append(index+":");
                 }
                 index++;
             }
@@ -47,8 +47,6 @@ public class UtilHelper {
     }
 
 
-
-
     //获取当前时间的String值
     public static String getNowStrTime(){
         return sdf.format(new Date());
@@ -56,22 +54,5 @@ public class UtilHelper {
 
     private  static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-
-
-    public static String contactHostUrl(String host,String url){
-        if(host.endsWith("index.html")){
-            host=host.replace("index.html","");
-        }
-
-        if(host.endsWith("/")&&url.startsWith("/")){
-            return host+url.substring(1);
-        }
-        else if(!host.endsWith("/")&&!url.startsWith("/")){
-            return host+"/"+url;
-        }
-        else{
-            return host+url;
-        }
-    }
 
 }
