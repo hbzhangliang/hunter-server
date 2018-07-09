@@ -7,6 +7,7 @@ import cn.com.cubic.platform.hunter.mysql.entity.CoreUser;
 import cn.com.cubic.platform.hunter.mysql.services.CoreUserService;
 import cn.com.cubic.platform.hunter.mysql.vo.PageParams;
 import cn.com.cubic.platform.utils.RedisUtils;
+import cn.com.cubic.platform.utils.XmlReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -126,6 +127,14 @@ public class TestController extends BaseController{
         userRepo.saveBatch(users);
         return userRepo.list(new Query());
     }
+
+
+    @RequestMapping(value = "/11")
+    public Object test11(){
+         String url= "initdata/direction.xml";
+         return XmlReader.getElementList(url);
+    }
+
 
 
     @Autowired

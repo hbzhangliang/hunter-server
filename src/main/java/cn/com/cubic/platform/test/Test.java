@@ -7,10 +7,6 @@ package cn.com.cubic.platform.test;
 public class Test {
 
 
-    /**
-     * 作家 文章 列表
-     * @param args
-     */
     public static void main(String[] args){
 
 
