@@ -1,8 +1,12 @@
 package cn.com.cubic.platform.utils.initdata;
 
+import cn.com.cubic.platform.hunter.controller.TestController;
+import cn.com.cubic.platform.utils.XmlReader;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.util.List;
@@ -13,20 +17,13 @@ import java.util.List;
 
 public class InitDirection {
 
-    public static void main(String[] args){
-        try{
-            SAXBuilder builder = new SAXBuilder();
-            Document doc = builder.build(new File("initdata/direction.xml"));
-            Element foo = doc.getRootElement();
-            List allChildren = foo.getChildren();
-            for(int i=0;i<allChildren.size();i++){
-                Element element=(Element)allChildren.get(i);
-                System.out.println(element);
-            }
+    private static final Logger log = LoggerFactory.getLogger(TestController.class);
 
-        }
-        catch (Exception e){
-            e.printStackTrace();
+    public static void main(String[] args){
+        String url= "initdata/direction.xml";
+        List<Element> list= XmlReader.getElementList(url);
+        for(Element item:list){
+            log.info("[{}]",item);
         }
     }
 
