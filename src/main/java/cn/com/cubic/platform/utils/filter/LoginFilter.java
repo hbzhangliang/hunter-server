@@ -5,6 +5,7 @@ import cn.com.cubic.platform.utils.sso.SSOConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.util.AntPathMatcher;
 import org.springframework.util.StringUtils;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
@@ -22,6 +23,7 @@ public class LoginFilter implements Filter{
     private static final Logger log = LoggerFactory.getLogger(LoginFilter.class);
     private SSOConfig ssoConfig;
     private String[] excludePaths;
+    private AntPathMatcher antPathMatcher;
     //未加密的
     private static final String TOKEN_PARAM_NAME="token";
     //加密后的
@@ -33,6 +35,7 @@ public class LoginFilter implements Filter{
         WebApplicationContext ctx = WebApplicationContextUtils.getWebApplicationContext(servletContext);
         this.ssoConfig = (SSOConfig)ctx.getBean(SSOConfig.class);
         String excludePath = this.ssoConfig.getExcludePaths();
+        this.antPathMatcher = new AntPathMatcher();
         if (StringUtils.isEmpty(excludePath)) {
             this.excludePaths = new String[0];
         } else {
@@ -48,7 +51,8 @@ public class LoginFilter implements Filter{
             throw new IOException("sso config bean must set");
         } else {
             String encodeToken= CookieUtils.getCookie(request,ENCODE_TOKEN_PARAM_NAME);
-            if(StringUtils.isEmpty(encodeToken)){
+            String requestURI = request.getRequestURI().replace(request.getContextPath(), "");
+            if(StringUtils.isEmpty(encodeToken)&&!checkExclude(requestURI)){
                 log.warn("未查询到cookie数据，直接导航到登录页面");
                 response.sendRedirect(ssoConfig.getLoginUrl());
                 return;
@@ -56,6 +60,30 @@ public class LoginFilter implements Filter{
             filterChain.doFilter(servletRequest, servletResponse);
         }
     }
+
+
+    /**
+     * 判断排除在外
+     * @param requestURI
+     * @return
+     */
+    private boolean checkExclude(String requestURI) {
+        if (this.ssoConfig !=null) {
+            String[] var2 = this.excludePaths;
+            int var3 = var2.length;
+
+            for(int var4 = 0; var4 < var3; ++var4) {
+                String path = var2[var4];
+                if (this.antPathMatcher.match(path, requestURI)) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+        return false;
+    }
+
 
     @Override
     public void destroy() {
