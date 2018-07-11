@@ -4,6 +4,7 @@ import cn.com.cubic.platform.hunter.mysql.entity.TSysAccount;
 import cn.com.cubic.platform.hunter.mysql.entity.TSysAccountExample;
 import cn.com.cubic.platform.hunter.mysql.services.SysAccountService;
 import cn.com.cubic.platform.hunter.mysql.vo.PageParams;
+import cn.com.cubic.platform.utils.CodeUtils;
 import cn.com.cubic.platform.utils.Exception.HunterException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -80,6 +81,7 @@ public class SysAccountServiceImpl extends BaseServiceImpl<TSysAccount,TSysAccou
     public Boolean checkLogin(String account, String pwd) {
         log.info("check login by account[{}],pwd[{}]",account,pwd);
         TSysAccountExample example=new TSysAccountExample();
+        pwd= CodeUtils.getEncryptedCode(pwd);
         example.createCriteria().andAccountEqualTo(account).andPwdEqualTo(pwd);
         List<TSysAccount> list=this.selectByExample(example);
         if(null!=list&&list.size()==1){

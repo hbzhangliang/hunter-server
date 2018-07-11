@@ -1,5 +1,7 @@
 package cn.com.cubic.platform.utils;
 
+import cn.com.cubic.platform.hunter.mysql.services.SysAccountService;
+import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
@@ -58,9 +60,28 @@ public class CodeUtils {
         }
     }
 
+
+
+
+    public static String getEncryptedCode(String pwd) {
+        logger.info("encrypt token :{}", pwd);
+        return AesUtils.encrypt(pwd , "password");
+    }
+
+    public static String getDecodedCode(String content) {
+        return AesUtils.decrypt(content, "password");
+    }
+
     public static void main(String[] args) {
-        String code="6a569dac-a4dc-4238-a3e9-38ed8db3fbff";
-        String content = getEncryptedToken(code);
-        logger.info("before [{}],after [{}], decode [{}]",code,content,getDecodedToken(content));
+        String code="111";
+        Long startTime= System.currentTimeMillis();
+        logger.info("start time is [{}]",startTime);
+        String content = getEncryptedCode(code);
+        Long mm=System.currentTimeMillis();
+        logger.info("encode finish time is [{}],spend [{}]",mm,mm-startTime);
+        logger.info("before [{}],after [{}], decode [{}]",code,content,getDecodedCode(content));
+        Long nn=System.currentTimeMillis();
+        logger.info("decode finish time is [{}],spend [{}]", System.currentTimeMillis(),nn-mm);
+        logger.info("encode length is [{}]",content.length());
     }
 }
