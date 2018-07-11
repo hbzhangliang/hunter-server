@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
 /**
@@ -17,15 +18,20 @@ import java.util.Map;
 @Controller
 @RequestMapping(value = "/account",produces = "application/json; charset=utf-8")
 @ResponseBody
-public class AccountController {
+public class AccountController{
 
     @Autowired
     private SysAccountService accountService;
 
     @RequestMapping(value = "/check")
-    public Object check(@RequestBody Map<String,String> map){
+    public Object check(@RequestBody Map<String,String> map, HttpServletResponse response){
         String account=map.get("account"),pwd=map.get("pwd");
-        return accountService.checkLogin(account,pwd);
+        return accountService.checkLogin(account,pwd,response);
+    }
+
+    @RequestMapping(value = "/listall")
+    public Object list(){
+        return accountService.listAll();
     }
 
 }

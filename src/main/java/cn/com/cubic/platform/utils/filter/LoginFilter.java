@@ -1,9 +1,13 @@
 package cn.com.cubic.platform.utils.filter;
 
+import cn.com.cubic.platform.utils.CodeUtils;
 import cn.com.cubic.platform.utils.CookieUtils;
+import cn.com.cubic.platform.utils.RedisUtils;
 import cn.com.cubic.platform.utils.sso.SSOConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.util.StringUtils;
@@ -29,11 +33,14 @@ public class LoginFilter implements Filter{
     //加密后的
     private static final String ENCODE_TOKEN_PARAM_NAME="encode_token_cookie";
 
+    private RedisUtils redisUtils;
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         ServletContext servletContext = filterConfig.getServletContext();
         WebApplicationContext ctx = WebApplicationContextUtils.getWebApplicationContext(servletContext);
         this.ssoConfig = (SSOConfig)ctx.getBean(SSOConfig.class);
+        this.redisUtils=ctx.getBean(RedisUtils.class);
         String excludePath = this.ssoConfig.getExcludePaths();
         this.antPathMatcher = new AntPathMatcher();
         if (StringUtils.isEmpty(excludePath)) {
@@ -52,12 +59,19 @@ public class LoginFilter implements Filter{
         } else {
             String encodeToken= CookieUtils.getCookie(request,ENCODE_TOKEN_PARAM_NAME);
             String requestURI = request.getRequestURI().replace(request.getContextPath(), "");
-            if(StringUtils.isEmpty(encodeToken)&&!checkExclude(requestURI)){
-                log.warn("未查询到cookie数据，直接导航到登录页面");
-                response.sendRedirect(ssoConfig.getLoginUrl());
+            if(checkExclude(requestURI)){
+                filterChain.doFilter(servletRequest, servletResponse);
                 return;
             }
-            filterChain.doFilter(servletRequest, servletResponse);
+            if(!StringUtils.isEmpty(encodeToken)){
+                String token= CodeUtils.getDecodedToken(encodeToken);
+                if(!StringUtils.isEmpty(token)&&redisUtils.getObj(token)!=null){
+                    filterChain.doFilter(servletRequest, servletResponse);
+                    return;
+                }
+            }
+            response.sendRedirect(ssoConfig.getLoginUrl());
+            return;
         }
     }
 

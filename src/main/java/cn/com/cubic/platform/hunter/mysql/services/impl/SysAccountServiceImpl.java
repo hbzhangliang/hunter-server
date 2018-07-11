@@ -5,11 +5,16 @@ import cn.com.cubic.platform.hunter.mysql.entity.TSysAccountExample;
 import cn.com.cubic.platform.hunter.mysql.services.SysAccountService;
 import cn.com.cubic.platform.hunter.mysql.vo.PageParams;
 import cn.com.cubic.platform.utils.CodeUtils;
+import cn.com.cubic.platform.utils.CookieUtils;
 import cn.com.cubic.platform.utils.Exception.HunterException;
+import cn.com.cubic.platform.utils.RedisUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -19,6 +24,12 @@ import java.util.List;
 public class SysAccountServiceImpl extends BaseServiceImpl<TSysAccount,TSysAccountExample> implements SysAccountService {
 
     private final static Logger log = LoggerFactory.getLogger(SysAccountServiceImpl.class);
+
+    //加密后的
+    private static final String ENCODE_TOKEN_PARAM_NAME="encode_token_cookie";
+
+    @Autowired
+    private RedisUtils redisUtils;
 
     @Override
     public TSysAccountExample construct(TSysAccount account) {
@@ -33,6 +44,12 @@ public class SysAccountServiceImpl extends BaseServiceImpl<TSysAccount,TSysAccou
             }
         }
         return example;
+    }
+
+
+    @Override
+    public List<TSysAccount> listAll() {
+        return this.selectByExample(new TSysAccountExample());
     }
 
     @Override
@@ -78,7 +95,7 @@ public class SysAccountServiceImpl extends BaseServiceImpl<TSysAccount,TSysAccou
 
 
     @Override
-    public Boolean checkLogin(String account, String pwd) {
+    public Boolean checkLogin(String account, String pwd,HttpServletResponse response) {
         log.info("check login by account[{}],pwd[{}]",account,pwd);
         TSysAccountExample example=new TSysAccountExample();
         pwd= CodeUtils.getEncryptedCode(pwd);
@@ -86,9 +103,27 @@ public class SysAccountServiceImpl extends BaseServiceImpl<TSysAccount,TSysAccou
         List<TSysAccount> list=this.selectByExample(example);
         if(null!=list&&list.size()==1){
             log.info("check login by account[{}],pwd[{}],login sucess",account,pwd);
+
+            this.tokenGenerete(list.get(0).getId(),response);
+
             return true;
         }
         log.error("check login by account[{}],pwd[{}],login fail",account,pwd);
         return false;
+    }
+
+
+    /**
+     * 根据账号id  获取账号信息，生成token，写入 cookie
+     * @param id
+     */
+    @Override
+    public void tokenGenerete(Long id,HttpServletResponse response) {
+        TSysAccount account=this.findById(id);
+        String token=String.format("token_%s",id);
+        String enToken=CodeUtils.getEncryptedToken(token);
+        String redisKey="token_encode";
+        redisUtils.setObj(token,account,redisKey);
+        CookieUtils.writeCookie(response,this.ENCODE_TOKEN_PARAM_NAME,enToken);
     }
 }

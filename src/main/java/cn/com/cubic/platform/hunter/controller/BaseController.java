@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @Validated
 public abstract class BaseController {
@@ -15,7 +16,6 @@ public abstract class BaseController {
 
     @Autowired
     public HttpServletRequest request;
-
 
     public static String getIp(HttpServletRequest request){
         String ip = request.getHeader("x-forwarded-for");
