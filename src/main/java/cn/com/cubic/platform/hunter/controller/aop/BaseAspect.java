@@ -28,7 +28,7 @@ public class BaseAspect {
         long startTime = System.currentTimeMillis();
         String methodInfo="";
         if(null!=args&&args.length>0){
-            methodInfo= String.format("method:[%s],args:[%s]",methodName, JSONObject.toJSONString(args[0]));
+//            methodInfo= String.format("method:[%s],args:[%s]",methodName, JSONObject.toJSONString(args[0]));
         }
         log.info("Before request url,{}", methodInfo);
         Object result = null;

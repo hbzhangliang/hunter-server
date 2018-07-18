@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
@@ -27,6 +28,17 @@ public class AccountController{
     public Object check(@RequestBody Map<String,String> map, HttpServletResponse response){
         String account=map.get("account"),pwd=map.get("pwd");
         return accountService.checkLogin(account,pwd,response);
+    }
+
+    @RequestMapping(value = "/check_info")
+    public Object checkInfo(@RequestBody Map<String,String> map, HttpServletResponse response){
+        String account=map.get("account"),pwd=map.get("pwd");
+        return accountService.checkLoginBackInfo(account,pwd,response);
+    }
+
+    @RequestMapping(value = "/logout")
+    public Object logout(HttpServletRequest request, HttpServletResponse response){
+        return accountService.checkLogout(request,response);
     }
 
     @RequestMapping(value = "/listall")

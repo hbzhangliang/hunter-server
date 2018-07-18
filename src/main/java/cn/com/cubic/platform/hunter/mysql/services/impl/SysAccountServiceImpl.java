@@ -14,8 +14,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Liang.Zhang on 2018/7/10.
@@ -99,6 +101,7 @@ public class SysAccountServiceImpl extends BaseServiceImpl<TSysAccount,TSysAccou
         log.info("check login by account[{}],pwd[{}]",account,pwd);
         TSysAccountExample example=new TSysAccountExample();
         pwd= CodeUtils.getEncryptedCode(pwd);
+
         example.createCriteria().andAccountEqualTo(account).andPwdEqualTo(pwd);
         List<TSysAccount> list=this.selectByExample(example);
         if(null!=list&&list.size()==1){
@@ -113,6 +116,22 @@ public class SysAccountServiceImpl extends BaseServiceImpl<TSysAccount,TSysAccou
     }
 
 
+    @Override
+    public TSysAccount checkLoginBackInfo(String account, String pwd, HttpServletResponse response) {
+        log.info("check login by account[{}],pwd[{}]",account,pwd);
+        TSysAccountExample example=new TSysAccountExample();
+        pwd= CodeUtils.getEncryptedCode(pwd);
+        example.createCriteria().andAccountEqualTo(account).andPwdEqualTo(pwd);
+        List<TSysAccount> list=this.selectByExample(example);
+        if(null!=list&&list.size()==1){
+            log.info("check login by account[{}],pwd[{}],login sucess",account,pwd);
+            this.tokenGenerete(list.get(0).getId(),response);
+            return list.get(0);
+        }
+        log.error("check login by account[{}],pwd[{}],login fail",account,pwd);
+        return null;
+    }
+
     /**
      * 根据账号id  获取账号信息，生成token，写入 cookie
      * @param id
@@ -125,5 +144,17 @@ public class SysAccountServiceImpl extends BaseServiceImpl<TSysAccount,TSysAccou
         String redisKey="token_encode";
         redisUtils.setObj(token,account,redisKey);
         CookieUtils.writeCookie(response,this.ENCODE_TOKEN_PARAM_NAME,enToken);
+    }
+
+    @Override
+    public Boolean checkLogout(HttpServletRequest request, HttpServletResponse response) {
+        String encodeToken= CookieUtils.getCookie(request,ENCODE_TOKEN_PARAM_NAME);
+        if(StringUtils.isNotBlank(encodeToken)){
+            String token= CodeUtils.getDecodedToken(encodeToken);
+            redisUtils.delKeys(token);
+            CookieUtils.writeCookie(response,this.ENCODE_TOKEN_PARAM_NAME,null);
+            return true;
+        }
+        return false;
     }
 }
