@@ -8,4 +8,7 @@ import cn.com.cubic.platform.hunter.mongo.models.User;
  **/
 
 public interface UserRepo extends BaseMongoDbRepo<User> {
+
+    void tempSave();
+
 }

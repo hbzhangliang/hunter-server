@@ -9,4 +9,13 @@ import org.springframework.stereotype.Service;
  **/
 @Service
 public class UserRepoImpl extends BaseMongoDbRepoSupport<User> implements UserRepo {
+
+
+    @Override
+    public void tempSave() {
+        for(int i=0;i<10;i++){
+            User user=new User();
+            user.setName(i+"");
+        }
+    }
 }
