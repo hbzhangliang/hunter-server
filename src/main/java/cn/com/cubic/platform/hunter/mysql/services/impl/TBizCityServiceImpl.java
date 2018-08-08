@@ -3,12 +3,16 @@ package cn.com.cubic.platform.hunter.mysql.services.impl;
 import cn.com.cubic.platform.hunter.mysql.entity.TBizCity;
 import cn.com.cubic.platform.hunter.mysql.entity.TBizCityExample;
 import cn.com.cubic.platform.hunter.mysql.services.TBizCityService;
+import cn.com.cubic.platform.hunter.mysql.vo.CityTreeVo;
 import cn.com.cubic.platform.hunter.mysql.vo.PageParams;
 import cn.com.cubic.platform.utils.Exception.HunterException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Liang.Zhang on 2018/8/8.
@@ -59,4 +63,44 @@ public class TBizCityServiceImpl  extends BaseServiceImpl<TBizCity,TBizCityExamp
         return true;
     }
 
+
+    @Override
+    public CityTreeVo tree(Long id) {
+        TBizCity city=this.findById(id);
+
+        TBizCityExample example=new TBizCityExample();
+        example.createCriteria().andParentIdEqualTo(city.getId());
+        List<TBizCity> list=this.selectByExample(example);
+
+        if(null==list||list.isEmpty()){
+            return new CityTreeVo(city.getId(),city.getName(),null);
+        }
+        else {
+            List<CityTreeVo> children=new ArrayList<>(10);
+            for(TBizCity item:list){
+                children.add(this.tree(item.getId()));
+            }
+            return new CityTreeVo(city.getId(),city.getName(),children);
+        }
+    }
+
+
+    @Override
+    public List<CityTreeVo> tree() {
+        TBizCityExample example=new TBizCityExample();
+        example.createCriteria().andParentIdIsNull();
+        List<TBizCity> list=this.selectByExample(example);
+        if(null==list||list.isEmpty()){
+            log.info("未查询到城市数据");
+            return null;
+        }
+        else {
+            List<CityTreeVo> result=new ArrayList<>(10);
+            for(TBizCity item:list){
+                result.add(this.tree(item.getId()));
+            }
+            return result;
+        }
+
+    }
 }

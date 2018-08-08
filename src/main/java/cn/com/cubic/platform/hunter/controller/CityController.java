@@ -47,5 +47,11 @@ public class CityController {
         return cityService.del(ids);
     }
 
+    @RequestMapping(value = "/tree")
+    public Object tree(){
+        return cityService.tree();
+    }
+
+
 
 }
