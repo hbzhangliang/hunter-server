@@ -73,7 +73,7 @@ public class CodeUtils {
     }
 
     public static void main(String[] args) {
-        String code="111";
+        String code="1";
         Long startTime= System.currentTimeMillis();
         logger.info("start time is [{}]",startTime);
         String content = getEncryptedCode(code);
