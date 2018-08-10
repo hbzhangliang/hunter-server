@@ -37,12 +37,6 @@ public class BaseAspect {
         } catch (Throwable ex) {
             log.error("Exception : {}", ex);
             throw ex;
-//            for (Throwable e : ExceptionUtils.getThrowableList(ex)) {
-//                String msg = e.getMessage();
-//                if (StringUtils.isNotBlank(msg)) {
-//                    throw new InvalidStateException(msg);
-//                }
-//            }
         }
         long tokeTime = System.currentTimeMillis() - startTime;
         log.info("After request,{},完成, 花费总时间：[{}] ms \n request result:[{}]", methodInfo, tokeTime, result);
