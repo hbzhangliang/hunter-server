@@ -19,6 +19,8 @@ public interface TBizCityService extends BaseService<TBizCity,TBizCityExample>{
 
     PageParams<TBizCity> list(PageParams<TBizCity> pageParams);
 
+    List<TBizCity> listAll();
+
     TBizCity findById(@NotNull Long id);
 
     Boolean del(List<Long> ids);

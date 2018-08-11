@@ -34,6 +34,13 @@ public class TBizCityServiceImpl  extends BaseServiceImpl<TBizCity,TBizCityExamp
     }
 
     @Override
+    public List<TBizCity> listAll() {
+        TBizCityExample example=new TBizCityExample();
+        example.setOrderByClause("id , seq ");
+        return this.selectByExample(example);
+    }
+
+    @Override
     public TBizCity findById(Long id) {
         TBizCityExample example = new TBizCityExample();
         example.createCriteria().andIdEqualTo(id);

@@ -32,6 +32,12 @@ public class CityController {
         return cityService.list(cityPageParams);
     }
 
+
+    @RequestMapping(value = "/list-all")
+    public Object listAll(){
+        return cityService.listAll();
+    }
+
     @RequestMapping(value = "/save")
     public Object save(@RequestBody TBizCity bean){
         return cityService.saveOrUpdate(bean);
