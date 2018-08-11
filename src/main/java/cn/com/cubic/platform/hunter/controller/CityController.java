@@ -2,7 +2,12 @@ package cn.com.cubic.platform.hunter.controller;
 
 import cn.com.cubic.platform.hunter.mysql.entity.TBizCity;
 import cn.com.cubic.platform.hunter.mysql.services.TBizCityService;
+import cn.com.cubic.platform.hunter.mysql.services.impl.TBizCityServiceImpl;
+import cn.com.cubic.platform.hunter.mysql.vo.CityTreeVo;
 import cn.com.cubic.platform.hunter.mysql.vo.PageParams;
+import cn.com.cubic.platform.utils.RedisUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
@@ -23,6 +28,8 @@ import java.util.Map;
 @RequestMapping(value = "/city",produces = "application/json; charset=utf-8")
 @ResponseBody
 public class CityController {
+
+    private final static Logger log = LoggerFactory.getLogger(CityController.class);
 
     @Autowired
     private TBizCityService cityService;
@@ -59,6 +66,10 @@ public class CityController {
         return cityService.del(delIds);
     }
 
+    /**
+     * 存在缓存
+     * @return
+     */
     @RequestMapping(value = "/tree")
     public Object tree(){
         return cityService.tree();
