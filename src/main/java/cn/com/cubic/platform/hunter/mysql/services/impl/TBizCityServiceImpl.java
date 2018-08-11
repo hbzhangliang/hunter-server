@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -46,7 +47,11 @@ public class TBizCityServiceImpl  extends BaseServiceImpl<TBizCity,TBizCityExamp
     @Override
     public Boolean del(List<Long> ids) {
         TBizCityExample example = new TBizCityExample();
-        example.createCriteria().andIdIn(ids);
+        List<Long> details=new ArrayList<>(20);
+        for(Long item:ids){
+            details.addAll(this.getChildrenIds(item));
+        }
+        example.createCriteria().andIdIn(details);
         this.deleteByExample(example);
         return true;
     }
@@ -103,4 +108,34 @@ public class TBizCityServiceImpl  extends BaseServiceImpl<TBizCity,TBizCityExamp
         }
 
     }
+
+
+    @Override
+    public List<Long> getChildrenIds(@NotEmpty Long id) {
+        CityTreeVo vo=this.tree(id);
+        if(null==vo){
+            log.info("未查询到数据");
+            return null;
+        }
+        return this.getChildrenIds(vo);
+    }
+
+    public List<Long> getChildrenIds(CityTreeVo vo){
+        if(null==vo) return null;
+
+        List<Long> result=new ArrayList<>(10);
+        result.add(vo.getId());
+
+        //只返回节点，没有子节点
+        if(null==vo.getChildren()||vo.getChildren().isEmpty()){
+           return result;
+        }
+
+        for(CityTreeVo item:vo.getChildren()){
+            result.addAll(this.getChildrenIds(item));
+        }
+        return result;
+
+    }
+
 }

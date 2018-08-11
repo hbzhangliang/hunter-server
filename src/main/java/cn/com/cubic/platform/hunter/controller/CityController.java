@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -43,8 +45,12 @@ public class CityController {
 
     @RequestMapping(value = "/del")
     public Object del(@RequestBody Map<String,Object> map){
-        List<Long> ids=(List) map.get("ids");
-        return cityService.del(ids);
+        List<Object> ids=(List) map.get("ids");
+        List<Long> delIds=new ArrayList<>(10);
+        for(Object p:ids){
+            delIds.add(Long.valueOf(p.toString()));
+        }
+        return cityService.del(delIds);
     }
 
     @RequestMapping(value = "/tree")

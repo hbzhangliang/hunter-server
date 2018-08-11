@@ -32,4 +32,6 @@ public interface TBizCityService extends BaseService<TBizCity,TBizCityExample>{
     //获取所有的节点数据
     List<CityTreeVo> tree();
 
+    List<Long> getChildrenIds(@NotEmpty Long id);
+
 }
