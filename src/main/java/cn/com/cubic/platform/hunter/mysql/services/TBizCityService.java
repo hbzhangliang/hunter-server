@@ -36,4 +36,7 @@ public interface TBizCityService extends BaseService<TBizCity,TBizCityExample>{
 
     List<Long> getChildrenIds(@NotEmpty Long id);
 
+
+    void importCitys();
+
 }

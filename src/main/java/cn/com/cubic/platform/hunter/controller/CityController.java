@@ -77,4 +77,11 @@ public class CityController {
 
 
 
+
+    @RequestMapping(value = "/import")
+    public Object importCity(){
+        cityService.importCitys();
+        return null;
+    }
+
 }

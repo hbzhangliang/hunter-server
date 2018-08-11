@@ -6,6 +6,9 @@ import cn.com.cubic.platform.hunter.mysql.services.TBizCityService;
 import cn.com.cubic.platform.hunter.mysql.vo.CityTreeVo;
 import cn.com.cubic.platform.hunter.mysql.vo.PageParams;
 import cn.com.cubic.platform.utils.Exception.HunterException;
+import cn.com.cubic.platform.utils.JsonReader;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -145,4 +148,36 @@ public class TBizCityServiceImpl  extends BaseServiceImpl<TBizCity,TBizCityExamp
 
     }
 
+
+    @Override
+    public void importCitys() {
+        //删除所有
+        this.deleteByExample(null);
+
+        String path="initdata/city.json";
+        JSONObject jsonObject= JsonReader.readJson(path);
+        if(null==jsonObject||jsonObject.isEmpty()) return;
+        JSONArray jsonArray=jsonObject.getJSONArray("provinces");
+        for(Object item:jsonArray){
+            JSONObject jsb=(JSONObject)item;
+            String provinceName=jsb.getString("provinceName");
+            JSONArray jAy=jsb.getJSONArray("citys");
+
+            //插入省份
+            TBizCity city=new TBizCity();
+            city.setName(provinceName);
+            this.saveOrUpdate(city);
+
+            if(null!=jAy&&jAy.size()>0){
+                for(Object tmp:jAy){
+                    JSONObject js=(JSONObject)tmp;
+                    TBizCity city1=new TBizCity();
+                    city1.setName(js.getString("citysName"));
+                    city1.setParentId(city.getId());
+                    this.saveOrUpdate(city1);
+                }
+            }
+        }
+
+    }
 }
