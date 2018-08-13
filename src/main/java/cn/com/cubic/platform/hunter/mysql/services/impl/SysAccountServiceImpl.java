@@ -171,10 +171,23 @@ public class SysAccountServiceImpl extends BaseServiceImpl<TSysAccount,TSysAccou
         String encodeToken= CookieUtils.getCookie(request,ENCODE_TOKEN_PARAM_NAME);
         if(StringUtils.isNotBlank(encodeToken)){
             String token= CodeUtils.getDecodedToken(encodeToken);
+
+            this.cleanGlobal(token);
+
             redisUtils.delKeys(token);
             CookieUtils.writeCookie(response,this.ENCODE_TOKEN_PARAM_NAME,null);
             return true;
         }
         return false;
+    }
+
+    /**
+     * 将global 的tokenSet 清除 此request的token，将requestHolder 清除
+     * @param token
+     */
+    @Override
+    public void cleanGlobal(String token) {
+        GlobalHolder.getTokenSet().remove(token);
+        GlobalHolder.remove();
     }
 }

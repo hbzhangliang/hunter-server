@@ -40,4 +40,6 @@ public interface SysAccountService  extends BaseService<TSysAccount,TSysAccountE
 
     TSysAccount checkLoginInfo(HttpServletRequest request);
 
+    void cleanGlobal(String token);
+
 }

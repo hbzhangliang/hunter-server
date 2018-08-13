@@ -106,14 +106,19 @@ public class LoginFilter implements Filter{
     }
 
     private void initGlobalHolder(HttpServletRequest request){
-        Map<String,Object> map=new HashMap<>(5);
+        if(null==GlobalHolder.get()) {
+            log.info("重赋值globalholder");
+            Map<String, Object> map = new HashMap<>(5);
+            String encodeToken = CookieUtils.getCookie(request, ENCODE_TOKEN_PARAM_NAME);
+            if (!StringUtils.isEmpty(encodeToken)) {
+                String token = CodeUtils.getDecodedToken(encodeToken);
+                map.put("token", token);
+                map.put("account", redisUtils.getObj(token));
+                GlobalHolder.set(map);
 
-        String encodeToken= CookieUtils.getCookie(request,ENCODE_TOKEN_PARAM_NAME);
-        if(!StringUtils.isEmpty(encodeToken)){
-            String token= CodeUtils.getDecodedToken(encodeToken);
-            map.put("token",token);
-            map.put("account",redisUtils.getObj(token));
-            GlobalHolder.set(map);
+                //token set 添加
+                GlobalHolder.getTokenSet().add(token);
+            }
         }
     }
 
