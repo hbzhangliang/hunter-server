@@ -1,16 +1,11 @@
 package cn.com.cubic.platform.hunter.mysql.services.impl;
 
-import cn.com.cubic.platform.hunter.mysql.entity.TBizCity;
-import cn.com.cubic.platform.hunter.mysql.entity.TBizCityExample;
-import cn.com.cubic.platform.hunter.mysql.entity.TSysAccount;
-import cn.com.cubic.platform.hunter.mysql.services.TBizCityService;
+import cn.com.cubic.platform.hunter.mysql.entity.*;
+import cn.com.cubic.platform.hunter.mysql.services.TBizBusinessService;
 import cn.com.cubic.platform.hunter.mysql.vo.ElTreeVo;
 import cn.com.cubic.platform.hunter.mysql.vo.PageParams;
 import cn.com.cubic.platform.utils.Exception.HunterException;
-import cn.com.cubic.platform.utils.JsonReader;
 import cn.com.cubic.platform.utils.global.GlobalHolder;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -21,17 +16,16 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by Liang.Zhang on 2018/8/8.
+ * Created by Liang.Zhang on 2018/8/13.
  **/
 @Service
-public class TBizCityServiceImpl  extends BaseServiceImpl<TBizCity,TBizCityExample> implements TBizCityService {
-
-    private final static Logger log = LoggerFactory.getLogger(TBizCityServiceImpl.class);
+public class TBizBusinessServiceIml  extends BaseServiceImpl<TBizBusiness,TBizBusinessExample> implements TBizBusinessService {
+    private final static Logger log = LoggerFactory.getLogger(TBizBusinessServiceIml.class);
 
     @Override
-    public PageParams<TBizCity> list(PageParams<TBizCity> pageParams) {
+    public PageParams<TBizBusiness> list(PageParams<TBizBusiness> pageParams) {
         //查询参数
-        TBizCityExample example=new TBizCityExample();
+        TBizBusinessExample example=new TBizBusinessExample();
         //排序
         String strOrder=String.format("%s %s",pageParams.getOrderBy(),pageParams.getDirection());
         example.setOrderByClause(strOrder);
@@ -39,17 +33,17 @@ public class TBizCityServiceImpl  extends BaseServiceImpl<TBizCity,TBizCityExamp
     }
 
     @Override
-    public List<TBizCity> listAll() {
-        TBizCityExample example=new TBizCityExample();
+    public List<TBizBusiness> listAll() {
+        TBizBusinessExample example=new TBizBusinessExample();
         example.setOrderByClause("id , seq ");
         return this.selectByExample(example);
     }
 
     @Override
-    public TBizCity findById(Long id) {
-        TBizCityExample example = new TBizCityExample();
+    public TBizBusiness findById(Long id) {
+        TBizBusinessExample example = new TBizBusinessExample();
         example.createCriteria().andIdEqualTo(id);
-        List<TBizCity> list = this.selectByExample(example);
+        List<TBizBusiness> list = this.selectByExample(example);
         if (null != list && 1 != list.size()) {
             throw new HunterException("查询错误");
         }
@@ -58,7 +52,7 @@ public class TBizCityServiceImpl  extends BaseServiceImpl<TBizCity,TBizCityExamp
 
     @Override
     public Boolean del(List<Long> ids) {
-        TBizCityExample example = new TBizCityExample();
+        TBizBusinessExample example = new TBizBusinessExample();
         List<Long> details=new ArrayList<>(20);
         for(Long item:ids){
             details.addAll(this.getChildrenIds(item));
@@ -69,11 +63,11 @@ public class TBizCityServiceImpl  extends BaseServiceImpl<TBizCity,TBizCityExamp
     }
 
     @Override
-    public Boolean saveOrUpdate(TBizCity bean) {
+    public Boolean saveOrUpdate(TBizBusiness bean) {
         Date dt=new Date();
         TSysAccount user=(TSysAccount) GlobalHolder.get().get("account");
         if (null != bean.getId()) {
-            TBizCityExample example = new TBizCityExample();
+            TBizBusinessExample example = new TBizBusinessExample();
             example.createCriteria().andIdEqualTo(bean.getId());
             bean.setModifyBy(user.getName());
             bean.setModifyTime(dt);
@@ -86,47 +80,41 @@ public class TBizCityServiceImpl  extends BaseServiceImpl<TBizCity,TBizCityExamp
         return true;
     }
 
-
     @Override
-    public ElTreeVo tree(Long id) {
-        TBizCity city=this.findById(id);
-
-        TBizCityExample example=new TBizCityExample();
-        example.createCriteria().andParentIdEqualTo(city.getId());
-        List<TBizCity> list=this.selectByExample(example);
-
+    public ElTreeVo tree(@NotEmpty Long id) {
+        TBizBusiness business=this.findById(id);
+        TBizBusinessExample example=new TBizBusinessExample();
+        example.createCriteria().andParentIdEqualTo(business.getId());
+        List<TBizBusiness> list=this.selectByExample(example);
         if(null==list||list.isEmpty()){
-            return new ElTreeVo(city.getId(),city.getName(),null);
+            return new ElTreeVo(business.getId(),business.getName(),null);
         }
         else {
             List<ElTreeVo> children=new ArrayList<>(10);
-            for(TBizCity item:list){
+            for(TBizBusiness item:list){
                 children.add(this.tree(item.getId()));
             }
-            return new ElTreeVo(city.getId(),city.getName(),children);
+            return new ElTreeVo(business.getId(),business.getName(),children);
         }
     }
 
-
     @Override
     public List<ElTreeVo> tree() {
-        TBizCityExample example=new TBizCityExample();
+        TBizBusinessExample example=new TBizBusinessExample();
         example.createCriteria().andParentIdIsNull();
-        List<TBizCity> list=this.selectByExample(example);
+        List<TBizBusiness> list=this.selectByExample(example);
         if(null==list||list.isEmpty()){
-            log.info("未查询到城市数据");
+            log.info("未查询到行业数据");
             return null;
         }
         else {
             List<ElTreeVo> result=new ArrayList<>(10);
-            for(TBizCity item:list){
+            for(TBizBusiness item:list){
                 result.add(this.tree(item.getId()));
             }
             return result;
         }
-
     }
-
 
     @Override
     public List<Long> getChildrenIds(@NotEmpty Long id) {
@@ -140,52 +128,21 @@ public class TBizCityServiceImpl  extends BaseServiceImpl<TBizCity,TBizCityExamp
 
     public List<Long> getChildrenIds(ElTreeVo vo){
         if(null==vo) return null;
-
         List<Long> result=new ArrayList<>(10);
         result.add(vo.getId());
-
         //只返回节点，没有子节点
         if(null==vo.getChildren()||vo.getChildren().isEmpty()){
-           return result;
+            return result;
         }
-
         for(ElTreeVo item:vo.getChildren()){
             result.addAll(this.getChildrenIds(item));
         }
         return result;
-
     }
 
 
     @Override
-    public void importCitys() {
-        //删除所有
-        this.deleteByExample(null);
-
-        String path="initdata/city.json";
-        JSONObject jsonObject= JsonReader.readJson(path);
-        if(null==jsonObject||jsonObject.isEmpty()) return;
-        JSONArray jsonArray=jsonObject.getJSONArray("provinces");
-        for(Object item:jsonArray){
-            JSONObject jsb=(JSONObject)item;
-            String provinceName=jsb.getString("provinceName");
-            JSONArray jAy=jsb.getJSONArray("citys");
-
-            //插入省份
-            TBizCity city=new TBizCity();
-            city.setName(provinceName);
-            this.saveOrUpdate(city);
-
-            if(null!=jAy&&jAy.size()>0){
-                for(Object tmp:jAy){
-                    JSONObject js=(JSONObject)tmp;
-                    TBizCity city1=new TBizCity();
-                    city1.setName(js.getString("citysName"));
-                    city1.setParentId(city.getId());
-                    this.saveOrUpdate(city1);
-                }
-            }
-        }
+    public void importBusiness() {
 
     }
 }

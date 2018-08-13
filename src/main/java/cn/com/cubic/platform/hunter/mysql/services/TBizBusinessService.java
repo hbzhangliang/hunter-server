@@ -1,7 +1,7 @@
 package cn.com.cubic.platform.hunter.mysql.services;
 
-import cn.com.cubic.platform.hunter.mysql.entity.TBizCity;
-import cn.com.cubic.platform.hunter.mysql.entity.TBizCityExample;
+import cn.com.cubic.platform.hunter.mysql.entity.TBizBusiness;
+import cn.com.cubic.platform.hunter.mysql.entity.TBizBusinessExample;
 import cn.com.cubic.platform.hunter.mysql.vo.ElTreeVo;
 import cn.com.cubic.platform.hunter.mysql.vo.PageParams;
 import com.sun.istack.internal.NotNull;
@@ -10,20 +10,20 @@ import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
 /**
- * Created by Liang.Zhang on 2018/8/8.
+ * Created by Liang.Zhang on 2018/8/13.
  **/
 
-public interface TBizCityService extends BaseService<TBizCity,TBizCityExample>{
+public interface TBizBusinessService extends BaseService<TBizBusiness,TBizBusinessExample>{
 
-    PageParams<TBizCity> list(PageParams<TBizCity> pageParams);
+    PageParams<TBizBusiness> list(PageParams<TBizBusiness> pageParams);
 
-    List<TBizCity> listAll();
+    List<TBizBusiness> listAll();
 
-    TBizCity findById(@NotNull Long id);
+    TBizBusiness findById(@NotNull Long id);
 
     Boolean del(List<Long> ids);
 
-    Boolean saveOrUpdate(TBizCity bean);
+    Boolean saveOrUpdate(TBizBusiness bean);
 
 
     //树形结构展示菜单栏
@@ -35,6 +35,6 @@ public interface TBizCityService extends BaseService<TBizCity,TBizCityExample>{
     List<Long> getChildrenIds(@NotEmpty Long id);
 
 
-    void importCitys();
+    void importBusiness();
 
 }

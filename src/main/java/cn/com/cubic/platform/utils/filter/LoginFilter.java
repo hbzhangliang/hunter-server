@@ -66,13 +66,14 @@ public class LoginFilter implements Filter{
             String encodeToken= CookieUtils.getCookie(request,ENCODE_TOKEN_PARAM_NAME);
             String requestURI = request.getRequestURI().replace(request.getContextPath(), "");
             if(checkExclude(requestURI)){
-                this.initGlobalHolder(request);
+                this.initGlobalHolder(request);///后面要删除的。。。。。。
                 filterChain.doFilter(servletRequest, servletResponse);
                 return;
             }
             if(!StringUtils.isEmpty(encodeToken)){
                 String token= CodeUtils.getDecodedToken(encodeToken);
                 if(!StringUtils.isEmpty(token)&&redisUtils.getObj(token)!=null){
+                    this.initGlobalHolder(request);
                     filterChain.doFilter(servletRequest, servletResponse);
                     return;
                 }

@@ -7,15 +7,15 @@ import java.util.List;
  * Created by Liang.Zhang on 2018/8/8.
  **/
 
-public class CityTreeVo implements Serializable{
+public class ElTreeVo implements Serializable{
 
     private Long id;
 
     private String name;
 
-    private List<CityTreeVo> children;
+    private List<ElTreeVo> children;
 
-    public CityTreeVo(Long id,String name,List<CityTreeVo> children){
+    public ElTreeVo(Long id, String name, List<ElTreeVo> children){
         this.id=id;
         this.name=name;
         this.children=children;
@@ -37,11 +37,11 @@ public class CityTreeVo implements Serializable{
         this.name = name;
     }
 
-    public List<CityTreeVo> getChildren() {
+    public List<ElTreeVo> getChildren() {
         return children;
     }
 
-    public void setChildren(List<CityTreeVo> children) {
+    public void setChildren(List<ElTreeVo> children) {
         this.children = children;
     }
 }

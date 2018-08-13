@@ -1,6 +1,8 @@
 package cn.com.cubic.platform.hunter.controller;
 
+import cn.com.cubic.platform.hunter.mysql.entity.TBizBusiness;
 import cn.com.cubic.platform.hunter.mysql.entity.TBizCity;
+import cn.com.cubic.platform.hunter.mysql.services.TBizBusinessService;
 import cn.com.cubic.platform.hunter.mysql.services.TBizCityService;
 import cn.com.cubic.platform.hunter.mysql.vo.PageParams;
 import org.slf4j.Logger;
@@ -17,39 +19,39 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by Liang.Zhang on 2018/8/8.
+ * Created by Liang.Zhang on 2018/8/13.
  **/
 @Validated
 @Controller
-@RequestMapping(value = "/city",produces = "application/json; charset=utf-8")
+@RequestMapping(value = "/business",produces = "application/json; charset=utf-8")
 @ResponseBody
-public class CityController {
+public class BusinessController {
 
-    private final static Logger log = LoggerFactory.getLogger(CityController.class);
+    private final static Logger log = LoggerFactory.getLogger(BusinessController.class);
 
     @Autowired
-    private TBizCityService cityService;
+    private TBizBusinessService businessService;
 
     @RequestMapping(value = "/list")
-    public Object list(@RequestBody PageParams<TBizCity> cityPageParams){
-        return cityService.list(cityPageParams);
+    public Object list(@RequestBody PageParams<TBizBusiness> cityPageParams){
+        return businessService.list(cityPageParams);
     }
 
 
     @RequestMapping(value = "/list-all")
     public Object listAll(){
-        return cityService.listAll();
+        return businessService.listAll();
     }
 
     @RequestMapping(value = "/save")
-    public Object save(@RequestBody TBizCity bean){
-        return cityService.saveOrUpdate(bean);
+    public Object save(@RequestBody TBizBusiness bean){
+        return businessService.saveOrUpdate(bean);
     }
 
     @RequestMapping(value = "/get")
     public Object get(@RequestBody Map<String,Long> map){
         Long id=map.get("id");
-        return cityService.findById(id);
+        return businessService.findById(id);
     }
 
     @RequestMapping(value = "/del")
@@ -59,7 +61,7 @@ public class CityController {
         for(Object p:ids){
             delIds.add(Long.valueOf(p.toString()));
         }
-        return cityService.del(delIds);
+        return businessService.del(delIds);
     }
 
     /**
@@ -68,7 +70,7 @@ public class CityController {
      */
     @RequestMapping(value = "/tree")
     public Object tree(){
-        return cityService.tree();
+        return businessService.tree();
     }
 
 
@@ -76,7 +78,7 @@ public class CityController {
 
     @RequestMapping(value = "/import")
     public Object importCity(){
-        cityService.importCitys();
+        businessService.importBusiness();
         return null;
     }
 
