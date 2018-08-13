@@ -2,11 +2,13 @@ package cn.com.cubic.platform.hunter.mysql.services.impl;
 
 import cn.com.cubic.platform.hunter.mysql.entity.TBizCity;
 import cn.com.cubic.platform.hunter.mysql.entity.TBizCityExample;
+import cn.com.cubic.platform.hunter.mysql.entity.TSysAccount;
 import cn.com.cubic.platform.hunter.mysql.services.TBizCityService;
 import cn.com.cubic.platform.hunter.mysql.vo.CityTreeVo;
 import cn.com.cubic.platform.hunter.mysql.vo.PageParams;
 import cn.com.cubic.platform.utils.Exception.HunterException;
 import cn.com.cubic.platform.utils.JsonReader;
+import cn.com.cubic.platform.utils.global.GlobalHolder;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.slf4j.Logger;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -68,11 +71,17 @@ public class TBizCityServiceImpl  extends BaseServiceImpl<TBizCity,TBizCityExamp
 
     @Override
     public Boolean saveOrUpdate(TBizCity bean) {
+        Date dt=new Date();
+        TSysAccount user=(TSysAccount) GlobalHolder.get().get("account");
         if (null != bean.getId()) {
             TBizCityExample example = new TBizCityExample();
             example.createCriteria().andIdEqualTo(bean.getId());
+            bean.setModifyBy(user.getName());
+            bean.setModifyTime(dt);
             this.updateByExampleSelective(bean, example);
         } else {
+            bean.setCreateBy(user.getName());
+            bean.setCreateTime(dt);
             this.insert(bean);
         }
         return true;

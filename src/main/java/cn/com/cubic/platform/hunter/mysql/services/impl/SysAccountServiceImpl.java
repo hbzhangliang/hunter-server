@@ -8,6 +8,7 @@ import cn.com.cubic.platform.utils.CodeUtils;
 import cn.com.cubic.platform.utils.CookieUtils;
 import cn.com.cubic.platform.utils.Exception.HunterException;
 import cn.com.cubic.platform.utils.RedisUtils;
+import cn.com.cubic.platform.utils.global.GlobalHolder;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -85,11 +87,17 @@ public class SysAccountServiceImpl extends BaseServiceImpl<TSysAccount,TSysAccou
 
     @Override
     public Boolean saveOrUpdate(TSysAccount account) {
+        Date dt=new Date();
+        TSysAccount user=(TSysAccount) GlobalHolder.get().get("account");
         if (null != account.getId()) {
             TSysAccountExample example = new TSysAccountExample();
             example.createCriteria().andIdEqualTo(account.getId());
+            account.setModifyBy(user.getName());
+            account.setModifyTime(dt);
             this.updateByExampleSelective(account, example);
         } else {
+            account.setCreateBy(user.getName());
+            account.setCreateTime(dt);
             this.insert(account);
         }
         return true;
@@ -144,6 +152,18 @@ public class SysAccountServiceImpl extends BaseServiceImpl<TSysAccount,TSysAccou
         String redisKey="token_encode";
         redisUtils.setObj(token,account,redisKey);
         CookieUtils.writeCookie(response,this.ENCODE_TOKEN_PARAM_NAME,enToken);
+    }
+
+    @Override
+    public TSysAccount checkLoginInfo(HttpServletRequest request) {
+        String encodeToken= CookieUtils.getCookie(request,ENCODE_TOKEN_PARAM_NAME);
+        if(StringUtils.isNotBlank(encodeToken)) {
+            String token = CodeUtils.getDecodedToken(encodeToken);
+            log.info("获取到用户token:[{}]",token);
+            return (TSysAccount)redisUtils.getObj(token);
+        }
+        log.warn("未获取到用户token");
+        return null;
     }
 
     @Override

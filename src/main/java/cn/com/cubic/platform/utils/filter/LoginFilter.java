@@ -1,8 +1,11 @@
 package cn.com.cubic.platform.utils.filter;
 
+import cn.com.cubic.platform.hunter.mysql.services.SysAccountService;
+import cn.com.cubic.platform.hunter.mysql.services.impl.SysAccountServiceImpl;
 import cn.com.cubic.platform.utils.CodeUtils;
 import cn.com.cubic.platform.utils.CookieUtils;
 import cn.com.cubic.platform.utils.RedisUtils;
+import cn.com.cubic.platform.utils.global.GlobalHolder;
 import cn.com.cubic.platform.utils.sso.SSOConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +14,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
@@ -18,6 +22,8 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Liang.Zhang on 2018/7/6.
@@ -60,6 +66,7 @@ public class LoginFilter implements Filter{
             String encodeToken= CookieUtils.getCookie(request,ENCODE_TOKEN_PARAM_NAME);
             String requestURI = request.getRequestURI().replace(request.getContextPath(), "");
             if(checkExclude(requestURI)){
+                this.initGlobalHolder(request);
                 filterChain.doFilter(servletRequest, servletResponse);
                 return;
             }
@@ -96,6 +103,18 @@ public class LoginFilter implements Filter{
             return false;
         }
         return false;
+    }
+
+    private void initGlobalHolder(HttpServletRequest request){
+        Map<String,Object> map=new HashMap<>(5);
+
+        String encodeToken= CookieUtils.getCookie(request,ENCODE_TOKEN_PARAM_NAME);
+        if(!StringUtils.isEmpty(encodeToken)){
+            String token= CodeUtils.getDecodedToken(encodeToken);
+            map.put("token",token);
+            map.put("account",redisUtils.getObj(token));
+            GlobalHolder.set(map);
+        }
     }
 
 

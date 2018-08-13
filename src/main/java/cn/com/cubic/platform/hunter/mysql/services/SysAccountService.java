@@ -38,5 +38,6 @@ public interface SysAccountService  extends BaseService<TSysAccount,TSysAccountE
 
     void tokenGenerete(Long id, HttpServletResponse response);
 
+    TSysAccount checkLoginInfo(HttpServletRequest request);
 
 }
