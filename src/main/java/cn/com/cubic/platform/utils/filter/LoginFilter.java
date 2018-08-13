@@ -112,12 +112,13 @@ public class LoginFilter implements Filter{
             String encodeToken = CookieUtils.getCookie(request, ENCODE_TOKEN_PARAM_NAME);
             if (!StringUtils.isEmpty(encodeToken)) {
                 String token = CodeUtils.getDecodedToken(encodeToken);
+
                 map.put("token", token);
                 map.put("account", redisUtils.getObj(token));
                 GlobalHolder.set(map);
-
                 //token set 添加
                 GlobalHolder.getTokenSet().add(token);
+
             }
         }
     }
