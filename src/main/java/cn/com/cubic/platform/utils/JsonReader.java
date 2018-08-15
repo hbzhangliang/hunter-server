@@ -36,4 +36,22 @@ public class JsonReader {
         }
     }
 
+    public static JSONArray readJsonArray(String path){
+        try {
+            path= ResourceUtils.getURL("classpath:").getPath()+path;
+            BufferedReader br = new BufferedReader(new FileReader(path));// 读取原始json文件
+            StringBuilder sb=new StringBuilder();
+            String lineTxt = br.readLine();
+            while (lineTxt != null) {
+                sb.append(lineTxt);
+                lineTxt=br.readLine();
+            }
+            return JSONArray.parseArray(sb.toString());
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 }

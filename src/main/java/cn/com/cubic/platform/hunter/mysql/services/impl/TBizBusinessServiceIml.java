@@ -5,7 +5,10 @@ import cn.com.cubic.platform.hunter.mysql.services.TBizBusinessService;
 import cn.com.cubic.platform.hunter.mysql.vo.ElTreeVo;
 import cn.com.cubic.platform.hunter.mysql.vo.PageParams;
 import cn.com.cubic.platform.utils.Exception.HunterException;
+import cn.com.cubic.platform.utils.JsonReader;
 import cn.com.cubic.platform.utils.global.GlobalHolder;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -145,6 +148,42 @@ public class TBizBusinessServiceIml  extends BaseServiceImpl<TBizBusiness,TBizBu
 
     @Override
     public void importBusiness() {
+        //删除所有
+        this.deleteByExample(null);
+        String path="initdata/business.json";
+        JSONArray jsonArray= JsonReader.readJsonArray(path);
+        if(null==jsonArray||jsonArray.isEmpty()) return;
+        for(Object item:jsonArray){
+            JSONObject jsb=(JSONObject)item;
+            String label=jsb.getString("label");
+            JSONArray jAy=jsb.getJSONArray("children");
 
+            //插入省份
+            TBizBusiness biz=new TBizBusiness();
+            biz.setName(label);
+            this.saveOrUpdate(biz);
+
+            if(null!=jAy&&jAy.size()>0){
+                for(Object tmp:jAy){
+                    JSONObject js1=(JSONObject)tmp;
+                    TBizBusiness biz1=new TBizBusiness();
+                    biz1.setName(js1.getString("label"));
+                    biz1.setParentId(biz.getId());
+                    this.saveOrUpdate(biz1);
+
+                    JSONArray jAy1=js1.getJSONArray("children");
+
+                    if(null!=jAy1&&jAy1.size()>0) {
+                        for (Object tmp2 : jAy1) {
+                            JSONObject js2=(JSONObject)tmp2;
+                            TBizBusiness biz2=new TBizBusiness();
+                            biz2.setName(js2.getString("label"));
+                            biz2.setParentId(biz1.getId());
+                            this.saveOrUpdate(biz2);
+                        }
+                    }
+                }
+            }
+        }
     }
 }
