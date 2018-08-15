@@ -155,35 +155,31 @@ public class TBizBusinessServiceIml  extends BaseServiceImpl<TBizBusiness,TBizBu
         if(null==jsonArray||jsonArray.isEmpty()) return;
         for(Object item:jsonArray){
             JSONObject jsb=(JSONObject)item;
-            String label=jsb.getString("label");
-            JSONArray jAy=jsb.getJSONArray("children");
+            this.importBiz(jsb,null);
+        }
+    }
 
-            //插入省份
-            TBizBusiness biz=new TBizBusiness();
-            biz.setName(label);
-            this.saveOrUpdate(biz);
+    /**
+     * 递归获取行业数据
+     * @param jsonObject
+     * @param pId
+     */
+    private void importBiz(JSONObject jsonObject,Long pId){
+        TBizBusiness biz=new TBizBusiness();
+        biz.setName(jsonObject.getString("label"));
+        biz.setParentId(pId);
+        this.saveOrUpdate(biz);
 
-            if(null!=jAy&&jAy.size()>0){
-                for(Object tmp:jAy){
-                    JSONObject js1=(JSONObject)tmp;
-                    TBizBusiness biz1=new TBizBusiness();
-                    biz1.setName(js1.getString("label"));
-                    biz1.setParentId(biz.getId());
-                    this.saveOrUpdate(biz1);
-
-                    JSONArray jAy1=js1.getJSONArray("children");
-
-                    if(null!=jAy1&&jAy1.size()>0) {
-                        for (Object tmp2 : jAy1) {
-                            JSONObject js2=(JSONObject)tmp2;
-                            TBizBusiness biz2=new TBizBusiness();
-                            biz2.setName(js2.getString("label"));
-                            biz2.setParentId(biz1.getId());
-                            this.saveOrUpdate(biz2);
-                        }
-                    }
-                }
+        JSONArray jsonArray=jsonObject.getJSONArray("children");
+        if(null==jsonArray||jsonArray.isEmpty()){
+            return;
+        }
+        else {
+            for(Object item:jsonArray){
+                this.importBiz((JSONObject)item,biz.getId());
             }
         }
     }
+
+
 }
