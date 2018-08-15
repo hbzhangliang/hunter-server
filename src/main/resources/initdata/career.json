@@ -1,0 +1,2476 @@
+[
+  {
+    "count": 0,
+    "level": 0,
+    "name_alias": "",
+    "label": "销售",
+    "id": 16,
+    "mapping_id": null,
+    "parent_id": null,
+    "another_label": "销售",
+    "children": [
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "销售管理",
+        "id": 167,
+        "mapping_id": null,
+        "parent_id": 16,
+        "another_label": "销售管理",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "销售人员",
+        "id": 168,
+        "mapping_id": null,
+        "parent_id": 16,
+        "another_label": "销售人员",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "销售行政/商务",
+        "id": 169,
+        "mapping_id": null,
+        "parent_id": 16,
+        "another_label": "销售行政/商务",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "客户服务",
+        "id": 170,
+        "mapping_id": null,
+        "parent_id": 16,
+        "another_label": "客户服务",
+        "children": []
+      }
+    ]
+  },
+  {
+    "count": 0,
+    "level": 0,
+    "name_alias": "",
+    "label": "互联网",
+    "id": 112,
+    "mapping_id": null,
+    "parent_id": null,
+    "another_label": "互联网",
+    "children": [
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "互联网技术",
+        "id": 113,
+        "mapping_id": null,
+        "parent_id": 112,
+        "another_label": "互联网技术",
+        "children": [
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "IOS",
+            "id": 119,
+            "mapping_id": null,
+            "parent_id": 113,
+            "another_label": "IOS",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "Android",
+            "id": 120,
+            "mapping_id": null,
+            "parent_id": 113,
+            "another_label": "Android",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "Java",
+            "id": 121,
+            "mapping_id": null,
+            "parent_id": 113,
+            "another_label": "Java",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "PHP",
+            "id": 122,
+            "mapping_id": null,
+            "parent_id": 113,
+            "another_label": "PHP",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "Python",
+            "id": 123,
+            "mapping_id": null,
+            "parent_id": 113,
+            "another_label": "Python",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "C C++",
+            "id": 124,
+            "mapping_id": null,
+            "parent_id": 113,
+            "another_label": "C C++",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": ".Net",
+            "id": 125,
+            "mapping_id": null,
+            "parent_id": 113,
+            "another_label": ".Net",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "前端",
+            "id": 126,
+            "mapping_id": null,
+            "parent_id": 113,
+            "another_label": "前端",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "测试",
+            "id": 127,
+            "mapping_id": null,
+            "parent_id": 113,
+            "another_label": "测试",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "Ruby",
+            "id": 297,
+            "mapping_id": null,
+            "parent_id": 113,
+            "another_label": "Ruby",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "Hadoop",
+            "id": 299,
+            "mapping_id": null,
+            "parent_id": 113,
+            "another_label": "Hadoop",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "全栈",
+            "id": 300,
+            "mapping_id": null,
+            "parent_id": 113,
+            "another_label": "全栈",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "算法",
+            "id": 302,
+            "mapping_id": null,
+            "parent_id": 113,
+            "another_label": "算法",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "运维",
+            "id": 298,
+            "mapping_id": null,
+            "parent_id": 113,
+            "another_label": "运维",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "数据库",
+            "id": 301,
+            "mapping_id": null,
+            "parent_id": 113,
+            "another_label": "数据库",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "CTO",
+            "id": 304,
+            "mapping_id": null,
+            "parent_id": 113,
+            "another_label": "CTO",
+            "children": []
+          }
+        ]
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "互联网设计",
+        "id": 115,
+        "mapping_id": null,
+        "parent_id": 112,
+        "another_label": "互联网设计",
+        "children": [
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "UI",
+            "id": 128,
+            "mapping_id": null,
+            "parent_id": 115,
+            "another_label": "UI",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "UE",
+            "id": 129,
+            "mapping_id": null,
+            "parent_id": 115,
+            "another_label": "UE",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "UX",
+            "id": 130,
+            "mapping_id": null,
+            "parent_id": 115,
+            "another_label": "UX",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "视频/音效",
+            "id": 179,
+            "mapping_id": null,
+            "parent_id": 115,
+            "another_label": "视频/音效",
+            "children": []
+          }
+        ]
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "互联网产品",
+        "id": 114,
+        "mapping_id": null,
+        "parent_id": 112,
+        "another_label": "互联网产品",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "互联网运营",
+        "id": 116,
+        "mapping_id": null,
+        "parent_id": 112,
+        "another_label": "互联网运营",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "互联网市场",
+        "id": 117,
+        "mapping_id": null,
+        "parent_id": 112,
+        "another_label": "互联网市场",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "互联网销售",
+        "id": 118,
+        "mapping_id": null,
+        "parent_id": 112,
+        "another_label": "互联网销售",
+        "children": []
+      }
+    ]
+  },
+  {
+    "count": 0,
+    "level": 0,
+    "name_alias": "",
+    "label": "IT",
+    "id": 11,
+    "mapping_id": null,
+    "parent_id": null,
+    "another_label": "IT",
+    "children": [
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "IT管理",
+        "id": 52,
+        "mapping_id": null,
+        "parent_id": 11,
+        "another_label": "IT管理",
+        "children": [
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "项目管理",
+            "id": 178,
+            "mapping_id": null,
+            "parent_id": 52,
+            "another_label": "项目管理",
+            "children": []
+          }
+        ]
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "游戏",
+        "id": 311,
+        "mapping_id": null,
+        "parent_id": 11,
+        "another_label": "游戏",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "软件研发",
+        "id": 43,
+        "mapping_id": null,
+        "parent_id": 11,
+        "another_label": "软件研发",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "硬件研发",
+        "id": 173,
+        "mapping_id": null,
+        "parent_id": 11,
+        "another_label": "硬件研发",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "需求分析",
+        "id": 171,
+        "mapping_id": null,
+        "parent_id": 11,
+        "another_label": "需求分析",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "技术支持",
+        "id": 175,
+        "mapping_id": null,
+        "parent_id": 11,
+        "another_label": "技术支持",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "信息安全",
+        "id": 180,
+        "mapping_id": null,
+        "parent_id": 11,
+        "another_label": "信息安全",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "ERP",
+        "id": 177,
+        "mapping_id": null,
+        "parent_id": 11,
+        "another_label": "ERP",
+        "children": [
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "ERP实施顾问",
+            "id": 50,
+            "mapping_id": null,
+            "parent_id": 177,
+            "another_label": "ERP实施顾问",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "ERP技术开发",
+            "id": 176,
+            "mapping_id": null,
+            "parent_id": 177,
+            "another_label": "ERP技术开发",
+            "children": []
+          }
+        ]
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "DBA",
+        "id": 172,
+        "mapping_id": null,
+        "parent_id": 11,
+        "another_label": "DBA",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "BI",
+        "id": 174,
+        "mapping_id": null,
+        "parent_id": 11,
+        "another_label": "BI",
+        "children": []
+      }
+    ]
+  },
+  {
+    "count": 0,
+    "level": 0,
+    "name_alias": "",
+    "label": "财务/金融",
+    "id": 8,
+    "mapping_id": null,
+    "parent_id": null,
+    "another_label": "财务/金融",
+    "children": [
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "财务/会计",
+        "id": 181,
+        "mapping_id": null,
+        "parent_id": 8,
+        "another_label": "财务/会计",
+        "children": [
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "财务",
+            "id": 26,
+            "mapping_id": null,
+            "parent_id": 181,
+            "another_label": "财务",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "会计",
+            "id": 27,
+            "mapping_id": null,
+            "parent_id": 181,
+            "another_label": "会计",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "出纳",
+            "id": 28,
+            "mapping_id": null,
+            "parent_id": 181,
+            "another_label": "出纳",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "总帐",
+            "id": 29,
+            "mapping_id": null,
+            "parent_id": 181,
+            "another_label": "总帐",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "成本",
+            "id": 30,
+            "mapping_id": null,
+            "parent_id": 181,
+            "another_label": "成本",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "分析",
+            "id": 31,
+            "mapping_id": null,
+            "parent_id": 181,
+            "another_label": "分析",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "审计",
+            "id": 32,
+            "mapping_id": null,
+            "parent_id": 181,
+            "another_label": "审计",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "税务",
+            "id": 33,
+            "mapping_id": null,
+            "parent_id": 181,
+            "another_label": "税务",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "资金",
+            "id": 34,
+            "mapping_id": null,
+            "parent_id": 181,
+            "another_label": "资金",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "信用",
+            "id": 35,
+            "mapping_id": null,
+            "parent_id": 181,
+            "another_label": "信用",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "控制",
+            "id": 109,
+            "mapping_id": null,
+            "parent_id": 181,
+            "another_label": "控制",
+            "children": []
+          }
+        ]
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "金融/投资",
+        "id": 183,
+        "mapping_id": null,
+        "parent_id": 8,
+        "another_label": "金融/投资",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "投融资",
+        "id": 305,
+        "mapping_id": null,
+        "parent_id": 8,
+        "another_label": "投融资",
+        "children": [
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "投资",
+            "id": 306,
+            "mapping_id": null,
+            "parent_id": 305,
+            "another_label": "投资",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "融资",
+            "id": 307,
+            "mapping_id": null,
+            "parent_id": 305,
+            "another_label": "融资",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "并购",
+            "id": 308,
+            "mapping_id": null,
+            "parent_id": 305,
+            "another_label": "并购",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "分析师",
+            "id": 309,
+            "mapping_id": null,
+            "parent_id": 305,
+            "another_label": "分析师",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "行业研究",
+            "id": 310,
+            "mapping_id": null,
+            "parent_id": 305,
+            "another_label": "行业研究",
+            "children": []
+          }
+        ]
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "银行",
+        "id": 182,
+        "mapping_id": null,
+        "parent_id": 8,
+        "another_label": "银行",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "压下",
+        "id": 312,
+        "mapping_id": null,
+        "parent_id": 8,
+        "another_label": "压下",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "保险",
+        "id": 184,
+        "mapping_id": null,
+        "parent_id": 8,
+        "another_label": "保险",
+        "children": []
+      }
+    ]
+  },
+  {
+    "count": 0,
+    "level": 0,
+    "name_alias": "",
+    "label": "人事/行政/高级管理",
+    "id": 196,
+    "mapping_id": null,
+    "parent_id": null,
+    "another_label": "人事/行政/高级管理",
+    "children": [
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "人力资源",
+        "id": 9,
+        "mapping_id": null,
+        "parent_id": 196,
+        "another_label": "人力资源",
+        "children": [
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "人力资源总监",
+            "id": 201,
+            "mapping_id": null,
+            "parent_id": 9,
+            "another_label": "人力资源总监",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "人力资源经理",
+            "id": 204,
+            "mapping_id": null,
+            "parent_id": 9,
+            "another_label": "人力资源经理",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "HR BP",
+            "id": 36,
+            "mapping_id": null,
+            "parent_id": 9,
+            "another_label": "HR BP",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "招聘",
+            "id": 38,
+            "mapping_id": null,
+            "parent_id": 9,
+            "another_label": "招聘",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "人事",
+            "id": 203,
+            "mapping_id": null,
+            "parent_id": 9,
+            "another_label": "人事",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "薪酬与福利",
+            "id": 39,
+            "mapping_id": null,
+            "parent_id": 9,
+            "another_label": "薪酬与福利",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "培训",
+            "id": 40,
+            "mapping_id": null,
+            "parent_id": 9,
+            "another_label": "培训",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "组织发展",
+            "id": 41,
+            "mapping_id": null,
+            "parent_id": 9,
+            "another_label": "组织发展",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "员工关系",
+            "id": 42,
+            "mapping_id": null,
+            "parent_id": 9,
+            "another_label": "员工关系",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "绩效",
+            "id": 108,
+            "mapping_id": null,
+            "parent_id": 9,
+            "another_label": "绩效",
+            "children": []
+          }
+        ]
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "行政",
+        "id": 198,
+        "mapping_id": null,
+        "parent_id": 196,
+        "another_label": "行政",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "秘书",
+        "id": 199,
+        "mapping_id": null,
+        "parent_id": 196,
+        "another_label": "秘书",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "高级管理",
+        "id": 197,
+        "mapping_id": null,
+        "parent_id": 196,
+        "another_label": "高级管理",
+        "children": [
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "总裁/CEO",
+            "id": 215,
+            "mapping_id": null,
+            "parent_id": 197,
+            "another_label": "总裁/CEO",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "首席技术管/CTO/CIO",
+            "id": 216,
+            "mapping_id": null,
+            "parent_id": 197,
+            "another_label": "首席技术管/CTO/CIO",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "首席运营官/COO",
+            "id": 217,
+            "mapping_id": null,
+            "parent_id": 197,
+            "another_label": "首席运营官/COO",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "首席财务官/CFO",
+            "id": 218,
+            "mapping_id": null,
+            "parent_id": 197,
+            "another_label": "首席财务官/CFO",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "副总裁/VP",
+            "id": 219,
+            "mapping_id": null,
+            "parent_id": 197,
+            "another_label": "副总裁/VP",
+            "children": []
+          }
+        ]
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "项目管理",
+        "id": 200,
+        "mapping_id": null,
+        "parent_id": 196,
+        "another_label": "项目管理",
+        "children": []
+      }
+    ]
+  },
+  {
+    "count": 0,
+    "level": 0,
+    "name_alias": "",
+    "label": "房地产",
+    "id": 131,
+    "mapping_id": null,
+    "parent_id": null,
+    "another_label": "房地产",
+    "children": [
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "高级管理",
+        "id": 133,
+        "mapping_id": null,
+        "parent_id": 131,
+        "another_label": "高级管理",
+        "children": [
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "集团总裁",
+            "id": 143,
+            "mapping_id": null,
+            "parent_id": 133,
+            "another_label": "集团总裁",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "城市总/常务副总",
+            "id": 144,
+            "mapping_id": null,
+            "parent_id": 133,
+            "another_label": "城市总/常务副总",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "项目总经理",
+            "id": 145,
+            "mapping_id": null,
+            "parent_id": 133,
+            "another_label": "项目总经理",
+            "children": []
+          }
+        ]
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "投资开发",
+        "id": 132,
+        "mapping_id": null,
+        "parent_id": 131,
+        "another_label": "投资开发",
+        "children": [
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "投资总监",
+            "id": 146,
+            "mapping_id": null,
+            "parent_id": 132,
+            "another_label": "投资总监",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "投资经理",
+            "id": 147,
+            "mapping_id": null,
+            "parent_id": 132,
+            "another_label": "投资经理",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "项目拓展",
+            "id": 148,
+            "mapping_id": null,
+            "parent_id": 132,
+            "another_label": "项目拓展",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "开发配套/报批建",
+            "id": 149,
+            "mapping_id": null,
+            "parent_id": 132,
+            "another_label": "开发配套/报批建",
+            "children": []
+          }
+        ]
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "房地产工程",
+        "id": 134,
+        "mapping_id": null,
+        "parent_id": 131,
+        "another_label": "房地产工程",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "房地产运营",
+        "id": 292,
+        "mapping_id": null,
+        "parent_id": 131,
+        "another_label": "房地产运营",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "房地产设计",
+        "id": 135,
+        "mapping_id": null,
+        "parent_id": 131,
+        "another_label": "房地产设计",
+        "children": [
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "设计总监",
+            "id": 158,
+            "mapping_id": null,
+            "parent_id": 135,
+            "another_label": "设计总监",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "建筑设计",
+            "id": 161,
+            "mapping_id": null,
+            "parent_id": 135,
+            "another_label": "建筑设计",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "景观设计",
+            "id": 162,
+            "mapping_id": null,
+            "parent_id": 135,
+            "another_label": "景观设计",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "室内设计",
+            "id": 163,
+            "mapping_id": null,
+            "parent_id": 135,
+            "another_label": "室内设计",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "结构设计",
+            "id": 164,
+            "mapping_id": null,
+            "parent_id": 135,
+            "another_label": "结构设计",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "机电设计",
+            "id": 165,
+            "mapping_id": null,
+            "parent_id": 135,
+            "another_label": "机电设计",
+            "children": []
+          }
+        ]
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "物业管理",
+        "id": 136,
+        "mapping_id": null,
+        "parent_id": 131,
+        "another_label": "物业管理",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "营销管理",
+        "id": 139,
+        "mapping_id": null,
+        "parent_id": 131,
+        "another_label": "营销管理",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "审计监察",
+        "id": 140,
+        "mapping_id": null,
+        "parent_id": 131,
+        "another_label": "审计监察",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "法务管理",
+        "id": 141,
+        "mapping_id": null,
+        "parent_id": 131,
+        "another_label": "法务管理",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "公共关系",
+        "id": 142,
+        "mapping_id": null,
+        "parent_id": 131,
+        "another_label": "公共关系",
+        "children": []
+      }
+    ]
+  },
+  {
+    "count": 0,
+    "level": 0,
+    "name_alias": "",
+    "label": "汽车",
+    "id": 261,
+    "mapping_id": null,
+    "parent_id": null,
+    "another_label": "汽车",
+    "children": [
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "汽车制造",
+        "id": 262,
+        "mapping_id": null,
+        "parent_id": 261,
+        "another_label": "汽车制造",
+        "children": [
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "汽车项目管理",
+            "id": 264,
+            "mapping_id": null,
+            "parent_id": 262,
+            "another_label": "汽车项目管理",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "汽车机构",
+            "id": 265,
+            "mapping_id": null,
+            "parent_id": 262,
+            "another_label": "汽车机构",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "汽车设计",
+            "id": 266,
+            "mapping_id": null,
+            "parent_id": 262,
+            "another_label": "汽车设计",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "汽车电子",
+            "id": 267,
+            "mapping_id": null,
+            "parent_id": 262,
+            "another_label": "汽车电子",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "汽车质量",
+            "id": 268,
+            "mapping_id": null,
+            "parent_id": 262,
+            "another_label": "汽车质量",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "汽车安全性能",
+            "id": 269,
+            "mapping_id": null,
+            "parent_id": 262,
+            "another_label": "汽车安全性能",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "汽车装配工艺",
+            "id": 270,
+            "mapping_id": null,
+            "parent_id": 262,
+            "another_label": "汽车装配工艺",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "发动机/底盘/总装",
+            "id": 271,
+            "mapping_id": null,
+            "parent_id": 262,
+            "another_label": "发动机/底盘/总装",
+            "children": []
+          }
+        ]
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "汽车销售",
+        "id": 263,
+        "mapping_id": null,
+        "parent_id": 261,
+        "another_label": "汽车销售",
+        "children": []
+      }
+    ]
+  },
+  {
+    "count": 0,
+    "level": 0,
+    "name_alias": "",
+    "label": "生产/营运",
+    "id": 238,
+    "mapping_id": null,
+    "parent_id": null,
+    "another_label": "生产/营运",
+    "children": [
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "工厂经理/厂长",
+        "id": 24,
+        "mapping_id": null,
+        "parent_id": 238,
+        "another_label": "工厂经理/厂长",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "总工程师",
+        "id": 287,
+        "mapping_id": null,
+        "parent_id": 238,
+        "another_label": "总工程师",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "项目管理",
+        "id": 98,
+        "mapping_id": null,
+        "parent_id": 238,
+        "another_label": "项目管理",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "工程/设备",
+        "id": 13,
+        "mapping_id": null,
+        "parent_id": 238,
+        "another_label": "工程/设备",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "工业工程师",
+        "id": 102,
+        "mapping_id": null,
+        "parent_id": 238,
+        "another_label": "工业工程师",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "工艺工程师",
+        "id": 243,
+        "mapping_id": null,
+        "parent_id": 238,
+        "another_label": "工艺工程师",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "生产计划/物料",
+        "id": 288,
+        "mapping_id": null,
+        "parent_id": 238,
+        "another_label": "生产计划/物料",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "化验/检验",
+        "id": 289,
+        "mapping_id": null,
+        "parent_id": 238,
+        "another_label": "化验/检验",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "产品",
+        "id": 290,
+        "mapping_id": null,
+        "parent_id": 238,
+        "another_label": "产品",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "制造",
+        "id": 291,
+        "mapping_id": null,
+        "parent_id": 238,
+        "another_label": "制造",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "Operation",
+        "id": 106,
+        "mapping_id": null,
+        "parent_id": 238,
+        "another_label": "Operation",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "生产",
+        "id": 242,
+        "mapping_id": null,
+        "parent_id": 238,
+        "another_label": "生产",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "包装",
+        "id": 245,
+        "mapping_id": null,
+        "parent_id": 238,
+        "another_label": "包装",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "维修",
+        "id": 244,
+        "mapping_id": null,
+        "parent_id": 238,
+        "another_label": "维修",
+        "children": []
+      }
+    ]
+  },
+  {
+    "count": 0,
+    "level": 0,
+    "name_alias": "",
+    "label": "工程/机械",
+    "id": 260,
+    "mapping_id": null,
+    "parent_id": null,
+    "another_label": "工程/机械",
+    "children": [
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "工程",
+        "id": 272,
+        "mapping_id": null,
+        "parent_id": 260,
+        "another_label": "工程",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "机械",
+        "id": 273,
+        "mapping_id": null,
+        "parent_id": 260,
+        "another_label": "机械",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "模具",
+        "id": 274,
+        "mapping_id": null,
+        "parent_id": 260,
+        "another_label": "模具",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "工业",
+        "id": 275,
+        "mapping_id": null,
+        "parent_id": 260,
+        "another_label": "工业",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "结构",
+        "id": 276,
+        "mapping_id": null,
+        "parent_id": 260,
+        "another_label": "结构",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "机电",
+        "id": 277,
+        "mapping_id": null,
+        "parent_id": 260,
+        "another_label": "机电",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "铸造",
+        "id": 278,
+        "mapping_id": null,
+        "parent_id": 260,
+        "another_label": "铸造",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "注塑",
+        "id": 279,
+        "mapping_id": null,
+        "parent_id": 260,
+        "another_label": "注塑",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "CNC",
+        "id": 280,
+        "mapping_id": null,
+        "parent_id": 260,
+        "another_label": "CNC",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "冲压",
+        "id": 281,
+        "mapping_id": null,
+        "parent_id": 260,
+        "another_label": "冲压",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "夹具",
+        "id": 282,
+        "mapping_id": null,
+        "parent_id": 260,
+        "another_label": "夹具",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "锅炉",
+        "id": 283,
+        "mapping_id": null,
+        "parent_id": 260,
+        "another_label": "锅炉",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "焊接",
+        "id": 284,
+        "mapping_id": null,
+        "parent_id": 260,
+        "another_label": "焊接",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "维修",
+        "id": 285,
+        "mapping_id": null,
+        "parent_id": 260,
+        "another_label": "维修",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "材料",
+        "id": 286,
+        "mapping_id": null,
+        "parent_id": 260,
+        "another_label": "材料",
+        "children": []
+      }
+    ]
+  },
+  {
+    "count": 0,
+    "level": 0,
+    "name_alias": "",
+    "label": "质量/安防",
+    "id": 239,
+    "mapping_id": null,
+    "parent_id": null,
+    "another_label": "质量/安防",
+    "children": [
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "质量",
+        "id": 15,
+        "mapping_id": null,
+        "parent_id": 239,
+        "another_label": "质量",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "测试",
+        "id": 246,
+        "mapping_id": null,
+        "parent_id": 239,
+        "another_label": "测试",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "供应商管理",
+        "id": 111,
+        "mapping_id": null,
+        "parent_id": 239,
+        "another_label": "供应商管理",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "EHS",
+        "id": 247,
+        "mapping_id": null,
+        "parent_id": 239,
+        "another_label": "EHS",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "安防",
+        "id": 248,
+        "mapping_id": null,
+        "parent_id": 239,
+        "another_label": "安防",
+        "children": []
+      }
+    ]
+  },
+  {
+    "count": 0,
+    "level": 0,
+    "name_alias": "",
+    "label": "采购/贸易",
+    "id": 241,
+    "mapping_id": null,
+    "parent_id": null,
+    "another_label": "采购/贸易",
+    "children": [
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "采购",
+        "id": 67,
+        "mapping_id": null,
+        "parent_id": 241,
+        "another_label": "采购",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "买手",
+        "id": 249,
+        "mapping_id": null,
+        "parent_id": 241,
+        "another_label": "买手",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "供应商开发",
+        "id": 250,
+        "mapping_id": null,
+        "parent_id": 241,
+        "another_label": "供应商开发",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "外贸",
+        "id": 251,
+        "mapping_id": null,
+        "parent_id": 241,
+        "another_label": "外贸",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "国内贸易",
+        "id": 252,
+        "mapping_id": null,
+        "parent_id": 241,
+        "another_label": "国内贸易",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "跟单",
+        "id": 253,
+        "mapping_id": null,
+        "parent_id": 241,
+        "another_label": "跟单",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "商务",
+        "id": 254,
+        "mapping_id": null,
+        "parent_id": 241,
+        "another_label": "商务",
+        "children": []
+      }
+    ]
+  },
+  {
+    "count": 0,
+    "level": 0,
+    "name_alias": "",
+    "label": "物流/仓储",
+    "id": 240,
+    "mapping_id": null,
+    "parent_id": null,
+    "another_label": "物流/仓储",
+    "children": [
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "供应链",
+        "id": 68,
+        "mapping_id": null,
+        "parent_id": 240,
+        "another_label": "供应链",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "物流",
+        "id": 255,
+        "mapping_id": null,
+        "parent_id": 240,
+        "another_label": "物流",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "物料",
+        "id": 256,
+        "mapping_id": null,
+        "parent_id": 240,
+        "another_label": "物料",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "仓储",
+        "id": 257,
+        "mapping_id": null,
+        "parent_id": 240,
+        "another_label": "仓储",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "运输",
+        "id": 258,
+        "mapping_id": null,
+        "parent_id": 240,
+        "another_label": "运输",
+        "children": []
+      }
+    ]
+  },
+  {
+    "count": 0,
+    "level": 0,
+    "name_alias": "",
+    "label": "生物/制药/医疗器械",
+    "id": 213,
+    "mapping_id": null,
+    "parent_id": null,
+    "another_label": "生物/制药/医疗器械",
+    "children": [
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "制药",
+        "id": 221,
+        "mapping_id": null,
+        "parent_id": 213,
+        "another_label": "制药",
+        "children": [
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "医药研发",
+            "id": 223,
+            "mapping_id": null,
+            "parent_id": 221,
+            "another_label": "医药研发",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "临床研究",
+            "id": 224,
+            "mapping_id": null,
+            "parent_id": 221,
+            "another_label": "临床研究",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "药品注册",
+            "id": 225,
+            "mapping_id": null,
+            "parent_id": 221,
+            "another_label": "药品注册",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "药品生产",
+            "id": 226,
+            "mapping_id": null,
+            "parent_id": 221,
+            "another_label": "药品生产",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "药品市场推广",
+            "id": 227,
+            "mapping_id": null,
+            "parent_id": 221,
+            "another_label": "药品市场推广",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "药品销售",
+            "id": 228,
+            "mapping_id": null,
+            "parent_id": 221,
+            "another_label": "药品销售",
+            "children": []
+          }
+        ]
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "医疗器械",
+        "id": 222,
+        "mapping_id": null,
+        "parent_id": 213,
+        "another_label": "医疗器械",
+        "children": [
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "医疗器械研发",
+            "id": 229,
+            "mapping_id": null,
+            "parent_id": 222,
+            "another_label": "医疗器械研发",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "医疗器械注册",
+            "id": 230,
+            "mapping_id": null,
+            "parent_id": 222,
+            "another_label": "医疗器械注册",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "医疗器械生产",
+            "id": 231,
+            "mapping_id": null,
+            "parent_id": 222,
+            "another_label": "医疗器械生产",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "医疗器械市场推广",
+            "id": 232,
+            "mapping_id": null,
+            "parent_id": 222,
+            "another_label": "医疗器械市场推广",
+            "children": []
+          },
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "医疗器械销售",
+            "id": 233,
+            "mapping_id": null,
+            "parent_id": 222,
+            "another_label": "医疗器械销售",
+            "children": []
+          }
+        ]
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "生物",
+        "id": 220,
+        "mapping_id": null,
+        "parent_id": 213,
+        "another_label": "生物",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "化工",
+        "id": 234,
+        "mapping_id": null,
+        "parent_id": 213,
+        "another_label": "化工",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "医院",
+        "id": 235,
+        "mapping_id": null,
+        "parent_id": 213,
+        "another_label": "医院",
+        "children": []
+      }
+    ]
+  },
+  {
+    "count": 0,
+    "level": 0,
+    "name_alias": "",
+    "label": "能源/环保",
+    "id": 214,
+    "mapping_id": null,
+    "parent_id": null,
+    "another_label": "能源/环保",
+    "children": [
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "能源",
+        "id": 236,
+        "mapping_id": null,
+        "parent_id": 214,
+        "another_label": "能源",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "环保",
+        "id": 237,
+        "mapping_id": null,
+        "parent_id": 214,
+        "another_label": "环保",
+        "children": []
+      }
+    ]
+  },
+  {
+    "count": 0,
+    "level": 0,
+    "name_alias": "",
+    "label": "广告/市场/设计",
+    "id": 206,
+    "mapping_id": null,
+    "parent_id": null,
+    "another_label": "广告/市场/设计",
+    "children": [
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "市场/营销",
+        "id": 207,
+        "mapping_id": null,
+        "parent_id": 206,
+        "another_label": "市场/营销",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "公关/媒介",
+        "id": 208,
+        "mapping_id": null,
+        "parent_id": 206,
+        "another_label": "公关/媒介",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "广告/会展",
+        "id": 209,
+        "mapping_id": null,
+        "parent_id": 206,
+        "another_label": "广告/会展",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "写作/出版",
+        "id": 210,
+        "mapping_id": null,
+        "parent_id": 206,
+        "another_label": "写作/出版",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "影视/媒体",
+        "id": 211,
+        "mapping_id": null,
+        "parent_id": 206,
+        "another_label": "影视/媒体",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "艺术/设计",
+        "id": 212,
+        "mapping_id": null,
+        "parent_id": 206,
+        "another_label": "艺术/设计",
+        "children": []
+      }
+    ]
+  },
+  {
+    "count": 0,
+    "level": 0,
+    "name_alias": "",
+    "label": "咨询/法律/教育/翻译",
+    "id": 186,
+    "mapping_id": null,
+    "parent_id": null,
+    "another_label": "咨询/法律/教育/翻译",
+    "children": [
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "律师/法务",
+        "id": 23,
+        "mapping_id": null,
+        "parent_id": 186,
+        "another_label": "律师/法务",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "咨询/顾问",
+        "id": 187,
+        "mapping_id": null,
+        "parent_id": 186,
+        "another_label": "咨询/顾问",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "教育",
+        "id": 188,
+        "mapping_id": null,
+        "parent_id": 186,
+        "another_label": "教育",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "培训",
+        "id": 190,
+        "mapping_id": null,
+        "parent_id": 186,
+        "another_label": "培训",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "翻译",
+        "id": 189,
+        "mapping_id": null,
+        "parent_id": 186,
+        "another_label": "翻译",
+        "children": []
+      }
+    ]
+  },
+  {
+    "count": 0,
+    "level": 0,
+    "name_alias": "",
+    "label": "服务",
+    "id": 191,
+    "mapping_id": null,
+    "parent_id": null,
+    "another_label": "服务",
+    "children": [
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "餐饮/娱乐",
+        "id": 192,
+        "mapping_id": null,
+        "parent_id": 191,
+        "another_label": "餐饮/娱乐",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "酒店/旅游",
+        "id": 193,
+        "mapping_id": null,
+        "parent_id": 191,
+        "another_label": "酒店/旅游",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "百货/零售",
+        "id": 194,
+        "mapping_id": null,
+        "parent_id": 191,
+        "another_label": "百货/零售",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "交通运输",
+        "id": 195,
+        "mapping_id": null,
+        "parent_id": 191,
+        "another_label": "交通运输",
+        "children": []
+      }
+    ]
+  },
+  {
+    "count": 0,
+    "level": 0,
+    "name_alias": "",
+    "label": "猎头",
+    "id": 205,
+    "mapping_id": null,
+    "parent_id": null,
+    "another_label": "猎头",
+    "children": [
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "General Manager",
+        "id": 293,
+        "mapping_id": null,
+        "parent_id": 205,
+        "another_label": "General Manager",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "猎头经理",
+        "id": 294,
+        "mapping_id": null,
+        "parent_id": 205,
+        "another_label": "猎头经理",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "猎头顾问",
+        "id": 295,
+        "mapping_id": null,
+        "parent_id": 205,
+        "another_label": "猎头顾问",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "猎头助理",
+        "id": 296,
+        "mapping_id": null,
+        "parent_id": 205,
+        "another_label": "猎头助理",
+        "children": []
+      }
+    ]
+  },
+  {
+    "count": 0,
+    "level": 0,
+    "name_alias": "",
+    "label": "服装/纺织",
+    "id": 259,
+    "mapping_id": null,
+    "parent_id": null,
+    "another_label": "服装/纺织",
+    "children": []
+  },
+  {
+    "count": 0,
+    "level": 0,
+    "name_alias": "",
+    "label": "应届毕业生",
+    "id": 185,
+    "mapping_id": null,
+    "parent_id": null,
+    "another_label": "应届毕业生",
+    "children": []
+  },
+  {
+    "count": 0,
+    "level": 0,
+    "name_alias": "",
+    "label": "其他",
+    "id": 25,
+    "mapping_id": null,
+    "parent_id": null,
+    "another_label": "其他",
+    "children": []
+  }
+]

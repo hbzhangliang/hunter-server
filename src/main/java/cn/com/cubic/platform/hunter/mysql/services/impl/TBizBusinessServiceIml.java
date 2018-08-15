@@ -35,7 +35,7 @@ public class TBizBusinessServiceIml  extends BaseServiceImpl<TBizBusiness,TBizBu
     @Override
     public List<TBizBusiness> listAll() {
         TBizBusinessExample example=new TBizBusinessExample();
-        example.setOrderByClause("id , seq ");
+        example.setOrderByClause("seq is null,seq");
         return this.selectByExample(example);
     }
 
@@ -85,6 +85,7 @@ public class TBizBusinessServiceIml  extends BaseServiceImpl<TBizBusiness,TBizBu
         TBizBusiness business=this.findById(id);
         TBizBusinessExample example=new TBizBusinessExample();
         example.createCriteria().andParentIdEqualTo(business.getId());
+        example.setOrderByClause("seq is null,seq");
         List<TBizBusiness> list=this.selectByExample(example);
         if(null==list||list.isEmpty()){
             return new ElTreeVo(business.getId(),business.getName(),null);
@@ -102,6 +103,7 @@ public class TBizBusinessServiceIml  extends BaseServiceImpl<TBizBusiness,TBizBu
     public List<ElTreeVo> tree() {
         TBizBusinessExample example=new TBizBusinessExample();
         example.createCriteria().andParentIdIsNull();
+        example.setOrderByClause("seq is null,seq");
         List<TBizBusiness> list=this.selectByExample(example);
         if(null==list||list.isEmpty()){
             log.info("未查询到行业数据");

@@ -1,0 +1,527 @@
+[
+  {
+    "count": 0,
+    "level": 0,
+    "name_alias": "",
+    "label": "制药/医疗",
+    "id": 9,
+    "mapping_id": null,
+    "parent_id": null,
+    "another_label": "制药/医疗",
+    "children": [
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "制药/生物工程",
+        "id": 54,
+        "mapping_id": null,
+        "parent_id": 9,
+        "another_label": "制药/生物工程",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "医疗器械",
+        "id": 8,
+        "mapping_id": null,
+        "parent_id": 9,
+        "another_label": "医疗器械",
+        "children": []
+      }
+    ]
+  },
+  {
+    "count": 0,
+    "level": 0,
+    "name_alias": "",
+    "label": "互联网/移动互联网",
+    "id": 4,
+    "mapping_id": null,
+    "parent_id": null,
+    "another_label": "互联网/移动互联网",
+    "children": [
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "移动互联网",
+        "id": 44,
+        "mapping_id": null,
+        "parent_id": 4,
+        "another_label": "移动互联网",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "互联网金融",
+        "id": 40,
+        "mapping_id": null,
+        "parent_id": 4,
+        "another_label": "互联网金融",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "电商",
+        "id": 46,
+        "mapping_id": null,
+        "parent_id": 4,
+        "another_label": "电商",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "互联网医疗",
+        "id": 65,
+        "mapping_id": null,
+        "parent_id": 4,
+        "another_label": "互联网医疗",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "O2O",
+        "id": 43,
+        "mapping_id": null,
+        "parent_id": 4,
+        "another_label": "O2O",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "互联网教育",
+        "id": 66,
+        "mapping_id": null,
+        "parent_id": 4,
+        "another_label": "互联网教育",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "游戏",
+        "id": 45,
+        "mapping_id": null,
+        "parent_id": 4,
+        "another_label": "游戏",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "智能硬件",
+        "id": 64,
+        "mapping_id": null,
+        "parent_id": 4,
+        "another_label": "智能硬件",
+        "children": []
+      }
+    ]
+  },
+  {
+    "count": 0,
+    "level": 0,
+    "name_alias": "",
+    "label": "汽车整车",
+    "id": 38,
+    "mapping_id": null,
+    "parent_id": null,
+    "another_label": "汽车整车",
+    "children": [
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "11",
+        "id": 67,
+        "mapping_id": null,
+        "parent_id": 38,
+        "another_label": "11",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "在",
+        "id": 69,
+        "mapping_id": null,
+        "parent_id": 38,
+        "another_label": "在",
+        "children": []
+      }
+    ]
+  },
+  {
+    "count": 0,
+    "level": 0,
+    "name_alias": "",
+    "label": "半导体",
+    "id": 10,
+    "mapping_id": null,
+    "parent_id": null,
+    "another_label": "半导体",
+    "children": [
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "汽车半导体",
+        "id": 39,
+        "mapping_id": null,
+        "parent_id": 10,
+        "another_label": "汽车半导体",
+        "children": []
+      }
+    ]
+  },
+  {
+    "count": 0,
+    "level": 0,
+    "name_alias": "",
+    "label": "金融",
+    "id": 18,
+    "mapping_id": null,
+    "parent_id": null,
+    "another_label": "金融",
+    "children": [
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "投行",
+        "id": 48,
+        "mapping_id": null,
+        "parent_id": 18,
+        "another_label": "投行",
+        "children": [
+          {
+            "count": 0,
+            "level": 2,
+            "name_alias": "",
+            "label": "银行",
+            "id": 50,
+            "mapping_id": null,
+            "parent_id": 48,
+            "another_label": "银行",
+            "children": []
+          }
+        ]
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "证券",
+        "id": 49,
+        "mapping_id": null,
+        "parent_id": 18,
+        "another_label": "证券",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "保险",
+        "id": 51,
+        "mapping_id": null,
+        "parent_id": 18,
+        "another_label": "保险",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "PE",
+        "id": 52,
+        "mapping_id": null,
+        "parent_id": 18,
+        "another_label": "PE",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "VC",
+        "id": 53,
+        "mapping_id": null,
+        "parent_id": 18,
+        "another_label": "VC",
+        "children": []
+      }
+    ]
+  },
+  {
+    "count": 0,
+    "level": 0,
+    "name_alias": "",
+    "label": "房地产",
+    "id": 11,
+    "mapping_id": null,
+    "parent_id": null,
+    "another_label": "房地产",
+    "children": []
+  },
+  {
+    "count": 0,
+    "level": 0,
+    "name_alias": "",
+    "label": "消费品",
+    "id": 20,
+    "mapping_id": null,
+    "parent_id": null,
+    "another_label": "消费品",
+    "children": [
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "快速消费品",
+        "id": 36,
+        "mapping_id": null,
+        "parent_id": 20,
+        "another_label": "快速消费品",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "耐用消费品",
+        "id": 37,
+        "mapping_id": null,
+        "parent_id": 20,
+        "another_label": "耐用消费品",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "奢侈品",
+        "id": 58,
+        "mapping_id": null,
+        "parent_id": 20,
+        "another_label": "奢侈品",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "零售",
+        "id": 59,
+        "mapping_id": null,
+        "parent_id": 20,
+        "another_label": "零售",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "贸易",
+        "id": 28,
+        "mapping_id": null,
+        "parent_id": 20,
+        "another_label": "贸易",
+        "children": []
+      }
+    ]
+  },
+  {
+    "count": 0,
+    "level": 0,
+    "name_alias": "",
+    "label": "IT与通讯",
+    "id": 3,
+    "mapping_id": null,
+    "parent_id": null,
+    "another_label": "IT与通讯",
+    "children": [
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "计算机软件",
+        "id": 57,
+        "mapping_id": null,
+        "parent_id": 3,
+        "another_label": "计算机软件",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "计算机硬件",
+        "id": 7,
+        "mapping_id": null,
+        "parent_id": 3,
+        "another_label": "计算机硬件",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "IT服务",
+        "id": 56,
+        "mapping_id": null,
+        "parent_id": 3,
+        "another_label": "IT服务",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "电子技术/半导体",
+        "id": 6,
+        "mapping_id": null,
+        "parent_id": 3,
+        "another_label": "电子技术/半导体",
+        "children": []
+      },
+      {
+        "count": 0,
+        "level": 1,
+        "name_alias": "",
+        "label": "通信",
+        "id": 55,
+        "mapping_id": null,
+        "parent_id": 3,
+        "another_label": "通信",
+        "children": []
+      }
+    ]
+  },
+  {
+    "count": 0,
+    "level": 0,
+    "name_alias": "",
+    "label": "工控与自动化",
+    "id": 12,
+    "mapping_id": null,
+    "parent_id": null,
+    "another_label": "工控与自动化",
+    "children": []
+  },
+  {
+    "count": 0,
+    "level": 0,
+    "name_alias": "",
+    "label": "机械",
+    "id": 13,
+    "mapping_id": null,
+    "parent_id": null,
+    "another_label": "机械",
+    "children": []
+  },
+  {
+    "count": 0,
+    "level": 0,
+    "name_alias": "",
+    "label": "化工",
+    "id": 14,
+    "mapping_id": null,
+    "parent_id": null,
+    "another_label": "化工",
+    "children": []
+  },
+  {
+    "count": 0,
+    "level": 0,
+    "name_alias": "",
+    "label": "能源",
+    "id": 16,
+    "mapping_id": null,
+    "parent_id": null,
+    "another_label": "能源",
+    "children": []
+  },
+  {
+    "count": 0,
+    "level": 0,
+    "name_alias": "",
+    "label": "物流",
+    "id": 60,
+    "mapping_id": null,
+    "parent_id": null,
+    "another_label": "物流",
+    "children": []
+  },
+  {
+    "count": 0,
+    "level": 0,
+    "name_alias": "",
+    "label": "咨询",
+    "id": 21,
+    "mapping_id": null,
+    "parent_id": null,
+    "another_label": "咨询",
+    "children": []
+  },
+  {
+    "count": 0,
+    "level": 0,
+    "name_alias": "",
+    "label": "广告",
+    "id": 62,
+    "mapping_id": null,
+    "parent_id": null,
+    "another_label": "广告",
+    "children": []
+  },
+  {
+    "count": 0,
+    "level": 0,
+    "name_alias": "",
+    "label": "服务",
+    "id": 61,
+    "mapping_id": null,
+    "parent_id": null,
+    "another_label": "服务",
+    "children": []
+  },
+  {
+    "count": 0,
+    "level": 0,
+    "name_alias": "",
+    "label": "教育",
+    "id": 63,
+    "mapping_id": null,
+    "parent_id": null,
+    "another_label": "教育",
+    "children": []
+  },
+  {
+    "count": 0,
+    "level": 0,
+    "name_alias": "",
+    "label": "其他",
+    "id": 25,
+    "mapping_id": null,
+    "parent_id": null,
+    "another_label": "其他",
+    "children": []
+  }
+]

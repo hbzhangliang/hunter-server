@@ -41,7 +41,7 @@ public class TBizCityServiceImpl  extends BaseServiceImpl<TBizCity,TBizCityExamp
     @Override
     public List<TBizCity> listAll() {
         TBizCityExample example=new TBizCityExample();
-        example.setOrderByClause("id , seq ");
+        example.setOrderByClause("seq is null,seq");
         return this.selectByExample(example);
     }
 
@@ -93,6 +93,7 @@ public class TBizCityServiceImpl  extends BaseServiceImpl<TBizCity,TBizCityExamp
 
         TBizCityExample example=new TBizCityExample();
         example.createCriteria().andParentIdEqualTo(city.getId());
+        example.setOrderByClause("seq is null,seq");
         List<TBizCity> list=this.selectByExample(example);
 
         if(null==list||list.isEmpty()){
@@ -112,6 +113,7 @@ public class TBizCityServiceImpl  extends BaseServiceImpl<TBizCity,TBizCityExamp
     public List<ElTreeVo> tree() {
         TBizCityExample example=new TBizCityExample();
         example.createCriteria().andParentIdIsNull();
+        example.setOrderByClause("seq is null,seq");
         List<TBizCity> list=this.selectByExample(example);
         if(null==list||list.isEmpty()){
             log.info("未查询到城市数据");

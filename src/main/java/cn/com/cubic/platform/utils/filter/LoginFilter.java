@@ -107,7 +107,7 @@ public class LoginFilter implements Filter{
     }
 
     private void initGlobalHolder(HttpServletRequest request){
-        if(null==GlobalHolder.get()) {
+//        if(null==GlobalHolder.get()) {
             log.info("重赋值globalholder");
             Map<String, Object> map = new HashMap<>(5);
             String encodeToken = CookieUtils.getCookie(request, ENCODE_TOKEN_PARAM_NAME);
@@ -121,7 +121,7 @@ public class LoginFilter implements Filter{
                 GlobalHolder.getTokenSet().add(token);
 
             }
-        }
+//        }
     }
 
 
