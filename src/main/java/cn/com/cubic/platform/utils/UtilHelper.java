@@ -8,6 +8,10 @@ import java.util.concurrent.TimeUnit;
 
 public class UtilHelper {
 
+    public static void  main(String[] args){
+        String a="ab",b="cd";
+        System.out.println(contacsString(a,b));
+    }
 
     /**
      * 连接字符串  z作为redis的key值
@@ -20,10 +24,10 @@ public class UtilHelper {
             StringBuilder sb=new StringBuilder();
             for (Object p : args) {
                 if (null != p&&StringUtils.isNotBlank(String.valueOf(p))) {
-                    sb.append(index+String.valueOf(p)+":");
+                    sb.append(index+String.valueOf(p));
                 }
                 else {
-                    sb.append(index+":");
+                    sb.append(index+"_");
                 }
                 index++;
             }

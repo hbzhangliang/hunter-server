@@ -1,6 +1,8 @@
 package cn.com.cubic.platform.hunter.controller.aop;
 
 import cn.com.cubic.platform.utils.RedisUtils;
+import cn.com.cubic.platform.utils.UtilHelper;
+import com.sun.xml.internal.rngom.util.Utf16;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -11,6 +13,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
+
+import java.util.HashMap;
 
 /**
  * Created by Liang.Zhang on 2018/8/15.
@@ -25,8 +29,8 @@ public class TagAspect {
     @Autowired
     private RedisUtils redisUtils;
 
-    @Pointcut("execution(* cn.com.cubic.platform.hunter.controller.TagController.listAll()) ||" +
-            " execution(* cn.com.cubic.platform.hunter.controller.TagController.tree())")
+    @Pointcut("execution(* cn.com.cubic.platform.hunter.controller.TagController.listAll(..)) ||" +
+            " execution(* cn.com.cubic.platform.hunter.controller.TagController.tree(..))")
     public void pointcutAddRedis(){
     }
 
@@ -38,12 +42,25 @@ public class TagAspect {
     @Around("pointcutAddRedis()")
     public Object aroundAddRequest(ProceedingJoinPoint pjp) throws Throwable {
         String methodName = pjp.getSignature().getName();
+        Object[] args = pjp.getArgs();
 
+        String para="";
+        if(null!=args&&args.length>0){
+            para=((HashMap)args[0]).get("groupId").toString();
+        }
+
+        Object result = null;
         //逻辑处理  添加缓存
-        String redisKey="";
+        String redisKey="",redisType="",redisTimeKey1="tag_listall",redisTimeKey2="tag_tree";
         switch (methodName){
-            case "listAll":redisKey="tag_listall";break;
-            case "tree":redisKey="tag_tree";break;
+            case "listAll":{
+                redisKey= UtilHelper.contacsString(redisTimeKey1,para);
+                redisType=redisTimeKey1;
+            };break;
+            case "tree":{
+                redisKey= UtilHelper.contacsString(redisTimeKey2,para);
+                redisType=redisTimeKey2;
+            }break;
             default:break;
         }
         if (StringUtils.isNotEmpty(redisKey)) {
@@ -54,9 +71,6 @@ public class TagAspect {
             }
         }
 
-
-        Object[] args = pjp.getArgs();
-        Object result = null;
         try {
             result = pjp.proceed(args);
         } catch (Throwable ex) {
@@ -65,7 +79,7 @@ public class TagAspect {
         }
 
         //逻辑处理
-        redisUtils.setObj(redisKey,result,redisKey);
+        redisUtils.setObj(redisKey,result,redisType);
 
         return result;
     }
@@ -82,7 +96,8 @@ public class TagAspect {
             throw ex;
         }
         //删除缓存
-        redisUtils.delKeys("tag_listall","tag_tree");
+//        redisUtils.delKeys("tag_listall","tag_tree");
+        redisUtils.delKeysPatners("0tag_listall","0tag_tree");
 
         return result;
 
