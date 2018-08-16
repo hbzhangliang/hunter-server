@@ -147,6 +147,19 @@ public class TBizTagServiceImpl  extends BaseServiceImpl<TBizTag,TBizTagExample>
 
     @Override
     public List<Long> getChildrenIds(Long pId) {
-        return null;
+        List<Long> result=new ArrayList<>(10);
+        result.add(pId);
+        TBizTagExample example=new TBizTagExample();
+        example.createCriteria().andParentIdEqualTo(pId);
+        List<TBizTag> list=this.selectByExample(example);
+        if(null==list||list.isEmpty()){
+            return result;
+        }
+        else {
+            for(TBizTag item:list){
+                result.addAll(this.getChildrenIds(item.getId()));
+            }
+            return result;
+        }
     }
 }
