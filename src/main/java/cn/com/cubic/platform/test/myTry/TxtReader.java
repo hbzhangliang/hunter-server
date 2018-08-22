@@ -36,12 +36,13 @@ public class TxtReader {
 
     public static void main(String[] args){
         String path=TxtReader.class.getClass().getResource("/").getPath();
-        File file=new File(path+"heart/kindheated.txt");
+        File file=new File(path+"heart/kindheated1.txt");
         String strInfo=txt2String(file);
         String startStr="nickname",endStr="money-comment";
         List<Map<String,Object>> list=new ArrayList<>(200);
         int startPt=0,endPt=0;
         Set<String> namesSet=new HashSet<>(100);
+        String type="dad";
         while (strInfo.indexOf(startStr)>-1&&strInfo.indexOf(endStr)>-1){ //存在数据
             Map<String,Object> map=new HashMap<>(2);
             startPt=strInfo.indexOf(startStr)+10;
@@ -53,10 +54,11 @@ public class TxtReader {
             endPt=strInfo.substring(startPt).indexOf("</span>");
             String money=strInfo.substring(startPt,startPt+endPt);
             map.put("money",strToInt(money));
+            map.put("type",type);
 //            list.add(map);
             strInfo=strInfo.substring(startPt+endPt);
             if(name.indexOf("FOX")>-1){
-                break;
+                type="mum";
             }
 
 
@@ -89,7 +91,7 @@ public class TxtReader {
         double sum=0;
         for(Map<String,Object>item:list){
             sum+=(int)item.get("money");
-            System.out.println(item.get("name")+":"+item.get("money"));
+            System.out.println(item.get("type")+":"+item.get("name")+":"+item.get("money"));
         }
         System.out.println("sum is "+sum);
     }
