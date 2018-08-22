@@ -4,7 +4,10 @@ package cn.com.cubic.platform.hunter.controller;
 import cn.com.cubic.platform.hunter.mongo.models.User;
 import cn.com.cubic.platform.hunter.mongo.repo.UserRepo;
 import cn.com.cubic.platform.hunter.mysql.entity.CoreUser;
+import cn.com.cubic.platform.hunter.mysql.entity.TSysDictionary;
+import cn.com.cubic.platform.hunter.mysql.mapper.TSysDictionaryMapper;
 import cn.com.cubic.platform.hunter.mysql.services.CoreUserService;
+import cn.com.cubic.platform.hunter.mysql.services.TSysDictionaryService;
 import cn.com.cubic.platform.hunter.mysql.vo.PageParams;
 import cn.com.cubic.platform.utils.RedisUtils;
 import cn.com.cubic.platform.utils.XmlReader;
@@ -136,6 +139,20 @@ public class TestController extends BaseController{
     }
 
 
+    @RequestMapping(value = "/12")
+    public Object test12(){
+        for(int i=0;i<100;i++){
+            TSysDictionary dictionary=new TSysDictionary();
+            dictionary.setCode("code"+i);
+            dictionary.setCode("name"+i);
+            dictionary.setSeq(i);
+            dictionaryMapper.insert(dictionary);
+        }
+        return null;
+    }
+
+    @Autowired
+    private TSysDictionaryMapper dictionaryMapper;
 
     @Autowired
     private UserRepo userRepo;

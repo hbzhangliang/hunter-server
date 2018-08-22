@@ -4,6 +4,7 @@ import cn.com.cubic.platform.hunter.mysql.entity.*;
 import cn.com.cubic.platform.hunter.mysql.services.TSysDictionaryService;
 import cn.com.cubic.platform.hunter.mysql.vo.PageParams;
 import cn.com.cubic.platform.utils.Exception.HunterException;
+import cn.com.cubic.platform.utils.UtilHelper;
 import cn.com.cubic.platform.utils.global.GlobalHolder;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -43,7 +44,7 @@ public class TSysDictionaryServiceImpl extends BaseServiceImpl<TSysDictionary,TS
         }
         criteria=criteria.andParentIdIsNull();
         //排序
-        String strOrder=String.format("%s %s",pageParams.getOrderBy(),pageParams.getDirection());
+        String strOrder=String.format("%s %s", UtilHelper.camelToUnderline(pageParams.getOrderBy()),pageParams.getDirection());
         example.setOrderByClause(strOrder);
         return this.listPage(example,pageParams);
     }
