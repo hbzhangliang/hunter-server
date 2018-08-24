@@ -58,7 +58,7 @@ public class TSysDictionaryServiceImpl extends BaseServiceImpl<TSysDictionary,TS
     public List<TSysDictionary> list(Long pId) {
         TSysDictionaryExample example=new TSysDictionaryExample();
         example.createCriteria().andParentIdEqualTo(pId);
-        example.setOrderByClause("seq is null,seq");
+        example.setOrderByClause("id desc");
         return this.selectByExample(example);
     }
 
