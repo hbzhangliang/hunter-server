@@ -52,6 +52,25 @@ public class UtilHelper {
         return result;
     }
 
+    /**
+     * 将 redis-time-config改成按秒计算的时间
+     * @param str
+     * @return
+     */
+    public static int timeUtlToInt(String str){
+        int result=0;
+        int p=Integer.parseInt(str.split(",")[0]);
+        String type=str.split(",")[1];
+        switch (type){
+            case "S":result=p;break;
+            case "M":result=60*p;break;
+            case "H":result=3600*p;break;
+            case "D":result=3600*24*p;break;
+            default:result=p;break;
+        }
+        return result;
+    }
+
 
     //获取当前时间的String值
     public static String getNowStrTime(){

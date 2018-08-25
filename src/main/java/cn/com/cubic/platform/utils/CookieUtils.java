@@ -33,4 +33,11 @@ public class CookieUtils {
         response.addCookie(cookie);
     }
 
+    public static void writeCookie(HttpServletResponse response, String cookieName, String value,int expiry) {
+        Cookie cookie = new Cookie(cookieName, value);
+        cookie.setPath("/");
+        cookie.setMaxAge(expiry);
+        response.addCookie(cookie);
+    }
+
 }

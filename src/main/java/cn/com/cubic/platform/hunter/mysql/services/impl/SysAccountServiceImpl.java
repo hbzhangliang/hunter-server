@@ -8,6 +8,7 @@ import cn.com.cubic.platform.utils.CodeUtils;
 import cn.com.cubic.platform.utils.CookieUtils;
 import cn.com.cubic.platform.utils.Exception.HunterException;
 import cn.com.cubic.platform.utils.RedisUtils;
+import cn.com.cubic.platform.utils.UtilHelper;
 import cn.com.cubic.platform.utils.global.GlobalHolder;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -142,6 +143,7 @@ public class SysAccountServiceImpl extends BaseServiceImpl<TSysAccount,TSysAccou
 
     /**
      * 根据账号id  获取账号信息，生成token，写入 cookie
+     * 缓存时间 一天
      * @param id
      */
     @Override
@@ -151,7 +153,7 @@ public class SysAccountServiceImpl extends BaseServiceImpl<TSysAccount,TSysAccou
         String enToken=CodeUtils.getEncryptedToken(token);
         String redisKey="token_encode";
         redisUtils.setObj(token,account,redisKey);
-        CookieUtils.writeCookie(response,this.ENCODE_TOKEN_PARAM_NAME,enToken);
+        CookieUtils.writeCookie(response,this.ENCODE_TOKEN_PARAM_NAME,enToken, UtilHelper.timeUtlToInt(redisKey));
     }
 
     @Override
