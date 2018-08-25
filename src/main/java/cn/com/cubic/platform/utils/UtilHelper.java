@@ -10,6 +10,9 @@ public class UtilHelper {
 
     private final static char UNDERLINE='_';
 
+    private static final PropertiesUtils redisProper = new PropertiesUtils("spring/redis-time-config.properties");
+
+
     public static void  main(String[] args){
         String a="createTime";
         System.out.println(camelToUnderline(a));
@@ -59,8 +62,9 @@ public class UtilHelper {
      */
     public static int timeUtlToInt(String str){
         int result=0;
-        int p=Integer.parseInt(str.split(",")[0]);
-        String type=str.split(",")[1];
+        String[] redispropers=redisProper.getPropertiesValues(str);
+        int p=Integer.parseInt(redispropers[0]);
+        String type=redispropers[1];
         switch (type){
             case "S":result=p;break;
             case "M":result=60*p;break;
