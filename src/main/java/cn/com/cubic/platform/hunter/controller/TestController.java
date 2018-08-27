@@ -15,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -150,6 +151,17 @@ public class TestController extends BaseController{
         }
         return null;
     }
+
+
+    @RequestMapping(value = "/20")
+    public Object test20(){
+        jdbcTemplate.update("delete from t_sys_dictionary where id in (22,23,24,25)");
+        return null;
+    }
+
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     @Autowired
     private TSysDictionaryMapper dictionaryMapper;
