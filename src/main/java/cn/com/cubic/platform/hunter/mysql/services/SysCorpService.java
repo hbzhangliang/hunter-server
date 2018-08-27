@@ -23,4 +23,6 @@ public interface SysCorpService extends BaseService<TSysCorp,TSysCorpExample>{
 
     Boolean saveOrUpdate(TSysCorp corp);
 
+
+    TSysCorp getOne();
 }

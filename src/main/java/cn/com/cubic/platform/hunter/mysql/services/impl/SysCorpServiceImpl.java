@@ -5,6 +5,7 @@ import cn.com.cubic.platform.hunter.mysql.entity.TSysCorpExample;
 import cn.com.cubic.platform.hunter.mysql.services.SysCorpService;
 import cn.com.cubic.platform.hunter.mysql.vo.PageParams;
 import cn.com.cubic.platform.utils.Exception.HunterException;
+import cn.com.cubic.platform.utils.resp.HunterBaseResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -74,5 +75,18 @@ public class SysCorpServiceImpl extends BaseServiceImpl<TSysCorp,TSysCorpExample
             this.insert(corp);
         }
         return true;
+    }
+
+
+    @Override
+    public TSysCorp getOne() {
+        List<TSysCorp> list=this.selectByExample(null);
+        if(null!=list&&list.size()==1){
+            return list.get(0);
+        }
+        else {
+            log.error("企业数据获取失败");
+            throw new HunterException("企业数据获取失败");
+        }
     }
 }

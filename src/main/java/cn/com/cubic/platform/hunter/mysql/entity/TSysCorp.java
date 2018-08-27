@@ -2,7 +2,8 @@ package cn.com.cubic.platform.hunter.mysql.entity;
 
 import java.util.Date;
 
-public class TSysCorp extends BaseEntity{
+public class TSysCorp  extends BaseEntity{
+
     private String name;
 
     private String logo;
@@ -21,12 +22,13 @@ public class TSysCorp extends BaseEntity{
 
     private String business;
 
-    private String accountability;
+    private String career;
 
     private String introduce;
 
     private Boolean terminalOn;
 
+    private String remark;
 
     public String getName() {
         return name;
@@ -100,12 +102,12 @@ public class TSysCorp extends BaseEntity{
         this.business = business;
     }
 
-    public String getAccountability() {
-        return accountability;
+    public String getCareer() {
+        return career;
     }
 
-    public void setAccountability(String accountability) {
-        this.accountability = accountability;
+    public void setCareer(String career) {
+        this.career = career;
     }
 
     public String getIntroduce() {
@@ -122,6 +124,14 @@ public class TSysCorp extends BaseEntity{
 
     public void setTerminalOn(Boolean terminalOn) {
         this.terminalOn = terminalOn;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 
 }
