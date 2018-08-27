@@ -140,17 +140,7 @@ public class TestController extends BaseController{
     }
 
 
-    @RequestMapping(value = "/12")
-    public Object test12(){
-        for(int i=0;i<100;i++){
-            TSysDictionary dictionary=new TSysDictionary();
-            dictionary.setCode("code"+i);
-            dictionary.setCode("name"+i);
-            dictionary.setSeq(i);
-//            dictionaryMapper.insert(dictionary);
-        }
-        return null;
-    }
+
 
 
     @RequestMapping(value = "/20")
@@ -159,12 +149,8 @@ public class TestController extends BaseController{
         return null;
     }
 
-
     @Autowired
     private JdbcTemplate jdbcTemplate;
-
-//    @Autowired
-//    private TSysDictionaryMapper dictionaryMapper;
 
     @Autowired
     private UserRepo userRepo;
