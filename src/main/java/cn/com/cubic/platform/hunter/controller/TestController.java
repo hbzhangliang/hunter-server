@@ -147,7 +147,7 @@ public class TestController extends BaseController{
             dictionary.setCode("code"+i);
             dictionary.setCode("name"+i);
             dictionary.setSeq(i);
-            dictionaryMapper.insert(dictionary);
+//            dictionaryMapper.insert(dictionary);
         }
         return null;
     }
@@ -163,8 +163,8 @@ public class TestController extends BaseController{
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    @Autowired
-    private TSysDictionaryMapper dictionaryMapper;
+//    @Autowired
+//    private TSysDictionaryMapper dictionaryMapper;
 
     @Autowired
     private UserRepo userRepo;
