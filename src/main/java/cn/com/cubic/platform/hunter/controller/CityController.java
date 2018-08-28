@@ -72,6 +72,11 @@ public class CityController {
     }
 
 
+    @RequestMapping(value = "/map")
+    public Object cityMap(){
+        return cityService.cityMap();
+    }
+
 
 
     @RequestMapping(value = "/import")

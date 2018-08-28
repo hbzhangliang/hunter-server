@@ -8,6 +8,7 @@ import com.sun.istack.internal.NotNull;
 
 import javax.validation.constraints.NotEmpty;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Liang.Zhang on 2018/8/8.
@@ -34,6 +35,9 @@ public interface TBizCityService extends BaseService<TBizCity,TBizCityExample>{
 
     List<Long> getChildrenIds(@NotEmpty Long id);
 
+
+    //获取所有的map
+    Map<Long,String> cityMap();
 
     void importCitys();
 

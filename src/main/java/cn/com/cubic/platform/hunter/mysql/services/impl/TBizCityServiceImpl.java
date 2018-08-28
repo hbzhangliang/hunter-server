@@ -16,9 +16,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotEmpty;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Liang.Zhang on 2018/8/8.
@@ -158,6 +156,18 @@ public class TBizCityServiceImpl  extends BaseServiceImpl<TBizCity,TBizCityExamp
 
     }
 
+
+    @Override
+    public Map<Long, String> cityMap() {
+        List<TBizCity> list=this.listAll();
+        Map<Long,String> result=new HashMap<>(200);
+        if(list!=null&&list.size()>0){
+            for(TBizCity item:list){
+                result.put(item.getId(),item.getName());
+            }
+        }
+        return result;
+    }
 
     @Override
     public void importCitys() {

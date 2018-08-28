@@ -36,6 +36,12 @@ public class AccountController{
         return accountService.checkLoginBackInfo(account,pwd,response);
     }
 
+    @RequestMapping(value = "/account_info")
+    public Object userInfo(HttpServletRequest request){
+        return accountService.checkLoginInfo(request);
+    }
+
+
     @RequestMapping(value = "/logout")
     public Object logout(HttpServletRequest request, HttpServletResponse response){
         return accountService.checkLogout(request,response);

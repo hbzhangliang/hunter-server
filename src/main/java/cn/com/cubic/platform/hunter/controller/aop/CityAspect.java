@@ -26,7 +26,8 @@ public class CityAspect {
     private RedisUtils redisUtils;
 
     @Pointcut("execution(* cn.com.cubic.platform.hunter.controller.CityController.listAll()) ||" +
-            " execution(* cn.com.cubic.platform.hunter.controller.CityController.tree())")
+            " execution(* cn.com.cubic.platform.hunter.controller.CityController.tree())||" +
+            "execution(* cn.com.cubic.platform.hunter.controller.CityController.cityMap())")
     public void pointcutAddRedis(){
     }
 
@@ -44,6 +45,7 @@ public class CityAspect {
         switch (methodName){
             case "listAll":redisKey="city_listall";break;
             case "tree":redisKey="city_tree";break;
+            case "cityMap":redisKey="city_map";break;
             default:break;
         }
         if (StringUtils.isNotEmpty(redisKey)) {
@@ -82,7 +84,7 @@ public class CityAspect {
             throw ex;
         }
         //删除缓存
-        redisUtils.delKeys("city_listall","city_tree");
+        redisUtils.delKeys("city_listall","city_tree","city_map");
 
         return result;
 
