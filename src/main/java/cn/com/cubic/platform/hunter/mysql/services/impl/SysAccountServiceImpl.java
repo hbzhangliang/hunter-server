@@ -1,5 +1,6 @@
 package cn.com.cubic.platform.hunter.mysql.services.impl;
 
+import cn.com.cubic.platform.hunter.mysql.entity.TBizCareerExample;
 import cn.com.cubic.platform.hunter.mysql.entity.TSysAccount;
 import cn.com.cubic.platform.hunter.mysql.entity.TSysAccountExample;
 import cn.com.cubic.platform.hunter.mysql.services.SysAccountService;
@@ -42,11 +43,12 @@ public class SysAccountServiceImpl extends BaseServiceImpl<TSysAccount,TSysAccou
         if(null!=account){
             TSysAccountExample.Criteria criteria = example.createCriteria();
             if(null!=account.getId()){
-                criteria.andIdEqualTo(account.getId());
+                criteria=criteria.andIdEqualTo(account.getId());
             }
             if(null!=account.getName()) {
-                criteria.andNameLike(account.getName());
+                criteria=criteria.andNameLike(UtilHelper.strToLikeStr(account.getName()));
             }
+
         }
         return example;
     }
@@ -54,7 +56,9 @@ public class SysAccountServiceImpl extends BaseServiceImpl<TSysAccount,TSysAccou
 
     @Override
     public List<TSysAccount> listAll() {
-        return this.selectByExample(new TSysAccountExample());
+        TSysAccountExample example=new TSysAccountExample();
+        example.setOrderByClause("id desc");
+        return this.selectByExample(example);
     }
 
     @Override

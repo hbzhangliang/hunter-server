@@ -15,7 +15,7 @@ public class UtilHelper {
 
     public static void  main(String[] args){
         String a="createTime";
-        System.out.println(camelToUnderline(a));
+        System.out.println(strToLikeStr(a));
     }
 
     /**
@@ -132,6 +132,13 @@ public class UtilHelper {
         return sb.toString();
     }
 
+
+
+    public static String strToLikeStr(String str) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("%").append(str).append("%");
+        return sb.toString();
+    }
 
 
 
