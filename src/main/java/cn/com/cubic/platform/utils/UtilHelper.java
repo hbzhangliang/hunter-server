@@ -2,6 +2,7 @@ package cn.com.cubic.platform.utils;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
@@ -83,6 +84,19 @@ public class UtilHelper {
 
     private  static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
+
+    private  static SimpleDateFormat sdfYMD = new SimpleDateFormat("yyyy-MM-dd");
+
+    private  static SimpleDateFormat sdfYMDHM = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+
+
+    public static Date parseDateYMD(String str)throws ParseException{
+        return sdfYMD.parse(str);
+    }
+
+    public static Date parseDateYMDHM(String str)throws ParseException{
+        return sdfYMDHM.parse(str);
+    }
 
     /**
      * 将驼峰转为下横线

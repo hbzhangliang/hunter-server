@@ -54,9 +54,10 @@ public class SysAccountServiceImpl extends BaseServiceImpl<TSysAccount,TSysAccou
         for(Map.Entry<String,Object> entity:map.entrySet()){
             String key=entity.getKey();
             Object value=entity.getValue();
+            if(value==null) continue;
             if(key.startsWith("eq_")){
                 String tmp=key.replace("eq_","");
-                tmp="and"+tmp+"equalto";
+                tmp=String.format("and%sEqualto",tmp);
                 for(Method item:methods){
                     if(tmp.equalsIgnoreCase(item.getName())){
                         //参数类型 ,都只有一个参数
@@ -89,9 +90,10 @@ public class SysAccountServiceImpl extends BaseServiceImpl<TSysAccount,TSysAccou
         for(Map.Entry<String,Object> entity:map.entrySet()){
             String key=entity.getKey();
             Object value=entity.getValue();
+            if(value==null) continue;
             if(key.startsWith("lk_")){
                 String tmp=key.replace("lk_","");
-                tmp="and"+tmp+"like";
+                tmp=String.format("and%sLike",tmp);
                 for(Method item:methods){
                     if(tmp.equalsIgnoreCase(item.getName())){
                         criteria= (TSysAccountExample.Criteria)item.invoke(criteria,"%"+value+"%");
@@ -102,10 +104,48 @@ public class SysAccountServiceImpl extends BaseServiceImpl<TSysAccount,TSysAccou
         return criteria;
     }
 
+    /**
+     * 只能是时间类型
+     * @param map
+     * @param criteria
+     * @return
+     * @throws Exception
+     */
+    private TSysAccountExample.Criteria btCriteria(Map<String,Object> map,TSysAccountExample.Criteria criteria) throws Exception{
+        Class clz=criteria.getClass();
+        Method[] methods=clz.getMethods();
+        for(Map.Entry<String,Object> entity:map.entrySet()){
+            String key=entity.getKey();
+            Object value=entity.getValue();
+            if(value==null) continue;
+            String[] sValue=value.toString().split(",");
+            if(key.startsWith("bt_")){
+                String tmp=key.replace("bt_","");
+                String tmp1=String.format("and%sGreaterThanOrEqualTo",tmp);
+                String tmp2=String.format("and%sLessThan",tmp);
+
+                for(Method item:methods){
+                    if(tmp1.equalsIgnoreCase(item.getName())){
+                        //有开始时间
+                        if(StringUtils.isNotBlank(sValue[0])){
+                            criteria= (TSysAccountExample.Criteria)item.invoke(criteria,UtilHelper.parseDateYMD(sValue[0]));
+                        }
+                    }
+                    if(tmp2.equalsIgnoreCase(item.getName())){
+                        if(sValue.length==2&&StringUtils.isNotBlank(sValue[1])){
+                            criteria= (TSysAccountExample.Criteria)item.invoke(criteria,UtilHelper.parseDateYMD(sValue[1]));
+                        }
+                    }
+                }
+            }
+        }
+        return criteria;
+    }
+
 
 
     /**
-     * eq相等  lk 相似 lt 小于  gt 大于
+     * eq相等  lk 相似 bt 小于 大于 (111,222)
      * @param map
      * @return
      */
@@ -116,6 +156,7 @@ public class SysAccountServiceImpl extends BaseServiceImpl<TSysAccount,TSysAccou
             TSysAccountExample.Criteria criteria = example.createCriteria();
             criteria = this.eqCriteria(map, criteria);
             criteria = this.lkCriteria(map, criteria);
+            criteria=this.btCriteria(map,criteria);
             return example;
         }
         catch (Exception e){

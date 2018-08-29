@@ -42,7 +42,7 @@ public class Test {
         String result=(String) m.invoke(obj,null);
         System.out.println("vvvv------");
         System.out.println(result);
-*/
+
 
 
         TSysAccountExample.Criteria criteria=new TSysAccountExample().createCriteria();
@@ -66,11 +66,16 @@ public class Test {
 
             }
             System.out.println();
-//            System.out.println(item.getGenericParameterTypes());
 
         }
+*/
 
 
+        String aa="111,";
+
+        String[] b=aa.split(",");
+
+        int i=0;
 
 
     }
