@@ -16,7 +16,7 @@ import java.util.Map;
 
 public interface SysAccountService  extends BaseService<TSysAccount,TSysAccountExample>{
 
-    TSysAccountExample construct(TSysAccount account);
+    TSysAccountExample construct(Map<String,Object> map);
 
     List<TSysAccount> listAll();
 

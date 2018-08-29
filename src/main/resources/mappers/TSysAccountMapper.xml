@@ -11,7 +11,6 @@
     <result column="email" property="email" jdbcType="VARCHAR" />
     <result column="photo" property="photo" jdbcType="VARCHAR" />
     <result column="eng_name" property="engName" jdbcType="VARCHAR" />
-    <result column="status" property="status" jdbcType="VARCHAR" />
     <result column="position_id" property="positionId" jdbcType="BIGINT" />
     <result column="team_id" property="teamId" jdbcType="BIGINT" />
     <result column="mobile" property="mobile" jdbcType="VARCHAR" />
@@ -19,10 +18,11 @@
     <result column="birthday" property="birthday" jdbcType="DATE" />
     <result column="hire_date" property="hireDate" jdbcType="DATE" />
     <result column="depart_date" property="departDate" jdbcType="DATE" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
     <result column="flag" property="flag" jdbcType="BIT" />
-    <result column="create_by" property="createBy" jdbcType="BIGINT" />
-    <result column="creaate_time" property="creaateTime" jdbcType="TIMESTAMP" />
-    <result column="modify_by" property="modifyBy" jdbcType="BIGINT" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="modify_by" property="modifyBy" jdbcType="VARCHAR" />
     <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -84,9 +84,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, corp_id, account, pwd, name, nick_name, email, photo, eng_name, status, position_id, 
-    team_id, mobile, office_phone, birthday, hire_date, depart_date, flag, create_by, 
-    creaate_time, modify_by, modify_time
+    id, corp_id, account, pwd, name, nick_name, email, photo, eng_name, position_id, 
+    team_id, mobile, office_phone, birthday, hire_date, depart_date, status, flag, create_by, 
+    create_time, modify_by, modify_time
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.com.cubic.platform.hunter.mysql.entity.TSysAccountExample" >
     select
@@ -115,19 +115,19 @@
     </selectKey>
     insert into t_sys_account (corp_id, account, pwd, 
       name, nick_name, email, 
-      photo, eng_name, status, 
-      position_id, team_id, mobile, 
-      office_phone, birthday, hire_date, 
-      depart_date, flag, create_by, 
-      creaate_time, modify_by, modify_time
+      photo, eng_name, position_id, 
+      team_id, mobile, office_phone, 
+      birthday, hire_date, depart_date, 
+      status, flag, create_by, 
+      create_time, modify_by, modify_time
       )
     values (#{corpId,jdbcType=BIGINT}, #{account,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}, 
       #{name,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
-      #{photo,jdbcType=VARCHAR}, #{engName,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
-      #{positionId,jdbcType=BIGINT}, #{teamId,jdbcType=BIGINT}, #{mobile,jdbcType=VARCHAR}, 
-      #{officePhone,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE}, #{hireDate,jdbcType=DATE}, 
-      #{departDate,jdbcType=DATE}, #{flag,jdbcType=BIT}, #{createBy,jdbcType=BIGINT}, 
-      #{creaateTime,jdbcType=TIMESTAMP}, #{modifyBy,jdbcType=BIGINT}, #{modifyTime,jdbcType=TIMESTAMP}
+      #{photo,jdbcType=VARCHAR}, #{engName,jdbcType=VARCHAR}, #{positionId,jdbcType=BIGINT}, 
+      #{teamId,jdbcType=BIGINT}, #{mobile,jdbcType=VARCHAR}, #{officePhone,jdbcType=VARCHAR}, 
+      #{birthday,jdbcType=DATE}, #{hireDate,jdbcType=DATE}, #{departDate,jdbcType=DATE}, 
+      #{status,jdbcType=VARCHAR}, #{flag,jdbcType=BIT}, #{createBy,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{modifyBy,jdbcType=VARCHAR}, #{modifyTime,jdbcType=TIMESTAMP}
       )
   </insert>
   <insert id="insertSelective" parameterType="cn.com.cubic.platform.hunter.mysql.entity.TSysAccount" >
@@ -160,9 +160,6 @@
       <if test="engName != null" >
         eng_name,
       </if>
-      <if test="status != null" >
-        status,
-      </if>
       <if test="positionId != null" >
         position_id,
       </if>
@@ -184,14 +181,17 @@
       <if test="departDate != null" >
         depart_date,
       </if>
+      <if test="status != null" >
+        status,
+      </if>
       <if test="flag != null" >
         flag,
       </if>
       <if test="createBy != null" >
         create_by,
       </if>
-      <if test="creaateTime != null" >
-        creaate_time,
+      <if test="createTime != null" >
+        create_time,
       </if>
       <if test="modifyBy != null" >
         modify_by,
@@ -225,9 +225,6 @@
       <if test="engName != null" >
         #{engName,jdbcType=VARCHAR},
       </if>
-      <if test="status != null" >
-        #{status,jdbcType=VARCHAR},
-      </if>
       <if test="positionId != null" >
         #{positionId,jdbcType=BIGINT},
       </if>
@@ -249,17 +246,20 @@
       <if test="departDate != null" >
         #{departDate,jdbcType=DATE},
       </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
       <if test="flag != null" >
         #{flag,jdbcType=BIT},
       </if>
       <if test="createBy != null" >
-        #{createBy,jdbcType=BIGINT},
+        #{createBy,jdbcType=VARCHAR},
       </if>
-      <if test="creaateTime != null" >
-        #{creaateTime,jdbcType=TIMESTAMP},
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="modifyBy != null" >
-        #{modifyBy,jdbcType=BIGINT},
+        #{modifyBy,jdbcType=VARCHAR},
       </if>
       <if test="modifyTime != null" >
         #{modifyTime,jdbcType=TIMESTAMP},
@@ -302,9 +302,6 @@
       <if test="record.engName != null" >
         eng_name = #{record.engName,jdbcType=VARCHAR},
       </if>
-      <if test="record.status != null" >
-        status = #{record.status,jdbcType=VARCHAR},
-      </if>
       <if test="record.positionId != null" >
         position_id = #{record.positionId,jdbcType=BIGINT},
       </if>
@@ -326,17 +323,20 @@
       <if test="record.departDate != null" >
         depart_date = #{record.departDate,jdbcType=DATE},
       </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
       <if test="record.flag != null" >
         flag = #{record.flag,jdbcType=BIT},
       </if>
       <if test="record.createBy != null" >
-        create_by = #{record.createBy,jdbcType=BIGINT},
+        create_by = #{record.createBy,jdbcType=VARCHAR},
       </if>
-      <if test="record.creaateTime != null" >
-        creaate_time = #{record.creaateTime,jdbcType=TIMESTAMP},
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.modifyBy != null" >
-        modify_by = #{record.modifyBy,jdbcType=BIGINT},
+        modify_by = #{record.modifyBy,jdbcType=VARCHAR},
       </if>
       <if test="record.modifyTime != null" >
         modify_time = #{record.modifyTime,jdbcType=TIMESTAMP},
@@ -357,7 +357,6 @@
       email = #{record.email,jdbcType=VARCHAR},
       photo = #{record.photo,jdbcType=VARCHAR},
       eng_name = #{record.engName,jdbcType=VARCHAR},
-      status = #{record.status,jdbcType=VARCHAR},
       position_id = #{record.positionId,jdbcType=BIGINT},
       team_id = #{record.teamId,jdbcType=BIGINT},
       mobile = #{record.mobile,jdbcType=VARCHAR},
@@ -365,10 +364,11 @@
       birthday = #{record.birthday,jdbcType=DATE},
       hire_date = #{record.hireDate,jdbcType=DATE},
       depart_date = #{record.departDate,jdbcType=DATE},
+      status = #{record.status,jdbcType=VARCHAR},
       flag = #{record.flag,jdbcType=BIT},
-      create_by = #{record.createBy,jdbcType=BIGINT},
-      creaate_time = #{record.creaateTime,jdbcType=TIMESTAMP},
-      modify_by = #{record.modifyBy,jdbcType=BIGINT},
+      create_by = #{record.createBy,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      modify_by = #{record.modifyBy,jdbcType=VARCHAR},
       modify_time = #{record.modifyTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />

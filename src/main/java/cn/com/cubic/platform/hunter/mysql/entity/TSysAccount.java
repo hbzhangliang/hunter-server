@@ -3,7 +3,6 @@ package cn.com.cubic.platform.hunter.mysql.entity;
 import java.util.Date;
 
 public class TSysAccount extends BaseEntity{
-
     private Long corpId;
 
     private String account;
@@ -33,7 +32,6 @@ public class TSysAccount extends BaseEntity{
     private Date hireDate;
 
     private Date departDate;
-
 
     public Long getCorpId() {
         return corpId;

@@ -17,8 +17,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.Filter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -37,20 +40,75 @@ public class SysAccountServiceImpl extends BaseServiceImpl<TSysAccount,TSysAccou
     @Autowired
     private RedisUtils redisUtils;
 
-    @Override
-    public TSysAccountExample construct(TSysAccount account) {
-        TSysAccountExample example=new TSysAccountExample();
-        if(null!=account){
-            TSysAccountExample.Criteria criteria = example.createCriteria();
-            if(null!=account.getId()){
-                criteria=criteria.andIdEqualTo(account.getId());
-            }
-            if(null!=account.getName()) {
-                criteria=criteria.andNameLike(UtilHelper.strToLikeStr(account.getName()));
-            }
 
+    private TSysAccountExample.Criteria eqCriteria(Map<String,Object> map,TSysAccountExample.Criteria criteria) throws Exception{
+        Class clz=criteria.getClass();
+        Method[] methods=clz.getMethods();
+        for(Map.Entry<String,Object> entity:map.entrySet()){
+            String key=entity.getKey();
+            Object value=entity.getValue();
+            if(key.startsWith("eq_")){
+                String tmp=key.replace("eq_","");
+                tmp="and"+tmp+"equalto";
+                for(Method item:methods){
+                    if(tmp.equalsIgnoreCase(item.getName())){
+                        //参数类型 ,都只有一个参数
+                        Class<?> cl[]=item.getParameterTypes();
+                        String parasType=cl[0].getSimpleName();
+                        switch (parasType){
+                            case "Long":criteria= (TSysAccountExample.Criteria)item.invoke(criteria,((Integer)value).longValue());break;
+                            case "Integer":criteria= (TSysAccountExample.Criteria)item.invoke(criteria,(Integer)value);break;
+                            default:criteria= (TSysAccountExample.Criteria)item.invoke(criteria,value.toString());break;
+                        }
+                    }
+                }
+
+            }
         }
-        return example;
+        return criteria;
+    }
+
+
+    private TSysAccountExample.Criteria lkCriteria(Map<String,Object> map,TSysAccountExample.Criteria criteria) throws Exception{
+        Class clz=criteria.getClass();
+        Method[] methods=clz.getMethods();
+        for(Map.Entry<String,Object> entity:map.entrySet()){
+            String key=entity.getKey();
+            Object value=entity.getValue();
+            if(key.startsWith("lk_")){
+                String tmp=key.replace("lk_","");
+                tmp="and"+tmp+"like";
+                for(Method item:methods){
+                    if(tmp.equalsIgnoreCase(item.getName())){
+                        criteria= (TSysAccountExample.Criteria)item.invoke(criteria,"%"+value+"%");
+                    }
+                }
+
+            }
+        }
+        return criteria;
+    }
+
+
+
+    /**
+     * eq相等  lk 相似 lt 小于  gt 大于
+     * @param map
+     * @return
+     */
+    @Override
+    public TSysAccountExample construct(Map<String,Object> map) {
+        try {
+            TSysAccountExample example = new TSysAccountExample();
+            TSysAccountExample.Criteria criteria = example.createCriteria();
+            criteria = this.eqCriteria(map, criteria);
+            criteria = this.lkCriteria(map, criteria);
+            return example;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            throw new HunterException("查询错误");
+        }
     }
 
 
@@ -64,7 +122,7 @@ public class SysAccountServiceImpl extends BaseServiceImpl<TSysAccount,TSysAccou
     @Override
     public PageParams<TSysAccount> list(PageParams<TSysAccount> pageParams) {
         //查询参数
-        TSysAccountExample example=this.construct(pageParams.getFilter());
+        TSysAccountExample example=this.construct(pageParams.getParams());
         //排序
         String strOrder=String.format("%s %s",pageParams.getOrderBy(),pageParams.getDirection());
         example.setOrderByClause(strOrder);
