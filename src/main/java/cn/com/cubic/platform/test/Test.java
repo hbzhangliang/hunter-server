@@ -5,6 +5,8 @@ import cn.com.cubic.platform.hunter.mysql.entity.TSysAccountExample;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 
 /**
  * Created by liang_zhang on 2017/10/14.
@@ -57,7 +59,11 @@ public class Test {
         for(Method item:methods){
             Class[] paramTypes = item.getParameterTypes();
             for (Class class2 : paramTypes) {
-                System.out.print(class2.getSimpleName()+",");
+                System.out.print(class2.getSimpleName());
+
+                Type type=class2.getGenericSuperclass();
+                System.out.println(type);
+
             }
             System.out.println();
 //            System.out.println(item.getGenericParameterTypes());

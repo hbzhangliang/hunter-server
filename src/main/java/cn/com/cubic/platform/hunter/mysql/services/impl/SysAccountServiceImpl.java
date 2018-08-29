@@ -41,6 +41,13 @@ public class SysAccountServiceImpl extends BaseServiceImpl<TSysAccount,TSysAccou
     private RedisUtils redisUtils;
 
 
+    /**
+     * 参数 只能是 String，Long，Integer
+     * @param map
+     * @param criteria
+     * @return
+     * @throws Exception
+     */
     private TSysAccountExample.Criteria eqCriteria(Map<String,Object> map,TSysAccountExample.Criteria criteria) throws Exception{
         Class clz=criteria.getClass();
         Method[] methods=clz.getMethods();
@@ -56,8 +63,8 @@ public class SysAccountServiceImpl extends BaseServiceImpl<TSysAccount,TSysAccou
                         Class<?> cl[]=item.getParameterTypes();
                         String parasType=cl[0].getSimpleName();
                         switch (parasType){
-                            case "Long":criteria= (TSysAccountExample.Criteria)item.invoke(criteria,((Integer)value).longValue());break;
-                            case "Integer":criteria= (TSysAccountExample.Criteria)item.invoke(criteria,(Integer)value);break;
+                            case "Long":criteria= (TSysAccountExample.Criteria)item.invoke(criteria,Long.valueOf(value.toString()));break;
+                            case "Integer":criteria= (TSysAccountExample.Criteria)item.invoke(criteria,Integer.valueOf(value.toString()));break;
                             default:criteria= (TSysAccountExample.Criteria)item.invoke(criteria,value.toString());break;
                         }
                     }
@@ -69,6 +76,13 @@ public class SysAccountServiceImpl extends BaseServiceImpl<TSysAccount,TSysAccou
     }
 
 
+    /**
+     * 参数只能是String
+     * @param map
+     * @param criteria
+     * @return
+     * @throws Exception
+     */
     private TSysAccountExample.Criteria lkCriteria(Map<String,Object> map,TSysAccountExample.Criteria criteria) throws Exception{
         Class clz=criteria.getClass();
         Method[] methods=clz.getMethods();
@@ -83,7 +97,6 @@ public class SysAccountServiceImpl extends BaseServiceImpl<TSysAccount,TSysAccou
                         criteria= (TSysAccountExample.Criteria)item.invoke(criteria,"%"+value+"%");
                     }
                 }
-
             }
         }
         return criteria;
