@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Method;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -38,7 +39,7 @@ public class VAccountInfoServiceImpl extends BaseServiceImpl<VAccountInfo,VAccou
         for(Map.Entry<String,Object> entity:map.entrySet()){
             String key=entity.getKey();
             Object value=entity.getValue();
-            if(value==null) continue;
+            if(value==null||StringUtils.isBlank(value.toString())) continue;
             if(key.startsWith("eq_")){
                 String tmp=key.replace("eq_","");
                 tmp=String.format("and%sEqualto",tmp);
@@ -74,7 +75,7 @@ public class VAccountInfoServiceImpl extends BaseServiceImpl<VAccountInfo,VAccou
         for(Map.Entry<String,Object> entity:map.entrySet()){
             String key=entity.getKey();
             Object value=entity.getValue();
-            if(value==null) continue;
+            if(value==null||StringUtils.isBlank(value.toString())) continue;
             if(key.startsWith("lk_")){
                 String tmp=key.replace("lk_","");
                 tmp=String.format("and%sLike",tmp);
@@ -101,24 +102,21 @@ public class VAccountInfoServiceImpl extends BaseServiceImpl<VAccountInfo,VAccou
         for(Map.Entry<String,Object> entity:map.entrySet()){
             String key=entity.getKey();
             Object value=entity.getValue();
-            if(value==null) continue;
-            String[] sValue=value.toString().split(",");
+            if(value==null||StringUtils.isBlank(value.toString())) continue;
             if(key.startsWith("bt_")){
                 String tmp=key.replace("bt_","");
-                String tmp1=String.format("and%sGreaterThanOrEqualTo",tmp);
-                String tmp2=String.format("and%sLessThan",tmp);
+                if(key.endsWith("1")){
+                     tmp=tmp.substring(0,tmp.length()-1);
+                     tmp=String.format("and%sGreaterThanOrEqualTo",tmp);
+                }
+                else {
+                    tmp=tmp.substring(0,tmp.length()-1);
+                    tmp=String.format("and%sLessThan",tmp);
+                }
 
                 for(Method item:methods){
-                    if(tmp1.equalsIgnoreCase(item.getName())){
-                        //有开始时间
-                        if(StringUtils.isNotBlank(sValue[0])){
-                            criteria= (VAccountInfoExample.Criteria)item.invoke(criteria, UtilHelper.parseDateYMD(sValue[0]));
-                        }
-                    }
-                    if(tmp2.equalsIgnoreCase(item.getName())){
-                        if(sValue.length==2&&StringUtils.isNotBlank(sValue[1])){
-                            criteria= (VAccountInfoExample.Criteria)item.invoke(criteria,UtilHelper.parseDateYMD(sValue[1]));
-                        }
+                    if(tmp.equalsIgnoreCase(item.getName())) {
+                        criteria = (VAccountInfoExample.Criteria) item.invoke(criteria, UtilHelper.parseDateYMD(value.toString()));
                     }
                 }
             }
