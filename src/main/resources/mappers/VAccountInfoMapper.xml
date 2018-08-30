@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.cubic.platform.hunter.mysql.mapper.VAccountInfoMapper" >
+  <resultMap id="BaseResultMap" type="cn.com.cubic.platform.hunter.mysql.entity.VAccountInfo" >
+    <result column="id" property="id" jdbcType="BIGINT" />
+    <result column="corp_id" property="corpId" jdbcType="BIGINT" />
+    <result column="account" property="account" jdbcType="VARCHAR" />
+    <result column="pwd" property="pwd" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="nick_name" property="nickName" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="photo" property="photo" jdbcType="VARCHAR" />
+    <result column="eng_name" property="engName" jdbcType="VARCHAR" />
+    <result column="position_id" property="positionId" jdbcType="BIGINT" />
+    <result column="team_id" property="teamId" jdbcType="BIGINT" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="office_phone" property="officePhone" jdbcType="VARCHAR" />
+    <result column="birthday" property="birthday" jdbcType="DATE" />
+    <result column="hire_date" property="hireDate" jdbcType="DATE" />
+    <result column="depart_date" property="departDate" jdbcType="DATE" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="flag" property="flag" jdbcType="BIT" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="modify_by" property="modifyBy" jdbcType="VARCHAR" />
+    <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+    <result column="corp_name" property="corpName" jdbcType="VARCHAR" />
+    <result column="position_name" property="positionName" jdbcType="VARCHAR" />
+    <result column="team_name" property="teamName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, corp_id, account, pwd, name, nick_name, email, photo, eng_name, position_id, 
+    team_id, mobile, office_phone, birthday, hire_date, depart_date, status, flag, create_by, 
+    create_time, modify_by, modify_time, corp_name, position_name, team_name
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.com.cubic.platform.hunter.mysql.entity.VAccountInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from v_account_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="cn.com.cubic.platform.hunter.mysql.entity.VAccountInfoExample" >
+    delete from v_account_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.com.cubic.platform.hunter.mysql.entity.VAccountInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into v_account_info (corp_id, account, pwd, 
+      name, nick_name, email, 
+      photo, eng_name, position_id, 
+      team_id, mobile, office_phone, 
+      birthday, hire_date, depart_date, 
+      status, flag, create_by, 
+      create_time, modify_by, modify_time, 
+      corp_name, position_name, team_name
+      )
+    values (#{corpId,jdbcType=BIGINT}, #{account,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{photo,jdbcType=VARCHAR}, #{engName,jdbcType=VARCHAR}, #{positionId,jdbcType=BIGINT}, 
+      #{teamId,jdbcType=BIGINT}, #{mobile,jdbcType=VARCHAR}, #{officePhone,jdbcType=VARCHAR}, 
+      #{birthday,jdbcType=DATE}, #{hireDate,jdbcType=DATE}, #{departDate,jdbcType=DATE}, 
+      #{status,jdbcType=VARCHAR}, #{flag,jdbcType=BIT}, #{createBy,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{modifyBy,jdbcType=VARCHAR}, #{modifyTime,jdbcType=TIMESTAMP}, 
+      #{corpName,jdbcType=VARCHAR}, #{positionName,jdbcType=VARCHAR}, #{teamName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.cubic.platform.hunter.mysql.entity.VAccountInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into v_account_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="corpId != null" >
+        corp_id,
+      </if>
+      <if test="account != null" >
+        account,
+      </if>
+      <if test="pwd != null" >
+        pwd,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="nickName != null" >
+        nick_name,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="photo != null" >
+        photo,
+      </if>
+      <if test="engName != null" >
+        eng_name,
+      </if>
+      <if test="positionId != null" >
+        position_id,
+      </if>
+      <if test="teamId != null" >
+        team_id,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="officePhone != null" >
+        office_phone,
+      </if>
+      <if test="birthday != null" >
+        birthday,
+      </if>
+      <if test="hireDate != null" >
+        hire_date,
+      </if>
+      <if test="departDate != null" >
+        depart_date,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="flag != null" >
+        flag,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="modifyBy != null" >
+        modify_by,
+      </if>
+      <if test="modifyTime != null" >
+        modify_time,
+      </if>
+      <if test="corpName != null" >
+        corp_name,
+      </if>
+      <if test="positionName != null" >
+        position_name,
+      </if>
+      <if test="teamName != null" >
+        team_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="corpId != null" >
+        #{corpId,jdbcType=BIGINT},
+      </if>
+      <if test="account != null" >
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="pwd != null" >
+        #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null" >
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="photo != null" >
+        #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="engName != null" >
+        #{engName,jdbcType=VARCHAR},
+      </if>
+      <if test="positionId != null" >
+        #{positionId,jdbcType=BIGINT},
+      </if>
+      <if test="teamId != null" >
+        #{teamId,jdbcType=BIGINT},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="officePhone != null" >
+        #{officePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=DATE},
+      </if>
+      <if test="hireDate != null" >
+        #{hireDate,jdbcType=DATE},
+      </if>
+      <if test="departDate != null" >
+        #{departDate,jdbcType=DATE},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null" >
+        #{flag,jdbcType=BIT},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyBy != null" >
+        #{modifyBy,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="corpName != null" >
+        #{corpName,jdbcType=VARCHAR},
+      </if>
+      <if test="positionName != null" >
+        #{positionName,jdbcType=VARCHAR},
+      </if>
+      <if test="teamName != null" >
+        #{teamName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.com.cubic.platform.hunter.mysql.entity.VAccountInfoExample" resultType="java.lang.Integer" >
+    select count(*) from v_account_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update v_account_info
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.corpId != null" >
+        corp_id = #{record.corpId,jdbcType=BIGINT},
+      </if>
+      <if test="record.account != null" >
+        account = #{record.account,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pwd != null" >
+        pwd = #{record.pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nickName != null" >
+        nick_name = #{record.nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.photo != null" >
+        photo = #{record.photo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.engName != null" >
+        eng_name = #{record.engName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.positionId != null" >
+        position_id = #{record.positionId,jdbcType=BIGINT},
+      </if>
+      <if test="record.teamId != null" >
+        team_id = #{record.teamId,jdbcType=BIGINT},
+      </if>
+      <if test="record.mobile != null" >
+        mobile = #{record.mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.officePhone != null" >
+        office_phone = #{record.officePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.birthday != null" >
+        birthday = #{record.birthday,jdbcType=DATE},
+      </if>
+      <if test="record.hireDate != null" >
+        hire_date = #{record.hireDate,jdbcType=DATE},
+      </if>
+      <if test="record.departDate != null" >
+        depart_date = #{record.departDate,jdbcType=DATE},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flag != null" >
+        flag = #{record.flag,jdbcType=BIT},
+      </if>
+      <if test="record.createBy != null" >
+        create_by = #{record.createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifyBy != null" >
+        modify_by = #{record.modifyBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modifyTime != null" >
+        modify_time = #{record.modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.corpName != null" >
+        corp_name = #{record.corpName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.positionName != null" >
+        position_name = #{record.positionName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teamName != null" >
+        team_name = #{record.teamName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update v_account_info
+    set id = #{record.id,jdbcType=BIGINT},
+      corp_id = #{record.corpId,jdbcType=BIGINT},
+      account = #{record.account,jdbcType=VARCHAR},
+      pwd = #{record.pwd,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      nick_name = #{record.nickName,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      photo = #{record.photo,jdbcType=VARCHAR},
+      eng_name = #{record.engName,jdbcType=VARCHAR},
+      position_id = #{record.positionId,jdbcType=BIGINT},
+      team_id = #{record.teamId,jdbcType=BIGINT},
+      mobile = #{record.mobile,jdbcType=VARCHAR},
+      office_phone = #{record.officePhone,jdbcType=VARCHAR},
+      birthday = #{record.birthday,jdbcType=DATE},
+      hire_date = #{record.hireDate,jdbcType=DATE},
+      depart_date = #{record.departDate,jdbcType=DATE},
+      status = #{record.status,jdbcType=VARCHAR},
+      flag = #{record.flag,jdbcType=BIT},
+      create_by = #{record.createBy,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      modify_by = #{record.modifyBy,jdbcType=VARCHAR},
+      modify_time = #{record.modifyTime,jdbcType=TIMESTAMP},
+      corp_name = #{record.corpName,jdbcType=VARCHAR},
+      position_name = #{record.positionName,jdbcType=VARCHAR},
+      team_name = #{record.teamName,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <select resultMap="BaseResultMap" parameterType="cn.com.cubic.platform.hunter.mysql.entity.VAccountInfoExample" id="selectByExampleWithRowbounds" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from v_account_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

@@ -1,0 +1,318 @@
+{
+    "code": 200,
+    "message": "查询配置数据成功",
+    "dataCount": null,
+    "data": {
+        "commonConfig": [
+            {
+                "appConfigGroupId": 20180802000317,
+                "flag": true,
+                "name": "CORP_LOGO",
+                "active": false,
+                "id": 20180802000318,
+                "text": "企业logo",
+                "type": "3",
+                "value": "display"
+            },
+            {
+                "appConfigGroupId": 20180802000317,
+                "flag": true,
+                "name": "MESSAGE_TYPE",
+                "active": false,
+                "id": 20180802000319,
+                "text": "消息类型",
+                "type": "3",
+                "value": "business_message,interactive_message"
+            },
+            {
+                "appConfigGroupId": 20180802000317,
+                "flag": true,
+                "name": "IM_MESSAGE_SEND",
+                "active": false,
+                "id": 20180802000320,
+                "text": "IM消息发送框",
+                "type": "3",
+                "value": "display"
+            },
+            {
+                "appConfigGroupId": 20180802000317,
+                "flag": true,
+                "name": "IM_MESSAGE_SCAN",
+                "active": false,
+                "id": 20180802000321,
+                "text": "IM右上角扫一扫",
+                "type": "3",
+                "value": "display"
+            }
+        ],
+        "loginType": "NONE",
+        "footer": {
+            "bgColor": {
+                "a": 1,
+                "b": 83,
+                "r": 166,
+                "g": 83
+            },
+            "footer": true,
+            "name": "BOTTOM_MENU",
+            "text": "底部菜单",
+            "items": [
+                {
+                    "noHeader": false,
+                    "flag": true,
+                    "noFooter": false,
+                    "footer": false,
+                    "iconActive": "http://terminal-center.oss-cn-hangzhou.aliyuncs.com/umsapp6.1.0/default-icon/5b46f4546b251a2c8c358c4f.png",
+                    "active": false,
+                    "sort": 1,
+                    "type": "2",
+                    "textNormalColor": {
+                        "a": 1,
+                        "b": 124,
+                        "r": 124,
+                        "g": 124
+                    },
+                    "iconNormal": "http://terminal-center.oss-cn-hangzhou.aliyuncs.com/umsapp6.1.0/default-icon/5b46f4546b251a2c8c358c54.png",
+                    "appConfigGroupId": 20180802000317,
+                    "name": "MESSAGE",
+                    "action": "view://room-list",
+                    "textActiveColor": {
+                        "a": 1,
+                        "b": 255,
+                        "r": 0,
+                        "g": 122
+                    },
+                    "header": false,
+                    "id": 20180802000327,
+                    "text": "消息"
+                },
+                {
+                    "noHeader": false,
+                    "flag": true,
+                    "noFooter": false,
+                    "footer": false,
+                    "iconActive": "http://terminal-center.oss-cn-hangzhou.aliyuncs.com/umsapp6.1.0/default-icon/5b46f4546b251a2c8c358c4b.png",
+                    "active": false,
+                    "sort": 2,
+                    "type": "2",
+                    "textNormalColor": {
+                        "a": 1,
+                        "b": 124,
+                        "r": 124,
+                        "g": 124
+                    },
+                    "iconNormal": "http://terminal-center.oss-cn-hangzhou.aliyuncs.com/umsapp6.1.0/default-icon/5b46f4546b251a2c8c358c50.png",
+                    "appConfigGroupId": 20180802000317,
+                    "name": "WORKBENCH",
+                    "action": "view://workbench",
+                    "textActiveColor": {
+                        "a": 1,
+                        "b": 255,
+                        "r": 0,
+                        "g": 122
+                    },
+                    "header": false,
+                    "id": 20180802000328,
+                    "text": "工作台"
+                },
+                {
+                    "noHeader": false,
+                    "flag": true,
+                    "noFooter": false,
+                    "footer": false,
+                    "iconActive": "http://terminal-center.oss-cn-hangzhou.aliyuncs.com/umsapp6.1.0/default-icon/5b46f4546b251a2c8c358c4d.png",
+                    "active": false,
+                    "sort": 3,
+                    "type": "2",
+                    "textNormalColor": {
+                        "a": 1,
+                        "b": 124,
+                        "r": 124,
+                        "g": 124
+                    },
+                    "iconNormal": "http://terminal-center.oss-cn-hangzhou.aliyuncs.com/umsapp6.1.0/default-icon/5b46f4546b251a2c8c358c52.png",
+                    "appConfigGroupId": 20180802000317,
+                    "name": "CONTACTS",
+                    "action": "view://contact",
+                    "textActiveColor": {
+                        "a": 1,
+                        "b": 255,
+                        "r": 0,
+                        "g": 122
+                    },
+                    "header": false,
+                    "id": 20180802000329,
+                    "text": "通讯录"
+                },
+                {
+                    "noHeader": false,
+                    "flag": true,
+                    "noFooter": false,
+                    "footer": false,
+                    "iconActive": "http://terminal-center.oss-cn-hangzhou.aliyuncs.com/umsapp6.1.0/default-icon/5b46f4546b251a2c8c358c4c.png",
+                    "active": false,
+                    "sort": 4,
+                    "type": "2",
+                    "textNormalColor": {
+                        "a": 1,
+                        "b": 124,
+                        "r": 124,
+                        "g": 124
+                    },
+                    "iconNormal": "http://terminal-center.oss-cn-hangzhou.aliyuncs.com/umsapp6.1.0/default-icon/5b46f4546b251a2c8c358c51.png",
+                    "appConfigGroupId": 20180802000317,
+                    "name": "ALERT",
+                    "action": "view://alert-list",
+                    "textActiveColor": {
+                        "a": 1,
+                        "b": 255,
+                        "r": 0,
+                        "g": 122
+                    },
+                    "header": false,
+                    "id": 20180802000330,
+                    "text": "提醒"
+                },
+                {
+                    "noHeader": false,
+                    "flag": true,
+                    "noFooter": false,
+                    "footer": false,
+                    "iconActive": "http://terminal-center.oss-cn-hangzhou.aliyuncs.com/umsapp6.1.0/default-icon/5b46f4546b251a2c8c358c4e.png",
+                    "active": false,
+                    "sort": 5,
+                    "type": "2",
+                    "textNormalColor": {
+                        "a": 1,
+                        "b": 124,
+                        "r": 124,
+                        "g": 124
+                    },
+                    "iconNormal": "http://terminal-center.oss-cn-hangzhou.aliyuncs.com/umsapp6.1.0/default-icon/5b46f4546b251a2c8c358c53.png",
+                    "appConfigGroupId": 20180802000317,
+                    "name": "ME",
+                    "action": "view://me",
+                    "textActiveColor": {
+                        "a": 1,
+                        "b": 255,
+                        "r": 0,
+                        "g": 122
+                    },
+                    "header": false,
+                    "id": 20180802000331,
+                    "text": "我"
+                }
+            ]
+        },
+        "myConfig": [
+            {
+                "iconNormal": "http://terminal-center.oss-cn-hangzhou.aliyuncs.com/umsapp6.1.0/default-icon/5a4d99d0239d06e1a60203f5.png",
+                "appConfigGroupId": 20180802000317,
+                "flag": true,
+                "name": "CHANGE_CORP",
+                "active": false,
+                "id": 20180802000322,
+                "text": "切换企业",
+                "sort": 1,
+                "type": "1",
+                "value": "true",
+                "textNormalColor": {
+                    "a": 1,
+                    "b": 100,
+                    "r": 100,
+                    "g": 100
+                }
+            },
+            {
+                "iconNormal": "http://terminal-center.oss-cn-hangzhou.aliyuncs.com/umsapp6.1.0/default-icon/5a4d99d0239d06e1a60203f6.png",
+                "appConfigGroupId": 20180802000317,
+                "flag": true,
+                "name": "UPDATE_PASSWORD",
+                "active": false,
+                "id": 20180802000323,
+                "text": "修改密码",
+                "sort": 2,
+                "type": "1",
+                "value": "true",
+                "textNormalColor": {
+                    "a": 1,
+                    "b": 100,
+                    "r": 100,
+                    "g": 100
+                }
+            },
+            {
+                "iconNormal": "http://terminal-center.oss-cn-hangzhou.aliyuncs.com/umsapp6.1.0/default-icon/5a4d99d0239d06e1a60203f7.png",
+                "appConfigGroupId": 20180802000317,
+                "flag": true,
+                "name": "CHECK_UPDATE",
+                "active": false,
+                "id": 20180802000324,
+                "text": "检查更新",
+                "sort": 3,
+                "type": "1",
+                "value": "true",
+                "textNormalColor": {
+                    "a": 1,
+                    "b": 100,
+                    "r": 100,
+                    "g": 100
+                }
+            },
+            {
+                "iconNormal": "http://terminal-center.oss-cn-hangzhou.aliyuncs.com/umsapp6.1.0/default-icon/5a4d99d0239d06e1a60203f9.png",
+                "appConfigGroupId": 20180802000317,
+                "flag": true,
+                "name": "SHARE_CLIENT",
+                "active": false,
+                "id": 20180802000325,
+                "text": "分享客户端",
+                "sort": 4,
+                "type": "1",
+                "value": "true",
+                "textNormalColor": {
+                    "a": 1,
+                    "b": 100,
+                    "r": 100,
+                    "g": 100
+                }
+            },
+            {
+                "iconNormal": "http://terminal-center.oss-cn-hangzhou.aliyuncs.com/umsapp6.1.0/default-icon/5a4d99d0239d06e1a60203f8.png",
+                "appConfigGroupId": 20180802000317,
+                "flag": true,
+                "name": "CLEAR_CACHE",
+                "active": false,
+                "id": 20180802000326,
+                "text": "清空缓存",
+                "sort": 5,
+                "type": "1",
+                "value": "true",
+                "textNormalColor": {
+                    "a": 1,
+                    "b": 100,
+                    "r": 100,
+                    "g": 100
+                }
+            }
+        ],
+        "header": {
+            "bgColor": {
+                "a": 1,
+                "b": 177,
+                "r": 35,
+                "g": 121
+            },
+            "name": "TOP_NAV",
+            "header": true,
+            "text": "顶部导航",
+            "bgImage": "http://terminal-center.oss-cn-hangzhou.aliyuncs.com/umsapp6.1.0/attachments/5b84be9f8ecfed08b5cc5a13",
+            "textNormalColor": {
+                "a": 1,
+                "b": 78,
+                "r": 179,
+                "g": 78
+            }
+        }
+    }
+}
