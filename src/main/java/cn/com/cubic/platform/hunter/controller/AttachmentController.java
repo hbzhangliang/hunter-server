@@ -9,8 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +23,7 @@ import java.util.Map;
  **/
 @Validated
 @Controller
-@RequestMapping(value = "/attachment",produces = "application/json; charset=utf-8")
+@RequestMapping(value = "/attachment")
 @ResponseBody
 public class AttachmentController {
     private final static Logger log = LoggerFactory.getLogger(AttachmentController.class);
@@ -31,6 +34,15 @@ public class AttachmentController {
 
 
 
+    @RequestMapping(value = "/upload", method = RequestMethod.POST)
+    @ResponseBody
+    public Object fileUpload(@RequestBody MultipartFile file, HttpServletRequest request) throws Exception{
+        TBizAttachment attachment=new TBizAttachment();
+        attachment.setName("111");
+        attachment.setType("ddd");
+        attachment.setUrl("www.baidu.com");
+        return attachmentService.saveOrUpdate(attachment);
+    }
 
     @RequestMapping(value = "/list-all")
     public Object listAll(@RequestBody Map<String,Long> map){
