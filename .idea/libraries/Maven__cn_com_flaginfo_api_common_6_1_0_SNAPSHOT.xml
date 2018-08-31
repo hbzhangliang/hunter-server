@@ -1,13 +1,13 @@
 <component name="libraryTable">
   <library name="Maven: cn.com.flaginfo:api-common:6.1.0-SNAPSHOT">
     <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/cn/com/flaginfo/api-common/6.1.0-SNAPSHOT/api-common-6.1.0-20180705.044627-40.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/cn/com/flaginfo/api-common/6.1.0-SNAPSHOT/api-common-6.1.0-20180816.022321-41.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$MAVEN_REPOSITORY$/cn/com/flaginfo/api-common/6.1.0-SNAPSHOT/api-common-6.1.0-20180705.044627-40-javadoc.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/cn/com/flaginfo/api-common/6.1.0-SNAPSHOT/api-common-6.1.0-20180816.022321-41-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$MAVEN_REPOSITORY$/cn/com/flaginfo/api-common/6.1.0-SNAPSHOT/api-common-6.1.0-20180705.044627-40-sources.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/cn/com/flaginfo/api-common/6.1.0-SNAPSHOT/api-common-6.1.0-20180816.022321-41-sources.jar!/" />
     </SOURCES>
   </library>
 </component>
