@@ -30,7 +30,7 @@ public class ComEnum {
      * 分享的类型， 个人，团队，岗位，所有人
      */
     public static enum ShareType{
-        account,postion,team,all,other;
+        account,position,team,all,other;
         public static ShareType getShareType(String str){
             for(ShareType item:ShareType.values()){
                 if(str.equalsIgnoreCase(item.toString())){
