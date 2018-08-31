@@ -3,7 +3,7 @@
 <mapper namespace="cn.com.cubic.platform.hunter.mysql.mapper.TBizDocMapper" >
   <resultMap id="BaseResultMap" type="cn.com.cubic.platform.hunter.mysql.entity.TBizDoc" >
     <result column="id" property="id" jdbcType="BIGINT" />
-    <result column="type" property="type" jdbcType="BIGINT" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
     <result column="status" property="status" jdbcType="VARCHAR" />
@@ -103,7 +103,7 @@
       status, flag, create_by, 
       create_time, modify_by, modify_time
       )
-    values (#{type,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+    values (#{type,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
       #{status,jdbcType=VARCHAR}, #{flag,jdbcType=BIT}, #{createBy,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=TIMESTAMP}, #{modifyBy,jdbcType=VARCHAR}, #{modifyTime,jdbcType=TIMESTAMP}
       )
@@ -144,7 +144,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="type != null" >
-        #{type,jdbcType=BIGINT},
+        #{type,jdbcType=VARCHAR},
       </if>
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
@@ -185,7 +185,7 @@
         id = #{record.id,jdbcType=BIGINT},
       </if>
       <if test="record.type != null" >
-        type = #{record.type,jdbcType=BIGINT},
+        type = #{record.type,jdbcType=VARCHAR},
       </if>
       <if test="record.name != null" >
         name = #{record.name,jdbcType=VARCHAR},
@@ -219,7 +219,7 @@
   <update id="updateByExample" parameterType="map" >
     update t_biz_doc
     set id = #{record.id,jdbcType=BIGINT},
-      type = #{record.type,jdbcType=BIGINT},
+      type = #{record.type,jdbcType=VARCHAR},
       name = #{record.name,jdbcType=VARCHAR},
       remark = #{record.remark,jdbcType=VARCHAR},
       status = #{record.status,jdbcType=VARCHAR},

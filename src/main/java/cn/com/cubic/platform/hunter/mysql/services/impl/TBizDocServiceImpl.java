@@ -2,6 +2,7 @@ package cn.com.cubic.platform.hunter.mysql.services.impl;
 
 import cn.com.cubic.platform.hunter.mysql.entity.*;
 import cn.com.cubic.platform.hunter.mysql.services.TBizDocService;
+import cn.com.cubic.platform.hunter.mysql.vo.ElTreeVo;
 import cn.com.cubic.platform.hunter.mysql.vo.PageParams;
 import cn.com.cubic.platform.utils.Exception.HunterException;
 import cn.com.cubic.platform.utils.UtilHelper;
@@ -12,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -152,5 +154,19 @@ public class TBizDocServiceImpl extends BaseServiceImpl<TBizDoc,TBizDocExample> 
             this.insert(bean);
         }
         return true;
+    }
+
+
+    @Override
+    public List<ElTreeVo> tree() {
+        List<TBizDoc> list = this.listAll();
+        if (null != list && !list.isEmpty()) {
+            List<ElTreeVo> treeVos = new ArrayList<>(10);
+            for (TBizDoc item : list) {
+                treeVos.add(new ElTreeVo(item.getId(), item.getName(), null));
+            }
+            return treeVos;
+        }
+        return null;
     }
 }

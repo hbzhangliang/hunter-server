@@ -61,4 +61,15 @@ public class DocController {
         }
         return docService.del(delIds);
     }
+
+    /**
+     * 存在缓存
+     * @return
+     */
+    @RequestMapping(value = "/tree")
+    public Object tree(){
+        return docService.tree();
+    }
+
+
 }

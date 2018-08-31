@@ -3,17 +3,19 @@ package cn.com.cubic.platform.hunter.mysql.entity;
 import java.util.Date;
 
 public class TBizDoc extends BaseEntity{
-    private Long type;
+
+    private String type;
 
     private String name;
 
     private String remark;
 
-    public Long getType() {
+
+    public String getType() {
         return type;
     }
 
-    public void setType(Long type) {
+    public void setType(String type) {
         this.type = type;
     }
 
