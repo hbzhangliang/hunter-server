@@ -25,6 +25,6 @@ public interface TBizDocService extends BaseService<TBizDoc,TBizDocExample>{
     Boolean saveOrUpdate(TBizDoc bean);
 
 
-    List<ElTreeVo> tree();
+    List<ElTreeVo> tree(List<String> types);
 
 }

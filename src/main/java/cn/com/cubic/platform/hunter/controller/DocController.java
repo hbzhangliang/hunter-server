@@ -67,8 +67,13 @@ public class DocController {
      * @return
      */
     @RequestMapping(value = "/tree")
-    public Object tree(){
-        return docService.tree();
+    public Object tree(@RequestBody Map<String,Object> map){
+        Object obj=map.get("types");
+        List<String> list=new ArrayList<>(5);
+        if(null!=obj){
+            list=(List<String>)obj;
+        }
+        return docService.tree(list);
     }
 
 

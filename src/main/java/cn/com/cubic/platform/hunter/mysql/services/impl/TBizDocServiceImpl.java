@@ -158,8 +158,13 @@ public class TBizDocServiceImpl extends BaseServiceImpl<TBizDoc,TBizDocExample> 
 
 
     @Override
-    public List<ElTreeVo> tree() {
-        List<TBizDoc> list = this.listAll();
+    public List<ElTreeVo> tree(List<String> types) {
+        TBizDocExample example=new TBizDocExample();
+        if(null!=types&&types.size()>0){
+            example.createCriteria().andTypeIn(types);
+        }
+        example.setOrderByClause("id desc");
+        List<TBizDoc> list = this.selectByExample(example);
         if (null != list && !list.isEmpty()) {
             List<ElTreeVo> treeVos = new ArrayList<>(10);
             for (TBizDoc item : list) {
