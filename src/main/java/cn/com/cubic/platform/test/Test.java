@@ -2,6 +2,7 @@ package cn.com.cubic.platform.test;
 
 import cn.com.cubic.platform.hunter.mysql.entity.TSysAccount;
 import cn.com.cubic.platform.hunter.mysql.entity.TSysAccountExample;
+import cn.com.cubic.platform.utils.ComEnum;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -71,11 +72,9 @@ public class Test {
 */
 
 
-        String aa="111,";
+        System.out.println(ComEnum.ShareType.all.toString());
 
-        String[] b=aa.split(",");
-
-        int i=0;
+        System.out.println(ComEnum.ShareType.getShareType("Account"));
 
 
     }

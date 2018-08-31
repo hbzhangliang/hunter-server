@@ -11,4 +11,34 @@ public class ComEnum {
 
     }
 
+    /**
+     * 分享的类别， 人才分享，企业分享，项目分享，目录分享
+     */
+    public static enum ShareCategory{
+        talent,company,project,doc,other;
+        public static ShareCategory getShareCategory(String str){
+            for(ShareCategory item:ShareCategory.values()){
+                if(str.equalsIgnoreCase(item.toString())){
+                    return item;
+                }
+            }
+            return other;
+        }
+    }
+
+    /**
+     * 分享的类型， 个人，团队，岗位，所有人
+     */
+    public static enum ShareType{
+        account,postion,team,all,other;
+        public static ShareType getShareType(String str){
+            for(ShareType item:ShareType.values()){
+                if(str.equalsIgnoreCase(item.toString())){
+                    return item;
+                }
+            }
+            return other;
+        }
+    }
+
 }
