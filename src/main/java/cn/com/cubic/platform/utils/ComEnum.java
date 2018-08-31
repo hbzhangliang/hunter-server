@@ -41,4 +41,22 @@ public class ComEnum {
         }
     }
 
+
+    /**
+     * 文档类型
+     */
+    public static enum DocType{
+        talent,company,project,other;
+        public static DocType getDocType(String str){
+            for(DocType item:DocType.values()){
+                if(str.equalsIgnoreCase(item.toString())){
+                    return item;
+                }
+            }
+            return other;
+        }
+    }
+
+
+
 }
