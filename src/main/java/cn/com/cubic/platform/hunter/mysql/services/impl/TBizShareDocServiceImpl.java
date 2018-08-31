@@ -154,4 +154,17 @@ public class TBizShareDocServiceImpl  extends BaseServiceImpl<TBizShareDoc,TBizS
         }
         return true;
     }
+
+
+    @Override
+    public List<TBizShareDoc> listByDoc(Long docId, String shareType) {
+        TBizShareDocExample example=new TBizShareDocExample();
+        TBizShareDocExample.Criteria criteria= example.createCriteria();
+        criteria=criteria.andDocIdEqualTo(docId);
+        if(StringUtils.isNotBlank(shareType)){
+            criteria=criteria.andShareTypeEqualTo(shareType);
+        }
+        example.setOrderByClause("id desc");
+        return this.selectByExample(example);
+    }
 }

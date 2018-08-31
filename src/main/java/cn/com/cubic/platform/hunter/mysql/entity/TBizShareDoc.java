@@ -3,17 +3,18 @@ package cn.com.cubic.platform.hunter.mysql.entity;
 import java.util.Date;
 
 public class TBizShareDoc extends BaseEntity{
-    private Long shareType;
+
+    private String shareType;
 
     private Long docId;
 
     private String detail;
 
-    public Long getShareType() {
+    public String getShareType() {
         return shareType;
     }
 
-    public void setShareType(Long shareType) {
+    public void setShareType(String shareType) {
         this.shareType = shareType;
     }
 
@@ -32,4 +33,5 @@ public class TBizShareDoc extends BaseEntity{
     public void setDetail(String detail) {
         this.detail = detail;
     }
+
 }

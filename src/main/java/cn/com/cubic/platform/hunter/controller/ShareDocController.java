@@ -61,4 +61,20 @@ public class ShareDocController {
         }
         return shareDocService.del(delIds);
     }
+
+    /**
+     * docId必须穿   type可以不穿
+     * @param map
+     * @return
+     */
+    @RequestMapping(value = "/list-by-doc")
+    public Object listByDoc(@RequestBody Map<String,Object> map){
+        Long docId=Long.valueOf(map.get("docId").toString());
+        Object shareType=map.get("shareType");
+        String type=shareType==null?null:shareType.toString();
+        return shareDocService.listByDoc(docId,type);
+    }
+
+
+
 }

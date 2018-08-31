@@ -23,4 +23,7 @@ public interface TBizShareDocService extends BaseService<TBizShareDoc,TBizShareD
 
     Boolean saveOrUpdate(TBizShareDoc bean);
 
+
+    List<TBizShareDoc> listByDoc(@NotNull Long docId,String shareType);
+
 }

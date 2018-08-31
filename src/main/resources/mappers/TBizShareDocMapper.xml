@@ -3,7 +3,7 @@
 <mapper namespace="cn.com.cubic.platform.hunter.mysql.mapper.TBizShareDocMapper" >
   <resultMap id="BaseResultMap" type="cn.com.cubic.platform.hunter.mysql.entity.TBizShareDoc" >
     <result column="id" property="id" jdbcType="BIGINT" />
-    <result column="share_type" property="shareType" jdbcType="BIGINT" />
+    <result column="share_type" property="shareType" jdbcType="VARCHAR" />
     <result column="doc_id" property="docId" jdbcType="BIGINT" />
     <result column="detail" property="detail" jdbcType="VARCHAR" />
     <result column="status" property="status" jdbcType="VARCHAR" />
@@ -104,7 +104,7 @@
       status, flag, create_by, 
       create_time, modify_by, modify_time
       )
-    values (#{shareType,jdbcType=BIGINT}, #{docId,jdbcType=BIGINT}, #{detail,jdbcType=VARCHAR}, 
+    values (#{shareType,jdbcType=VARCHAR}, #{docId,jdbcType=BIGINT}, #{detail,jdbcType=VARCHAR}, 
       #{status,jdbcType=VARCHAR}, #{flag,jdbcType=BIT}, #{createBy,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=TIMESTAMP}, #{modifyBy,jdbcType=VARCHAR}, #{modifyTime,jdbcType=TIMESTAMP}
       )
@@ -145,7 +145,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="shareType != null" >
-        #{shareType,jdbcType=BIGINT},
+        #{shareType,jdbcType=VARCHAR},
       </if>
       <if test="docId != null" >
         #{docId,jdbcType=BIGINT},
@@ -186,7 +186,7 @@
         id = #{record.id,jdbcType=BIGINT},
       </if>
       <if test="record.shareType != null" >
-        share_type = #{record.shareType,jdbcType=BIGINT},
+        share_type = #{record.shareType,jdbcType=VARCHAR},
       </if>
       <if test="record.docId != null" >
         doc_id = #{record.docId,jdbcType=BIGINT},
@@ -220,7 +220,7 @@
   <update id="updateByExample" parameterType="map" >
     update t_biz_share_doc
     set id = #{record.id,jdbcType=BIGINT},
-      share_type = #{record.shareType,jdbcType=BIGINT},
+      share_type = #{record.shareType,jdbcType=VARCHAR},
       doc_id = #{record.docId,jdbcType=BIGINT},
       detail = #{record.detail,jdbcType=VARCHAR},
       status = #{record.status,jdbcType=VARCHAR},

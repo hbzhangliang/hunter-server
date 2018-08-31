@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class TBizShareDocExample extends BaseExample{
+public class TBizShareDocExample extends BaseExample {
     protected String orderByClause;
 
     protected boolean distinct;
@@ -175,52 +175,62 @@ public class TBizShareDocExample extends BaseExample{
             return (Criteria) this;
         }
 
-        public Criteria andShareTypeEqualTo(Long value) {
+        public Criteria andShareTypeEqualTo(String value) {
             addCriterion("share_type =", value, "shareType");
             return (Criteria) this;
         }
 
-        public Criteria andShareTypeNotEqualTo(Long value) {
+        public Criteria andShareTypeNotEqualTo(String value) {
             addCriterion("share_type <>", value, "shareType");
             return (Criteria) this;
         }
 
-        public Criteria andShareTypeGreaterThan(Long value) {
+        public Criteria andShareTypeGreaterThan(String value) {
             addCriterion("share_type >", value, "shareType");
             return (Criteria) this;
         }
 
-        public Criteria andShareTypeGreaterThanOrEqualTo(Long value) {
+        public Criteria andShareTypeGreaterThanOrEqualTo(String value) {
             addCriterion("share_type >=", value, "shareType");
             return (Criteria) this;
         }
 
-        public Criteria andShareTypeLessThan(Long value) {
+        public Criteria andShareTypeLessThan(String value) {
             addCriterion("share_type <", value, "shareType");
             return (Criteria) this;
         }
 
-        public Criteria andShareTypeLessThanOrEqualTo(Long value) {
+        public Criteria andShareTypeLessThanOrEqualTo(String value) {
             addCriterion("share_type <=", value, "shareType");
             return (Criteria) this;
         }
 
-        public Criteria andShareTypeIn(List<Long> values) {
+        public Criteria andShareTypeLike(String value) {
+            addCriterion("share_type like", value, "shareType");
+            return (Criteria) this;
+        }
+
+        public Criteria andShareTypeNotLike(String value) {
+            addCriterion("share_type not like", value, "shareType");
+            return (Criteria) this;
+        }
+
+        public Criteria andShareTypeIn(List<String> values) {
             addCriterion("share_type in", values, "shareType");
             return (Criteria) this;
         }
 
-        public Criteria andShareTypeNotIn(List<Long> values) {
+        public Criteria andShareTypeNotIn(List<String> values) {
             addCriterion("share_type not in", values, "shareType");
             return (Criteria) this;
         }
 
-        public Criteria andShareTypeBetween(Long value1, Long value2) {
+        public Criteria andShareTypeBetween(String value1, String value2) {
             addCriterion("share_type between", value1, value2, "shareType");
             return (Criteria) this;
         }
 
-        public Criteria andShareTypeNotBetween(Long value1, Long value2) {
+        public Criteria andShareTypeNotBetween(String value1, String value2) {
             addCriterion("share_type not between", value1, value2, "shareType");
             return (Criteria) this;
         }
