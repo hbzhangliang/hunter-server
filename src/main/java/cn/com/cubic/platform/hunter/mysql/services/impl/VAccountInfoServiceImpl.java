@@ -27,13 +27,13 @@ public class VAccountInfoServiceImpl extends BaseServiceImpl<VAccountInfo,VAccou
 
 
     /**
-     * 参数 只能是 String，Long，Integer
+     * 参数  qu全部在一起处理
      * @param map
      * @param criteria
      * @return
      * @throws Exception
      */
-    private VAccountInfoExample.Criteria eqCriteria(Map<String,Object> map,VAccountInfoExample.Criteria criteria) throws Exception{
+    private VAccountInfoExample.Criteria constructCriteria(Map<String,Object> map,VAccountInfoExample.Criteria criteria) throws Exception{
         Class clz=criteria.getClass();
         Method[] methods=clz.getMethods();
         for(Map.Entry<String,Object> entity:map.entrySet()){
@@ -41,7 +41,7 @@ public class VAccountInfoServiceImpl extends BaseServiceImpl<VAccountInfo,VAccou
             Object value=entity.getValue();
             if(value==null||StringUtils.isBlank(value.toString())) continue;
             if(key.startsWith("eq_")){
-                String tmp=key.replace("eq_","");
+                String tmp=key.substring(3);
                 tmp=String.format("and%sEqualto",tmp);
                 for(Method item:methods){
                     if(tmp.equalsIgnoreCase(item.getName())){
@@ -55,29 +55,9 @@ public class VAccountInfoServiceImpl extends BaseServiceImpl<VAccountInfo,VAccou
                         }
                     }
                 }
-
             }
-        }
-        return criteria;
-    }
-
-
-    /**
-     * 参数只能是String
-     * @param map
-     * @param criteria
-     * @return
-     * @throws Exception
-     */
-    private VAccountInfoExample.Criteria lkCriteria(Map<String,Object> map,VAccountInfoExample.Criteria criteria) throws Exception{
-        Class clz=criteria.getClass();
-        Method[] methods=clz.getMethods();
-        for(Map.Entry<String,Object> entity:map.entrySet()){
-            String key=entity.getKey();
-            Object value=entity.getValue();
-            if(value==null||StringUtils.isBlank(value.toString())) continue;
-            if(key.startsWith("lk_")){
-                String tmp=key.replace("lk_","");
+            else if(key.startsWith("lk_")){
+                String tmp=key.substring(3);
                 tmp=String.format("and%sLike",tmp);
                 for(Method item:methods){
                     if(tmp.equalsIgnoreCase(item.getName())){
@@ -85,29 +65,11 @@ public class VAccountInfoServiceImpl extends BaseServiceImpl<VAccountInfo,VAccou
                     }
                 }
             }
-        }
-        return criteria;
-    }
-
-    /**
-     * 只能是时间类型
-     * @param map
-     * @param criteria
-     * @return
-     * @throws Exception
-     */
-    private VAccountInfoExample.Criteria btCriteria(Map<String,Object> map,VAccountInfoExample.Criteria criteria) throws Exception{
-        Class clz=criteria.getClass();
-        Method[] methods=clz.getMethods();
-        for(Map.Entry<String,Object> entity:map.entrySet()){
-            String key=entity.getKey();
-            Object value=entity.getValue();
-            if(value==null||StringUtils.isBlank(value.toString())) continue;
-            if(key.startsWith("bt_")){
-                String tmp=key.replace("bt_","");
+            else if(key.startsWith("bt_")){
+                String tmp=key.substring(3);
                 if(key.endsWith("1")){
-                     tmp=tmp.substring(0,tmp.length()-1);
-                     tmp=String.format("and%sGreaterThanOrEqualTo",tmp);
+                    tmp=tmp.substring(0,tmp.length()-1);
+                    tmp=String.format("and%sGreaterThanOrEqualTo",tmp);
                 }
                 else {
                     tmp=tmp.substring(0,tmp.length()-1);
@@ -120,19 +82,19 @@ public class VAccountInfoServiceImpl extends BaseServiceImpl<VAccountInfo,VAccou
                     }
                 }
             }
+            else {
+                continue;
+            }
         }
         return criteria;
     }
-
 
 
     private VAccountInfoExample construct(Map<String,Object> map) {
         try {
             VAccountInfoExample example = new VAccountInfoExample();
             VAccountInfoExample.Criteria criteria = example.createCriteria();
-            criteria = this.eqCriteria(map, criteria);
-            criteria = this.lkCriteria(map, criteria);
-            criteria=this.btCriteria(map,criteria);
+            criteria = this.constructCriteria(map, criteria);
             return example;
         }
         catch (Exception e){
