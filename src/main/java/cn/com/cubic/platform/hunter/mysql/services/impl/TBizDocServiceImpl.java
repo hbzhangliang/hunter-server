@@ -210,7 +210,8 @@ public class TBizDocServiceImpl extends BaseServiceImpl<TBizDoc,TBizDocExample> 
         }
 
         //所有人
-        SelTreeVo allSelTree=new SelTreeVo(ComEnum.ShareType.all.toString(),ComEnum.ShareType.all.getDesc(),null);
+        SelTreeVo allSelTree=new SelTreeVo(ComEnum.ShareType.all.toString(),ComEnum.ShareType.all.getDesc(),new ArrayList<>(1));
+        allSelTree.getChildren().add(new SelTreeVo(ComEnum.ShareType.all.toString(),ComEnum.ShareType.all.getDesc(),null));
 
         result.add(accountSelTree);
         result.add(positionSelTree);
