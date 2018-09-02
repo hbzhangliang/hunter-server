@@ -74,7 +74,7 @@ public class Test {
 
         System.out.println(ComEnum.ShareType.all.toString());
 
-        System.out.println(ComEnum.ShareType.getShareType("Account"));
+        System.out.println(ComEnum.ShareType.account.getDesc());
 
 
     }

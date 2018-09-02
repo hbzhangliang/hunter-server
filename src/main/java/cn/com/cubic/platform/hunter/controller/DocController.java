@@ -77,4 +77,11 @@ public class DocController {
     }
 
 
+    @RequestMapping(value = "/all-tree")
+    public Object allTree(){
+        return docService.allTree();
+    }
+
+
+
 }

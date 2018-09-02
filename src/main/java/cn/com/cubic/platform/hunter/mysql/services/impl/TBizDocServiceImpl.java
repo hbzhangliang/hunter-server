@@ -1,22 +1,25 @@
 package cn.com.cubic.platform.hunter.mysql.services.impl;
 
 import cn.com.cubic.platform.hunter.mysql.entity.*;
+import cn.com.cubic.platform.hunter.mysql.services.SysAccountService;
 import cn.com.cubic.platform.hunter.mysql.services.TBizDocService;
+import cn.com.cubic.platform.hunter.mysql.services.TSysPositionService;
+import cn.com.cubic.platform.hunter.mysql.services.TSysTeamService;
 import cn.com.cubic.platform.hunter.mysql.vo.ElTreeVo;
 import cn.com.cubic.platform.hunter.mysql.vo.PageParams;
+import cn.com.cubic.platform.hunter.mysql.vo.SelTreeVo;
+import cn.com.cubic.platform.utils.ComEnum;
 import cn.com.cubic.platform.utils.Exception.HunterException;
 import cn.com.cubic.platform.utils.UtilHelper;
 import cn.com.cubic.platform.utils.global.GlobalHolder;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Liang.Zhang on 2018/8/31.
@@ -157,11 +160,19 @@ public class TBizDocServiceImpl extends BaseServiceImpl<TBizDoc,TBizDocExample> 
     }
 
 
+    /**
+     * 如果 没传参数，没有数据
+     * @param types
+     * @return
+     */
     @Override
     public List<ElTreeVo> tree(List<String> types) {
         TBizDocExample example=new TBizDocExample();
         if(null!=types&&types.size()>0){
             example.createCriteria().andTypeIn(types);
+        }
+        else {
+            example.createCriteria().andIdIsNull();
         }
         example.setOrderByClause("id desc");
         List<TBizDoc> list = this.selectByExample(example);
@@ -174,4 +185,67 @@ public class TBizDocServiceImpl extends BaseServiceImpl<TBizDoc,TBizDocExample> 
         }
         return null;
     }
+
+
+    @Override
+    public List<SelTreeVo> allTree() {
+        List<SelTreeVo> result=new ArrayList<>(5);
+
+        //个人  没有从属关系
+        SelTreeVo accountSelTree=new SelTreeVo(ComEnum.ShareType.account.toString(),ComEnum.ShareType.account.getDesc(),new ArrayList<>(10));
+        for(TSysAccount item:accountService.listAll()){
+            accountSelTree.getChildren().add(new SelTreeVo(item.getId().toString(),item.getName(),null));
+        }
+
+        //职位
+        SelTreeVo positionSelTree=new SelTreeVo(ComEnum.ShareType.position.toString(),ComEnum.ShareType.position.getDesc(),new ArrayList<>(10));
+        for(TSysPosition item:positionService.listAll()){
+            positionSelTree.getChildren().add(new SelTreeVo(item.getId().toString(),item.getName(),null));
+        }
+
+        //团队
+        SelTreeVo teamSelTree=new SelTreeVo(ComEnum.ShareType.team.toString(),ComEnum.ShareType.team.getDesc(),new ArrayList<>(10));
+        for(ElTreeVo item:teamService.tree()){
+            teamSelTree.getChildren().add(this.transFor(item));
+        }
+
+        //所有人
+        SelTreeVo allSelTree=new SelTreeVo(ComEnum.ShareType.all.toString(),ComEnum.ShareType.all.getDesc(),null);
+
+        result.add(accountSelTree);
+        result.add(positionSelTree);
+        result.add(teamSelTree);
+        result.add(allSelTree);
+        return result;
+    }
+
+
+
+    private SelTreeVo transFor(ElTreeVo treeVo){
+        if(null==treeVo) return null;
+
+        if(treeVo.getChildren()==null){
+            return new SelTreeVo(treeVo.getId().toString(),treeVo.getName(),null);
+        }
+        else {
+           SelTreeVo vo=new SelTreeVo(treeVo.getId().toString(),treeVo.getName(),new ArrayList<>(10));
+           for(ElTreeVo item:treeVo.getChildren()){
+               SelTreeVo tmp=this.transFor(item);
+               if(null!=tmp){
+                   vo.getChildren().add(tmp);
+               }
+           }
+           return vo;
+        }
+    }
+
+
+    @Autowired
+    private SysAccountService accountService;
+
+    @Autowired
+    private TSysPositionService positionService;
+
+    @Autowired
+    private TSysTeamService teamService;
 }

@@ -4,6 +4,7 @@ import cn.com.cubic.platform.hunter.mysql.entity.TBizDoc;
 import cn.com.cubic.platform.hunter.mysql.entity.TBizDocExample;
 import cn.com.cubic.platform.hunter.mysql.vo.ElTreeVo;
 import cn.com.cubic.platform.hunter.mysql.vo.PageParams;
+import cn.com.cubic.platform.hunter.mysql.vo.SelTreeVo;
 import com.sun.istack.internal.NotNull;
 
 import java.util.List;
@@ -26,5 +27,9 @@ public interface TBizDocService extends BaseService<TBizDoc,TBizDocExample>{
 
 
     List<ElTreeVo> tree(List<String> types);
+
+
+
+    List<SelTreeVo> allTree();
 
 }
