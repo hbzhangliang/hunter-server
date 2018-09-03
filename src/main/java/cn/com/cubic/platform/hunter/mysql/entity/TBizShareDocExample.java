@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class TBizShareDocExample extends BaseExample {
+public class TBizShareDocExample extends BaseExample{
     protected String orderByClause;
 
     protected boolean distinct;
@@ -752,6 +752,146 @@ public class TBizShareDocExample extends BaseExample {
 
         public Criteria andModifyTimeNotBetween(Date value1, Date value2) {
             addCriterion("modify_time not between", value1, value2, "modifyTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andShareValueIsNull() {
+            addCriterion("share_value is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andShareValueIsNotNull() {
+            addCriterion("share_value is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andShareValueEqualTo(String value) {
+            addCriterion("share_value =", value, "shareValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andShareValueNotEqualTo(String value) {
+            addCriterion("share_value <>", value, "shareValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andShareValueGreaterThan(String value) {
+            addCriterion("share_value >", value, "shareValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andShareValueGreaterThanOrEqualTo(String value) {
+            addCriterion("share_value >=", value, "shareValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andShareValueLessThan(String value) {
+            addCriterion("share_value <", value, "shareValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andShareValueLessThanOrEqualTo(String value) {
+            addCriterion("share_value <=", value, "shareValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andShareValueLike(String value) {
+            addCriterion("share_value like", value, "shareValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andShareValueNotLike(String value) {
+            addCriterion("share_value not like", value, "shareValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andShareValueIn(List<String> values) {
+            addCriterion("share_value in", values, "shareValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andShareValueNotIn(List<String> values) {
+            addCriterion("share_value not in", values, "shareValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andShareValueBetween(String value1, String value2) {
+            addCriterion("share_value between", value1, value2, "shareValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andShareValueNotBetween(String value1, String value2) {
+            addCriterion("share_value not between", value1, value2, "shareValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andShareLabelIsNull() {
+            addCriterion("share_label is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andShareLabelIsNotNull() {
+            addCriterion("share_label is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andShareLabelEqualTo(String value) {
+            addCriterion("share_label =", value, "shareLabel");
+            return (Criteria) this;
+        }
+
+        public Criteria andShareLabelNotEqualTo(String value) {
+            addCriterion("share_label <>", value, "shareLabel");
+            return (Criteria) this;
+        }
+
+        public Criteria andShareLabelGreaterThan(String value) {
+            addCriterion("share_label >", value, "shareLabel");
+            return (Criteria) this;
+        }
+
+        public Criteria andShareLabelGreaterThanOrEqualTo(String value) {
+            addCriterion("share_label >=", value, "shareLabel");
+            return (Criteria) this;
+        }
+
+        public Criteria andShareLabelLessThan(String value) {
+            addCriterion("share_label <", value, "shareLabel");
+            return (Criteria) this;
+        }
+
+        public Criteria andShareLabelLessThanOrEqualTo(String value) {
+            addCriterion("share_label <=", value, "shareLabel");
+            return (Criteria) this;
+        }
+
+        public Criteria andShareLabelLike(String value) {
+            addCriterion("share_label like", value, "shareLabel");
+            return (Criteria) this;
+        }
+
+        public Criteria andShareLabelNotLike(String value) {
+            addCriterion("share_label not like", value, "shareLabel");
+            return (Criteria) this;
+        }
+
+        public Criteria andShareLabelIn(List<String> values) {
+            addCriterion("share_label in", values, "shareLabel");
+            return (Criteria) this;
+        }
+
+        public Criteria andShareLabelNotIn(List<String> values) {
+            addCriterion("share_label not in", values, "shareLabel");
+            return (Criteria) this;
+        }
+
+        public Criteria andShareLabelBetween(String value1, String value2) {
+            addCriterion("share_label between", value1, value2, "shareLabel");
+            return (Criteria) this;
+        }
+
+        public Criteria andShareLabelNotBetween(String value1, String value2) {
+            addCriterion("share_label not between", value1, value2, "shareLabel");
             return (Criteria) this;
         }
     }

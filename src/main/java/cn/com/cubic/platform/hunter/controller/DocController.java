@@ -2,6 +2,7 @@ package cn.com.cubic.platform.hunter.controller;
 
 import cn.com.cubic.platform.hunter.mysql.entity.TBizDoc;
 import cn.com.cubic.platform.hunter.mysql.services.TBizDocService;
+import cn.com.cubic.platform.hunter.mysql.vo.DocVo;
 import cn.com.cubic.platform.hunter.mysql.vo.PageParams;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,14 +43,20 @@ public class DocController {
     }
 
     @RequestMapping(value = "/save")
-    public Object save(@RequestBody TBizDoc bean){
-        return docService.saveOrUpdate(bean);
+    public Object save(@RequestBody DocVo bean){
+        return docService.saveTx(bean);
     }
 
+
+    /**
+     * 返回视图，包含权限数据
+     * @param map
+     * @return
+     */
     @RequestMapping(value = "/get")
     public Object get(@RequestBody Map<String,Long> map){
         Long id=map.get("id");
-        return docService.findById(id);
+        return docService.findDocVo(id);
     }
 
     @RequestMapping(value = "/del")

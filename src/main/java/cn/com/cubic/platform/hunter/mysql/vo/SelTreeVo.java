@@ -10,11 +10,13 @@ import java.util.List;
 public class SelTreeVo implements Serializable {
     private String value;
     private String label;
+    private int level; //第几层，从0开始
     private List<SelTreeVo> children;
 
-    public SelTreeVo(String value,String label,List<SelTreeVo> children){
+    public SelTreeVo(String value,String label,int level,List<SelTreeVo> children){
         this.value=value;
         this.label=label;
+        this.level=level;
         this.children=children;
     }
 
@@ -32,6 +34,14 @@ public class SelTreeVo implements Serializable {
 
     public void setLabel(String label) {
         this.label = label;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
     }
 
     public List<SelTreeVo> getChildren() {

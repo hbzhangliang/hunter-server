@@ -1,10 +1,8 @@
 package cn.com.cubic.platform.hunter.mysql.services.impl;
 
 import cn.com.cubic.platform.hunter.mysql.entity.*;
-import cn.com.cubic.platform.hunter.mysql.services.SysAccountService;
-import cn.com.cubic.platform.hunter.mysql.services.TBizDocService;
-import cn.com.cubic.platform.hunter.mysql.services.TSysPositionService;
-import cn.com.cubic.platform.hunter.mysql.services.TSysTeamService;
+import cn.com.cubic.platform.hunter.mysql.services.*;
+import cn.com.cubic.platform.hunter.mysql.vo.DocVo;
 import cn.com.cubic.platform.hunter.mysql.vo.ElTreeVo;
 import cn.com.cubic.platform.hunter.mysql.vo.PageParams;
 import cn.com.cubic.platform.hunter.mysql.vo.SelTreeVo;
@@ -16,8 +14,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
+import javax.print.Doc;
 import java.lang.reflect.Method;
 import java.util.*;
 
@@ -133,6 +133,24 @@ public class TBizDocServiceImpl extends BaseServiceImpl<TBizDoc,TBizDocExample> 
         return list.get(0);
     }
 
+
+    @Override
+    public DocVo findDocVo(Long id) {
+        TBizShareDocExample example=new TBizShareDocExample();
+        example.createCriteria().andDocIdEqualTo(id);
+        List<TBizShareDoc> docList=shareDocService.selectByExample(example);
+        List<Map<String,String>> share=new ArrayList<>(5);
+        if(null!=docList&&!docList.isEmpty()){
+            for(TBizShareDoc doc:docList){
+                Map<String,String> tmp=new HashMap<>(2);
+                tmp.put("value",doc.getShareValue());
+                tmp.put("label",doc.getShareLabel());
+                share.add(tmp);
+            }
+        }
+        return this.transForm(this.findById(id),share);
+    }
+
     @Override
     public Boolean del(List<Long> ids) {
         TBizDocExample example = new TBizDocExample();
@@ -159,6 +177,45 @@ public class TBizDocServiceImpl extends BaseServiceImpl<TBizDoc,TBizDocExample> 
         return true;
     }
 
+
+    /**
+     * 包含权限数据的保存
+     * @param bean
+     * @return
+     */
+    @Override
+    public Boolean saveTx(DocVo bean) {
+        Date dt=new Date();
+        TSysAccount user=(TSysAccount) GlobalHolder.get().get("account");
+        if (null != bean.getId()) {//更新操作
+            TBizDocExample example = new TBizDocExample();
+            example.createCriteria().andIdEqualTo(bean.getId());
+            bean.setModifyBy(user.getName());
+            bean.setModifyTime(dt);
+            this.updateByExampleSelective(bean, example);
+
+            String sql=String.format("delete from t_biz_share_doc where doc_id=%s",bean.getId());
+            jdbcTemplate.update(sql);
+        } else { //插入操作
+            bean.setCreateBy(user.getName());
+            bean.setCreateTime(dt);
+            this.insert(bean);
+        }
+        //权限添加
+        if(null!=bean.getShare()&&bean.getShare().size()>0){
+            for(Map<String,String> map:bean.getShare()){
+                TBizShareDoc p=new TBizShareDoc();
+                p.setDocId(bean.getId());
+                p.setShareType(map.get("value").split(",")[0]);
+                p.setShareValue(map.get("value"));
+                p.setShareLabel(map.get("label"));
+                p.setCreateBy(user.getName());
+                p.setCreateTime(dt);
+                shareDocService.insert(p);
+            }
+        }
+        return true;
+    }
 
     /**
      * 如果 没传参数，没有数据
@@ -192,26 +249,26 @@ public class TBizDocServiceImpl extends BaseServiceImpl<TBizDoc,TBizDocExample> 
         List<SelTreeVo> result=new ArrayList<>(5);
 
         //个人  没有从属关系
-        SelTreeVo accountSelTree=new SelTreeVo(ComEnum.ShareType.account.toString(),ComEnum.ShareType.account.getDesc(),new ArrayList<>(10));
+        SelTreeVo accountSelTree=new SelTreeVo(ComEnum.ShareType.account.toString(),ComEnum.ShareType.account.getDesc(),0,new ArrayList<>(10));
         for(TSysAccount item:accountService.listAll()){
-            accountSelTree.getChildren().add(new SelTreeVo(item.getId().toString(),item.getName(),null));
+            accountSelTree.getChildren().add(new SelTreeVo(item.getId().toString(),item.getName(),1,null));
         }
 
         //职位
-        SelTreeVo positionSelTree=new SelTreeVo(ComEnum.ShareType.position.toString(),ComEnum.ShareType.position.getDesc(),new ArrayList<>(10));
+        SelTreeVo positionSelTree=new SelTreeVo(ComEnum.ShareType.position.toString(),ComEnum.ShareType.position.getDesc(),0,new ArrayList<>(10));
         for(TSysPosition item:positionService.listAll()){
-            positionSelTree.getChildren().add(new SelTreeVo(item.getId().toString(),item.getName(),null));
+            positionSelTree.getChildren().add(new SelTreeVo(item.getId().toString(),item.getName(),1,null));
         }
 
         //团队
-        SelTreeVo teamSelTree=new SelTreeVo(ComEnum.ShareType.team.toString(),ComEnum.ShareType.team.getDesc(),new ArrayList<>(10));
+        SelTreeVo teamSelTree=new SelTreeVo(ComEnum.ShareType.team.toString(),ComEnum.ShareType.team.getDesc(),0,new ArrayList<>(10));
         for(ElTreeVo item:teamService.tree()){
-            teamSelTree.getChildren().add(this.transFor(item));
+            teamSelTree.getChildren().add(this.transFor(item,1));
         }
 
         //所有人
-        SelTreeVo allSelTree=new SelTreeVo(ComEnum.ShareType.all.toString(),ComEnum.ShareType.all.getDesc(),new ArrayList<>(1));
-        allSelTree.getChildren().add(new SelTreeVo(ComEnum.ShareType.all.toString(),ComEnum.ShareType.all.getDesc(),null));
+        SelTreeVo allSelTree=new SelTreeVo(ComEnum.ShareType.all.toString(),ComEnum.ShareType.all.getDesc(),0,new ArrayList<>(1));
+        allSelTree.getChildren().add(new SelTreeVo(ComEnum.ShareType.all.toString(),ComEnum.ShareType.all.getDesc(),1,null));
 
         result.add(accountSelTree);
         result.add(positionSelTree);
@@ -222,16 +279,16 @@ public class TBizDocServiceImpl extends BaseServiceImpl<TBizDoc,TBizDocExample> 
 
 
 
-    private SelTreeVo transFor(ElTreeVo treeVo){
+    private SelTreeVo transFor(ElTreeVo treeVo,int level){
         if(null==treeVo) return null;
 
         if(treeVo.getChildren()==null){
-            return new SelTreeVo(treeVo.getId().toString(),treeVo.getName(),null);
+            return new SelTreeVo(treeVo.getId().toString(),treeVo.getName(),level,null);
         }
         else {
-           SelTreeVo vo=new SelTreeVo(treeVo.getId().toString(),treeVo.getName(),new ArrayList<>(10));
+           SelTreeVo vo=new SelTreeVo(treeVo.getId().toString(),treeVo.getName(),level,new ArrayList<>(10));
            for(ElTreeVo item:treeVo.getChildren()){
-               SelTreeVo tmp=this.transFor(item);
+               SelTreeVo tmp=this.transFor(item,level+1);
                if(null!=tmp){
                    vo.getChildren().add(tmp);
                }
@@ -241,6 +298,21 @@ public class TBizDocServiceImpl extends BaseServiceImpl<TBizDoc,TBizDocExample> 
     }
 
 
+    private DocVo transForm(TBizDoc doc,List<Map<String,String>> list){
+        if(null==doc) return null;
+        DocVo vo=new DocVo();
+        vo.setId(doc.getId());
+        vo.setName(doc.getName());
+        vo.setType(doc.getType());
+        vo.setRemark(doc.getRemark());
+        vo.setShare(list);
+        return vo;
+    }
+
+
+    @Autowired
+    private TBizShareDocService shareDocService;
+
     @Autowired
     private SysAccountService accountService;
 
@@ -249,4 +321,7 @@ public class TBizDocServiceImpl extends BaseServiceImpl<TBizDoc,TBizDocExample> 
 
     @Autowired
     private TSysTeamService teamService;
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 }
