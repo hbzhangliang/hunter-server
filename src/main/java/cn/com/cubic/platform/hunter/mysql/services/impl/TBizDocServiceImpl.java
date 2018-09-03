@@ -7,6 +7,7 @@ import cn.com.cubic.platform.hunter.mysql.vo.ElTreeVo;
 import cn.com.cubic.platform.hunter.mysql.vo.PageParams;
 import cn.com.cubic.platform.hunter.mysql.vo.SelTreeVo;
 import cn.com.cubic.platform.utils.ComEnum;
+import cn.com.cubic.platform.utils.ComTrans;
 import cn.com.cubic.platform.utils.Exception.HunterException;
 import cn.com.cubic.platform.utils.UtilHelper;
 import cn.com.cubic.platform.utils.global.GlobalHolder;
@@ -148,7 +149,7 @@ public class TBizDocServiceImpl extends BaseServiceImpl<TBizDoc,TBizDocExample> 
                 share.add(tmp);
             }
         }
-        return this.transForm(this.findById(id),share);
+        return ComTrans.transDocVo(this.findById(id),share);
     }
 
     @Override
@@ -298,16 +299,6 @@ public class TBizDocServiceImpl extends BaseServiceImpl<TBizDoc,TBizDocExample> 
     }
 
 
-    private DocVo transForm(TBizDoc doc,List<Map<String,String>> list){
-        if(null==doc) return null;
-        DocVo vo=new DocVo();
-        vo.setId(doc.getId());
-        vo.setName(doc.getName());
-        vo.setType(doc.getType());
-        vo.setRemark(doc.getRemark());
-        vo.setShare(list);
-        return vo;
-    }
 
 
     @Autowired
