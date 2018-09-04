@@ -2,6 +2,7 @@ package cn.com.cubic.platform.hunter.controller;
 
 import cn.com.cubic.platform.hunter.mysql.entity.TBizAttachment;
 import cn.com.cubic.platform.hunter.mysql.services.TBizAttachmentService;
+import cn.com.cubic.platform.utils.ComFiles;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,8 @@ public class AttachmentController {
     private TBizAttachmentService attachmentService;
 
 
+    @Autowired
+    private ComFiles comFiles;
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     @ResponseBody
@@ -40,7 +43,7 @@ public class AttachmentController {
         TBizAttachment attachment=new TBizAttachment();
         attachment.setName("111");
         attachment.setType("ddd");
-        attachment.setUrl("www.baidu.com");
+        attachment.setUrl(comFiles.fileUpload(file));
         return attachmentService.saveOrUpdate(attachment);
     }
 

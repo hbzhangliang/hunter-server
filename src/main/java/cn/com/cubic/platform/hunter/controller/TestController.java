@@ -156,8 +156,7 @@ public class TestController extends BaseController{
 
     @RequestMapping(value = "/22")
     public Object test22(){
-        comFiles.makeFile();
-        return true;
+        return null;
     }
 
 
