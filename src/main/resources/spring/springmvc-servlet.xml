@@ -13,6 +13,10 @@
     <context:annotation-config />
     <context:component-scan base-package="cn.com.cubic.platform"/>
 
+    <!--spring 和 springmvc 都需要加载配置文件-->
+    <context:property-placeholder location="classpath:spring/config.properties"/>
+
+
     <!-- 启用aop -->
     <aop:aspectj-autoproxy proxy-target-class="true" />
 

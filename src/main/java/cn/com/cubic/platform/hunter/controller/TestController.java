@@ -7,13 +7,16 @@ import cn.com.cubic.platform.hunter.mysql.entity.CoreUser;
 import cn.com.cubic.platform.hunter.mysql.entity.TSysDictionary;
 import cn.com.cubic.platform.hunter.mysql.mapper.TSysDictionaryMapper;
 import cn.com.cubic.platform.hunter.mysql.services.CoreUserService;
+import cn.com.cubic.platform.hunter.mysql.services.TBizAttachmentService;
 import cn.com.cubic.platform.hunter.mysql.services.TSysDictionaryService;
 import cn.com.cubic.platform.hunter.mysql.vo.PageParams;
+import cn.com.cubic.platform.utils.ComFiles;
 import cn.com.cubic.platform.utils.RedisUtils;
 import cn.com.cubic.platform.utils.XmlReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
@@ -148,6 +151,24 @@ public class TestController extends BaseController{
         jdbcTemplate.update("delete from t_sys_dictionary where id in (22,23,24,25)");
         return null;
     }
+
+
+
+    @RequestMapping(value = "/22")
+    public Object test22(){
+        comFiles.makeFile();
+        return true;
+    }
+
+
+
+    @Autowired
+    private TBizAttachmentService attachmentService;
+
+
+    @Autowired
+    private ComFiles comFiles;
+
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
