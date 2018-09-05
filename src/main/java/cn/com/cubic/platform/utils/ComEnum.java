@@ -58,5 +58,31 @@ public class ComEnum {
     }
 
 
+    /**
+     * 人才表类型
+     */
+    public static enum TalentType{
+        Candidate("候选人"),Linkman("联系人"),ColdCall("Cold Call");
+        private String desc;
+        private TalentType(String desc){
+            this.desc=desc;
+        }
+        public String getDesc(){
+            return desc;
+        }
+    }
+
+    public static enum TalentAttachType{
+        Primitive("原始简历"),Recommend("推荐报告"),Background("背景调查"),Health("体检报告"),OfferLetter("Offer Letter");
+        private String desc;
+        private TalentAttachType(String desc){
+            this.desc=desc;
+        }
+        public String getDesc(){
+            return desc;
+        }
+    }
+
+
 
 }

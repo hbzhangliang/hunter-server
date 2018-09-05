@@ -44,6 +44,14 @@ public class DictionaryController {
     }
 
 
+    @RequestMapping(value = "/list-children-bycode")
+    public Object listChildrenByCode(@RequestBody Map<String,String> map) {
+        String code=map.get("code");
+        return dictionaryService.list(code);
+    }
+
+
+
     @RequestMapping(value = "/list-all")
     public Object listAll(){
         return dictionaryService.listAll();

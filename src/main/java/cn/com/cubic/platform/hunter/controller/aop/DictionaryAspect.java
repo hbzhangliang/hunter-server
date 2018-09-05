@@ -29,7 +29,8 @@ public class DictionaryAspect {
     private RedisUtils redisUtils;
 
     @Pointcut("execution(* cn.com.cubic.platform.hunter.controller.DictionaryController.listChildren(..)) ||" +
-            " execution(* cn.com.cubic.platform.hunter.controller.DictionaryController.listAll())")
+            " execution(* cn.com.cubic.platform.hunter.controller.DictionaryController.listAll())||" +
+            "execution(* cn.com.cubic.platform.hunter.controller.DictionaryController.listChildrenByCode(..)) ")
     public void pointcutAddRedis(){
     }
 
@@ -50,11 +51,15 @@ public class DictionaryAspect {
 
         Object result = null;
         //逻辑处理  添加缓存
-        String redisKey="",redisType="",redisTimeKey1="dict_children",redisTimeKey2="dict_all";
+        String redisKey="",redisType="",redisTimeKey1="dict_children",redisTimeKey2="dict_all",redisTimeKey3="dict_children_bycode";
         switch (methodName){
             case "listChildren":{
                 redisKey= UtilHelper.contacsString(redisTimeKey1,para);
                 redisType=redisTimeKey1;
+            };break;
+            case "listChildrenByCode":{
+                redisKey= UtilHelper.contacsString(redisTimeKey3,para);
+                redisType=redisTimeKey3;
             };break;
             case "listAll":{
                 redisKey= redisTimeKey2;
@@ -95,7 +100,7 @@ public class DictionaryAspect {
             throw ex;
         }
         //删除缓存
-        redisUtils.delKeysPatners("0dict_children");
+        redisUtils.delKeysPatners("0dict_children","0dict_children_bycode");
         redisUtils.delKeys("dict_all");
         return result;
 

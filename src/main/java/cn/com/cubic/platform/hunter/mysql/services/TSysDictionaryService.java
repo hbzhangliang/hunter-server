@@ -17,6 +17,8 @@ public interface TSysDictionaryService extends BaseService<TSysDictionary,TSysDi
 
     List<TSysDictionary> list(Long pId);
 
+    List<TSysDictionary> list(String type);
+
     List<TSysDictionary> listAll();
 
     TSysDictionary findById(@NotNull Long id);

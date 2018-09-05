@@ -20,11 +20,10 @@ public class Test {
 
     public static void main(String[] args){
 
-        String ab="a,b,11";
 
+        System.out.println(ComEnum.TalentType.Candidate.toString());
 
-        System.out.println(ab.substring(ab.lastIndexOf(",")+1));
-
+        System.out.println(ComEnum.TalentType.Candidate.getDesc());
 
     }
 

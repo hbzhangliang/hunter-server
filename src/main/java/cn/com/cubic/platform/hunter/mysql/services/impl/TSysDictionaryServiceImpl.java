@@ -62,6 +62,18 @@ public class TSysDictionaryServiceImpl extends BaseServiceImpl<TSysDictionary,TS
         return this.selectByExample(example);
     }
 
+
+    @Override
+    public List<TSysDictionary> list(String type) {
+        TSysDictionaryExample example=new TSysDictionaryExample();
+        example.createCriteria().andCodeEqualTo(type);
+        List<TSysDictionary> list = this.selectByExample(example);
+        if (null != list && 1 != list.size()) {
+            throw new HunterException("查询错误");
+        }
+        return this.list(list.get(0).getId());
+    }
+
     @Override
     public List<TSysDictionary> listAll() {
         TSysDictionaryExample example=new TSysDictionaryExample();
