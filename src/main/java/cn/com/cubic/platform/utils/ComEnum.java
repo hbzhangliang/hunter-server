@@ -85,4 +85,17 @@ public class ComEnum {
 
 
 
+    public static enum MarryStatus{
+        NoMarry("未婚"),Married("已婚"),NoKnow("未知"),KeepSecret("保密");
+        private String desc;
+        private MarryStatus(String desc){
+            this.desc=desc;
+        }
+        public String getDesc(){
+            return desc;
+        }
+    }
+
+
+
 }
