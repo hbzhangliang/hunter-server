@@ -6,6 +6,7 @@
     <result column="type" property="type" jdbcType="VARCHAR" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="share_type" property="shareType" jdbcType="BIT" />
     <result column="status" property="status" jdbcType="VARCHAR" />
     <result column="flag" property="flag" jdbcType="BIT" />
     <result column="create_by" property="createBy" jdbcType="VARCHAR" />
@@ -72,7 +73,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, type, name, remark, status, flag, create_by, create_time, modify_by, modify_time
+    id, type, name, remark, share_type, status, flag, create_by, create_time, modify_by, 
+    modify_time
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.com.cubic.platform.hunter.mysql.entity.TBizDocExample" >
     select
@@ -100,11 +102,11 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into t_biz_doc (type, name, remark, 
-      status, flag, create_by, 
+      share_type, status, flag, create_by, 
       create_time, modify_by, modify_time
       )
     values (#{type,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
-      #{status,jdbcType=VARCHAR}, #{flag,jdbcType=BIT}, #{createBy,jdbcType=VARCHAR}, 
+      #{shareType,jdbcType=BIT}, #{status,jdbcType=VARCHAR}, #{flag,jdbcType=BIT}, #{createBy,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=TIMESTAMP}, #{modifyBy,jdbcType=VARCHAR}, #{modifyTime,jdbcType=TIMESTAMP}
       )
   </insert>
@@ -122,6 +124,9 @@
       </if>
       <if test="remark != null" >
         remark,
+      </if>
+      <if test="shareType != null" >
+        share_type,
       </if>
       <if test="status != null" >
         status,
@@ -151,6 +156,9 @@
       </if>
       <if test="remark != null" >
         #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="shareType != null" >
+        #{shareType,jdbcType=BIT},
       </if>
       <if test="status != null" >
         #{status,jdbcType=VARCHAR},
@@ -193,6 +201,9 @@
       <if test="record.remark != null" >
         remark = #{record.remark,jdbcType=VARCHAR},
       </if>
+      <if test="record.shareType != null" >
+        share_type = #{record.shareType,jdbcType=BIT},
+      </if>
       <if test="record.status != null" >
         status = #{record.status,jdbcType=VARCHAR},
       </if>
@@ -222,6 +233,7 @@
       type = #{record.type,jdbcType=VARCHAR},
       name = #{record.name,jdbcType=VARCHAR},
       remark = #{record.remark,jdbcType=VARCHAR},
+      share_type = #{record.shareType,jdbcType=BIT},
       status = #{record.status,jdbcType=VARCHAR},
       flag = #{record.flag,jdbcType=BIT},
       create_by = #{record.createBy,jdbcType=VARCHAR},

@@ -5,6 +5,9 @@
     <result column="id" property="id" jdbcType="BIGINT" />
     <result column="share_type" property="shareType" jdbcType="VARCHAR" />
     <result column="doc_id" property="docId" jdbcType="BIGINT" />
+    <result column="code" property="code" jdbcType="BIGINT" />
+    <result column="share_value" property="shareValue" jdbcType="VARCHAR" />
+    <result column="share_label" property="shareLabel" jdbcType="VARCHAR" />
     <result column="detail" property="detail" jdbcType="VARCHAR" />
     <result column="status" property="status" jdbcType="VARCHAR" />
     <result column="flag" property="flag" jdbcType="BIT" />
@@ -12,8 +15,6 @@
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="modify_by" property="modifyBy" jdbcType="VARCHAR" />
     <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
-    <result column="share_value" property="shareValue" jdbcType="VARCHAR" />
-    <result column="share_label" property="shareLabel" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -74,8 +75,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, share_type, doc_id, detail, status, flag, create_by, create_time, modify_by, 
-    modify_time, share_value, share_label
+    id, share_type, doc_id, code, share_value, share_label, detail, status, flag, create_by, 
+    create_time, modify_by, modify_time
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.com.cubic.platform.hunter.mysql.entity.TBizShareDocExample" >
     select
@@ -102,14 +103,16 @@
     <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into t_biz_share_doc (share_type, doc_id, detail, 
+    insert into t_biz_share_doc (share_type, doc_id, code, 
+      share_value, share_label, detail, 
       status, flag, create_by, 
-      create_time, modify_by, modify_time, 
-      share_value, share_label)
-    values (#{shareType,jdbcType=VARCHAR}, #{docId,jdbcType=BIGINT}, #{detail,jdbcType=VARCHAR}, 
+      create_time, modify_by, modify_time
+      )
+    values (#{shareType,jdbcType=VARCHAR}, #{docId,jdbcType=BIGINT}, #{code,jdbcType=BIGINT}, 
+      #{shareValue,jdbcType=VARCHAR}, #{shareLabel,jdbcType=VARCHAR}, #{detail,jdbcType=VARCHAR}, 
       #{status,jdbcType=VARCHAR}, #{flag,jdbcType=BIT}, #{createBy,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{modifyBy,jdbcType=VARCHAR}, #{modifyTime,jdbcType=TIMESTAMP}, 
-      #{shareValue,jdbcType=VARCHAR}, #{shareLabel,jdbcType=VARCHAR})
+      #{createTime,jdbcType=TIMESTAMP}, #{modifyBy,jdbcType=VARCHAR}, #{modifyTime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="cn.com.cubic.platform.hunter.mysql.entity.TBizShareDoc" >
     <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
@@ -122,6 +125,15 @@
       </if>
       <if test="docId != null" >
         doc_id,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="shareValue != null" >
+        share_value,
+      </if>
+      <if test="shareLabel != null" >
+        share_label,
       </if>
       <if test="detail != null" >
         detail,
@@ -144,12 +156,6 @@
       <if test="modifyTime != null" >
         modify_time,
       </if>
-      <if test="shareValue != null" >
-        share_value,
-      </if>
-      <if test="shareLabel != null" >
-        share_label,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="shareType != null" >
@@ -157,6 +163,15 @@
       </if>
       <if test="docId != null" >
         #{docId,jdbcType=BIGINT},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=BIGINT},
+      </if>
+      <if test="shareValue != null" >
+        #{shareValue,jdbcType=VARCHAR},
+      </if>
+      <if test="shareLabel != null" >
+        #{shareLabel,jdbcType=VARCHAR},
       </if>
       <if test="detail != null" >
         #{detail,jdbcType=VARCHAR},
@@ -179,12 +194,6 @@
       <if test="modifyTime != null" >
         #{modifyTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="shareValue != null" >
-        #{shareValue,jdbcType=VARCHAR},
-      </if>
-      <if test="shareLabel != null" >
-        #{shareLabel,jdbcType=VARCHAR},
-      </if>
     </trim>
   </insert>
   <select id="countByExample" parameterType="cn.com.cubic.platform.hunter.mysql.entity.TBizShareDocExample" resultType="java.lang.Integer" >
@@ -204,6 +213,15 @@
       </if>
       <if test="record.docId != null" >
         doc_id = #{record.docId,jdbcType=BIGINT},
+      </if>
+      <if test="record.code != null" >
+        code = #{record.code,jdbcType=BIGINT},
+      </if>
+      <if test="record.shareValue != null" >
+        share_value = #{record.shareValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shareLabel != null" >
+        share_label = #{record.shareLabel,jdbcType=VARCHAR},
       </if>
       <if test="record.detail != null" >
         detail = #{record.detail,jdbcType=VARCHAR},
@@ -226,12 +244,6 @@
       <if test="record.modifyTime != null" >
         modify_time = #{record.modifyTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.shareValue != null" >
-        share_value = #{record.shareValue,jdbcType=VARCHAR},
-      </if>
-      <if test="record.shareLabel != null" >
-        share_label = #{record.shareLabel,jdbcType=VARCHAR},
-      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -242,15 +254,16 @@
     set id = #{record.id,jdbcType=BIGINT},
       share_type = #{record.shareType,jdbcType=VARCHAR},
       doc_id = #{record.docId,jdbcType=BIGINT},
+      code = #{record.code,jdbcType=BIGINT},
+      share_value = #{record.shareValue,jdbcType=VARCHAR},
+      share_label = #{record.shareLabel,jdbcType=VARCHAR},
       detail = #{record.detail,jdbcType=VARCHAR},
       status = #{record.status,jdbcType=VARCHAR},
       flag = #{record.flag,jdbcType=BIT},
       create_by = #{record.createBy,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       modify_by = #{record.modifyBy,jdbcType=VARCHAR},
-      modify_time = #{record.modifyTime,jdbcType=TIMESTAMP},
-      share_value = #{record.shareValue,jdbcType=VARCHAR},
-      share_label = #{record.shareLabel,jdbcType=VARCHAR}
+      modify_time = #{record.modifyTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>

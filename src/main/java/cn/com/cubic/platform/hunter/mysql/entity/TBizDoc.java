@@ -10,6 +10,8 @@ public class TBizDoc extends BaseEntity{
 
     private String remark;
 
+    private Boolean shareType;
+
 
     public String getType() {
         return type;
@@ -35,4 +37,11 @@ public class TBizDoc extends BaseEntity{
         this.remark = remark;
     }
 
+    public Boolean getShareType() {
+        return shareType;
+    }
+
+    public void setShareType(Boolean shareType) {
+        this.shareType = shareType;
+    }
 }

@@ -206,9 +206,14 @@ public class TBizDocServiceImpl extends BaseServiceImpl<TBizDoc,TBizDocExample> 
         if(null!=bean.getShare()&&bean.getShare().size()>0){
             for(Map<String,String> map:bean.getShare()){
                 TBizShareDoc p=new TBizShareDoc();
+                String vlue=map.get("value");
                 p.setDocId(bean.getId());
-                p.setShareType(map.get("value").split(",")[0]);
-                p.setShareValue(map.get("value"));
+                p.setShareType(vlue.split(",")[0]);
+                //不是all的时候才有值
+                if(!vlue.startsWith(ComEnum.ShareType.all.toString())) {
+                    p.setCode(Long.valueOf(vlue.substring(vlue.lastIndexOf(",") + 1)));
+                }
+                p.setShareValue(vlue);
                 p.setShareLabel(map.get("label"));
                 p.setCreateBy(user.getName());
                 p.setCreateTime(dt);
