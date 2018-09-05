@@ -5,6 +5,7 @@ import cn.com.cubic.platform.hunter.mysql.entity.TSysCorpExample;
 import cn.com.cubic.platform.hunter.mysql.services.SysCorpService;
 import cn.com.cubic.platform.hunter.mysql.vo.PageParams;
 import cn.com.cubic.platform.utils.Exception.HunterException;
+import cn.com.cubic.platform.utils.UtilHelper;
 import cn.com.cubic.platform.utils.resp.HunterBaseResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,7 +42,7 @@ public class SysCorpServiceImpl extends BaseServiceImpl<TSysCorp,TSysCorpExample
         //查询参数
         TSysCorpExample example=this.construct(pageParams.getFilter());
         //排序
-        String strOrder=String.format("%s %s",pageParams.getOrderBy(),pageParams.getDirection());
+        String strOrder=String.format("%s %s", UtilHelper.camelToUnderline(pageParams.getOrderBy()),pageParams.getDirection());
         example.setOrderByClause(strOrder);
         return this.listPage(example,pageParams);
     }

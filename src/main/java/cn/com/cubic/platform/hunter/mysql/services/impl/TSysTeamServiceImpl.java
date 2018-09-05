@@ -5,6 +5,7 @@ import cn.com.cubic.platform.hunter.mysql.services.TSysTeamService;
 import cn.com.cubic.platform.hunter.mysql.vo.ElTreeVo;
 import cn.com.cubic.platform.hunter.mysql.vo.PageParams;
 import cn.com.cubic.platform.utils.Exception.HunterException;
+import cn.com.cubic.platform.utils.UtilHelper;
 import cn.com.cubic.platform.utils.global.GlobalHolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +29,7 @@ public class TSysTeamServiceImpl  extends BaseServiceImpl<TSysTeam,TSysTeamExamp
         //查询参数
         TSysTeamExample example=new TSysTeamExample();
         //排序
-        String strOrder=String.format("%s %s",pageParams.getOrderBy(),pageParams.getDirection());
+        String strOrder=String.format("%s %s", UtilHelper.camelToUnderline(pageParams.getOrderBy()),pageParams.getDirection());
         example.setOrderByClause(strOrder);
         return this.listPage(example,pageParams);
     }

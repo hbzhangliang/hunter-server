@@ -109,7 +109,7 @@ public class VAccountInfoServiceImpl extends BaseServiceImpl<VAccountInfo,VAccou
         //查询参数
         VAccountInfoExample example=this.construct(pageParams.getParams());
         //排序
-        String strOrder=String.format("%s %s",pageParams.getOrderBy(),pageParams.getDirection());
+        String strOrder=String.format("%s %s",UtilHelper.camelToUnderline(pageParams.getOrderBy()),pageParams.getDirection());
         example.setOrderByClause(strOrder);
         return this.listPage(example,pageParams);
     }

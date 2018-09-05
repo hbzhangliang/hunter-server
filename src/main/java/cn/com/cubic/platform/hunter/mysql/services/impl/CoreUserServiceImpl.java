@@ -6,6 +6,7 @@ import cn.com.cubic.platform.hunter.mysql.mapper.CoreUserMapper;
 import cn.com.cubic.platform.hunter.mysql.services.CoreUserService;
 import cn.com.cubic.platform.hunter.mysql.vo.PageParams;
 import cn.com.cubic.platform.utils.Exception.HunterException;
+import cn.com.cubic.platform.utils.UtilHelper;
 import cn.com.cubic.platform.utils.resp.HunterBaseResponse;
 import cn.com.flaginfo.platform.api.common.base.BaseResponse;
 import org.apache.commons.lang3.StringUtils;
@@ -47,7 +48,7 @@ public class CoreUserServiceImpl extends BaseServiceImpl<CoreUser,CoreUserExampl
         //查询参数
         CoreUserExample example=this.construct(pageParams.getFilter());
         //排序
-        String strOrder=String.format("%s %s",pageParams.getOrderBy(),pageParams.getDirection());
+        String strOrder=String.format("%s %s", UtilHelper.camelToUnderline(pageParams.getOrderBy()),pageParams.getDirection());
         example.setOrderByClause(strOrder);
         return this.listPage(example,pageParams);
     }

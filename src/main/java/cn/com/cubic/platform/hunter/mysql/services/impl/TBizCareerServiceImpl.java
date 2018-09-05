@@ -6,6 +6,7 @@ import cn.com.cubic.platform.hunter.mysql.vo.ElTreeVo;
 import cn.com.cubic.platform.hunter.mysql.vo.PageParams;
 import cn.com.cubic.platform.utils.Exception.HunterException;
 import cn.com.cubic.platform.utils.JsonReader;
+import cn.com.cubic.platform.utils.UtilHelper;
 import cn.com.cubic.platform.utils.global.GlobalHolder;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -31,7 +32,7 @@ public class TBizCareerServiceImpl extends BaseServiceImpl<TBizCareer,TBizCareer
         //查询参数
         TBizCareerExample example=new TBizCareerExample();
         //排序
-        String strOrder=String.format("%s %s",pageParams.getOrderBy(),pageParams.getDirection());
+        String strOrder=String.format("%s %s", UtilHelper.camelToUnderline(pageParams.getOrderBy()),pageParams.getDirection());
         example.setOrderByClause(strOrder);
         return this.listPage(example,pageParams);
     }
