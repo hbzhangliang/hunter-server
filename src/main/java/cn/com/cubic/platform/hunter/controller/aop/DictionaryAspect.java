@@ -14,6 +14,8 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 /**
  * Created by Liang.Zhang on 2018/8/16.
@@ -46,8 +48,15 @@ public class DictionaryAspect {
 
         String para="";
         if(null!=args&&args.length>0){
-            para=((HashMap)args[0]).get("pId").toString();
+            HashMap map=((HashMap)args[0]);
+            //
+            Iterator<Map.Entry<String, Object>> it = map.entrySet().iterator();
+            while (it.hasNext()) {
+                Map.Entry<String, Object> entry = it.next();
+                para+=entry.getValue().toString();
+            }
         }
+
 
         Object result = null;
         //逻辑处理  添加缓存
