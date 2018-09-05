@@ -13,12 +13,20 @@ public class ElTreeVo implements Serializable{
 
     private String name;
 
+    private Boolean leaf;
+
     private List<ElTreeVo> children;
 
     public ElTreeVo(Long id, String name, List<ElTreeVo> children){
         this.id=id;
         this.name=name;
         this.children=children;
+        if(children==null||children.size()<1){
+            this.leaf=true;
+        }
+        else {
+            this.leaf=false;
+        }
     }
 
     public Long getId() {
@@ -43,5 +51,13 @@ public class ElTreeVo implements Serializable{
 
     public void setChildren(List<ElTreeVo> children) {
         this.children = children;
+    }
+
+    public Boolean getLeaf() {
+        return leaf;
+    }
+
+    public void setLeaf(Boolean leaf) {
+        this.leaf = leaf;
     }
 }

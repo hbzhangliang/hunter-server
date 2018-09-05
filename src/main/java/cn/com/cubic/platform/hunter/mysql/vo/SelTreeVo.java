@@ -11,6 +11,7 @@ public class SelTreeVo implements Serializable {
     private String value;
     private String label;
     private int level; //第几层，从0开始
+    private Boolean leaf;
     private List<SelTreeVo> children;
 
     public SelTreeVo(String value,String label,int level,List<SelTreeVo> children){
@@ -18,6 +19,13 @@ public class SelTreeVo implements Serializable {
         this.label=label;
         this.level=level;
         this.children=children;
+        if(children==null||children.size()<1){
+            this.leaf=true;
+        }
+        else {
+            this.leaf=false;
+        }
+
     }
 
     public String getValue() {
@@ -50,5 +58,13 @@ public class SelTreeVo implements Serializable {
 
     public void setChildren(List<SelTreeVo> children) {
         this.children = children;
+    }
+
+    public Boolean getLeaf() {
+        return leaf;
+    }
+
+    public void setLeaf(Boolean leaf) {
+        this.leaf = leaf;
     }
 }
