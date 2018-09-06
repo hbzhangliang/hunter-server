@@ -56,6 +56,18 @@ public class TBizTagGroupServiceImpl  extends BaseServiceImpl<TBizTagGroup,TBizT
         return list.get(0);
     }
 
+
+    @Override
+    public TBizTagGroup findByCode(String groupCode) {
+        TBizTagGroupExample example = new TBizTagGroupExample();
+        example.createCriteria().andCodeEqualTo(groupCode);
+        List<TBizTagGroup> list = this.selectByExample(example);
+        if (null != list && 1 != list.size()) {
+            throw new HunterException("查询错误");
+        }
+        return list.get(0);
+    }
+
     /**
      * 包含事务
      * @param ids

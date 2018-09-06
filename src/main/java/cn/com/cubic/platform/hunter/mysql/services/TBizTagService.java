@@ -35,6 +35,8 @@ public interface TBizTagService extends BaseService<TBizTag,TBizTagExample>{
     //获取所有的节点数据
     List<ElTreeVo> tree(Long groupId);
 
+    List<ElTreeVo> tree(String groupCode);
+
     List<Long> getChildrenIds(Long pId);
 
 }

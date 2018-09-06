@@ -20,6 +20,8 @@ public interface TBizTagGroupService extends BaseService<TBizTagGroup,TBizTagGro
 
     TBizTagGroup findById(@NotNull Long id);
 
+    TBizTagGroup findByCode(@NotNull String groupCode);
+
     Boolean delTx(List<Long> ids);
 
     Boolean saveOrUpdate(TBizTagGroup bean);

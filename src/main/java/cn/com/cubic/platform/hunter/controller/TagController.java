@@ -76,6 +76,13 @@ public class TagController {
     }
 
 
+    @RequestMapping(value = "/tree-bycode")
+    public Object treeByCode(@RequestBody Map<String,String> map){
+        String groupCode=map.get("code");
+        return tagService.tree(groupCode);
+    }
+
+
 
 
 

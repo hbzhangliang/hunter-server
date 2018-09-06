@@ -1,6 +1,7 @@
 package cn.com.cubic.platform.hunter.mysql.services.impl;
 
 import cn.com.cubic.platform.hunter.mysql.entity.*;
+import cn.com.cubic.platform.hunter.mysql.services.TBizTagGroupService;
 import cn.com.cubic.platform.hunter.mysql.services.TBizTagService;
 import cn.com.cubic.platform.hunter.mysql.vo.ElTreeVo;
 import cn.com.cubic.platform.hunter.mysql.vo.PageParams;
@@ -9,6 +10,7 @@ import cn.com.cubic.platform.utils.UtilHelper;
 import cn.com.cubic.platform.utils.global.GlobalHolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotEmpty;
@@ -147,6 +149,12 @@ public class TBizTagServiceImpl  extends BaseServiceImpl<TBizTag,TBizTagExample>
     }
 
     @Override
+    public List<ElTreeVo> tree(String groupCode) {
+        return this.tree(tagGroupService.findByCode(groupCode).getId());
+
+    }
+
+    @Override
     public List<Long> getChildrenIds(Long pId) {
         List<Long> result=new ArrayList<>(10);
         result.add(pId);
@@ -163,4 +171,8 @@ public class TBizTagServiceImpl  extends BaseServiceImpl<TBizTag,TBizTagExample>
             return result;
         }
     }
+
+
+    @Autowired
+    private TBizTagGroupService tagGroupService;
 }
