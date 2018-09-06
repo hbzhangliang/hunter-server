@@ -155,5 +155,35 @@ public class UtilHelper {
     }
 
 
+    /**
+     * postion3，postion4，position5 ----》3，4，5
+     * @param str
+     * @return
+     */
+    public static String cleanShareType(String str){
+        if(StringUtils.isNotEmpty(str)){
+            for(ComEnum.ShareType item:ComEnum.ShareType.values()){
+                if(str.indexOf(item.toString())>-1){
+                    str=str.replaceAll(item.toString(),"");
+                    break;
+                }
+            }
+            return str;
+        }
+        return null;
+    }
+
+    public static String getShareType(String str){
+        if(StringUtils.isNotEmpty(str)){
+            for(ComEnum.ShareType item:ComEnum.ShareType.values()){
+                if(str.indexOf(item.toString())>-1){
+                    return item.toString();
+                }
+            }
+            return str;
+        }
+        return null;
+    }
+
 
 }

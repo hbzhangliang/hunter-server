@@ -91,4 +91,11 @@ public class DocController {
 
 
 
+    @RequestMapping(value = "/share-tree")
+    public Object shareTree(){
+        return docService.allShareTree();
+    }
+
+
+
 }

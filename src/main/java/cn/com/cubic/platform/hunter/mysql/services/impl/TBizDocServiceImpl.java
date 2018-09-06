@@ -305,6 +305,66 @@ public class TBizDocServiceImpl extends BaseServiceImpl<TBizDoc,TBizDocExample> 
 
 
 
+    private SelTreeVo transForT(ElTreeVo treeVo,int level){
+        if(null==treeVo) return null;
+
+        if(treeVo.getChildren()==null){
+            return new SelTreeVo(ComEnum.ShareType.team.toString()+treeVo.getId().toString(),treeVo.getName(),level,null);
+        }
+        else {
+            SelTreeVo vo=new SelTreeVo(ComEnum.ShareType.team.toString()+treeVo.getId().toString(),treeVo.getName(),level,new ArrayList<>(10));
+            for(ElTreeVo item:treeVo.getChildren()){
+                SelTreeVo tmp=this.transForT(item,level+1);
+                if(null!=tmp){
+                    vo.getChildren().add(tmp);
+                }
+            }
+            return vo;
+        }
+    }
+
+
+    /**
+     * 避免id重复 供el tree使用
+     * 避免id重复 供el tree使用
+     * @return
+     */
+    @Override
+    public List<SelTreeVo> allShareTree() {
+        List<SelTreeVo> result=new ArrayList<>(5);
+
+        //个人  没有从属关系
+        SelTreeVo accountSelTree=new SelTreeVo(ComEnum.ShareType.account.toString(),ComEnum.ShareType.account.getDesc(),0,new ArrayList<>(10));
+        for(TSysAccount item:accountService.listAll()){
+            accountSelTree.getChildren().add(new SelTreeVo(ComEnum.ShareType.account.toString()+item.getId().toString(),item.getName(),1,null));
+        }
+
+        //职位
+        SelTreeVo positionSelTree=new SelTreeVo(ComEnum.ShareType.position.toString(),ComEnum.ShareType.position.getDesc(),0,new ArrayList<>(10));
+        for(TSysPosition item:positionService.listAll()){
+            positionSelTree.getChildren().add(new SelTreeVo(ComEnum.ShareType.position.toString()+item.getId().toString(),item.getName(),1,null));
+        }
+
+        //团队
+        SelTreeVo teamSelTree=new SelTreeVo(ComEnum.ShareType.team.toString(),ComEnum.ShareType.team.getDesc(),0,new ArrayList<>(10));
+        for(ElTreeVo item:teamService.tree()){
+            teamSelTree.getChildren().add(this.transForT(item,1));
+        }
+
+        //所有人
+        SelTreeVo allSelTree=new SelTreeVo(ComEnum.ShareType.all.toString(),ComEnum.ShareType.all.getDesc(),0,new ArrayList<>(1));
+        allSelTree.getChildren().add(new SelTreeVo(ComEnum.ShareType.all.toString()+ComEnum.ShareType.all.toString(),ComEnum.ShareType.all.getDesc(),1,null));
+
+        result.add(accountSelTree);
+        result.add(positionSelTree);
+        result.add(teamSelTree);
+        result.add(allSelTree);
+        return result;
+    }
+
+
+
+
 
     @Autowired
     private TBizShareDocService shareDocService;

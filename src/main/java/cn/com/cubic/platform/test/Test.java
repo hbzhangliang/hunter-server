@@ -4,6 +4,7 @@ import cn.com.cubic.platform.hunter.mysql.entity.TSysAccount;
 import cn.com.cubic.platform.hunter.mysql.entity.TSysAccountExample;
 import cn.com.cubic.platform.hunter.mysql.services.SysAccountService;
 import cn.com.cubic.platform.utils.ComEnum;
+import cn.com.cubic.platform.utils.UtilHelper;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -21,9 +22,12 @@ public class Test {
     public static void main(String[] args){
 
 
-        System.out.println(ComEnum.TalentType.Candidate.toString());
+        String aa="position3,position5,team10,allall";
 
-        System.out.println(ComEnum.TalentType.Candidate.getDesc());
+        for(String item:aa.split(",")){
+            System.out.println(UtilHelper.cleanShareType(item));
+        }
+
 
     }
 

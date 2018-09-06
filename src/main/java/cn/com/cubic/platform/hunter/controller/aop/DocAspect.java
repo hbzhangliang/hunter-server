@@ -29,7 +29,8 @@ public class DocAspect {
     private RedisUtils redisUtils;
 
 
-    @Pointcut("execution(* cn.com.cubic.platform.hunter.controller.DocController.allTree(..)) ")
+    @Pointcut("execution(* cn.com.cubic.platform.hunter.controller.DocController.allTree(..))||" +
+            "execution(* cn.com.cubic.platform.hunter.controller.DocController.shareTree(..))")
     public void pointcutAddRedis(){
     }
 
@@ -38,8 +39,15 @@ public class DocAspect {
     public Object aroundAddRequest(ProceedingJoinPoint pjp) throws Throwable {
         String methodName = pjp.getSignature().getName();
 
+
+
+        String redisKey="";
+        switch (methodName){
+            case "allTree":redisKey="all_tree";break;
+            case "shareTree":redisKey="share_tree";break;
+            default:break;
+        }
         //逻辑处理  添加缓存
-        String redisKey="share_tree";
         if (StringUtils.isNotEmpty(redisKey)) {
             Object obj=redisUtils.getObj(redisKey);
             if(null!=obj){

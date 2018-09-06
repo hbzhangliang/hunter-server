@@ -1,7 +1,9 @@
 package cn.com.cubic.platform.hunter.controller;
 
+import cn.com.cubic.platform.hunter.mysql.entity.TBizShareDoc;
+import cn.com.cubic.platform.hunter.mysql.entity.TBizShareTalent;
 import cn.com.cubic.platform.hunter.mysql.entity.TBizTalent;
-import cn.com.cubic.platform.hunter.mysql.services.TBizTalentService;
+import cn.com.cubic.platform.hunter.mysql.services.TBizShareTalentService;
 import cn.com.cubic.platform.hunter.mysql.vo.PageParams;
 import cn.com.cubic.platform.hunter.mysql.vo.TalentVo;
 import org.slf4j.Logger;
@@ -18,40 +20,40 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by Liang.Zhang on 2018/9/5.
+ * Created by Liang.Zhang on 2018/9/6.
  **/
 @Validated
 @Controller
-@RequestMapping(value = "/talent",produces = "application/json; charset=utf-8")
+@RequestMapping(value = "/talent-share",produces = "application/json; charset=utf-8")
 @ResponseBody
-public class TalentController {
+public class ShareTalentController {
 
+    private final static Logger log = LoggerFactory.getLogger(ShareTalentController.class);
 
-    private final static Logger log = LoggerFactory.getLogger(TalentController.class);
 
     @Autowired
-    private TBizTalentService talentService;
+    private TBizShareTalentService shareTalentService;
 
     @RequestMapping(value = "/list")
-    public Object list(@RequestBody PageParams<TBizTalent> pageParams){
-        return talentService.list(pageParams);
+    public Object list(@RequestBody PageParams<TBizShareTalent> pageParams){
+        return shareTalentService.list(pageParams);
     }
 
 
     @RequestMapping(value = "/list-all")
     public Object listAll(){
-        return talentService.listAll();
+        return shareTalentService.listAll();
     }
 
     @RequestMapping(value = "/save")
-    public Object save(@RequestBody TalentVo bean){
-        return talentService.saveOrUpdate(bean);
+    public Object save(@RequestBody TBizShareTalent bean){
+        return shareTalentService.saveOrUpdate(bean);
     }
 
     @RequestMapping(value = "/get")
     public Object get(@RequestBody Map<String,Long> map){
         Long id=map.get("id");
-        return talentService.findById(id);
+        return shareTalentService.findById(id);
     }
 
     @RequestMapping(value = "/del")
@@ -61,8 +63,9 @@ public class TalentController {
         for(Object p:ids){
             delIds.add(Long.valueOf(p.toString()));
         }
-        return talentService.del(delIds);
+        return shareTalentService.del(delIds);
     }
+
 
 
 }

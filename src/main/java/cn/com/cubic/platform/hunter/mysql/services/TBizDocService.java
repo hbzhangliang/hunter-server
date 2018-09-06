@@ -38,4 +38,9 @@ public interface TBizDocService extends BaseService<TBizDoc,TBizDocExample>{
 
     List<SelTreeVo> allTree();
 
+
+
+    //提供给其他页面共享调用
+    List<SelTreeVo> allShareTree();
+
 }
