@@ -1,10 +1,21 @@
 package cn.com.cubic.platform.hunter.WebSocketTs;
 
 import cn.com.cubic.platform.hunter.controller.BaseController;
+import cn.com.cubic.platform.hunter.mysql.entity.TSysAccount;
+import cn.com.cubic.platform.utils.RedisUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.context.ContextLoader;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.socket.server.standard.SpringConfigurator;
 
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.swing.*;
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
@@ -14,6 +25,7 @@ import java.util.concurrent.ConcurrentMap;
 /**
  * Created by Liang.Zhang on 2018/7/4.
  **/
+@Controller
 @ServerEndpoint(value = "/chat",configurator = HttpSessionConfigurator.class)
 public class WSServer {
 
@@ -27,51 +39,45 @@ public class WSServer {
 
     private HttpSession httpSession;
 
+    private RedisUtils redisUtils;
 
     @OnOpen
     public void onOpen(Session session, EndpointConfig config){
-
+        if(this.redisUtils==null) {
+            this.redisUtils = ContextLoader.getCurrentWebApplicationContext().getBean(RedisUtils.class);
+        }
         this.httpSession=(HttpSession) config.getUserProperties().get(HttpSession.class.getName());
-
-        this.httpSession.setAttribute("user","zs");
-
-        String user=(String) this.httpSession.getAttribute("user");
         this.session=session;
-
-        log.info("user is [{}]",user);
-
         log.info("sessionId is [{}]",this.session.getId());
 
-        if(map.get(user)!=null){
-            map.remove(user);
-            subOnlineCount();
+        TSysAccount account=(TSysAccount) redisUtils.getObj(httpSession.getId());
+        if(map.get(account.getId().toString())==null){
+            map.put(account.getId().toString(),this);
+            addOnlineCount();
         }
-
-        map.put(user,this);
-
-        addOnlineCount();
-
         log.info("有新的连接，当前连接数未[{}]",getOnlineCount());
-
     }
 
     @OnClose
     public void onClose(){
-        String user=(String) this.httpSession.getAttribute("user");
-        map.remove(user);
-        subOnlineCount();
+        TSysAccount account=(TSysAccount) redisUtils.getObj(httpSession.getId());
+        if(map.get(account.getId().toString())!=null){
+            map.remove(account.getId().toString());
+            subOnlineCount();
+        }
         log.info("有一个连接断开，当前连接数未[{}]",getOnlineCount());
     }
 
 
     @OnMessage
     public void onMessage(String message) throws IOException{
-        WSServer _client=map.get("zs");
+        TSysAccount account=(TSysAccount) redisUtils.getObj(httpSession.getId());
+        WSServer _client=map.get(account.getId().toString());
         log.info("后端发送数据开始");
         if(null!=_client){
-            if(_client.session.isOpen()){
+            while (_client.session.isOpen()){
                 try {
-                    Thread.sleep(10000);
+                    Thread.sleep(5000);
                 }
                 catch (Exception e){
                     e.printStackTrace();
@@ -87,19 +93,19 @@ public class WSServer {
         t.printStackTrace();
     }
 
-
-    static
-    public void pushBySys(){
-        WSServer ws=map.get("zs");
-        try {
-            if(ws!=null){
-                ws.session.getBasicRemote().sendText("123456");
-            }
-        } catch (IOException e1) {
-            e1.printStackTrace();
-        }
-
-    }
+//
+//    static
+//    public void pushBySys(){
+//        WSServer ws=map.get("zs");
+//        try {
+//            if(ws!=null){
+//                ws.session.getBasicRemote().sendText("123456");
+//            }
+//        } catch (IOException e1) {
+//            e1.printStackTrace();
+//        }
+//
+//    }
 
 
     // 获取连接数

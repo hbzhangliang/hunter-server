@@ -308,4 +308,11 @@ public class SysAccountServiceImpl extends BaseServiceImpl<TSysAccount,TSysAccou
         GlobalHolder.getTokenSet().remove(token);
         GlobalHolder.remove();
     }
+
+
+    @Override
+    public void recordSession(String sessionId, TSysAccount account) {
+        String redisKey="session";
+        redisUtils.setObj(sessionId,account,redisKey);
+    }
 }

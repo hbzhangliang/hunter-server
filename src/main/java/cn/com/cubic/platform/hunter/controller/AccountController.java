@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -36,9 +37,11 @@ public class AccountController{
     }
 
     @RequestMapping(value = "/check_info")
-    public Object checkInfo(@RequestBody Map<String,String> map, HttpServletResponse response){
+    public Object checkInfo(@RequestBody Map<String,String> map, HttpServletResponse response,HttpSession session){
         String account=map.get("account"),pwd=map.get("pwd");
-        return accountService.checkLoginBackInfo(account,pwd,response);
+        TSysAccount sysAccount=accountService.checkLoginBackInfo(account,pwd,response);
+        accountService.recordSession(session.getId(),sysAccount);
+        return sysAccount;
     }
 
     @RequestMapping(value = "/account_info")

@@ -42,4 +42,8 @@ public interface SysAccountService  extends BaseService<TSysAccount,TSysAccountE
 
     void cleanGlobal(String token);
 
+
+    void recordSession(String sessionId,TSysAccount account);
+
+
 }
