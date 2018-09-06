@@ -10,6 +10,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,16 +20,22 @@ import java.util.List;
 public class Test {
 
 
-    public static void main(String[] args){
+    public static void main(String[] args)throws Exception{
+
+//获取本机的InetAddress实例
+        InetAddress address =InetAddress.getLocalHost();
+        address.getHostName();//获取计算机名
+        address.getHostAddress();//获取IP地址
+        byte[] bytes = address.getAddress();//获取字节数组形式的IP地址,以点分隔的四部分
 
 
-        String aa="position3,position5,team10,allall";
 
-        for(String item:aa.split(",")){
-            System.out.println(UtilHelper.cleanShareType(item));
-        }
+        int i=10;
 
-
+//获取其他主机的InetAddress实例
+//        InetAddress address2 =InetAddress.getByName("其他主机名");
+//        InetAddress address3 =InetAddress.getByName("IP地址");
+//
     }
 
 
