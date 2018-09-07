@@ -54,6 +54,13 @@ public class TalentController {
         return talentService.findById(id);
     }
 
+    @RequestMapping(value = "/get-vo")
+    public Object getVo(@RequestBody Map<String,Long> map){
+        Long id=map.get("id");
+        return talentService.findVoById(id);
+    }
+
+
     @RequestMapping(value = "/del")
     public Object del(@RequestBody Map<String,Object> map){
         List<Object> ids=(List) map.get("ids");

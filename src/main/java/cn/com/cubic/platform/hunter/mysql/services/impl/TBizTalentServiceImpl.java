@@ -166,7 +166,7 @@ public class TBizTalentServiceImpl extends BaseServiceImpl<TBizTalent,TBizTalent
             bean.setCreateTime(dt);
             this.insert(bean);
         }
-        this.createTalentRecord(bean,delFalg);
+        this.createTalentRecordTx(bean,delFalg);
         return true;
     }
 
@@ -175,7 +175,7 @@ public class TBizTalentServiceImpl extends BaseServiceImpl<TBizTalent,TBizTalent
      * 共享数据添加，  工作经历，教育经历，学校经历，项目经历 添加
      * @param bean
      */
-    private void createTalentRecord(TalentVo bean,Boolean delFlag){
+    private void createTalentRecordTx(TalentVo bean,Boolean delFlag){
         taskExecutor.execute(new Runnable() {
             @Override
             public void run() {
@@ -219,6 +219,31 @@ public class TBizTalentServiceImpl extends BaseServiceImpl<TBizTalent,TBizTalent
     }
 
 
+    @Override
+    public TalentVo findVoById(Long id) {
+        TalentVo vo=(TalentVo) this.findById(id);
+        TBizShareTalentExample example1=new TBizShareTalentExample();
+        example1.createCriteria().andTalentIdEqualTo(id);
+        example1.setOrderByClause("seq");
+        vo.setShareTalentList(shareTalentService.selectByExample(example1));
+        TBizRecordWorkExample example2=new TBizRecordWorkExample();
+        example2.createCriteria().andIdEqualTo(id);
+        example2.setOrderByClause("seq");
+        vo.setRecordWorkList(recordWorkService.selectByExample(example2));
+        TBizRecordProjectExample example3=new TBizRecordProjectExample();
+        example3.createCriteria().andIdEqualTo(id);
+        example3.setOrderByClause("seq");
+        vo.setRecordProjectList(recordProjectService.selectByExample(example3));
+        TBizRecordEducationExample example4=new TBizRecordEducationExample();
+        example4.createCriteria().andIdEqualTo(id);
+        example4.setOrderByClause("seq");
+        vo.setRecordEducationList(recordEducationService.selectByExample(example4));
+        TBizRecordLanguageExample example5=new TBizRecordLanguageExample();
+        example5.createCriteria().andIdEqualTo(id);
+        example5.setOrderByClause("seq");
+        vo.setRecordLanguageList(recordLanguageService.selectByExample(example5));
+        return vo;
+    }
 
     @Autowired
     private JdbcTemplate jdbcTemplate;

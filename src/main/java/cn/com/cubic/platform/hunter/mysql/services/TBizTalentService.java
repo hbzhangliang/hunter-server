@@ -24,4 +24,7 @@ public interface TBizTalentService extends BaseService<TBizTalent,TBizTalentExam
 
     Boolean saveOrUpdate(TalentVo bean);
 
+    //查询视图信息
+    TalentVo findVoById(Long id);
+
 }
