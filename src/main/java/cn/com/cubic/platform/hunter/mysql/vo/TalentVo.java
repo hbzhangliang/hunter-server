@@ -1,6 +1,8 @@
 package cn.com.cubic.platform.hunter.mysql.vo;
 
-import cn.com.cubic.platform.hunter.mysql.entity.TBizTalent;
+import cn.com.cubic.platform.hunter.mysql.entity.*;
+
+import java.util.List;
 
 /**
  * Created by Liang.Zhang on 2018/9/6.
@@ -8,34 +10,54 @@ import cn.com.cubic.platform.hunter.mysql.entity.TBizTalent;
 
 public class TalentVo extends TBizTalent {
 
-    private String shareType;
+    private List<TBizShareTalent> shareTalentList;
 
-    private String shareValue;
+    private List<TBizRecordWork> recordWorkList;
 
-    private String shareLabel;
+    private List<TBizRecordProject> recordProjectList;
+
+    private List<TBizRecordEducation> recordEducationList;
+
+    private List<TBizRecordLanguage> recordLanguageList;
 
 
-    public String getShareType() {
-        return shareType;
+    public List<TBizShareTalent> getShareTalentList() {
+        return shareTalentList;
     }
 
-    public void setShareType(String shareType) {
-        this.shareType = shareType;
+    public void setShareTalentList(List<TBizShareTalent> shareTalentList) {
+        this.shareTalentList = shareTalentList;
     }
 
-    public String getShareValue() {
-        return shareValue;
+    public List<TBizRecordWork> getRecordWorkList() {
+        return recordWorkList;
     }
 
-    public void setShareValue(String shareValue) {
-        this.shareValue = shareValue;
+    public void setRecordWorkList(List<TBizRecordWork> recordWorkList) {
+        this.recordWorkList = recordWorkList;
     }
 
-    public String getShareLabel() {
-        return shareLabel;
+    public List<TBizRecordProject> getRecordProjectList() {
+        return recordProjectList;
     }
 
-    public void setShareLabel(String shareLabel) {
-        this.shareLabel = shareLabel;
+    public void setRecordProjectList(List<TBizRecordProject> recordProjectList) {
+        this.recordProjectList = recordProjectList;
+    }
+
+    public List<TBizRecordEducation> getRecordEducationList() {
+        return recordEducationList;
+    }
+
+    public void setRecordEducationList(List<TBizRecordEducation> recordEducationList) {
+        this.recordEducationList = recordEducationList;
+    }
+
+    public List<TBizRecordLanguage> getRecordLanguageList() {
+        return recordLanguageList;
+    }
+
+    public void setRecordLanguageList(List<TBizRecordLanguage> recordLanguageList) {
+        this.recordLanguageList = recordLanguageList;
     }
 }

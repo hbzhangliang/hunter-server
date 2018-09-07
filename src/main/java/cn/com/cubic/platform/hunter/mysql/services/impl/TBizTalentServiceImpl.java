@@ -1,8 +1,7 @@
 package cn.com.cubic.platform.hunter.mysql.services.impl;
 
 import cn.com.cubic.platform.hunter.mysql.entity.*;
-import cn.com.cubic.platform.hunter.mysql.services.TBizShareTalentService;
-import cn.com.cubic.platform.hunter.mysql.services.TBizTalentService;
+import cn.com.cubic.platform.hunter.mysql.services.*;
 import cn.com.cubic.platform.hunter.mysql.vo.PageParams;
 import cn.com.cubic.platform.hunter.mysql.vo.TalentVo;
 import cn.com.cubic.platform.utils.Exception.HunterException;
@@ -13,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Method;
@@ -27,6 +27,12 @@ import java.util.Map;
 public class TBizTalentServiceImpl extends BaseServiceImpl<TBizTalent,TBizTalentExample> implements TBizTalentService {
 
     private final static Logger log = LoggerFactory.getLogger(TBizTalentServiceImpl.class);
+
+
+    @Autowired
+    private ThreadPoolTaskExecutor taskExecutor;
+
+
 
     /**
      * 参数  qu全部在一起处理
@@ -145,6 +151,7 @@ public class TBizTalentServiceImpl extends BaseServiceImpl<TBizTalent,TBizTalent
     public Boolean saveOrUpdate(TalentVo bean) {
         Date dt=new Date();
         TSysAccount user=(TSysAccount) GlobalHolder.get().get("account");
+        Boolean delFalg=false;
         if (null != bean.getId()) {
             TBizTalentExample example = new TBizTalentExample();
             example.createCriteria().andIdEqualTo(bean.getId());
@@ -153,32 +160,63 @@ public class TBizTalentServiceImpl extends BaseServiceImpl<TBizTalent,TBizTalent
             this.updateByExampleSelective(bean, example);
 
             //删除共享数据
-            String sql=String.format("delete from t_biz_share_talent where talent_id=%s",bean.getId());
-            jdbcTemplate.update(sql);
-
+            delFalg=true;
         } else {
             bean.setCreateBy(user.getName());
             bean.setCreateTime(dt);
             this.insert(bean);
         }
-
-        //添加数据
-        if(StringUtils.isNotEmpty(bean.getShareValue())){
-            for(int i=0;i<bean.getShareValue().split(",").length;i++){
-                String value=bean.getShareValue().split(",")[i];
-                TBizShareTalent shareTalent=new TBizShareTalent();
-                shareTalent.setTalentId(bean.getId());
-                shareTalent.setShareType(UtilHelper.getShareType(value));
-                shareTalent.setShareValue(UtilHelper.cleanShareType(value));
-                shareTalent.setShareLabel(bean.getShareLabel().split(",")[i]);
-                shareTalentService.saveOrUpdate(shareTalent);
-            }
-        }
+        this.createTalentRecord(bean,delFalg);
         return true;
     }
 
 
-
+    /**
+     * 共享数据添加，  工作经历，教育经历，学校经历，项目经历 添加
+     * @param bean
+     */
+    private void createTalentRecord(TalentVo bean,Boolean delFlag){
+        taskExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+                if(delFlag) {
+                    //首先删除数据
+                    String[] sqls = new String[5];
+                    sqls[0] = String.format("delete from t_biz_share_talent where talent_id=%s", bean.getId());
+                    sqls[1] = String.format("delete from t_biz_record_work where talent_id=%s", bean.getId());
+                    sqls[2] = String.format("delete from t_biz_record_project where talent_id=%s", bean.getId());
+                    sqls[3] = String.format("delete from t_biz_record_language where talent_id=%s", bean.getId());
+                    sqls[4] = String.format("delete from t_biz_record_educate where talent_id=%s", bean.getId());
+                    jdbcTemplate.batchUpdate(sqls);
+                }
+                if(null!=bean.getShareTalentList()) {
+                    for (TBizShareTalent item : bean.getShareTalentList()) {
+                        shareTalentService.saveOrUpdate(item);
+                    }
+                }
+                if(null!=bean.getRecordWorkList()) {
+                    for (TBizRecordWork item : bean.getRecordWorkList()) {
+                        recordWorkService.saveOrUpdate(item);
+                    }
+                }
+                if(null!=bean.getRecordProjectList()) {
+                    for (TBizRecordProject item : bean.getRecordProjectList()) {
+                        recordProjectService.saveOrUpdate(item);
+                    }
+                }
+                if(null!=bean.getRecordEducationList()) {
+                    for (TBizRecordEducation item : bean.getRecordEducationList()) {
+                        recordEducationService.saveOrUpdate(item);
+                    }
+                }
+                if(null!=bean.getRecordLanguageList()) {
+                    for (TBizRecordLanguage item : bean.getRecordLanguageList()) {
+                        recordLanguageService.saveOrUpdate(item);
+                    }
+                }
+            }
+        });
+    }
 
 
 
@@ -188,4 +226,14 @@ public class TBizTalentServiceImpl extends BaseServiceImpl<TBizTalent,TBizTalent
 
     @Autowired
     private TBizShareTalentService shareTalentService;
+    @Autowired
+    private TBizRecordWorkService recordWorkService;
+    @Autowired
+    private TBizRecordProjectService recordProjectService;
+    @Autowired
+    private TBizRecordEducationService recordEducationService;
+    @Autowired
+    private TBizRecordLanguageService recordLanguageService;
+
+
 }
