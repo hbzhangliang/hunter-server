@@ -75,6 +75,7 @@ public class WSServer {
         WSServer _client=map.get(account.getId().toString());
         log.info("后端发送数据开始");
         if(null!=_client){
+            int i=1;
             while (_client.session.isOpen()){
                 try {
                     Thread.sleep(5000);
@@ -82,7 +83,9 @@ public class WSServer {
                 catch (Exception e){
                     e.printStackTrace();
                 }
-                _client.session.getBasicRemote().sendText("后端来的数据啦");
+                _client.session.getBasicRemote().sendText(String.format("后端来的第%s条数据",i));
+                log.info(String.format("后端已经发送%s条数据",i));
+                i++;
             }
         }
         log.info("后端发送数据结束");
