@@ -19,7 +19,7 @@ public class SelTreeVo implements Serializable {
         this.label=label;
         this.level=level;
         this.children=children;
-        if(children==null||children.size()<1){
+        if(children==null){
             this.leaf=true;
         }
         else {

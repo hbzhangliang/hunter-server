@@ -21,7 +21,7 @@ import java.util.Map;
  **/
 @Validated
 @Controller
-@RequestMapping(value = "/team",produces = "application/json; charset=utf-8")
+@RequestMapping(value = "/record-education",produces = "application/json; charset=utf-8")
 @ResponseBody
 public class RecordEducationController {
 

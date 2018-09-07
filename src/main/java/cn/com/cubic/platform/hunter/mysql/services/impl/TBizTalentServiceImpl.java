@@ -191,27 +191,32 @@ public class TBizTalentServiceImpl extends BaseServiceImpl<TBizTalent,TBizTalent
                 }
                 if(null!=bean.getShareTalentList()) {
                     for (TBizShareTalent item : bean.getShareTalentList()) {
-                        shareTalentService.saveOrUpdate(item);
+                        item.setTalentId(bean.getId());
+                        shareTalentService.insert(item);
                     }
                 }
                 if(null!=bean.getRecordWorkList()) {
                     for (TBizRecordWork item : bean.getRecordWorkList()) {
-                        recordWorkService.saveOrUpdate(item);
+                        item.setTalentId(bean.getId());
+                        recordWorkService.insert(item);
                     }
                 }
                 if(null!=bean.getRecordProjectList()) {
                     for (TBizRecordProject item : bean.getRecordProjectList()) {
-                        recordProjectService.saveOrUpdate(item);
+                        item.setTalentId(bean.getId());
+                        recordProjectService.insert(item);
                     }
                 }
                 if(null!=bean.getRecordEducationList()) {
                     for (TBizRecordEducation item : bean.getRecordEducationList()) {
-                        recordEducationService.saveOrUpdate(item);
+                        item.setTalentId(bean.getId());
+                        recordEducationService.insert(item);
                     }
                 }
                 if(null!=bean.getRecordLanguageList()) {
                     for (TBizRecordLanguage item : bean.getRecordLanguageList()) {
-                        recordLanguageService.saveOrUpdate(item);
+                        item.setTalentId(bean.getId());
+                        recordLanguageService.insert(item);
                     }
                 }
             }
