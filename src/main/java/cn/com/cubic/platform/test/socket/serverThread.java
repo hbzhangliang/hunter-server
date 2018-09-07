@@ -1,7 +1,8 @@
 package cn.com.cubic.platform.test.socket;
 
+import com.alibaba.fastjson.JSONObject;
+
 import java.io.*;
-import java.net.ServerSocket;
 import java.net.Socket;
 
 /**
@@ -32,9 +33,10 @@ public class serverThread implements Runnable{
 
             OutputStream os = socket.getOutputStream();
             PrintWriter pw = new PrintWriter(os);
-            pw.write("欢迎您fsgrsgffsergerg！");
-            pw.flush();
 
+            Msg msg=new Msg("zs","ls","这是测试数据");
+            pw.write(JSONObject.toJSONString(msg));
+            pw.flush();
             pw.close();
             os.close();
             br.close();
