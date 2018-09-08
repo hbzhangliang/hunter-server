@@ -7,6 +7,7 @@ import cn.com.cubic.platform.hunter.mysql.vo.TalentVo;
 import cn.com.cubic.platform.utils.Exception.HunterException;
 import cn.com.cubic.platform.utils.UtilHelper;
 import cn.com.cubic.platform.utils.global.GlobalHolder;
+import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -224,27 +225,34 @@ public class TBizTalentServiceImpl extends BaseServiceImpl<TBizTalent,TBizTalent
     }
 
 
+    /**
+     * 需要类型转换
+     * @param id
+     * @return
+     */
     @Override
     public TalentVo findVoById(Long id) {
-        TalentVo vo=(TalentVo) this.findById(id);
+//        TalentVo vo=(TalentVo) this.findById(id);
+        TBizTalent tBizTalent=this.findById(id);
+        TalentVo vo=JSONObject.parseObject(JSONObject.toJSONString(tBizTalent),TalentVo.class);
+
         TBizShareTalentExample example1=new TBizShareTalentExample();
         example1.createCriteria().andTalentIdEqualTo(id);
-        example1.setOrderByClause("seq");
         vo.setShareTalentList(shareTalentService.selectByExample(example1));
         TBizRecordWorkExample example2=new TBizRecordWorkExample();
-        example2.createCriteria().andIdEqualTo(id);
+        example2.createCriteria().andTalentIdEqualTo(id);
         example2.setOrderByClause("seq");
         vo.setRecordWorkList(recordWorkService.selectByExample(example2));
         TBizRecordProjectExample example3=new TBizRecordProjectExample();
-        example3.createCriteria().andIdEqualTo(id);
+        example3.createCriteria().andTalentIdEqualTo(id);
         example3.setOrderByClause("seq");
         vo.setRecordProjectList(recordProjectService.selectByExample(example3));
         TBizRecordEducationExample example4=new TBizRecordEducationExample();
-        example4.createCriteria().andIdEqualTo(id);
+        example4.createCriteria().andTalentIdEqualTo(id);
         example4.setOrderByClause("seq");
         vo.setRecordEducationList(recordEducationService.selectByExample(example4));
         TBizRecordLanguageExample example5=new TBizRecordLanguageExample();
-        example5.createCriteria().andIdEqualTo(id);
+        example5.createCriteria().andTalentIdEqualTo(id);
         example5.setOrderByClause("seq");
         vo.setRecordLanguageList(recordLanguageService.selectByExample(example5));
         return vo;
