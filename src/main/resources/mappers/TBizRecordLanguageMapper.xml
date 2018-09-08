@@ -6,6 +6,7 @@
     <result column="talent_id" property="talentId" jdbcType="BIGINT" />
     <result column="language" property="language" jdbcType="VARCHAR" />
     <result column="level" property="level" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
     <result column="seq" property="seq" jdbcType="INTEGER" />
     <result column="status" property="status" jdbcType="VARCHAR" />
     <result column="flag" property="flag" jdbcType="BIT" />
@@ -73,8 +74,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, talent_id, language, level, seq, status, flag, create_by, create_time, modify_by, 
-    modify_time
+    id, talent_id, language, level, remark, seq, status, flag, create_by, create_time, 
+    modify_by, modify_time
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.com.cubic.platform.hunter.mysql.entity.TBizRecordLanguageExample" >
     select
@@ -102,13 +103,13 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into t_biz_record_language (talent_id, language, level, 
-      seq, status, flag, create_by, 
-      create_time, modify_by, modify_time
-      )
+      remark, seq, status, 
+      flag, create_by, create_time, 
+      modify_by, modify_time)
     values (#{talentId,jdbcType=BIGINT}, #{language,jdbcType=VARCHAR}, #{level,jdbcType=VARCHAR}, 
-      #{seq,jdbcType=INTEGER}, #{status,jdbcType=VARCHAR}, #{flag,jdbcType=BIT}, #{createBy,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{modifyBy,jdbcType=VARCHAR}, #{modifyTime,jdbcType=TIMESTAMP}
-      )
+      #{remark,jdbcType=VARCHAR}, #{seq,jdbcType=INTEGER}, #{status,jdbcType=VARCHAR}, 
+      #{flag,jdbcType=BIT}, #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{modifyBy,jdbcType=VARCHAR}, #{modifyTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="cn.com.cubic.platform.hunter.mysql.entity.TBizRecordLanguage" >
     <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
@@ -124,6 +125,9 @@
       </if>
       <if test="level != null" >
         level,
+      </if>
+      <if test="remark != null" >
+        remark,
       </if>
       <if test="seq != null" >
         seq,
@@ -156,6 +160,9 @@
       </if>
       <if test="level != null" >
         #{level,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
       </if>
       <if test="seq != null" >
         #{seq,jdbcType=INTEGER},
@@ -201,6 +208,9 @@
       <if test="record.level != null" >
         level = #{record.level,jdbcType=VARCHAR},
       </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
       <if test="record.seq != null" >
         seq = #{record.seq,jdbcType=INTEGER},
       </if>
@@ -233,6 +243,7 @@
       talent_id = #{record.talentId,jdbcType=BIGINT},
       language = #{record.language,jdbcType=VARCHAR},
       level = #{record.level,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR},
       seq = #{record.seq,jdbcType=INTEGER},
       status = #{record.status,jdbcType=VARCHAR},
       flag = #{record.flag,jdbcType=BIT},

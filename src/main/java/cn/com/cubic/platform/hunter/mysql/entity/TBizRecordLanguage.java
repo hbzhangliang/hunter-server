@@ -2,12 +2,15 @@ package cn.com.cubic.platform.hunter.mysql.entity;
 
 import java.util.Date;
 
-public class TBizRecordLanguage  extends BaseEntity{
+public class TBizRecordLanguage extends BaseEntity{
+
     private Long talentId;
 
     private String language;
 
     private String level;
+
+    private String remark;
 
     private Integer seq;
 
@@ -33,6 +36,14 @@ public class TBizRecordLanguage  extends BaseEntity{
 
     public void setLevel(String level) {
         this.level = level;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 
     public Integer getSeq() {
