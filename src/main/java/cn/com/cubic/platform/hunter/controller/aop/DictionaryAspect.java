@@ -30,14 +30,14 @@ public class DictionaryAspect {
     @Autowired
     private RedisUtils redisUtils;
 
-    @Pointcut("execution(* cn.com.cubic.platform.hunter.controller.DictionaryController.listChildren(..)) ||" +
-            " execution(* cn.com.cubic.platform.hunter.controller.DictionaryController.listAll())||" +
-            "execution(* cn.com.cubic.platform.hunter.controller.DictionaryController.listChildrenByCode(..)) ")
+    @Pointcut("execution(* cn.com.cubic.platform.hunter.mysql.services.TSysDictionaryService.list(Long)) ||" +
+            " execution(* cn.com.cubic.platform.hunter.mysql.services.TSysDictionaryService.listAll())||" +
+            "execution(* cn.com.cubic.platform.hunter.mysql.services.TSysDictionaryService.list(String)) ")
     public void pointcutAddRedis(){
     }
 
-    @Pointcut("execution(* cn.com.cubic.platform.hunter.controller.DictionaryController.save(..))||" +
-            "execution(* cn.com.cubic.platform.hunter.controller.DictionaryController.del(..))")
+    @Pointcut("execution(* cn.com.cubic.platform.hunter.mysql.services.TSysDictionaryService.saveOrUpdate(..))||" +
+            "execution(* cn.com.cubic.platform.hunter.mysql.services.TSysDictionaryService.del(..))")
     public void pointcutDelRedis(){
     }
 
@@ -47,35 +47,29 @@ public class DictionaryAspect {
         Object[] args = pjp.getArgs();
 
         String para="";
+        String type="";
         if(null!=args&&args.length>0){
-            HashMap map=((HashMap)args[0]);
-            //
-            Iterator<Map.Entry<String, Object>> it = map.entrySet().iterator();
-            while (it.hasNext()) {
-                Map.Entry<String, Object> entry = it.next();
-                para+=entry.getValue().toString();
-            }
+            type=args[0].getClass().getName();
+            para=args[0].toString();
         }
-
-
         Object result = null;
         //逻辑处理  添加缓存
         String redisKey="",redisType="",redisTimeKey1="dict_children",redisTimeKey2="dict_all",redisTimeKey3="dict_children_bycode";
-        switch (methodName){
-            case "listChildren":{
-                redisKey= UtilHelper.contacsString(redisTimeKey1,para);
-                redisType=redisTimeKey1;
-            };break;
-            case "listChildrenByCode":{
+        if(methodName.equals("list")){
+            if(type.indexOf("String")>-1){
                 redisKey= UtilHelper.contacsString(redisTimeKey3,para);
                 redisType=redisTimeKey3;
-            };break;
-            case "listAll":{
-                redisKey= redisTimeKey2;
-                redisType=redisTimeKey2;
-            }break;
-            default:break;
+            }
+            else {
+                redisKey= UtilHelper.contacsString(redisTimeKey1,para);
+                redisType=redisTimeKey1;
+            }
         }
+        else {
+            redisKey= redisTimeKey2;
+            redisType=redisTimeKey2;
+        }
+
         if (StringUtils.isNotEmpty(redisKey)) {
             Object obj=redisUtils.getObj(redisKey);
             if(null!=obj){

@@ -31,14 +31,14 @@ public class TagAspect {
     @Autowired
     private RedisUtils redisUtils;
 
-    @Pointcut("execution(* cn.com.cubic.platform.hunter.controller.TagController.listAll(..)) ||" +
-            " execution(* cn.com.cubic.platform.hunter.controller.TagController.tree(..))||" +
-            "execution(* cn.com.cubic.platform.hunter.controller.TagController.treeByCode(..))")
+    @Pointcut("execution(* cn.com.cubic.platform.hunter.mysql.services.TBizTagService.listAll(..)) ||" +
+            " execution(* cn.com.cubic.platform.hunter.mysql.services.TBizTagService.tree(Long))||" +
+            "execution(* cn.com.cubic.platform.hunter.mysql.services.TBizTagService.tree(String))")
     public void pointcutAddRedis(){
     }
 
-    @Pointcut("execution(* cn.com.cubic.platform.hunter.controller.TagController.save(..))||" +
-            "execution(* cn.com.cubic.platform.hunter.controller.TagController.del(..))")
+    @Pointcut("execution(* cn.com.cubic.platform.hunter.mysql.services.TBizTagService.saveOrUpdate(..))||" +
+            "execution(* cn.com.cubic.platform.hunter.mysql.services.TBizTagService.del(..))")
     public void pointcutDelRedis(){
     }
 
@@ -46,36 +46,30 @@ public class TagAspect {
     public Object aroundAddRequest(ProceedingJoinPoint pjp) throws Throwable {
         String methodName = pjp.getSignature().getName();
         Object[] args = pjp.getArgs();
-
         String para="";
+        String type="";
         if(null!=args&&args.length>0){
-            HashMap map=((HashMap)args[0]);
-            //
-            Iterator<Map.Entry<String, Object>> it = map.entrySet().iterator();
-            while (it.hasNext()) {
-                Map.Entry<String, Object> entry = it.next();
-                para+=entry.getValue().toString();
-            }
+            type=args[0].getClass().getName();
+            para=args[0].toString();
         }
-
         Object result = null;
         //逻辑处理  添加缓存
         String redisKey="",redisType="",redisTimeKey1="tag_listall",redisTimeKey2="tag_tree",redisTimeKey3="tag_tree_bycode";
-        switch (methodName){
-            case "listAll":{
-                redisKey= UtilHelper.contacsString(redisTimeKey1,para);
-                redisType=redisTimeKey1;
-            };break;
-            case "treeByCode":{
+        if(methodName.equals("tree")){
+            if(type.indexOf("String")>-1){
                 redisKey= UtilHelper.contacsString(redisTimeKey3,para);
                 redisType=redisTimeKey3;
-            };break;
-            case "tree":{
+            }
+            else {
                 redisKey= UtilHelper.contacsString(redisTimeKey2,para);
                 redisType=redisTimeKey2;
-            }break;
-            default:break;
+            }
         }
+        else {
+            redisKey= UtilHelper.contacsString(redisTimeKey1,para);
+            redisType=redisTimeKey1;
+        }
+
         if (StringUtils.isNotEmpty(redisKey)) {
             Object obj=redisUtils.getObj(redisKey);
             if(null!=obj){

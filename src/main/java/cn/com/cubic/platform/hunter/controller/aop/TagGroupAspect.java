@@ -25,13 +25,13 @@ public class TagGroupAspect {
     @Autowired
     private RedisUtils redisUtils;
 
-    @Pointcut("execution(* cn.com.cubic.platform.hunter.controller.TagGroupController.listAll()) ||" +
-            " execution(* cn.com.cubic.platform.hunter.controller.TagGroupController.tree())")
+    @Pointcut("execution(* cn.com.cubic.platform.hunter.mysql.services.TBizTagGroupService.listAll()) ||" +
+            " execution(* cn.com.cubic.platform.hunter.mysql.services.TBizTagGroupService.tree())")
     public void pointcutAddRedis(){
     }
 
-    @Pointcut("execution(* cn.com.cubic.platform.hunter.controller.TagGroupController.save(..))||" +
-            "execution(* cn.com.cubic.platform.hunter.controller.TagGroupController.del(..))")
+    @Pointcut("execution(* cn.com.cubic.platform.hunter.mysql.services.TBizTagGroupService.saveOrUpdate(..))||" +
+            "execution(* cn.com.cubic.platform.hunter.mysql.services.TBizTagGroupService.delTx(..))")
     public void pointcutDelRedis(){
     }
 

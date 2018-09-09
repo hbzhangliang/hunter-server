@@ -25,14 +25,14 @@ public class CityAspect {
     @Autowired
     private RedisUtils redisUtils;
 
-    @Pointcut("execution(* cn.com.cubic.platform.hunter.controller.CityController.listAll()) ||" +
-            " execution(* cn.com.cubic.platform.hunter.controller.CityController.tree())||" +
-            "execution(* cn.com.cubic.platform.hunter.controller.CityController.cityMap())")
+    @Pointcut("execution(* cn.com.cubic.platform.hunter.mysql.services.TBizCityService.listAll()) ||" +
+            " execution(* cn.com.cubic.platform.hunter.mysql.services.TBizCityService.tree())||" +
+            "execution(* cn.com.cubic.platform.hunter.mysql.services.TBizCityService.cityMap())")
     public void pointcutAddRedis(){
     }
 
-    @Pointcut("execution(* cn.com.cubic.platform.hunter.controller.CityController.save(..))||" +
-            "execution(* cn.com.cubic.platform.hunter.controller.CityController.del(..))")
+    @Pointcut("execution(* cn.com.cubic.platform.hunter.mysql.services.TBizCityService.saveOrUpdate(..))||" +
+            "execution(* cn.com.cubic.platform.hunter.mysql.services.TBizCityService.del(..))")
     public void pointcutDelRedis(){
     }
 

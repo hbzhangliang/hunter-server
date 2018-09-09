@@ -25,13 +25,13 @@ public class CareerAspect {
     @Autowired
     private RedisUtils redisUtils;
 
-    @Pointcut("execution(* cn.com.cubic.platform.hunter.controller.CareerController.listAll()) ||" +
-            " execution(* cn.com.cubic.platform.hunter.controller.CareerController.tree())")
+    @Pointcut("execution(* cn.com.cubic.platform.hunter.mysql.services.TBizCareerService.listAll()) ||" +
+            " execution(* cn.com.cubic.platform.hunter.mysql.services.TBizCareerService.tree())")
     public void pointcutAddRedis(){
     }
 
-    @Pointcut("execution(* cn.com.cubic.platform.hunter.controller.CareerController.save(..))||" +
-            "execution(* cn.com.cubic.platform.hunter.controller.CareerController.del(..))")
+    @Pointcut("execution(* cn.com.cubic.platform.hunter.mysql.services.TBizCareerService.saveOrUpdate(..))||" +
+            "execution(* cn.com.cubic.platform.hunter.mysql.services.TBizCareerService.del(..))")
     public void pointcutDelRedis(){
     }
 

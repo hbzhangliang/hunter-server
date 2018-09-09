@@ -10,6 +10,29 @@ import java.util.List;
 
 public class TalentVo extends TBizTalent {
 
+    //籍贯
+    private String tmpNativePlace;
+
+    //所在城市
+    private String tmpCity;
+
+    //行业
+    private List<Long> tmpBusinessId;
+    private String tmpBusinessName;
+
+    //职能
+    private List<Long> tmpCareerId;
+    private String tmpCareerName;
+
+    //意向城市
+    private List<Long> tmpIntentCityId;
+    private String tmpIntentCityName;
+
+    //标签
+    private List<Long> tmpTagsId;
+    private String tmpTagsName;
+
+
     private List<TBizShareTalent> shareTalentList;
 
     private List<TBizRecordWork> recordWorkList;
@@ -20,6 +43,86 @@ public class TalentVo extends TBizTalent {
 
     private List<TBizRecordLanguage> recordLanguageList;
 
+
+    public String getTmpNativePlace() {
+        return tmpNativePlace;
+    }
+
+    public void setTmpNativePlace(String tmpNativePlace) {
+        this.tmpNativePlace = tmpNativePlace;
+    }
+
+    public String getTmpCity() {
+        return tmpCity;
+    }
+
+    public void setTmpCity(String tmpCity) {
+        this.tmpCity = tmpCity;
+    }
+
+    public List<Long> getTmpBusinessId() {
+        return tmpBusinessId;
+    }
+
+    public void setTmpBusinessId(List<Long> tmpBusinessId) {
+        this.tmpBusinessId = tmpBusinessId;
+    }
+
+    public String getTmpBusinessName() {
+        return tmpBusinessName;
+    }
+
+    public void setTmpBusinessName(String tmpBusinessName) {
+        this.tmpBusinessName = tmpBusinessName;
+    }
+
+    public List<Long> getTmpCareerId() {
+        return tmpCareerId;
+    }
+
+    public void setTmpCareerId(List<Long> tmpCareerId) {
+        this.tmpCareerId = tmpCareerId;
+    }
+
+    public String getTmpCareerName() {
+        return tmpCareerName;
+    }
+
+    public void setTmpCareerName(String tmpCareerName) {
+        this.tmpCareerName = tmpCareerName;
+    }
+
+    public List<Long> getTmpIntentCityId() {
+        return tmpIntentCityId;
+    }
+
+    public void setTmpIntentCityId(List<Long> tmpIntentCityId) {
+        this.tmpIntentCityId = tmpIntentCityId;
+    }
+
+    public String getTmpIntentCityName() {
+        return tmpIntentCityName;
+    }
+
+    public void setTmpIntentCityName(String tmpIntentCityName) {
+        this.tmpIntentCityName = tmpIntentCityName;
+    }
+
+    public List<Long> getTmpTagsId() {
+        return tmpTagsId;
+    }
+
+    public void setTmpTagsId(List<Long> tmpTagsId) {
+        this.tmpTagsId = tmpTagsId;
+    }
+
+    public String getTmpTagsName() {
+        return tmpTagsName;
+    }
+
+    public void setTmpTagsName(String tmpTagsName) {
+        this.tmpTagsName = tmpTagsName;
+    }
 
     public List<TBizShareTalent> getShareTalentList() {
         return shareTalentList;

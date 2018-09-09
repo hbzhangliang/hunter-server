@@ -25,13 +25,13 @@ public class BusinessAspect {
     @Autowired
     private RedisUtils redisUtils;
 
-    @Pointcut("execution(* cn.com.cubic.platform.hunter.controller.BusinessController.listAll()) ||" +
-            " execution(* cn.com.cubic.platform.hunter.controller.BusinessController.tree())")
+    @Pointcut("execution(* cn.com.cubic.platform.hunter.mysql.services.TBizBusinessService.listAll()) ||" +
+            " execution(* cn.com.cubic.platform.hunter.mysql.services.TBizBusinessService.tree())")
     public void pointcutAddRedis(){
     }
 
-    @Pointcut("execution(* cn.com.cubic.platform.hunter.controller.BusinessController.save(..))||" +
-            "execution(* cn.com.cubic.platform.hunter.controller.BusinessController.del(..))")
+    @Pointcut("execution(* cn.com.cubic.platform.hunter.mysql.services.TBizBusinessService.saveOrUpdate(..))||" +
+            "execution(* cn.com.cubic.platform.hunter.mysql.services.TBizBusinessService.del(..))")
     public void pointcutDelRedis(){
     }
 

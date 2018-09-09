@@ -29,8 +29,8 @@ public class DocAspect {
     private RedisUtils redisUtils;
 
 
-    @Pointcut("execution(* cn.com.cubic.platform.hunter.controller.DocController.allTree(..))||" +
-            "execution(* cn.com.cubic.platform.hunter.controller.DocController.shareTree(..))")
+    @Pointcut("execution(* cn.com.cubic.platform.hunter.mysql.services.TBizDocService.allTree())||" +
+            "execution(* cn.com.cubic.platform.hunter.mysql.services.TBizDocService.allShareTree())")
     public void pointcutAddRedis(){
     }
 
@@ -38,13 +38,10 @@ public class DocAspect {
     @Around("pointcutAddRedis()")
     public Object aroundAddRequest(ProceedingJoinPoint pjp) throws Throwable {
         String methodName = pjp.getSignature().getName();
-
-
-
         String redisKey="";
         switch (methodName){
             case "allTree":redisKey="all_tree";break;
-            case "shareTree":redisKey="share_tree";break;
+            case "allShareTree":redisKey="share_tree";break;
             default:break;
         }
         //逻辑处理  添加缓存

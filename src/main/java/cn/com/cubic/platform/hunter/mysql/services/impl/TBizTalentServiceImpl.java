@@ -4,6 +4,7 @@ import cn.com.cubic.platform.hunter.mysql.entity.*;
 import cn.com.cubic.platform.hunter.mysql.services.*;
 import cn.com.cubic.platform.hunter.mysql.vo.PageParams;
 import cn.com.cubic.platform.hunter.mysql.vo.TalentVo;
+import cn.com.cubic.platform.utils.ComServers;
 import cn.com.cubic.platform.utils.Exception.HunterException;
 import cn.com.cubic.platform.utils.UtilHelper;
 import cn.com.cubic.platform.utils.global.GlobalHolder;
@@ -235,6 +236,30 @@ public class TBizTalentServiceImpl extends BaseServiceImpl<TBizTalent,TBizTalent
 //        TalentVo vo=(TalentVo) this.findById(id);
         TBizTalent tBizTalent=this.findById(id);
         TalentVo vo=JSONObject.parseObject(JSONObject.toJSONString(tBizTalent),TalentVo.class);
+        //籍贯
+        if(null!=vo.getNativePlace()) {
+            vo.setTmpNativePlace(comServers.getCityName(vo.getNativePlace()));
+            vo.setTmpCity(comServers.getCityName(vo.getCity()));
+        }
+        if(null!=vo.getBusiness()) {
+            vo.setTmpBusinessId(comServers.getSplitIds(vo.getBusiness()));
+            vo.setTmpBusinessName(comServers.getBusinesssNames(vo.getTmpBusinessId()));
+        }
+        if(null!=vo.getCareer()) {
+            vo.setTmpCareerId(comServers.getSplitIds(vo.getCareer()));
+            vo.setTmpCareerName(comServers.getCareerNames(vo.getTmpCareerId()));
+        }
+        if(null!=vo.getIntentCity()) {
+            vo.setTmpIntentCityId(comServers.getSplitIds(vo.getIntentCity()));
+            vo.setTmpIntentCityName(comServers.getCityNames(vo.getTmpIntentCityId()));
+        }
+        if(null!=vo.getTags()){
+            vo.setTmpTagsId(comServers.getSplitIds(vo.getTags()));
+            vo.setTmpTagsName(comServers.getTagNames(vo.getTmpTagsId()));
+        }
+
+
+
 
         TBizShareTalentExample example1=new TBizShareTalentExample();
         example1.createCriteria().andTalentIdEqualTo(id);
@@ -273,5 +298,8 @@ public class TBizTalentServiceImpl extends BaseServiceImpl<TBizTalent,TBizTalent
     @Autowired
     private TBizRecordLanguageService recordLanguageService;
 
+
+    @Autowired
+    private ComServers comServers;
 
 }
