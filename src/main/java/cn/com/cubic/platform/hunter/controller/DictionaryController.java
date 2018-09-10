@@ -51,6 +51,19 @@ public class DictionaryController {
     }
 
 
+    /**
+     * 批量获取字典项的值
+     * @param map
+     * @return
+     */
+    @RequestMapping(value = "/list-children-bycodes")
+    public Object listChildrenByCodes(@RequestBody Map<String,Object> map) {
+        List<String> codes=(List<String>) map.get("codes");
+        return dictionaryService.listByCodes(codes);
+    }
+
+
+
 
     @RequestMapping(value = "/list-all")
     public Object listAll(){

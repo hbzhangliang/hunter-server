@@ -12,7 +12,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Liang.Zhang on 2018/8/16.
@@ -72,6 +74,18 @@ public class TSysDictionaryServiceImpl extends BaseServiceImpl<TSysDictionary,TS
             throw new HunterException("查询错误");
         }
         return this.list(list.get(0).getId());
+    }
+
+
+    @Override
+    public Map<String, List<TSysDictionary>> listByCodes(List<String> type) {
+        Map<String,List<TSysDictionary>> result=new HashMap<>(10);
+        if(type!=null&&type.size()>0){
+            for(String item:type){
+                result.put(item,this.list(item));
+            }
+        }
+        return result;
     }
 
     @Override

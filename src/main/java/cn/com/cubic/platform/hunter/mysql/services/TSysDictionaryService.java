@@ -6,6 +6,7 @@ import cn.com.cubic.platform.hunter.mysql.vo.PageParams;
 import com.sun.istack.internal.NotNull;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Liang.Zhang on 2018/8/16.
@@ -18,6 +19,10 @@ public interface TSysDictionaryService extends BaseService<TSysDictionary,TSysDi
     List<TSysDictionary> list(Long pId);
 
     List<TSysDictionary> list(String type);
+
+
+    Map<String,List<TSysDictionary>> listByCodes(List<String> type);
+
 
     List<TSysDictionary> listAll();
 
