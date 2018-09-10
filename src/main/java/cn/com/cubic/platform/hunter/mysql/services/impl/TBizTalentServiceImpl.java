@@ -61,6 +61,7 @@ public class TBizTalentServiceImpl extends BaseServiceImpl<TBizTalent,TBizTalent
                         switch (parasType){
                             case "Long":criteria= (TBizTalentExample.Criteria)item.invoke(criteria,Long.valueOf(value.toString()));break;
                             case "Integer":criteria= (TBizTalentExample.Criteria)item.invoke(criteria,Integer.valueOf(value.toString()));break;
+                            case "Boolean":criteria=(TBizTalentExample.Criteria)item.invoke(criteria,Boolean.valueOf(value.toString()));break;
                             default:criteria= (TBizTalentExample.Criteria)item.invoke(criteria,value.toString());break;
                         }
                     }
@@ -100,11 +101,22 @@ public class TBizTalentServiceImpl extends BaseServiceImpl<TBizTalent,TBizTalent
     }
 
 
-    private TBizTalentExample construct(Map<String,Object> map) {
+    /**
+     * flag ==true  只能查自己的，否则全部查询
+     * @param map
+     * @param ownerFlag
+     * @return
+     */
+    private TBizTalentExample construct(Map<String,Object> map,Boolean ownerFlag) {
         try {
             TBizTalentExample example = new TBizTalentExample();
             TBizTalentExample.Criteria criteria = example.createCriteria();
             criteria = this.constructCriteria(map, criteria);
+            if(ownerFlag){
+                //只能看到自己的
+                TSysAccount user=(TSysAccount) GlobalHolder.get().get("account");
+                criteria.andOwnerEqualTo(user.getId());
+            }
             return example;
         }
         catch (Exception e){
@@ -116,7 +128,7 @@ public class TBizTalentServiceImpl extends BaseServiceImpl<TBizTalent,TBizTalent
     @Override
     public PageParams<TBizTalent> list(PageParams<TBizTalent> pageParams) {
         //查询参数
-        TBizTalentExample example=this.construct(pageParams.getParams());
+        TBizTalentExample example=this.construct(pageParams.getParams(),true);
         //排序
         String strOrder=String.format("%s %s",UtilHelper.camelToUnderline(pageParams.getOrderBy()),pageParams.getDirection());
         example.setOrderByClause(strOrder);
@@ -141,8 +153,29 @@ public class TBizTalentServiceImpl extends BaseServiceImpl<TBizTalent,TBizTalent
         return list.get(0);
     }
 
+    /**
+     * 伪删除
+     * @param ids
+     * @return
+     */
     @Override
     public Boolean del(List<Long> ids) {
+        TBizTalentExample example = new TBizTalentExample();
+        example.createCriteria().andIdIn(ids);
+        TBizTalent bean=new TBizTalent();
+        bean.setFlag(false);
+        this.updateByExampleSelective(bean,example);
+        return true;
+    }
+
+
+    /**
+     * 物理删除
+     * @param ids
+     * @return
+     */
+    @Override
+    public Boolean delPhysics(List<Long> ids) {
         TBizTalentExample example = new TBizTalentExample();
         example.createCriteria().andIdIn(ids);
         this.deleteByExample(example);
@@ -159,6 +192,7 @@ public class TBizTalentServiceImpl extends BaseServiceImpl<TBizTalent,TBizTalent
             example.createCriteria().andIdEqualTo(bean.getId());
             bean.setModifyBy(user.getName());
             bean.setModifyTime(dt);
+            bean.setOwner(user.getId());
             this.updateByExampleSelective(bean, example);
 
             //删除共享数据

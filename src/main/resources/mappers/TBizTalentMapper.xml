@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="cn.com.cubic.platform.hunter.mysql.entity.TBizTalent" >
     <result column="id" property="id" jdbcType="BIGINT" />
     <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="owner" property="owner" jdbcType="BIGINT" />
     <result column="avatar" property="avatar" jdbcType="VARCHAR" />
     <result column="eng_name" property="engName" jdbcType="VARCHAR" />
     <result column="name" property="name" jdbcType="VARCHAR" />
@@ -98,8 +99,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, type, avatar, eng_name, name, native_place, city, phone1, phone2, phone3, email1, 
-    email2, email3, business, career, gender, birthday, marray, qq, salary, intent_city, 
+    id, type, owner, avatar, eng_name, name, native_place, city, phone1, phone2, phone3, 
+    email1, email2, email3, business, career, gender, birthday, marray, qq, salary, intent_city, 
     tags, mpc, quality, family, purpose, now_salary, exp_salary, evaluate, remark, status, 
     flag, create_by, create_time, modify_by, modify_time
   </sql>
@@ -128,30 +129,30 @@
     <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into t_biz_talent (type, avatar, eng_name, 
-      name, native_place, city, 
-      phone1, phone2, phone3, 
-      email1, email2, email3, 
-      business, career, gender, 
-      birthday, marray, qq, 
-      salary, intent_city, tags, 
-      mpc, quality, family, purpose, 
-      now_salary, exp_salary, evaluate, 
-      remark, status, flag, create_by, 
-      create_time, modify_by, modify_time
-      )
-    values (#{type,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, #{engName,jdbcType=VARCHAR}, 
-      #{name,jdbcType=VARCHAR}, #{nativePlace,jdbcType=BIGINT}, #{city,jdbcType=BIGINT}, 
-      #{phone1,jdbcType=VARCHAR}, #{phone2,jdbcType=VARCHAR}, #{phone3,jdbcType=VARCHAR}, 
-      #{email1,jdbcType=VARCHAR}, #{email2,jdbcType=VARCHAR}, #{email3,jdbcType=VARCHAR}, 
-      #{business,jdbcType=VARCHAR}, #{career,jdbcType=VARCHAR}, #{gender,jdbcType=BIT}, 
-      #{birthday,jdbcType=DATE}, #{marray,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, 
-      #{salary,jdbcType=VARCHAR}, #{intentCity,jdbcType=VARCHAR}, #{tags,jdbcType=VARCHAR}, 
-      #{mpc,jdbcType=BIT}, #{quality,jdbcType=VARCHAR}, #{family,jdbcType=VARCHAR}, #{purpose,jdbcType=VARCHAR}, 
-      #{nowSalary,jdbcType=VARCHAR}, #{expSalary,jdbcType=VARCHAR}, #{evaluate,jdbcType=VARCHAR}, 
-      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{flag,jdbcType=BIT}, #{createBy,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{modifyBy,jdbcType=VARCHAR}, #{modifyTime,jdbcType=TIMESTAMP}
-      )
+    insert into t_biz_talent (type, owner, avatar, 
+      eng_name, name, native_place, 
+      city, phone1, phone2, 
+      phone3, email1, email2, 
+      email3, business, career, 
+      gender, birthday, marray, 
+      qq, salary, intent_city, 
+      tags, mpc, quality, family, 
+      purpose, now_salary, exp_salary, 
+      evaluate, remark, status, 
+      flag, create_by, create_time, 
+      modify_by, modify_time)
+    values (#{type,jdbcType=VARCHAR}, #{owner,jdbcType=BIGINT}, #{avatar,jdbcType=VARCHAR}, 
+      #{engName,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{nativePlace,jdbcType=BIGINT}, 
+      #{city,jdbcType=BIGINT}, #{phone1,jdbcType=VARCHAR}, #{phone2,jdbcType=VARCHAR}, 
+      #{phone3,jdbcType=VARCHAR}, #{email1,jdbcType=VARCHAR}, #{email2,jdbcType=VARCHAR}, 
+      #{email3,jdbcType=VARCHAR}, #{business,jdbcType=VARCHAR}, #{career,jdbcType=VARCHAR}, 
+      #{gender,jdbcType=BIT}, #{birthday,jdbcType=DATE}, #{marray,jdbcType=VARCHAR}, 
+      #{qq,jdbcType=VARCHAR}, #{salary,jdbcType=VARCHAR}, #{intentCity,jdbcType=VARCHAR}, 
+      #{tags,jdbcType=VARCHAR}, #{mpc,jdbcType=BIT}, #{quality,jdbcType=VARCHAR}, #{family,jdbcType=VARCHAR}, 
+      #{purpose,jdbcType=VARCHAR}, #{nowSalary,jdbcType=VARCHAR}, #{expSalary,jdbcType=VARCHAR}, 
+      #{evaluate,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{flag,jdbcType=BIT}, #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{modifyBy,jdbcType=VARCHAR}, #{modifyTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="cn.com.cubic.platform.hunter.mysql.entity.TBizTalent" >
     <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
@@ -161,6 +162,9 @@
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="type != null" >
         type,
+      </if>
+      <if test="owner != null" >
+        owner,
       </if>
       <if test="avatar != null" >
         avatar,
@@ -268,6 +272,9 @@
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="type != null" >
         #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="owner != null" >
+        #{owner,jdbcType=BIGINT},
       </if>
       <if test="avatar != null" >
         #{avatar,jdbcType=VARCHAR},
@@ -388,6 +395,9 @@
       <if test="record.type != null" >
         type = #{record.type,jdbcType=VARCHAR},
       </if>
+      <if test="record.owner != null" >
+        owner = #{record.owner,jdbcType=BIGINT},
+      </if>
       <if test="record.avatar != null" >
         avatar = #{record.avatar,jdbcType=VARCHAR},
       </if>
@@ -499,6 +509,7 @@
     update t_biz_talent
     set id = #{record.id,jdbcType=BIGINT},
       type = #{record.type,jdbcType=VARCHAR},
+      owner = #{record.owner,jdbcType=BIGINT},
       avatar = #{record.avatar,jdbcType=VARCHAR},
       eng_name = #{record.engName,jdbcType=VARCHAR},
       name = #{record.name,jdbcType=VARCHAR},

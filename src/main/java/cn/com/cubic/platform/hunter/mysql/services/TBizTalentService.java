@@ -22,6 +22,8 @@ public interface TBizTalentService extends BaseService<TBizTalent,TBizTalentExam
 
     Boolean del(List<Long> ids);
 
+    Boolean delPhysics(List<Long> ids);
+
     Boolean saveOrUpdate(TalentVo bean);
 
     //查询视图信息

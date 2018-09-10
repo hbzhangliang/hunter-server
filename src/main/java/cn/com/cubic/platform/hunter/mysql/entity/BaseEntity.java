@@ -11,7 +11,7 @@ public abstract class BaseEntity implements Serializable{
     private static final long serialVersionUID = 1L;
     private Long id;
     private String status;
-    private Boolean flag;
+    private Boolean flag=true;
     private String createBy;
     private Date createTime;
     private String modifyBy;

@@ -3,7 +3,10 @@ package cn.com.cubic.platform.hunter.mysql.entity;
 import java.util.Date;
 
 public class TBizTalent extends BaseEntity{
+
     private String type;
+
+    private Long owner;
 
     private String avatar;
 
@@ -67,6 +70,14 @@ public class TBizTalent extends BaseEntity{
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public Long getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Long owner) {
+        this.owner = owner;
     }
 
     public String getAvatar() {

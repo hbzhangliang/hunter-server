@@ -72,4 +72,16 @@ public class TalentController {
     }
 
 
+    @RequestMapping(value = "/delph")
+    public Object delph(@RequestBody Map<String,Object> map){
+        List<Object> ids=(List) map.get("ids");
+        List<Long> delIds=new ArrayList<>(10);
+        for(Object p:ids){
+            delIds.add(Long.valueOf(p.toString()));
+        }
+        return talentService.delPhysics(delIds);
+    }
+
+
+
 }

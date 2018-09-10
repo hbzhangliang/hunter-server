@@ -262,6 +262,66 @@ public class TBizTalentExample extends BaseExample{
             return (Criteria) this;
         }
 
+        public Criteria andOwnerIsNull() {
+            addCriterion("owner is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOwnerIsNotNull() {
+            addCriterion("owner is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOwnerEqualTo(Long value) {
+            addCriterion("owner =", value, "owner");
+            return (Criteria) this;
+        }
+
+        public Criteria andOwnerNotEqualTo(Long value) {
+            addCriterion("owner <>", value, "owner");
+            return (Criteria) this;
+        }
+
+        public Criteria andOwnerGreaterThan(Long value) {
+            addCriterion("owner >", value, "owner");
+            return (Criteria) this;
+        }
+
+        public Criteria andOwnerGreaterThanOrEqualTo(Long value) {
+            addCriterion("owner >=", value, "owner");
+            return (Criteria) this;
+        }
+
+        public Criteria andOwnerLessThan(Long value) {
+            addCriterion("owner <", value, "owner");
+            return (Criteria) this;
+        }
+
+        public Criteria andOwnerLessThanOrEqualTo(Long value) {
+            addCriterion("owner <=", value, "owner");
+            return (Criteria) this;
+        }
+
+        public Criteria andOwnerIn(List<Long> values) {
+            addCriterion("owner in", values, "owner");
+            return (Criteria) this;
+        }
+
+        public Criteria andOwnerNotIn(List<Long> values) {
+            addCriterion("owner not in", values, "owner");
+            return (Criteria) this;
+        }
+
+        public Criteria andOwnerBetween(Long value1, Long value2) {
+            addCriterion("owner between", value1, value2, "owner");
+            return (Criteria) this;
+        }
+
+        public Criteria andOwnerNotBetween(Long value1, Long value2) {
+            addCriterion("owner not between", value1, value2, "owner");
+            return (Criteria) this;
+        }
+
         public Criteria andAvatarIsNull() {
             addCriterion("avatar is null");
             return (Criteria) this;
