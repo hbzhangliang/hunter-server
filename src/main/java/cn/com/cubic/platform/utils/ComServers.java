@@ -50,7 +50,8 @@ public class ComServers {
     }
 
     public List<TBizTag> allTalentTagList(){
-        return tagService.listAll(4L);
+        String tagGroupCode="talent";
+        return tagService.listAll(tagGroupCode);
     }
 
     /**

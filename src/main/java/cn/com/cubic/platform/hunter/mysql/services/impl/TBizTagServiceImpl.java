@@ -55,6 +55,11 @@ public class TBizTagServiceImpl  extends BaseServiceImpl<TBizTag,TBizTagExample>
     }
 
     @Override
+    public List<TBizTag> listAll(String code) {
+        return this.listAll(tagGroupService.findByCode(code).getId());
+    }
+
+    @Override
     public TBizTag findById(Long id) {
         TBizTagExample example = new TBizTagExample();
         example.createCriteria().andIdEqualTo(id);

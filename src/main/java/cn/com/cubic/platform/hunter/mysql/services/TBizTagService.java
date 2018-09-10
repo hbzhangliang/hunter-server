@@ -20,6 +20,8 @@ public interface TBizTagService extends BaseService<TBizTag,TBizTagExample>{
 
     List<TBizTag> listAll(Long groupId);
 
+    List<TBizTag> listAll(String code);
+
     TBizTag findById(@NotNull Long id);
 
     Boolean del(List<Long> ids);
