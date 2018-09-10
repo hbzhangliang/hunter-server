@@ -136,4 +136,19 @@ public class ComEnum {
     }
 
 
+
+    public static enum TreeType{
+        BusinessTree,CareerTree,CityTree,ShareTree;
+        public static TreeType getTreeType(String str){
+            for(TreeType item:TreeType.values()){
+                if(str.equalsIgnoreCase(item.toString())){
+                    return item;
+                }
+            }
+            return null;
+        }
+    }
+
+
+
 }
