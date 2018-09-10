@@ -17,6 +17,8 @@ public class User extends BaseMongoDbModel{
 
     private String psd;
 
+    private Object ext;
+
     private List<group> groupList=new ArrayList<>(5);
 
     public String getName() {
@@ -49,5 +51,14 @@ public class User extends BaseMongoDbModel{
 
     public void setGroupList(List<group> groupList) {
         this.groupList = groupList;
+    }
+
+
+    public Object getExt() {
+        return ext;
+    }
+
+    public void setExt(Object ext) {
+        this.ext = ext;
     }
 }

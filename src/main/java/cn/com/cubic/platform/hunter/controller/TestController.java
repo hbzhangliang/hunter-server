@@ -13,6 +13,7 @@ import cn.com.cubic.platform.hunter.mysql.vo.PageParams;
 import cn.com.cubic.platform.utils.ComFiles;
 import cn.com.cubic.platform.utils.RedisUtils;
 import cn.com.cubic.platform.utils.XmlReader;
+import com.alibaba.fastjson.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -156,9 +158,26 @@ public class TestController extends BaseController{
 
     @RequestMapping(value = "/22")
     public Object test22(){
-        return null;
+        User user=new User();
+        user.setName("ddddd");
+        JSONObject object=new JSONObject();
+        object.put("value","zhangsan");
+        object.put("label","张三");
+        object.put("status","onLine");
+        object.put("flag",true);
+        object.put("DateCreate",new Date());
+        user.setExt(object);
+
+        userRepo.save(user);
+
+        return user;
     }
 
+
+
+
+    @Autowired
+    private UserRepo userRepo;
 
 
     @Autowired
@@ -171,9 +190,6 @@ public class TestController extends BaseController{
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
-
-    @Autowired
-    private UserRepo userRepo;
 
 
     @Autowired
