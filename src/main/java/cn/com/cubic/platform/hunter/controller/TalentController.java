@@ -68,18 +68,18 @@ public class TalentController {
         for(Object p:ids){
             delIds.add(Long.valueOf(p.toString()));
         }
-        return talentService.del(delIds);
+        return talentService.fakeDel(delIds);
     }
 
 
-    @RequestMapping(value = "/delph")
+    @RequestMapping(value = "/admin-del")
     public Object delph(@RequestBody Map<String,Object> map){
         List<Object> ids=(List) map.get("ids");
         List<Long> delIds=new ArrayList<>(10);
         for(Object p:ids){
             delIds.add(Long.valueOf(p.toString()));
         }
-        return talentService.delPhysics(delIds);
+        return talentService.adminDel(delIds);
     }
 
 

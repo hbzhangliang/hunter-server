@@ -2,7 +2,7 @@ package cn.com.cubic.platform.hunter.mysql.entity;
 
 import java.util.Date;
 
-public class TBizTalent extends BaseEntity{
+public class TBizTalent extends  BaseEntity{
 
     private String type;
 
@@ -63,6 +63,9 @@ public class TBizTalent extends BaseEntity{
     private String evaluate;
 
     private String remark;
+
+    private String delStatus;
+
 
     public String getType() {
         return type;
@@ -302,5 +305,13 @@ public class TBizTalent extends BaseEntity{
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public String getDelStatus() {
+        return delStatus;
+    }
+
+    public void setDelStatus(String delStatus) {
+        this.delStatus = delStatus;
     }
 }

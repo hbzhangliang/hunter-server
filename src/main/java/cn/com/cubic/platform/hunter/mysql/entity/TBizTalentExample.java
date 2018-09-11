@@ -2302,6 +2302,76 @@ public class TBizTalentExample extends BaseExample{
             return (Criteria) this;
         }
 
+        public Criteria andDelStatusIsNull() {
+            addCriterion("del_status is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelStatusIsNotNull() {
+            addCriterion("del_status is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelStatusEqualTo(String value) {
+            addCriterion("del_status =", value, "delStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelStatusNotEqualTo(String value) {
+            addCriterion("del_status <>", value, "delStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelStatusGreaterThan(String value) {
+            addCriterion("del_status >", value, "delStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelStatusGreaterThanOrEqualTo(String value) {
+            addCriterion("del_status >=", value, "delStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelStatusLessThan(String value) {
+            addCriterion("del_status <", value, "delStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelStatusLessThanOrEqualTo(String value) {
+            addCriterion("del_status <=", value, "delStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelStatusLike(String value) {
+            addCriterion("del_status like", value, "delStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelStatusNotLike(String value) {
+            addCriterion("del_status not like", value, "delStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelStatusIn(List<String> values) {
+            addCriterion("del_status in", values, "delStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelStatusNotIn(List<String> values) {
+            addCriterion("del_status not in", values, "delStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelStatusBetween(String value1, String value2) {
+            addCriterion("del_status between", value1, value2, "delStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelStatusNotBetween(String value1, String value2) {
+            addCriterion("del_status not between", value1, value2, "delStatus");
+            return (Criteria) this;
+        }
+
         public Criteria andFlagIsNull() {
             addCriterion("flag is null");
             return (Criteria) this;

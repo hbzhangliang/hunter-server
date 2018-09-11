@@ -20,9 +20,9 @@ public interface TBizTalentService extends BaseService<TBizTalent,TBizTalentExam
 
     TBizTalent findById(@NotNull Long id);
 
-    Boolean del(List<Long> ids);
+    Boolean fakeDel(List<Long> ids);
 
-    Boolean delPhysics(List<Long> ids);
+    Boolean adminDel(List<Long> ids);
 
     Boolean saveOrUpdate(TalentVo bean);
 

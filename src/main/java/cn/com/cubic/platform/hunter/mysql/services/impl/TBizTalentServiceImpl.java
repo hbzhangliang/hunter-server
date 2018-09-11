@@ -4,6 +4,7 @@ import cn.com.cubic.platform.hunter.mysql.entity.*;
 import cn.com.cubic.platform.hunter.mysql.services.*;
 import cn.com.cubic.platform.hunter.mysql.vo.PageParams;
 import cn.com.cubic.platform.hunter.mysql.vo.TalentVo;
+import cn.com.cubic.platform.utils.ComEnum;
 import cn.com.cubic.platform.utils.ComServers;
 import cn.com.cubic.platform.utils.Exception.HunterException;
 import cn.com.cubic.platform.utils.UtilHelper;
@@ -159,11 +160,11 @@ public class TBizTalentServiceImpl extends BaseServiceImpl<TBizTalent,TBizTalent
      * @return
      */
     @Override
-    public Boolean del(List<Long> ids) {
+    public Boolean fakeDel(List<Long> ids) {
         TBizTalentExample example = new TBizTalentExample();
         example.createCriteria().andIdIn(ids);
         TBizTalent bean=new TBizTalent();
-        bean.setFlag(false);
+        bean.setDelStatus(ComEnum.TalentDelStatus.Faked.toString());
         this.updateByExampleSelective(bean,example);
         return true;
     }
@@ -175,10 +176,12 @@ public class TBizTalentServiceImpl extends BaseServiceImpl<TBizTalent,TBizTalent
      * @return
      */
     @Override
-    public Boolean delPhysics(List<Long> ids) {
+    public Boolean adminDel(List<Long> ids) {
         TBizTalentExample example = new TBizTalentExample();
         example.createCriteria().andIdIn(ids);
-        this.deleteByExample(example);
+        TBizTalent bean=new TBizTalent();
+        bean.setDelStatus(ComEnum.TalentDelStatus.Deleted.toString());
+        this.updateByExampleSelective(bean,example);
         return true;
     }
 
@@ -198,6 +201,7 @@ public class TBizTalentServiceImpl extends BaseServiceImpl<TBizTalent,TBizTalent
             //删除共享数据
             delFalg=true;
         } else {
+            bean.setDelStatus(ComEnum.TalentDelStatus.Normal.toString());
             bean.setCreateBy(user.getName());
             bean.setCreateTime(dt);
             this.insert(bean);

@@ -34,6 +34,7 @@
     <result column="evaluate" property="evaluate" jdbcType="VARCHAR" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
     <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="del_status" property="delStatus" jdbcType="VARCHAR" />
     <result column="flag" property="flag" jdbcType="BIT" />
     <result column="create_by" property="createBy" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
@@ -102,7 +103,7 @@
     id, type, owner, avatar, eng_name, name, native_place, city, phone1, phone2, phone3, 
     email1, email2, email3, business, career, gender, birthday, marray, qq, salary, intent_city, 
     tags, mpc, quality, family, purpose, now_salary, exp_salary, evaluate, remark, status, 
-    flag, create_by, create_time, modify_by, modify_time
+    del_status, flag, create_by, create_time, modify_by, modify_time
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.com.cubic.platform.hunter.mysql.entity.TBizTalentExample" >
     select
@@ -139,8 +140,9 @@
       tags, mpc, quality, family, 
       purpose, now_salary, exp_salary, 
       evaluate, remark, status, 
-      flag, create_by, create_time, 
-      modify_by, modify_time)
+      del_status, flag, create_by, 
+      create_time, modify_by, modify_time
+      )
     values (#{type,jdbcType=VARCHAR}, #{owner,jdbcType=BIGINT}, #{avatar,jdbcType=VARCHAR}, 
       #{engName,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{nativePlace,jdbcType=BIGINT}, 
       #{city,jdbcType=BIGINT}, #{phone1,jdbcType=VARCHAR}, #{phone2,jdbcType=VARCHAR}, 
@@ -151,8 +153,9 @@
       #{tags,jdbcType=VARCHAR}, #{mpc,jdbcType=BIT}, #{quality,jdbcType=VARCHAR}, #{family,jdbcType=VARCHAR}, 
       #{purpose,jdbcType=VARCHAR}, #{nowSalary,jdbcType=VARCHAR}, #{expSalary,jdbcType=VARCHAR}, 
       #{evaluate,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
-      #{flag,jdbcType=BIT}, #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{modifyBy,jdbcType=VARCHAR}, #{modifyTime,jdbcType=TIMESTAMP})
+      #{delStatus,jdbcType=VARCHAR}, #{flag,jdbcType=BIT}, #{createBy,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{modifyBy,jdbcType=VARCHAR}, #{modifyTime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="cn.com.cubic.platform.hunter.mysql.entity.TBizTalent" >
     <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
@@ -252,6 +255,9 @@
       </if>
       <if test="status != null" >
         status,
+      </if>
+      <if test="delStatus != null" >
+        del_status,
       </if>
       <if test="flag != null" >
         flag,
@@ -362,6 +368,9 @@
       </if>
       <if test="status != null" >
         #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="delStatus != null" >
+        #{delStatus,jdbcType=VARCHAR},
       </if>
       <if test="flag != null" >
         #{flag,jdbcType=BIT},
@@ -485,6 +494,9 @@
       <if test="record.status != null" >
         status = #{record.status,jdbcType=VARCHAR},
       </if>
+      <if test="record.delStatus != null" >
+        del_status = #{record.delStatus,jdbcType=VARCHAR},
+      </if>
       <if test="record.flag != null" >
         flag = #{record.flag,jdbcType=BIT},
       </if>
@@ -539,6 +551,7 @@
       evaluate = #{record.evaluate,jdbcType=VARCHAR},
       remark = #{record.remark,jdbcType=VARCHAR},
       status = #{record.status,jdbcType=VARCHAR},
+      del_status = #{record.delStatus,jdbcType=VARCHAR},
       flag = #{record.flag,jdbcType=BIT},
       create_by = #{record.createBy,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},

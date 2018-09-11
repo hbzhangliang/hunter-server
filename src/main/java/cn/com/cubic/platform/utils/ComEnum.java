@@ -150,5 +150,22 @@ public class ComEnum {
     }
 
 
+    /**
+     * 人才的删除状态
+     * 正常  伪删除  删除
+     */
+    public static enum TalentDelStatus{
+        Normal,Faked,Deleted;
+        public static TalentDelStatus TalentDelStatus(String str){
+            for(TalentDelStatus item: TalentDelStatus.values()){
+                if(str.equalsIgnoreCase(item.toString())){
+                    return item;
+                }
+            }
+            return null;
+        }
+    }
+
+
 
 }
