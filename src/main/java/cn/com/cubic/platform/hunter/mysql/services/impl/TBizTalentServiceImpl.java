@@ -155,14 +155,15 @@ public class TBizTalentServiceImpl extends BaseServiceImpl<TBizTalent,TBizTalent
     }
 
     /**
-     * 伪删除
+     * 伪删除   只能操作自己的
      * @param ids
      * @return
      */
     @Override
     public Boolean fakeDel(List<Long> ids) {
+        TSysAccount user=(TSysAccount) GlobalHolder.get().get("account");
         TBizTalentExample example = new TBizTalentExample();
-        example.createCriteria().andIdIn(ids);
+        example.createCriteria().andIdIn(ids).andOwnerEqualTo(user.getId());
         TBizTalent bean=new TBizTalent();
         bean.setDelStatus(ComEnum.TalentDelStatus.Faked.toString());
         this.updateByExampleSelective(bean,example);
