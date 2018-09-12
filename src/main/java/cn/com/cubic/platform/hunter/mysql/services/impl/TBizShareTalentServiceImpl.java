@@ -15,9 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Method;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Liang.Zhang on 2018/9/6.
@@ -188,6 +186,113 @@ public class TBizShareTalentServiceImpl extends BaseServiceImpl<TBizShareTalent,
         return flag;
     }
 
+
+    @Override
+    public Boolean checkShare(Long accountId, List<TBizShareTalent> list) {
+        TSysAccount account=sysAccountService.findById(accountId);
+        Boolean flag = false;
+        if (list != null && list.size() > 0) {
+            for (TBizShareTalent item : list) {
+                if (item.getShareType().equals(ComEnum.ShareType.all.toString())||
+                        (item.getShareType().equals(ComEnum.ShareType.account.toString())&&item.getShareValue().equals(accountId.toString()))||
+                        (item.getShareType().equals(ComEnum.ShareType.position.toString())&&account.getPositionId()!=null&&item.getShareValue().equals(account.getPositionId().toString()))||
+                        (item.getShareType().equals(ComEnum.ShareType.team.toString())&&account.getTeamId()!=null&&item.getShareValue().equals(account.getTeamId().toString()))
+                        ){
+                    flag=true;
+                    break;
+                }
+            }
+        }
+        return flag;
+    }
+
+
+    @Override
+    public List<Long> getAccountsBytalentid(Long talentId) {
+        TBizShareTalentExample example=new TBizShareTalentExample();
+        example.createCriteria().andTalentIdEqualTo(talentId);
+        List<TBizShareTalent> list=this.selectByExample(example);
+        //查出全部成员
+        List<TSysAccount> accountList=sysAccountService.listAll();
+        Set<Long> result=new HashSet<>(10);
+        if(list!=null&&list.size()>0){
+            for(TBizShareTalent item:list){
+                switch (ComEnum.ShareType.getShareType(item.getShareType())){
+                    case account:{
+                        for(TSysAccount p:accountList){
+                            if(p.getId().toString().equals(item.getShareValue())) {
+                                result.add(p.getId());
+                            }
+                        }
+                    }break;
+                    case team:{
+                        for(TSysAccount p:accountList){
+                            if(p.getTeamId()!=null&&p.getTeamId().toString().equals(item.getShareValue())) {
+                                result.add(p.getId());
+                            }
+                        }
+                    }break;
+                    case position:{
+                        for(TSysAccount p:accountList){
+                            if(p.getPositionId()!=null&&p.getPositionId().toString().equals(item.getShareValue())) {
+                                result.add(p.getId());
+                            }
+                        }
+                    }break;
+                    case all:{
+                        for(TSysAccount p:accountList){
+                            result.add(p.getId());
+                        }
+                    }break;
+                    default:break;
+                }
+            }
+        }
+        return new ArrayList<>(result);
+
+    }
+
+
+    @Override
+    public List<Long> getAccountsBytalentid(Long talentId, List<TBizShareTalent> list) {
+        //查出全部成员
+        List<TSysAccount> accountList=sysAccountService.listAll();
+        Set<Long> result=new HashSet<>(10);
+        if(list!=null&&list.size()>0){
+            for(TBizShareTalent item:list){
+                switch (ComEnum.ShareType.getShareType(item.getShareType())){
+                    case account:{
+                        for(TSysAccount p:accountList){
+                            if(p.getId().toString().equals(item.getShareValue())) {
+                                result.add(p.getId());
+                            }
+                        }
+                    }break;
+                    case team:{
+                        for(TSysAccount p:accountList){
+                            if(p.getTeamId()!=null&&p.getTeamId().toString().equals(item.getShareValue())) {
+                                result.add(p.getId());
+                            }
+                        }
+                    }break;
+                    case position:{
+                        for(TSysAccount p:accountList){
+                            if(p.getPositionId()!=null&&p.getPositionId().toString().equals(item.getShareValue())) {
+                                result.add(p.getId());
+                            }
+                        }
+                    }break;
+                    case all:{
+                        for(TSysAccount p:accountList){
+                            result.add(p.getId());
+                        }
+                    }break;
+                    default:break;
+                }
+            }
+        }
+        return new ArrayList<>(result);
+    }
 
     @Autowired
     private SysAccountService sysAccountService;

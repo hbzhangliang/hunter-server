@@ -260,6 +260,12 @@ public class TBizTalentServiceImpl extends BaseServiceImpl<TBizTalent,TBizTalent
                         recordLanguageService.insert(item);
                     }
                 }
+
+
+                //对 t_biz_share_talent 表的操作
+                List<Long> accountIds= shareTalentService.getAccountsBytalentid(bean.getId(),bean.getShareTalentList());
+                bizTalentAccountRefService.updateShareData(accountIds,bean.getId());
+
             }
         });
     }
@@ -337,6 +343,8 @@ public class TBizTalentServiceImpl extends BaseServiceImpl<TBizTalent,TBizTalent
     @Autowired
     private TBizRecordLanguageService recordLanguageService;
 
+    @Autowired
+    private TBizTalentAccountRefService bizTalentAccountRefService;
 
     @Autowired
     private ComServers comServers;

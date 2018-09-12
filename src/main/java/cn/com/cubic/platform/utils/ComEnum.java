@@ -39,6 +39,16 @@ public class ComEnum {
         public String getDesc(){
             return desc;
         }
+        public static ShareType getShareType(String str){
+            for(ShareType item:ShareType.values()){
+                if(str.equalsIgnoreCase(item.toString())){
+                    return item;
+                }
+            }
+            return account;
+        }
+
+
     }
 
 

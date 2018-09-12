@@ -24,7 +24,29 @@ public interface TBizShareTalentService extends BaseService<TBizShareTalent,TBiz
     Boolean saveOrUpdate(TBizShareTalent bean);
 
 
+    /**
+     * 保存之后查询
+     * @param accountId
+     * @param talentId
+     * @return
+     */
     Boolean checkShare(Long accountId,Long talentId);
 
+
+    /**
+     * 未保存数据的处理
+     * @param accountId
+     * @param list
+     * @return
+     */
+    Boolean checkShare(Long accountId,List<TBizShareTalent> list);
+
+
+
+
+    List<Long> getAccountsBytalentid(Long talentId);
+
+
+    List<Long> getAccountsBytalentid(Long talentId,List<TBizShareTalent> list);
 
 }

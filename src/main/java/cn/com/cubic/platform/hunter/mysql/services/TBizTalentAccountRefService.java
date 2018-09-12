@@ -25,4 +25,7 @@ public interface TBizTalentAccountRefService  extends BaseService<TBizTalentAcco
     void updateShareData(Long accountId,Long talentId);
 
 
+    void updateShareData(List<Long> accountIds,Long talentId);
+
+
 }

@@ -77,4 +77,14 @@ public class TBizTalentAccountRefServiceImpl  extends BaseServiceImpl<TBizTalent
             this.saveOrUpdate(bean);
         }
     }
+
+
+    @Override
+    public void updateShareData(List<Long> accountIds, Long talentId) {
+        if(null!=accountIds&&accountIds.size()>0){
+            for(Long item:accountIds){
+                this.updateShareData(item,talentId);
+            }
+        }
+    }
 }
