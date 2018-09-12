@@ -1,14 +1,17 @@
 package cn.com.cubic.platform.hunter.mysql.services.impl;
 
 import cn.com.cubic.platform.hunter.mysql.entity.*;
+import cn.com.cubic.platform.hunter.mysql.services.SysAccountService;
 import cn.com.cubic.platform.hunter.mysql.services.TBizShareTalentService;
 import cn.com.cubic.platform.hunter.mysql.vo.PageParams;
+import cn.com.cubic.platform.utils.ComEnum;
 import cn.com.cubic.platform.utils.Exception.HunterException;
 import cn.com.cubic.platform.utils.UtilHelper;
 import cn.com.cubic.platform.utils.global.GlobalHolder;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Method;
@@ -154,6 +157,40 @@ public class TBizShareTalentServiceImpl extends BaseServiceImpl<TBizShareTalent,
         }
         return true;
     }
+
+
+    /**
+     * 查看  此talent在 此account是否可见
+     * @param accountId
+     * @param talentId
+     * @return
+     */
+    @Override
+    public Boolean checkShare(Long accountId, Long talentId) {
+        TBizShareTalentExample example = new TBizShareTalentExample();
+        example.createCriteria().andTalentIdEqualTo(talentId);
+        List<TBizShareTalent> list = this.selectByExample(example);
+        TSysAccount account=sysAccountService.findById(accountId);
+        Boolean flag = false;
+        if (list != null && list.size() > 0) {
+            for (TBizShareTalent item : list) {
+                if (item.getShareType().equals(ComEnum.ShareType.all.toString())||
+                        (item.getShareType().equals(ComEnum.ShareType.account.toString())&&item.getShareValue().equals(accountId.toString()))||
+                        (item.getShareType().equals(ComEnum.ShareType.position.toString())&&account.getPositionId()!=null&&item.getShareValue().equals(account.getPositionId().toString()))||
+                        (item.getShareType().equals(ComEnum.ShareType.team.toString())&&account.getTeamId()!=null&&item.getShareValue().equals(account.getTeamId().toString()))
+                        ){
+                    flag=true;
+                    break;
+                }
+
+            }
+        }
+        return flag;
+    }
+
+
+    @Autowired
+    private SysAccountService sysAccountService;
 
 
 

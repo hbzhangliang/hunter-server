@@ -24,10 +24,10 @@ public class Test {
     public static void main(String[] args)throws Exception{
 
 
-        String t="true";
+        Long aa=10L;
+        String bb="10";
 
-        Boolean k=Boolean.valueOf(t.toString());
-        int i=10;
+        System.out.println(bb.equals(aa.toString()));
 
 //获取本机的InetAddress实例
 //        InetAddress address =InetAddress.getLocalHost();

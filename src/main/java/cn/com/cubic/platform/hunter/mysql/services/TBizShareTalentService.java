@@ -23,4 +23,8 @@ public interface TBizShareTalentService extends BaseService<TBizShareTalent,TBiz
 
     Boolean saveOrUpdate(TBizShareTalent bean);
 
+
+    Boolean checkShare(Long accountId,Long talentId);
+
+
 }
