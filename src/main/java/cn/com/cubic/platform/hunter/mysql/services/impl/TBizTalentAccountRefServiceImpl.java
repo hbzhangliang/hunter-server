@@ -6,6 +6,8 @@ import cn.com.cubic.platform.utils.Exception.HunterException;
 import cn.com.cubic.platform.utils.global.GlobalHolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -70,10 +72,17 @@ public class TBizTalentAccountRefServiceImpl  extends BaseServiceImpl<TBizTalent
         TBizTalentAccountRefExample example=new TBizTalentAccountRefExample();
         example.createCriteria().andAccountIdEqualTo(accountId).andTalentIdEqualTo(talentId);
         List<TBizTalentAccountRef> list=this.selectByExample(example);
+        //如果不存在 添加
         if(list==null||list.size()<1){
             TBizTalentAccountRef bean=new TBizTalentAccountRef();
             bean.setAccountId(accountId);
             bean.setTalentId(talentId);
+            bean.setFlag(true);
+            this.saveOrUpdate(bean);
+        }
+        else { //否则，做更新处理
+            TBizTalentAccountRef bean=list.get(0);
+            bean.setFlag(true);
             this.saveOrUpdate(bean);
         }
     }
@@ -81,10 +90,17 @@ public class TBizTalentAccountRefServiceImpl  extends BaseServiceImpl<TBizTalent
 
     @Override
     public void updateShareData(List<Long> accountIds, Long talentId) {
+        //首先把存在 的数据全部变成 flag=false
+        String sql=String.format("update t_biz_talent_acount_ref set flag=false where talent_id=%s",talentId);
+        jdbcTemplate.execute(sql);
         if(null!=accountIds&&accountIds.size()>0){
             for(Long item:accountIds){
                 this.updateShareData(item,talentId);
             }
         }
     }
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
 }
