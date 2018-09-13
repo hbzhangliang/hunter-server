@@ -37,9 +37,24 @@ public class TalentController {
     @Autowired
     private VShareTalentService shareTalentService;
 
+    /**
+     * 只显示自己的
+     * @param pageParams
+     * @return
+     */
     @RequestMapping(value = "/list")
     public Object list(@RequestBody PageParams<TBizTalent> pageParams){
-        return talentService.list(pageParams);
+        return talentService.list(pageParams,true);
+    }
+
+    /**
+     * 显示所有的
+     * @param pageParams
+     * @return
+     */
+    @RequestMapping(value = "/list-all-page")
+    public Object listAllPage(@RequestBody PageParams<TBizTalent> pageParams){
+        return talentService.list(pageParams,false);
     }
 
 

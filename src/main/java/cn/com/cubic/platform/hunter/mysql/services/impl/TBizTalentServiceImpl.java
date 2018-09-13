@@ -127,11 +127,9 @@ public class TBizTalentServiceImpl extends BaseServiceImpl<TBizTalent,TBizTalent
     }
 
     @Override
-    public PageParams<TBizTalent> list(PageParams<TBizTalent> pageParams) {
-
-
+    public PageParams<TBizTalent> list(PageParams<TBizTalent> pageParams,Boolean ownerFlag) {
         //查询参数
-        TBizTalentExample example=this.construct(pageParams.getParams(),true);
+        TBizTalentExample example=this.construct(pageParams.getParams(),ownerFlag);
         //排序
         String strOrder=String.format("%s %s",UtilHelper.camelToUnderline(pageParams.getOrderBy()),pageParams.getDirection());
         example.setOrderByClause(strOrder);

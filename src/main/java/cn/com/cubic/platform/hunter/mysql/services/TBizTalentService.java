@@ -14,7 +14,7 @@ import java.util.List;
 
 public interface TBizTalentService extends BaseService<TBizTalent,TBizTalentExample>{
 
-    PageParams<TBizTalent> list(PageParams<TBizTalent> pageParams);
+    PageParams<TBizTalent> list(PageParams<TBizTalent> pageParams,Boolean ownerFlag);
 
     List<TBizTalent> listAll();
 
