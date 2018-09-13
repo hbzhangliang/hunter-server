@@ -128,6 +128,8 @@ public class TBizTalentServiceImpl extends BaseServiceImpl<TBizTalent,TBizTalent
 
     @Override
     public PageParams<TBizTalent> list(PageParams<TBizTalent> pageParams) {
+
+
         //查询参数
         TBizTalentExample example=this.construct(pageParams.getParams(),true);
         //排序

@@ -1,7 +1,9 @@
 package cn.com.cubic.platform.hunter.controller;
 
 import cn.com.cubic.platform.hunter.mysql.entity.TBizTalent;
+import cn.com.cubic.platform.hunter.mysql.entity.VShareTalent;
 import cn.com.cubic.platform.hunter.mysql.services.TBizTalentService;
+import cn.com.cubic.platform.hunter.mysql.services.VShareTalentService;
 import cn.com.cubic.platform.hunter.mysql.vo.PageParams;
 import cn.com.cubic.platform.hunter.mysql.vo.TalentVo;
 import org.slf4j.Logger;
@@ -31,6 +33,9 @@ public class TalentController {
 
     @Autowired
     private TBizTalentService talentService;
+
+    @Autowired
+    private VShareTalentService shareTalentService;
 
     @RequestMapping(value = "/list")
     public Object list(@RequestBody PageParams<TBizTalent> pageParams){
@@ -80,6 +85,12 @@ public class TalentController {
             delIds.add(Long.valueOf(p.toString()));
         }
         return talentService.adminDel(delIds);
+    }
+
+
+    @RequestMapping(value = "/list-share")
+    public Object listShare(@RequestBody PageParams<VShareTalent> pageParams){
+        return shareTalentService.list(pageParams);
     }
 
 

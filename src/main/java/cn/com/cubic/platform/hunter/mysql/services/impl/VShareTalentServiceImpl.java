@@ -1,30 +1,27 @@
 package cn.com.cubic.platform.hunter.mysql.services.impl;
 
-import cn.com.cubic.platform.hunter.mysql.entity.TBizTalentExample;
-import cn.com.cubic.platform.hunter.mysql.entity.VAccountInfo;
-import cn.com.cubic.platform.hunter.mysql.entity.VAccountInfoExample;
-import cn.com.cubic.platform.hunter.mysql.services.VAccountInfoService;
+import cn.com.cubic.platform.hunter.mysql.entity.*;
+import cn.com.cubic.platform.hunter.mysql.services.VShareTalentService;
 import cn.com.cubic.platform.hunter.mysql.vo.PageParams;
 import cn.com.cubic.platform.utils.Exception.HunterException;
 import cn.com.cubic.platform.utils.UtilHelper;
+import cn.com.cubic.platform.utils.global.GlobalHolder;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Method;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 /**
- * Created by Liang.Zhang on 2018/8/29.
+ * Created by Liang.Zhang on 2018/9/13.
  **/
 @Service
-public class VAccountInfoServiceImpl extends BaseServiceImpl<VAccountInfo,VAccountInfoExample> implements VAccountInfoService {
+public class VShareTalentServiceImpl  extends BaseServiceImpl<VShareTalent,VShareTalentExample> implements VShareTalentService {
 
-    private final static Logger log = LoggerFactory.getLogger(VAccountInfoServiceImpl.class);
-
+    private final static Logger log = LoggerFactory.getLogger(VShareTalentServiceImpl.class);
 
 
     /**
@@ -34,13 +31,13 @@ public class VAccountInfoServiceImpl extends BaseServiceImpl<VAccountInfo,VAccou
      * @return
      * @throws Exception
      */
-    private VAccountInfoExample.Criteria constructCriteria(Map<String,Object> map,VAccountInfoExample.Criteria criteria) throws Exception{
+    private VShareTalentExample.Criteria constructCriteria(Map<String,Object> map, VShareTalentExample.Criteria criteria) throws Exception{
         Class clz=criteria.getClass();
         Method[] methods=clz.getMethods();
         for(Map.Entry<String,Object> entity:map.entrySet()){
             String key=entity.getKey();
             Object value=entity.getValue();
-            if(value==null||StringUtils.isBlank(value.toString())) continue;
+            if(value==null|| StringUtils.isBlank(value.toString())) continue;
             if(key.startsWith("eq_")){
                 String tmp=key.substring(3);
                 tmp=String.format("and%sEqualto",tmp);
@@ -50,10 +47,10 @@ public class VAccountInfoServiceImpl extends BaseServiceImpl<VAccountInfo,VAccou
                         Class<?> cl[]=item.getParameterTypes();
                         String parasType=cl[0].getSimpleName();
                         switch (parasType){
-                            case "Long":criteria= (VAccountInfoExample.Criteria)item.invoke(criteria,Long.valueOf(value.toString()));break;
-                            case "Integer":criteria= (VAccountInfoExample.Criteria)item.invoke(criteria,Integer.valueOf(value.toString()));break;
-                            case "Boolean":criteria=(VAccountInfoExample.Criteria)item.invoke(criteria,Boolean.valueOf(value.toString()));break;
-                            default:criteria= (VAccountInfoExample.Criteria)item.invoke(criteria,value.toString());break;
+                            case "Long":criteria= (VShareTalentExample.Criteria)item.invoke(criteria,Long.valueOf(value.toString()));break;
+                            case "Integer":criteria= (VShareTalentExample.Criteria)item.invoke(criteria,Integer.valueOf(value.toString()));break;
+                            case "Boolean":criteria=(VShareTalentExample.Criteria)item.invoke(criteria,Boolean.valueOf(value.toString()));break;
+                            default:criteria= (VShareTalentExample.Criteria)item.invoke(criteria,value.toString());break;
                         }
                     }
                 }
@@ -63,7 +60,7 @@ public class VAccountInfoServiceImpl extends BaseServiceImpl<VAccountInfo,VAccou
                 tmp=String.format("and%sLike",tmp);
                 for(Method item:methods){
                     if(tmp.equalsIgnoreCase(item.getName())){
-                        criteria= (VAccountInfoExample.Criteria)item.invoke(criteria,"%"+value+"%");
+                        criteria= (VShareTalentExample.Criteria)item.invoke(criteria,"%"+value+"%");
                     }
                 }
             }
@@ -80,7 +77,7 @@ public class VAccountInfoServiceImpl extends BaseServiceImpl<VAccountInfo,VAccou
 
                 for(Method item:methods){
                     if(tmp.equalsIgnoreCase(item.getName())) {
-                        criteria = (VAccountInfoExample.Criteria) item.invoke(criteria, UtilHelper.parseDateYMD(value.toString()));
+                        criteria = (VShareTalentExample.Criteria) item.invoke(criteria, UtilHelper.parseDateYMD(value.toString()));
                     }
                 }
             }
@@ -92,11 +89,16 @@ public class VAccountInfoServiceImpl extends BaseServiceImpl<VAccountInfo,VAccou
     }
 
 
-    private VAccountInfoExample construct(Map<String,Object> map) {
+    private VShareTalentExample construct(Map<String,Object> map,Boolean ownerFlag) {
         try {
-            VAccountInfoExample example = new VAccountInfoExample();
-            VAccountInfoExample.Criteria criteria = example.createCriteria();
+            VShareTalentExample example = new VShareTalentExample();
+            VShareTalentExample.Criteria criteria = example.createCriteria();
             criteria = this.constructCriteria(map, criteria);
+            if(ownerFlag){
+                //只能看到自己的
+                TSysAccount user=(TSysAccount) GlobalHolder.get().get("account");
+                criteria.andOwnerEqualTo(user.getId());
+            }
             return example;
         }
         catch (Exception e){
@@ -106,28 +108,22 @@ public class VAccountInfoServiceImpl extends BaseServiceImpl<VAccountInfo,VAccou
     }
 
 
+
     @Override
-    public PageParams<VAccountInfo> list(PageParams<VAccountInfo> pageParams) {
+    public PageParams<VShareTalent> list(PageParams<VShareTalent> pageParams) {
         //查询参数
-        VAccountInfoExample example=this.construct(pageParams.getParams());
+        VShareTalentExample example=this.construct(pageParams.getParams(),true);
         //排序
-        String strOrder=String.format("%s %s",UtilHelper.camelToUnderline(pageParams.getOrderBy()),pageParams.getDirection());
+        String strOrder=String.format("%s %s", UtilHelper.camelToUnderline(pageParams.getOrderBy()),pageParams.getDirection());
         example.setOrderByClause(strOrder);
         return this.listPage(example,pageParams);
     }
 
     @Override
-    public List<VAccountInfo> listAll() {
-        VAccountInfoExample example=new VAccountInfoExample();
-        example.setOrderByClause("id desc");
-        return this.selectByExample(example);
-    }
-
-    @Override
-    public VAccountInfo findById(Long id) {
-        VAccountInfoExample example = new VAccountInfoExample();
+    public VShareTalent findById(Long id) {
+        VShareTalentExample example = new VShareTalentExample();
         example.createCriteria().andIdEqualTo(id);
-        List<VAccountInfo> list = this.selectByExample(example);
+        List<VShareTalent> list = this.selectByExample(example);
         if (null != list && 1 != list.size()) {
             throw new HunterException("查询错误");
         }
