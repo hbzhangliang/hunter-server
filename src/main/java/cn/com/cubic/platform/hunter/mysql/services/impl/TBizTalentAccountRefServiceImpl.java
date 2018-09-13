@@ -43,6 +43,11 @@ public class TBizTalentAccountRefServiceImpl  extends BaseServiceImpl<TBizTalent
         return true;
     }
 
+    /**
+     * 如果是在线程中，是获取不到globalholder值的
+     * @param bean
+     * @return
+     */
     @Override
     public Boolean saveOrUpdate(TBizTalentAccountRef bean) {
         Date dt=new Date();
@@ -62,6 +67,24 @@ public class TBizTalentAccountRefServiceImpl  extends BaseServiceImpl<TBizTalent
     }
 
 
+
+
+    //在线程中获取不到global值
+    private void saveOrUpdateBean(TBizTalentAccountRef bean){
+        Date dt=new Date();
+        if (null != bean.getId()) {
+            TBizTalentAccountRefExample example = new TBizTalentAccountRefExample();
+            example.createCriteria().andIdEqualTo(bean.getId());
+            bean.setModifyTime(dt);
+            this.updateByExampleSelective(bean, example);
+        } else {
+            bean.setCreateTime(dt);
+            this.insert(bean);
+        }
+    }
+
+
+
     /**
      * 根据 id 处理数据
      * @param accountId
@@ -78,12 +101,12 @@ public class TBizTalentAccountRefServiceImpl  extends BaseServiceImpl<TBizTalent
             bean.setAccountId(accountId);
             bean.setTalentId(talentId);
             bean.setFlag(true);
-            this.saveOrUpdate(bean);
+            this.saveOrUpdateBean(bean);
         }
         else { //否则，做更新处理
             TBizTalentAccountRef bean=list.get(0);
             bean.setFlag(true);
-            this.saveOrUpdate(bean);
+            this.saveOrUpdateBean(bean);
         }
     }
 
