@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class TBizDocExample  extends BaseExample{
+public class TBizDocExample extends BaseExample{
     protected String orderByClause;
 
     protected boolean distinct;
@@ -372,6 +372,126 @@ public class TBizDocExample  extends BaseExample{
 
         public Criteria andRemarkNotBetween(String value1, String value2) {
             addCriterion("remark not between", value1, value2, "remark");
+            return (Criteria) this;
+        }
+
+        public Criteria andOwnerIsNull() {
+            addCriterion("owner is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOwnerIsNotNull() {
+            addCriterion("owner is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOwnerEqualTo(Long value) {
+            addCriterion("owner =", value, "owner");
+            return (Criteria) this;
+        }
+
+        public Criteria andOwnerNotEqualTo(Long value) {
+            addCriterion("owner <>", value, "owner");
+            return (Criteria) this;
+        }
+
+        public Criteria andOwnerGreaterThan(Long value) {
+            addCriterion("owner >", value, "owner");
+            return (Criteria) this;
+        }
+
+        public Criteria andOwnerGreaterThanOrEqualTo(Long value) {
+            addCriterion("owner >=", value, "owner");
+            return (Criteria) this;
+        }
+
+        public Criteria andOwnerLessThan(Long value) {
+            addCriterion("owner <", value, "owner");
+            return (Criteria) this;
+        }
+
+        public Criteria andOwnerLessThanOrEqualTo(Long value) {
+            addCriterion("owner <=", value, "owner");
+            return (Criteria) this;
+        }
+
+        public Criteria andOwnerIn(List<Long> values) {
+            addCriterion("owner in", values, "owner");
+            return (Criteria) this;
+        }
+
+        public Criteria andOwnerNotIn(List<Long> values) {
+            addCriterion("owner not in", values, "owner");
+            return (Criteria) this;
+        }
+
+        public Criteria andOwnerBetween(Long value1, Long value2) {
+            addCriterion("owner between", value1, value2, "owner");
+            return (Criteria) this;
+        }
+
+        public Criteria andOwnerNotBetween(Long value1, Long value2) {
+            addCriterion("owner not between", value1, value2, "owner");
+            return (Criteria) this;
+        }
+
+        public Criteria andShareTypeIsNull() {
+            addCriterion("share_type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andShareTypeIsNotNull() {
+            addCriterion("share_type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andShareTypeEqualTo(Boolean value) {
+            addCriterion("share_type =", value, "shareType");
+            return (Criteria) this;
+        }
+
+        public Criteria andShareTypeNotEqualTo(Boolean value) {
+            addCriterion("share_type <>", value, "shareType");
+            return (Criteria) this;
+        }
+
+        public Criteria andShareTypeGreaterThan(Boolean value) {
+            addCriterion("share_type >", value, "shareType");
+            return (Criteria) this;
+        }
+
+        public Criteria andShareTypeGreaterThanOrEqualTo(Boolean value) {
+            addCriterion("share_type >=", value, "shareType");
+            return (Criteria) this;
+        }
+
+        public Criteria andShareTypeLessThan(Boolean value) {
+            addCriterion("share_type <", value, "shareType");
+            return (Criteria) this;
+        }
+
+        public Criteria andShareTypeLessThanOrEqualTo(Boolean value) {
+            addCriterion("share_type <=", value, "shareType");
+            return (Criteria) this;
+        }
+
+        public Criteria andShareTypeIn(List<Boolean> values) {
+            addCriterion("share_type in", values, "shareType");
+            return (Criteria) this;
+        }
+
+        public Criteria andShareTypeNotIn(List<Boolean> values) {
+            addCriterion("share_type not in", values, "shareType");
+            return (Criteria) this;
+        }
+
+        public Criteria andShareTypeBetween(Boolean value1, Boolean value2) {
+            addCriterion("share_type between", value1, value2, "shareType");
+            return (Criteria) this;
+        }
+
+        public Criteria andShareTypeNotBetween(Boolean value1, Boolean value2) {
+            addCriterion("share_type not between", value1, value2, "shareType");
             return (Criteria) this;
         }
 
