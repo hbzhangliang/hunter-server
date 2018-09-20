@@ -115,5 +115,11 @@ public class DocController {
 
 
 
+    @RequestMapping(value = "/list-owner")
+    public Object listOwner(){
+        TSysAccount account=(TSysAccount) GlobalHolder.get().get("account");
+        return docService.listDocByAccountId(account.getId());
+    }
+
 
 }

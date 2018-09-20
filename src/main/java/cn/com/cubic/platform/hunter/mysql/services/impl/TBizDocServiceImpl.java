@@ -2,10 +2,7 @@ package cn.com.cubic.platform.hunter.mysql.services.impl;
 
 import cn.com.cubic.platform.hunter.mysql.entity.*;
 import cn.com.cubic.platform.hunter.mysql.services.*;
-import cn.com.cubic.platform.hunter.mysql.vo.DocVo;
-import cn.com.cubic.platform.hunter.mysql.vo.ElTreeVo;
-import cn.com.cubic.platform.hunter.mysql.vo.PageParams;
-import cn.com.cubic.platform.hunter.mysql.vo.SelTreeVo;
+import cn.com.cubic.platform.hunter.mysql.vo.*;
 import cn.com.cubic.platform.utils.ComEnum;
 import cn.com.cubic.platform.utils.ComTrans;
 import cn.com.cubic.platform.utils.Exception.HunterException;
@@ -418,6 +415,52 @@ public class TBizDocServiceImpl extends BaseServiceImpl<TBizDoc,TBizDocExample> 
         return flag;
     }
 
+
+    @Override
+    public MenuVo listMenu(Long accountId) {
+        List<TBizDoc> selfList=this.docListByOwner(accountId);
+        List<TBizDoc> shareList=this.docListByShare(accountId);
+
+        //我的文件夹
+        MenuVo myMenuVo=new MenuVo("2-1","el-icon-menu","我的文件夹",new ArrayList<>(10));
+        if(selfList!=null&&selfList.size()>0){
+            for(TBizDoc item:selfList){
+
+            }
+        }
+
+        return null;
+
+    }
+
+
+    @Override
+    public List<ElTreeVo> listDocByAccountId(Long accountId) {
+        List<TBizDoc> selfList=this.docListByOwner(accountId);
+        List<TBizDoc> shareList=this.docListByShare(accountId);
+
+        List<ElTreeVo> selfEltreeList=new ArrayList<>(5);
+        if(selfList!=null&&selfList.size()>0){
+            for(TBizDoc item:selfList){
+                selfEltreeList.add(new ElTreeVo(item.getId(),item.getName(),null));
+            }
+        }
+        ElTreeVo self=new ElTreeVo(100000L,"我的文档",selfEltreeList);
+
+
+        List<ElTreeVo> shareEltreeList=new ArrayList<>(5);
+        if(shareList!=null&&shareList.size()>0){
+            for(TBizDoc item:shareList){
+                shareEltreeList.add(new ElTreeVo(item.getId(),item.getName(),null));
+            }
+        }
+        ElTreeVo share=new ElTreeVo(200000L,"共享的目录",shareEltreeList);
+
+        List<ElTreeVo> result=new ArrayList<>(2);
+        result.add(self);
+        result.add(share);
+        return result;
+    }
 
     @Autowired
     private TBizShareDocService shareDocService;
