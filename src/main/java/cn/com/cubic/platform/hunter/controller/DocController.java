@@ -1,9 +1,11 @@
 package cn.com.cubic.platform.hunter.controller;
 
 import cn.com.cubic.platform.hunter.mysql.entity.TBizDoc;
+import cn.com.cubic.platform.hunter.mysql.entity.TSysAccount;
 import cn.com.cubic.platform.hunter.mysql.services.TBizDocService;
 import cn.com.cubic.platform.hunter.mysql.vo.DocVo;
 import cn.com.cubic.platform.hunter.mysql.vo.PageParams;
+import cn.com.cubic.platform.utils.global.GlobalHolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -95,6 +97,22 @@ public class DocController {
     public Object shareTree(){
         return docService.allShareTree();
     }
+
+
+
+    @RequestMapping(value = "/list-self")
+    public Object listSelf(){
+        TSysAccount account=(TSysAccount) GlobalHolder.get().get("account");
+        return docService.docListByOwner(account.getId());
+    }
+
+
+    @RequestMapping(value = "/list-share")
+    public Object listShare(){
+        TSysAccount account=(TSysAccount) GlobalHolder.get().get("account");
+        return docService.docListByShare(account.getId());
+    }
+
 
 
 

@@ -363,7 +363,60 @@ public class TBizDocServiceImpl extends BaseServiceImpl<TBizDoc,TBizDocExample> 
     }
 
 
+    @Override
+    public List<TBizDoc> docListByOwner(Long ownerId) {
+        TBizDocExample example=new TBizDocExample();
+        //类型是人，并且owner是自己
+        example.createCriteria().andShareTypeEqualTo(false).andOwnerEqualTo(ownerId);
+        return this.selectByExample(example);
+    }
 
+    @Override
+    public List<TBizDoc> docListByShare(Long accountId) {
+        TSysAccount account=accountService.findById(accountId);
+        TBizDocExample example=new TBizDocExample();
+        example.createCriteria().andShareTypeEqualTo(true);
+        List<TBizDoc> list=this.selectByExample(example);
+        List<TBizDoc> result=new ArrayList<>(10);
+        if(list!=null&&list.size()>0){
+            for(TBizDoc item:list){
+                if (this.checkShare(item, account)) {
+                    result.add(item);
+                }
+            }
+        }
+        return result;
+    }
+
+
+    private Boolean checkShare(TBizDoc doc,TSysAccount account){
+        TBizShareDocExample example=new TBizShareDocExample();
+        example.createCriteria().andDocIdEqualTo(doc.getId());
+        List<TBizShareDoc> list=shareDocService.selectByExample(example);
+        Boolean flag=false;
+        if(list!=null&&list.size()>0){
+            for(TBizShareDoc item:list){
+                  //如果是所有类型
+                if(item.getShareType().equals(ComEnum.ShareType.all.toString())){
+                    flag=true;
+                    break;
+                }
+                if(item.getShareType().equals(ComEnum.ShareType.account.toString())&&item.getCode().equals(account.getId())){
+                    flag=true;
+                    break;
+                }
+                if(item.getShareType().equals(ComEnum.ShareType.position.toString())&&null!=account.getPositionId()&&account.getPositionId().equals(item.getCode())){
+                    flag=true;
+                    break;
+                }
+                if(item.getShareType().equals(ComEnum.ShareType.team.toString())&&null!=account.getTeamId()&&account.getTeamId().equals(item.getCode())){
+                    flag=true;
+                    break;
+                }
+            }
+        }
+        return flag;
+    }
 
 
     @Autowired

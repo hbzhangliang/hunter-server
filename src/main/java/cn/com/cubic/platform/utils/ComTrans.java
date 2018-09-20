@@ -21,6 +21,7 @@ public class ComTrans {
         vo.setType(doc.getType());
         vo.setRemark(doc.getRemark());
         vo.setOwner(doc.getOwner());
+        vo.setShareType(doc.getShareType());
         vo.setShare(list);
         return vo;
     }

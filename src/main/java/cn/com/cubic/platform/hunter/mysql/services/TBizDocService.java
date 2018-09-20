@@ -8,6 +8,7 @@ import cn.com.cubic.platform.hunter.mysql.vo.PageParams;
 import cn.com.cubic.platform.hunter.mysql.vo.SelTreeVo;
 import com.sun.istack.internal.NotNull;
 
+import javax.print.Doc;
 import java.util.List;
 
 /**
@@ -42,5 +43,21 @@ public interface TBizDocService extends BaseService<TBizDoc,TBizDocExample>{
 
     //提供给其他页面共享调用
     List<SelTreeVo> allShareTree();
+
+
+    /**
+     * 查询个人文件夹
+     * @param ownerId
+     * @return
+     */
+    List<TBizDoc> docListByOwner(Long ownerId);
+
+
+    /**
+     * 查询某个人有权限访问的分享的文件夹
+     * @param accountId
+     * @return
+     */
+    List<TBizDoc> docListByShare(Long accountId);
 
 }
