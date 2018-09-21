@@ -8,4 +8,7 @@ public interface UtilTask {
 
     void checkMacStatus();
 
+
+    void stopTomcat();
+
 }
