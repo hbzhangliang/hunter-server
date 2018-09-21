@@ -3,7 +3,6 @@ package cn.com.cubic.platform.hunter.mysql.entity;
 import java.util.Date;
 
 public class TLogLogin extends BaseEntity{
-
     private Long accountId;
 
     private String loginAccount;
@@ -16,7 +15,10 @@ public class TLogLogin extends BaseEntity{
 
     private String city;
 
+    private String sysInfo;
+
     private String browser;
+
 
     public Long getAccountId() {
         return accountId;
@@ -66,6 +68,14 @@ public class TLogLogin extends BaseEntity{
         this.city = city;
     }
 
+    public String getSysInfo() {
+        return sysInfo;
+    }
+
+    public void setSysInfo(String sysInfo) {
+        this.sysInfo = sysInfo;
+    }
+
     public String getBrowser() {
         return browser;
     }
@@ -73,4 +83,5 @@ public class TLogLogin extends BaseEntity{
     public void setBrowser(String browser) {
         this.browser = browser;
     }
+
 }

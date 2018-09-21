@@ -9,6 +9,7 @@
     <result column="ip_address" property="ipAddress" jdbcType="VARCHAR" />
     <result column="mac_address" property="macAddress" jdbcType="VARCHAR" />
     <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="sys_info" property="sysInfo" jdbcType="VARCHAR" />
     <result column="browser" property="browser" jdbcType="VARCHAR" />
     <result column="status" property="status" jdbcType="VARCHAR" />
     <result column="flag" property="flag" jdbcType="BIT" />
@@ -76,8 +77,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, account_id, login_account, host_name, ip_address, mac_address, city, browser, 
-    status, flag, create_by, create_time, modify_by, modify_time
+    id, account_id, login_account, host_name, ip_address, mac_address, city, sys_info, 
+    browser, status, flag, create_by, create_time, modify_by, modify_time
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.com.cubic.platform.hunter.mysql.entity.TLogLoginExample" >
     select
@@ -106,14 +107,14 @@
     </selectKey>
     insert into t_log_login (account_id, login_account, host_name, 
       ip_address, mac_address, city, 
-      browser, status, flag, 
-      create_by, create_time, modify_by, 
-      modify_time)
+      sys_info, browser, status, 
+      flag, create_by, create_time, 
+      modify_by, modify_time)
     values (#{accountId,jdbcType=BIGINT}, #{loginAccount,jdbcType=VARCHAR}, #{hostName,jdbcType=VARCHAR}, 
       #{ipAddress,jdbcType=VARCHAR}, #{macAddress,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
-      #{browser,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{flag,jdbcType=BIT}, 
-      #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{modifyBy,jdbcType=VARCHAR}, 
-      #{modifyTime,jdbcType=TIMESTAMP})
+      #{sysInfo,jdbcType=VARCHAR}, #{browser,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{flag,jdbcType=BIT}, #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{modifyBy,jdbcType=VARCHAR}, #{modifyTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="cn.com.cubic.platform.hunter.mysql.entity.TLogLogin" >
     <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
@@ -138,6 +139,9 @@
       </if>
       <if test="city != null" >
         city,
+      </if>
+      <if test="sysInfo != null" >
+        sys_info,
       </if>
       <if test="browser != null" >
         browser,
@@ -179,6 +183,9 @@
       </if>
       <if test="city != null" >
         #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="sysInfo != null" >
+        #{sysInfo,jdbcType=VARCHAR},
       </if>
       <if test="browser != null" >
         #{browser,jdbcType=VARCHAR},
@@ -233,6 +240,9 @@
       <if test="record.city != null" >
         city = #{record.city,jdbcType=VARCHAR},
       </if>
+      <if test="record.sysInfo != null" >
+        sys_info = #{record.sysInfo,jdbcType=VARCHAR},
+      </if>
       <if test="record.browser != null" >
         browser = #{record.browser,jdbcType=VARCHAR},
       </if>
@@ -268,6 +278,7 @@
       ip_address = #{record.ipAddress,jdbcType=VARCHAR},
       mac_address = #{record.macAddress,jdbcType=VARCHAR},
       city = #{record.city,jdbcType=VARCHAR},
+      sys_info = #{record.sysInfo,jdbcType=VARCHAR},
       browser = #{record.browser,jdbcType=VARCHAR},
       status = #{record.status,jdbcType=VARCHAR},
       flag = #{record.flag,jdbcType=BIT},

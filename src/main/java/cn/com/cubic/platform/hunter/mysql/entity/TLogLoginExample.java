@@ -575,6 +575,76 @@ public class TLogLoginExample extends BaseExample{
             return (Criteria) this;
         }
 
+        public Criteria andSysInfoIsNull() {
+            addCriterion("sys_info is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSysInfoIsNotNull() {
+            addCriterion("sys_info is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSysInfoEqualTo(String value) {
+            addCriterion("sys_info =", value, "sysInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andSysInfoNotEqualTo(String value) {
+            addCriterion("sys_info <>", value, "sysInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andSysInfoGreaterThan(String value) {
+            addCriterion("sys_info >", value, "sysInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andSysInfoGreaterThanOrEqualTo(String value) {
+            addCriterion("sys_info >=", value, "sysInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andSysInfoLessThan(String value) {
+            addCriterion("sys_info <", value, "sysInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andSysInfoLessThanOrEqualTo(String value) {
+            addCriterion("sys_info <=", value, "sysInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andSysInfoLike(String value) {
+            addCriterion("sys_info like", value, "sysInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andSysInfoNotLike(String value) {
+            addCriterion("sys_info not like", value, "sysInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andSysInfoIn(List<String> values) {
+            addCriterion("sys_info in", values, "sysInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andSysInfoNotIn(List<String> values) {
+            addCriterion("sys_info not in", values, "sysInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andSysInfoBetween(String value1, String value2) {
+            addCriterion("sys_info between", value1, value2, "sysInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andSysInfoNotBetween(String value1, String value2) {
+            addCriterion("sys_info not between", value1, value2, "sysInfo");
+            return (Criteria) this;
+        }
+
         public Criteria andBrowserIsNull() {
             addCriterion("browser is null");
             return (Criteria) this;

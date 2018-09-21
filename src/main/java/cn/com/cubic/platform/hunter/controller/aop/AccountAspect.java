@@ -3,6 +3,7 @@ package cn.com.cubic.platform.hunter.controller.aop;
 import cn.com.cubic.platform.hunter.mysql.entity.TLogLogin;
 import cn.com.cubic.platform.hunter.mysql.mapper.TLogLoginMapper;
 import cn.com.cubic.platform.hunter.mysql.services.TLogLoginService;
+import cn.com.cubic.platform.utils.IpAddressUtils;
 import cn.com.cubic.platform.utils.UtilHelper;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -62,9 +63,10 @@ public class AccountAspect {
             account=map.get("account").toString();
         }
         //记录日志数据
-        String ipAddress= UtilHelper.getRemoteAddress(request);
-        String user=request.getRemoteUser();
-        this.remarkLog(account,ipAddress,user);
+        String ipAddress= IpAddressUtils.getRemoteAddress(request);
+        String sysInfo=IpAddressUtils.getRequestSystemInfo(request);
+        String browers=IpAddressUtils.getRequestBrowserInfo(request);
+        this.remarkLog(account,ipAddress,sysInfo,browers);
 
         Object result = null;
         try {
@@ -78,15 +80,17 @@ public class AccountAspect {
 
 
 
-    private void remarkLog(String account,String ip,String host){
+    private void remarkLog(String account,String ip,String sysInfo,String browers){
         taskExecutor.execute(new Runnable() {
             @Override
             public void run() {
                 TLogLogin logLogin=new TLogLogin();
                 logLogin.setLoginAccount(account);
                 logLogin.setIpAddress(ip);
-                logLogin.setHostName(host);
-                logLogin.setMacAddress(UtilHelper.getMACAddress(ip));
+                logLogin.setSysInfo(sysInfo);
+                logLogin.setBrowser(browers);
+                logLogin.setHostName(IpAddressUtils.getHostName(ip));
+                logLogin.setMacAddress(IpAddressUtils.getMacAddress(ip));
                 logLogin.setCreateTime(new Date());
                 logLoginMapper.insert(logLogin);
             }
