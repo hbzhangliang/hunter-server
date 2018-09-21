@@ -3,10 +3,7 @@ package cn.com.cubic.platform.utils;
 import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.net.Inet4Address;
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.net.UnknownHostException;
+import java.net.*;
 import java.util.Enumeration;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -325,6 +322,40 @@ public class IpAddressUtils {
             e.printStackTrace();
         }
         return "";
+    }
+
+
+
+
+    //获取本机的相应地址
+    public static String  getLocalMac()  {
+        try {
+            InetAddress ia = InetAddress.getLocalHost();
+            // TODO Auto-generated method stub
+            //获取网卡，获取地址
+            byte[] mac = NetworkInterface.getByInetAddress(ia).getHardwareAddress();
+            System.out.println("mac数组长度：" + mac.length);
+            StringBuffer sb = new StringBuffer("");
+            for (int i = 0; i < mac.length; i++) {
+                if (i != 0) {
+                    sb.append("-");
+                }
+                //字节转换为整数
+                int temp = mac[i] & 0xff;
+                String str = Integer.toHexString(temp);
+                System.out.println("每8位:" + str);
+                if (str.length() == 1) {
+                    sb.append("0" + str);
+                } else {
+                    sb.append(str);
+                }
+            }
+            return sb.toString().toUpperCase();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
     }
 
 

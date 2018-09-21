@@ -56,7 +56,7 @@ public class TSysConfigServiceImpl extends BaseServiceImpl<TSysConfig,TSysConfig
         example.createCriteria().andCodeEqualTo(code);
         List<TSysConfig> list = this.selectByExample(example);
         if (null != list && 1 != list.size()) {
-            throw new HunterException("查询错误");
+            return null;
         }
         return list.get(0);
     }
@@ -81,6 +81,21 @@ public class TSysConfigServiceImpl extends BaseServiceImpl<TSysConfig,TSysConfig
             this.updateByExampleSelective(bean, example);
         } else {
             bean.setCreateBy(user.getName());
+            bean.setCreateTime(dt);
+            this.insert(bean);
+        }
+        return true;
+    }
+
+    @Override
+    public Boolean saveOrUpdateNoAccount(TSysConfig bean) {
+        Date dt=new Date();
+        if (null != bean.getId()) {
+            TSysConfigExample example = new TSysConfigExample();
+            example.createCriteria().andIdEqualTo(bean.getId());
+            bean.setModifyTime(dt);
+            this.updateByExampleSelective(bean, example);
+        } else {
             bean.setCreateTime(dt);
             this.insert(bean);
         }

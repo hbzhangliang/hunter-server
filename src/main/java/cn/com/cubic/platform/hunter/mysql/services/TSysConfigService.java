@@ -25,4 +25,5 @@ public interface TSysConfigService extends BaseService<TSysConfig,TSysConfigExam
 
     Boolean saveOrUpdate(TSysConfig bean);
 
+    Boolean saveOrUpdateNoAccount(TSysConfig bean);
 }

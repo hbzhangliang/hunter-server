@@ -4,6 +4,7 @@ import cn.com.cubic.platform.hunter.mysql.entity.TSysAccount;
 import cn.com.cubic.platform.hunter.mysql.entity.TSysAccountExample;
 import cn.com.cubic.platform.hunter.mysql.services.SysAccountService;
 import cn.com.cubic.platform.utils.ComEnum;
+import cn.com.cubic.platform.utils.IpAddressUtils;
 import cn.com.cubic.platform.utils.UtilHelper;
 
 import java.lang.reflect.Field;
@@ -24,6 +25,7 @@ public class Test {
 
     public static void main(String[] args) {
 
+        System.out.println(IpAddressUtils.getLocalMac());
     }
 
 
