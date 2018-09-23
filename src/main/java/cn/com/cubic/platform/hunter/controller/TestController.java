@@ -42,6 +42,15 @@ import java.util.Map;
 public class TestController extends BaseController{
     private static final Logger log = LoggerFactory.getLogger(TestController.class);
 
+
+    @RequestMapping(value = "/health")
+    public Object healthCheck(){
+        JSONObject jsonObject=new JSONObject(2);
+        jsonObject.put("status","up");
+        jsonObject.put("description","hunter server status is ok");
+        return jsonObject;
+    }
+
     /**
      * mysql 操作
      * @param
