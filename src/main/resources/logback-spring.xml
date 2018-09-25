@@ -2,7 +2,7 @@
 <configuration>
 
 	<!-- 定义日志文件 输入位置 -->
-	<property name="log_dir" value="/Users/hbzhangliang/logs/book" />
+	<property name="log_dir" value="/data/yxtlog/hunter-server" />
 	<!-- 日志最大的历史 10天 -->
 	<property name="maxHistory" value="10"/>
 
