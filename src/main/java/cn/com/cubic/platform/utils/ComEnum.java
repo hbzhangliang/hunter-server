@@ -183,7 +183,7 @@ public class ComEnum {
 
     //company表的相应枚举
     public static enum CorpType{
-        Common("普通公司"),Develop("开发中公司"),Signed("已签约公司"),Teminated("终止合作");
+        Common("普通公司"),Develop("开发中公司"),Signed("已签约公司"),Terminated("终止合作");
         private String desc;
         private CorpType(String desc){
             this.desc=desc;
