@@ -25,7 +25,7 @@ public class Test {
 
     public static void main(String[] args) {
 
-        System.out.println(IpAddressUtils.getLocalMac());
+        System.out.println(ComEnum.CorpType.Develop.getDesc());
     }
 
 

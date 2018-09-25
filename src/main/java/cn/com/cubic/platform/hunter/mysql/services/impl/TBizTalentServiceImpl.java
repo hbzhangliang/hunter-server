@@ -138,9 +138,10 @@ public class TBizTalentServiceImpl extends BaseServiceImpl<TBizTalent,TBizTalent
 
     @Override
     public List<TBizTalent> listAll() {
-        TBizTalentExample example=new TBizTalentExample();
-        example.setOrderByClause("seq is null,seq");
-        return this.selectByExample(example);
+//        TBizTalentExample example=new TBizTalentExample();
+//        example.setOrderByClause("seq is null,seq");
+//        return this.selectByExample(example);
+        return null;
     }
 
     @Override
@@ -196,7 +197,6 @@ public class TBizTalentServiceImpl extends BaseServiceImpl<TBizTalent,TBizTalent
             example.createCriteria().andIdEqualTo(bean.getId());
             bean.setModifyBy(user.getName());
             bean.setModifyTime(dt);
-            bean.setOwner(user.getId());
             this.updateByExampleSelective(bean, example);
 
             //删除共享数据

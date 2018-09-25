@@ -178,4 +178,55 @@ public class ComEnum {
 
 
 
+
+
+
+    //company表的相应枚举
+    public static enum CorpType{
+        Common("普通公司"),Develop("开发中公司"),Signed("已签约公司"),Teminated("终止合作");
+        private String desc;
+        private CorpType(String desc){
+            this.desc=desc;
+        }
+        public String getDesc(){
+            return desc;
+        }
+    }
+
+
+    public static enum CorpMtype{
+        None("无"),ChildCorp("子公司"),MotherCorp("母公司");
+        private String desc;
+        private CorpMtype(String desc){
+            this.desc=desc;
+        }
+        public String getDesc(){
+            return desc;
+        }
+    }
+
+    public static enum CorpFinace{
+        A("A轮"),B("B轮"),C("C轮"),D("D轮"),E("E轮"),F("F轮"),S("上市");
+        private String desc;
+        private CorpFinace(String desc){
+            this.desc=desc;
+        }
+        public String getDesc(){
+            return desc;
+        }
+    }
+
+
+    public static enum CompanyDelStatus{
+        Normal,Faked,Deleted;
+        public static CompanyDelStatus CompanyDelStatus(String str){
+            for(CompanyDelStatus item: CompanyDelStatus.values()){
+                if(str.equalsIgnoreCase(item.toString())){
+                    return item;
+                }
+            }
+            return null;
+        }
+    }
+
 }
