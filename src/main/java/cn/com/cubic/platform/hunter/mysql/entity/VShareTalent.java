@@ -3,6 +3,7 @@ package cn.com.cubic.platform.hunter.mysql.entity;
 import java.util.Date;
 
 public class VShareTalent extends BaseEntity{
+
     private String type;
 
     private Long owner;
@@ -65,6 +66,7 @@ public class VShareTalent extends BaseEntity{
 
     private String delStatus;
 
+    private Long accountId;
 
     public String getType() {
         return type;
@@ -312,5 +314,13 @@ public class VShareTalent extends BaseEntity{
 
     public void setDelStatus(String delStatus) {
         this.delStatus = delStatus;
+    }
+
+    public Long getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(Long accountId) {
+        this.accountId = accountId;
     }
 }

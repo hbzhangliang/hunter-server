@@ -202,6 +202,7 @@ public class TBizTalentServiceImpl extends BaseServiceImpl<TBizTalent,TBizTalent
             //删除共享数据
             delFalg=true;
         } else {
+            bean.setOwner(user.getId());
             bean.setDelStatus(ComEnum.TalentDelStatus.Normal.toString());
             bean.setCreateBy(user.getName());
             bean.setCreateTime(dt);

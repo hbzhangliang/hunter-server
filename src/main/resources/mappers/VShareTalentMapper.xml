@@ -40,6 +40,7 @@
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="modify_by" property="modifyBy" jdbcType="VARCHAR" />
     <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+    <result column="account_id" property="accountId" jdbcType="BIGINT" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -103,7 +104,7 @@
     id, type, owner, avatar, eng_name, name, native_place, city, phone1, phone2, phone3, 
     email1, email2, email3, business, career, gender, birthday, marray, qq, salary, intent_city, 
     tags, mpc, quality, family, purpose, now_salary, exp_salary, evaluate, remark, status, 
-    del_status, flag, create_by, create_time, modify_by, modify_time
+    del_status, flag, create_by, create_time, modify_by, modify_time, account_id
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.com.cubic.platform.hunter.mysql.entity.VShareTalentExample" >
     select
@@ -141,8 +142,8 @@
       purpose, now_salary, exp_salary, 
       evaluate, remark, status, 
       del_status, flag, create_by, 
-      create_time, modify_by, modify_time
-      )
+      create_time, modify_by, modify_time, 
+      account_id)
     values (#{type,jdbcType=VARCHAR}, #{owner,jdbcType=BIGINT}, #{avatar,jdbcType=VARCHAR}, 
       #{engName,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{nativePlace,jdbcType=BIGINT}, 
       #{city,jdbcType=BIGINT}, #{phone1,jdbcType=VARCHAR}, #{phone2,jdbcType=VARCHAR}, 
@@ -154,8 +155,8 @@
       #{purpose,jdbcType=VARCHAR}, #{nowSalary,jdbcType=VARCHAR}, #{expSalary,jdbcType=VARCHAR}, 
       #{evaluate,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
       #{delStatus,jdbcType=VARCHAR}, #{flag,jdbcType=BIT}, #{createBy,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{modifyBy,jdbcType=VARCHAR}, #{modifyTime,jdbcType=TIMESTAMP}
-      )
+      #{createTime,jdbcType=TIMESTAMP}, #{modifyBy,jdbcType=VARCHAR}, #{modifyTime,jdbcType=TIMESTAMP}, 
+      #{accountId,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="cn.com.cubic.platform.hunter.mysql.entity.VShareTalent" >
     <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
@@ -274,6 +275,9 @@
       <if test="modifyTime != null" >
         modify_time,
       </if>
+      <if test="accountId != null" >
+        account_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="type != null" >
@@ -386,6 +390,9 @@
       </if>
       <if test="modifyTime != null" >
         #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="accountId != null" >
+        #{accountId,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
@@ -512,6 +519,9 @@
       <if test="record.modifyTime != null" >
         modify_time = #{record.modifyTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.accountId != null" >
+        account_id = #{record.accountId,jdbcType=BIGINT},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -556,7 +566,8 @@
       create_by = #{record.createBy,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       modify_by = #{record.modifyBy,jdbcType=VARCHAR},
-      modify_time = #{record.modifyTime,jdbcType=TIMESTAMP}
+      modify_time = #{record.modifyTime,jdbcType=TIMESTAMP},
+      account_id = #{record.accountId,jdbcType=BIGINT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>

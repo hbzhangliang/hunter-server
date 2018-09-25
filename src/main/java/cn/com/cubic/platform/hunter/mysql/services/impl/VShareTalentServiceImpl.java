@@ -97,7 +97,8 @@ public class VShareTalentServiceImpl  extends BaseServiceImpl<VShareTalent,VShar
             if(ownerFlag){
                 //只能看到自己的
                 TSysAccount user=(TSysAccount) GlobalHolder.get().get("account");
-                criteria.andOwnerEqualTo(user.getId());
+                criteria.andAccountIdEqualTo(user.getId());
+//                criteria.andOwnerEqualTo(user.getId());
             }
             return example;
         }
