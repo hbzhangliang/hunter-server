@@ -2,8 +2,11 @@ package cn.com.cubic.platform.hunter.controller;
 
 import cn.com.cubic.platform.hunter.mysql.entity.TBizCompany;
 import cn.com.cubic.platform.hunter.mysql.entity.TBizTalent;
+import cn.com.cubic.platform.hunter.mysql.entity.VShareCompany;
+import cn.com.cubic.platform.hunter.mysql.entity.VShareTalent;
 import cn.com.cubic.platform.hunter.mysql.services.TBizCompanyService;
 import cn.com.cubic.platform.hunter.mysql.services.TBizTalentService;
+import cn.com.cubic.platform.hunter.mysql.services.VShareCompanyService;
 import cn.com.cubic.platform.hunter.mysql.services.VShareTalentService;
 import cn.com.cubic.platform.hunter.mysql.vo.CompanyVo;
 import cn.com.cubic.platform.hunter.mysql.vo.PageParams;
@@ -35,6 +38,8 @@ public class CompanyController {
     @Autowired
     private TBizCompanyService companyService;
 
+    @Autowired
+    private VShareCompanyService shareCompanyService;
     /**
      * 只显示自己的
      * @param pageParams
@@ -99,6 +104,8 @@ public class CompanyController {
         }
         return companyService.adminDel(delIds);
     }
-
-
+    @RequestMapping(value = "/list-share")
+    public Object listShare(@RequestBody PageParams<VShareCompany> pageParams){
+        return shareCompanyService.list(pageParams);
+    }
 }
