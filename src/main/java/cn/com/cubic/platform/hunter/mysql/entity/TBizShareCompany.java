@@ -2,8 +2,7 @@ package cn.com.cubic.platform.hunter.mysql.entity;
 
 import java.util.Date;
 
-public class TBizShareCompany extends BaseEntity{
-
+public class TBizShareCompany extends BaseEntity {
     private String shareType;
 
     private Long companyId;

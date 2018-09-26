@@ -24,7 +24,7 @@
         <javaClientGenerator targetPackage="cn.com.cubic.platform.hunter.mysql.mapper" targetProject="src/main/java" type="XMLMAPPER" >
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
-        <table schema="hunter" tableName="t_biz_share_company" domainObjectName="TBizShareCompany"
+        <table schema="hunter" tableName="t_biz_company_acount_ref" domainObjectName="TBizCompanyAccountRef"
                selectByExampleQueryId="true"
                enableInsert="true"
                enableUpdateByExample="true"

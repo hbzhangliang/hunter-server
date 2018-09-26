@@ -1,16 +1,24 @@
 package cn.com.cubic.platform.hunter.mysql.services.impl;
 
 import cn.com.cubic.platform.hunter.mysql.entity.*;
+import cn.com.cubic.platform.hunter.mysql.services.TBizCompanyAccountRefService;
 import cn.com.cubic.platform.hunter.mysql.services.TBizCompanyService;
+import cn.com.cubic.platform.hunter.mysql.services.TBizShareCompanyService;
 import cn.com.cubic.platform.hunter.mysql.vo.CompanyVo;
 import cn.com.cubic.platform.hunter.mysql.vo.PageParams;
+import cn.com.cubic.platform.hunter.mysql.vo.TalentVo;
 import cn.com.cubic.platform.utils.ComEnum;
+import cn.com.cubic.platform.utils.ComServers;
 import cn.com.cubic.platform.utils.Exception.HunterException;
 import cn.com.cubic.platform.utils.UtilHelper;
 import cn.com.cubic.platform.utils.global.GlobalHolder;
+import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Method;
@@ -171,24 +179,84 @@ public class TBizCompanyServiceImpl extends BaseServiceImpl<TBizCompany,TBizComp
     public Boolean saveOrUpdate(CompanyVo bean) {
         Date dt=new Date();
         TSysAccount user=(TSysAccount) GlobalHolder.get().get("account");
+        Boolean delFalg=false;
         if (null != bean.getId()) {
             TBizCompanyExample example = new TBizCompanyExample();
             example.createCriteria().andIdEqualTo(bean.getId());
             bean.setModifyBy(user.getName());
             bean.setModifyTime(dt);
             this.updateByExampleSelective(bean, example);
+
+            //删除共享数据
+            delFalg=true;
+
         } else {
             bean.setOwner(bean.getId());
             bean.setCreateBy(user.getName());
+            bean.setDelStatus(ComEnum.TalentDelStatus.Normal.toString());
             bean.setCreateTime(dt);
             this.insert(bean);
         }
+
+        this.createShareCompanyTx(bean,delFalg);
         return true;
+    }
+
+
+    private void createShareCompanyTx(CompanyVo bean,Boolean delFlag){
+        taskExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+                if(delFlag) {
+                    String sql = String.format("delete from t_biz_share_company where company_id=%s", bean.getId());
+                    jdbcTemplate.batchUpdate(sql);
+                }
+                if(null!=bean.getShareCompanyList()) {
+                    for (TBizShareCompany item : bean.getShareCompanyList()) {
+                        item.setCompanyId(bean.getId());
+                        shareCompanyService.insert(item);
+                    }
+                }
+
+                //对 t_biz_share_talent 表的操作
+                List<Long> accountIds= shareCompanyService.getAccountsBytalentid(bean.getId(),bean.getShareCompanyList());
+                bizCompanyAccountRefService.updateShareData(accountIds,bean.getId());
+            }
+        });
     }
 
 
     @Override
     public CompanyVo findVoById(Long id) {
-        return null;
+        TBizCompany company=this.findById(id);
+        CompanyVo vo= JSONObject.parseObject(JSONObject.toJSONString(company),CompanyVo.class);
+        if(null!=vo.getBusiness()) {
+            vo.setTmpBusinessId(comServers.getSplitIds(vo.getBusiness()));
+            vo.setTmpBusinessName(comServers.getBusinesssNames(vo.getTmpBusinessId()));
+        }
+        if(null!=vo.getCity()) {
+            vo.setTmpCityId(comServers.getSplitIds(vo.getCity()));
+            vo.setTmpCityName(comServers.getCityNames(vo.getTmpCityId()));
+        }
+
+        TBizShareCompanyExample example=new TBizShareCompanyExample();
+        example.createCriteria().andCompanyIdEqualTo(id);
+        vo.setShareCompanyList(shareCompanyService.selectByExample(example));
+        return vo;
     }
+
+    @Autowired
+    private TBizCompanyAccountRefService bizCompanyAccountRefService;
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    private ThreadPoolTaskExecutor taskExecutor;
+
+    @Autowired
+    private TBizShareCompanyService shareCompanyService;
+
+    @Autowired
+    private ComServers comServers;
 }
