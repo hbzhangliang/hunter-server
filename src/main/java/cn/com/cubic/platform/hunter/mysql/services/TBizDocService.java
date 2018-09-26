@@ -50,6 +50,9 @@ public interface TBizDocService extends BaseService<TBizDoc,TBizDocExample>{
     List<TBizDoc> docListByOwner(Long ownerId);
 
 
+    List<TBizDoc> docListByOwner(Long ownerId,String type);
+
+
     /**
      * 查询某个人有权限访问的分享的文件夹
      * @param accountId
@@ -57,7 +60,7 @@ public interface TBizDocService extends BaseService<TBizDoc,TBizDocExample>{
      */
     List<TBizDoc> docListByShare(Long accountId);
 
-
+    List<TBizDoc> docListByShare(Long accountId,String type);
     /**
      * 获取某人的目录
      * @param accountId
@@ -67,6 +70,6 @@ public interface TBizDocService extends BaseService<TBizDoc,TBizDocExample>{
 
 
 
-    List<ElTreeVo> listDocByAccountId(Long accountId);
+    List<ElTreeVo> listDocByAccountId(Long accountId,String type);
 
 }

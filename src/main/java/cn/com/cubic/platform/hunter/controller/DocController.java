@@ -116,9 +116,10 @@ public class DocController {
 
 
     @RequestMapping(value = "/list-owner")
-    public Object listOwner(){
+    public Object listOwner(@RequestBody Map<String,String> map){
+        String type=map.get("type");
         TSysAccount account=(TSysAccount) GlobalHolder.get().get("account");
-        return docService.listDocByAccountId(account.getId());
+        return docService.listDocByAccountId(account.getId(),type);
     }
 
 

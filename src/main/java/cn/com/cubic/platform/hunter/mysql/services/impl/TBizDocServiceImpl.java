@@ -368,6 +368,15 @@ public class TBizDocServiceImpl extends BaseServiceImpl<TBizDoc,TBizDocExample> 
         return this.selectByExample(example);
     }
 
+
+    @Override
+    public List<TBizDoc> docListByOwner(Long ownerId, String type) {
+        TBizDocExample example=new TBizDocExample();
+        //类型是人，并且owner是自己
+        example.createCriteria().andShareTypeEqualTo(false).andTypeEqualTo(type).andOwnerEqualTo(ownerId);
+        return this.selectByExample(example);
+    }
+
     @Override
     public List<TBizDoc> docListByShare(Long accountId) {
         TSysAccount account=accountService.findById(accountId);
@@ -386,7 +395,24 @@ public class TBizDocServiceImpl extends BaseServiceImpl<TBizDoc,TBizDocExample> 
     }
 
 
-    private Boolean checkShare(TBizDoc doc,TSysAccount account){
+    @Override
+    public List<TBizDoc> docListByShare(Long accountId, String type) {
+        TSysAccount account=accountService.findById(accountId);
+        TBizDocExample example=new TBizDocExample();
+        example.createCriteria().andShareTypeEqualTo(true).andTypeEqualTo(type);
+        List<TBizDoc> list=this.selectByExample(example);
+        List<TBizDoc> result=new ArrayList<>(10);
+        if(list!=null&&list.size()>0){
+            for(TBizDoc item:list){
+                if (this.checkShare(item, account)) {
+                    result.add(item);
+                }
+            }
+        }
+        return result;
+    }
+
+    private Boolean checkShare(TBizDoc doc, TSysAccount account){
         TBizShareDocExample example=new TBizShareDocExample();
         example.createCriteria().andDocIdEqualTo(doc.getId());
         List<TBizShareDoc> list=shareDocService.selectByExample(example);
@@ -435,9 +461,9 @@ public class TBizDocServiceImpl extends BaseServiceImpl<TBizDoc,TBizDocExample> 
 
 
     @Override
-    public List<ElTreeVo> listDocByAccountId(Long accountId) {
-        List<TBizDoc> selfList=this.docListByOwner(accountId);
-        List<TBizDoc> shareList=this.docListByShare(accountId);
+    public List<ElTreeVo> listDocByAccountId(Long accountId,String type) {
+        List<TBizDoc> selfList=this.docListByOwner(accountId,type);
+        List<TBizDoc> shareList=this.docListByShare(accountId,type);
 
         List<ElTreeVo> selfEltreeList=new ArrayList<>(5);
         if(selfList!=null&&selfList.size()>0){
