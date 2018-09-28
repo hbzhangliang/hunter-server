@@ -1,9 +1,8 @@
 package cn.com.cubic.platform.hunter.mysql.services.impl;
 
 import cn.com.cubic.platform.hunter.mysql.entity.*;
-import cn.com.cubic.platform.hunter.mysql.services.TBizTalentDocService;
+import cn.com.cubic.platform.hunter.mysql.services.TBizCompanyDocService;
 import cn.com.cubic.platform.hunter.mysql.vo.PageParams;
-import cn.com.cubic.platform.utils.Exception.HunterException;
 import cn.com.cubic.platform.utils.UtilHelper;
 import cn.com.cubic.platform.utils.global.GlobalHolder;
 import org.slf4j.Logger;
@@ -17,16 +16,16 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by Liang.Zhang on 2018/9/20.
+ * Created by Liang.Zhang on 2018/9/28.
  **/
 @Service
-public class TBizTalentDocServiceImpl extends BaseServiceImpl<TBizTalentDoc,TBizTalentDocExample> implements TBizTalentDocService {
+public class TBizCompanyDocServiceImpl  extends BaseServiceImpl<TBizCompanyDoc,TBizCompanyDocExample> implements TBizCompanyDocService {
 
-    private final static Logger log = LoggerFactory.getLogger(TBizTalentDocServiceImpl.class);
+    private final static Logger log = LoggerFactory.getLogger(TBizCompanyDocServiceImpl.class);
 
     @Override
-    public PageParams<TBizTalentDoc> list(PageParams<TBizTalentDoc> pageParams) {
-        TBizTalentDocExample example=new TBizTalentDocExample();
+    public PageParams<TBizCompanyDoc> list(PageParams<TBizCompanyDoc> pageParams) {
+        TBizCompanyDocExample example=new TBizCompanyDocExample();
         //排序
         String strOrder=String.format("%s %s", UtilHelper.camelToUnderline(pageParams.getOrderBy()),pageParams.getDirection());
         example.setOrderByClause(strOrder);
@@ -34,15 +33,15 @@ public class TBizTalentDocServiceImpl extends BaseServiceImpl<TBizTalentDoc,TBiz
     }
 
     @Override
-    public List<TBizTalentDoc> listAll() {
-        return this.selectByExample(null);
+    public List<TBizCompanyDoc> listAll() {
+        return null;
     }
 
     @Override
-    public TBizTalentDoc findById(Long id) {
-        TBizTalentDocExample example = new TBizTalentDocExample();
+    public TBizCompanyDoc findById(Long id) {
+        TBizCompanyDocExample example = new TBizCompanyDocExample();
         example.createCriteria().andIdEqualTo(id);
-        List<TBizTalentDoc> list = this.selectByExample(example);
+        List<TBizCompanyDoc> list = this.selectByExample(example);
         if (null != list && 1 != list.size()) {
             return null;
 //            throw new HunterException("查询错误");
@@ -52,18 +51,18 @@ public class TBizTalentDocServiceImpl extends BaseServiceImpl<TBizTalentDoc,TBiz
 
     @Override
     public Boolean del(List<Long> ids) {
-        TBizTalentDocExample example = new TBizTalentDocExample();
+        TBizCompanyDocExample example = new TBizCompanyDocExample();
         example.createCriteria().andIdIn(ids);
         this.deleteByExample(example);
         return true;
     }
 
     @Override
-    public Boolean saveOrUpdate(TBizTalentDoc bean) {
+    public Boolean saveOrUpdate(TBizCompanyDoc bean) {
         Date dt=new Date();
         TSysAccount user=(TSysAccount) GlobalHolder.get().get("account");
         if (null != bean.getId()) {
-            TBizTalentDocExample example = new TBizTalentDocExample();
+            TBizCompanyDocExample example = new TBizCompanyDocExample();
             example.createCriteria().andIdEqualTo(bean.getId());
             bean.setModifyBy(user.getName());
             bean.setModifyTime(dt);
@@ -76,30 +75,28 @@ public class TBizTalentDocServiceImpl extends BaseServiceImpl<TBizTalentDoc,TBiz
         return true;
     }
 
-
     @Override
-    public void saveOrUpdate(Long talentId, List<Long> docIds) {
+    public void saveOrUpdate(Long companyId, List<Long> docIds) {
         //首先全部删除
-        String sql=String.format("delete from t_biz_talent_doc where talent_id=%s",talentId);
+        String sql=String.format("delete from t_biz_company_doc where company_id=%s",companyId);
         jdbcTemplate.update(sql);
         //然后全部新增
         for(Long item:docIds){
-           TBizTalentDoc p=new TBizTalentDoc();
-           p.setTalentId(talentId);
-           p.setDocId(item);
-           this.saveOrUpdate(p);
+            TBizCompanyDoc p=new TBizCompanyDoc();
+            p.setCompanyId(companyId);
+            p.setDocId(item);
+            this.saveOrUpdate(p);
         }
     }
 
-
     @Override
-    public List<Long> getDocIdsByTalentId(Long talentId) {
-        TBizTalentDocExample example=new TBizTalentDocExample();
-        example.createCriteria().andTalentIdEqualTo(talentId);
-        List<TBizTalentDoc> list=this.selectByExample(example);
+    public List<Long> getDocIdsByCompanyId(Long companyId) {
+        TBizCompanyDocExample example=new TBizCompanyDocExample();
+        example.createCriteria().andCompanyIdEqualTo(companyId);
+        List<TBizCompanyDoc> list=this.selectByExample(example);
         List<Long> result=new ArrayList<>(10);
         if(list!=null&&list.size()>0){
-            for (TBizTalentDoc item:list){
+            for (TBizCompanyDoc item:list){
                 result.add(item.getDocId());
             }
         }
