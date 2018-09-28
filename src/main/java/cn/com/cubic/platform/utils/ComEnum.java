@@ -229,4 +229,28 @@ public class ComEnum {
         }
     }
 
+
+    //project
+    public static enum ProjectPriority{
+        Level1("第一等级(最高)"),Level2("第二等级(次高)"),Level3("第三等级(一般)"),Level4("第四等级(次低)"),Level5("第五等级(最低)");
+        private String desc;
+        private ProjectPriority(String desc){
+            this.desc=desc;
+        }
+        public String getDesc(){
+            return desc;
+        }
+    }
+
+    public static enum ProcessStatus{
+        Process("进展中"),Success("已成功的"),Pause("暂停的"),NoEffective("失效的"),Canceled("已取消");
+        private String desc;
+        private ProcessStatus(String desc){
+            this.desc=desc;
+        }
+        public String getDesc(){
+            return desc;
+        }
+    }
+
 }
