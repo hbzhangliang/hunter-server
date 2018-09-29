@@ -67,8 +67,8 @@ public class ProjectDocController {
         for(Object p:ids){
             docIds.add(Long.valueOf(p.toString()));
         }
-        Long talentid=Long.valueOf(map.get("talentId").toString());
-        projectDocService.saveOrUpdate(talentid,docIds);
+        Long projectId=Long.valueOf(map.get("projectId").toString());
+        projectDocService.saveOrUpdate(projectId,docIds);
         return null;
     }
 

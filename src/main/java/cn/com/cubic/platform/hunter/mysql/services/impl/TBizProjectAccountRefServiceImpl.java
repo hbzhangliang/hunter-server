@@ -97,7 +97,7 @@ public class TBizProjectAccountRefServiceImpl extends BaseServiceImpl<TBizProjec
     @Override
     public void updateShareData(List<Long> accountIds, Long projectId) {
         //首先把存在 的数据全部变成 flag=false
-        String sql=String.format("update t_biz_company_acount_ref set flag=false where project_id=%s",projectId);
+        String sql=String.format("update t_biz_project_acount_ref set flag=false where project_id=%s",projectId);
         jdbcTemplate.execute(sql);
         if(null!=accountIds&&accountIds.size()>0){
             for(Long item:accountIds){
