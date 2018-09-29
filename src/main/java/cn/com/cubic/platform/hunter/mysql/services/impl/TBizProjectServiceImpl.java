@@ -4,12 +4,15 @@ import cn.com.cubic.platform.hunter.mysql.entity.*;
 import cn.com.cubic.platform.hunter.mysql.services.TBizProjectAccountRefService;
 import cn.com.cubic.platform.hunter.mysql.services.TBizProjectService;
 import cn.com.cubic.platform.hunter.mysql.services.TBizShareProjectService;
+import cn.com.cubic.platform.hunter.mysql.vo.CompanyVo;
 import cn.com.cubic.platform.hunter.mysql.vo.PageParams;
 import cn.com.cubic.platform.hunter.mysql.vo.ProjectVo;
 import cn.com.cubic.platform.utils.ComEnum;
+import cn.com.cubic.platform.utils.ComServers;
 import cn.com.cubic.platform.utils.Exception.HunterException;
 import cn.com.cubic.platform.utils.UtilHelper;
 import cn.com.cubic.platform.utils.global.GlobalHolder;
+import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -220,8 +223,24 @@ public class TBizProjectServiceImpl extends BaseServiceImpl<TBizProject,TBizProj
 
     @Override
     public ProjectVo findVoById(Long id) {
-        return null;
+        TBizProject project=this.findById(id);
+        ProjectVo vo= JSONObject.parseObject(JSONObject.toJSONString(project),ProjectVo.class);
+        if(null!=vo.getCity()){
+            vo.setTmpCityId(comServers.getSplitIds(vo.getCity()));
+            vo.setTmpCityName(comServers.getCityNames(vo.getTmpCityId()));
+        }
+        if(null!=vo.getPosition()){
+            vo.setTmpCareerId(comServers.getSplitIds(vo.getPosition()));
+            vo.setTmpCareerName(comServers.getCareerNames(vo.getTmpCareerId()));
+        }
+        TBizShareProjectExample example=new TBizShareProjectExample();
+        example.createCriteria().andProjectIdEqualTo(id);
+        vo.setShareProjectList(shareProjectService.selectByExample(example));
+        return vo;
     }
+
+    @Autowired
+    private ComServers comServers;
 
     @Autowired
     private TBizProjectAccountRefService bizProjectAccountRefService;
