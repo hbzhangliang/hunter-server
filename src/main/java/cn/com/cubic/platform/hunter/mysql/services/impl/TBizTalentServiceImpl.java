@@ -19,6 +19,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -327,6 +328,15 @@ public class TBizTalentServiceImpl extends BaseServiceImpl<TBizTalent,TBizTalent
         example5.setOrderByClause("seq");
         vo.setRecordLanguageList(recordLanguageService.selectByExample(example5));
         return vo;
+    }
+
+    @Override
+    public List<TalentVo> findVoListByIds(List<Long> ids) {
+        List<TalentVo> list=new ArrayList<>(10);
+        for(Long item:ids){
+            list.add(this.findVoById(item));
+        }
+        return list;
     }
 
     @Autowired

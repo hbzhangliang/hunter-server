@@ -7,4 +7,5 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 
 public interface TBizProjectMapper extends BaseMapper<TBizProject,TBizProjectExample>{
+
 }

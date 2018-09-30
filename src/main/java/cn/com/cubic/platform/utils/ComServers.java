@@ -8,6 +8,7 @@ import cn.com.cubic.platform.hunter.mysql.services.TBizBusinessService;
 import cn.com.cubic.platform.hunter.mysql.services.TBizCareerService;
 import cn.com.cubic.platform.hunter.mysql.services.TBizCityService;
 import cn.com.cubic.platform.hunter.mysql.services.TBizTagService;
+import cn.com.cubic.platform.hunter.mysql.vo.TalentVo;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -159,6 +160,19 @@ public class ComServers {
                 if(name!=null){
                     result+=name+",";
                 }
+            }
+            return result;
+        }
+        return null;
+
+    }
+
+
+    public String getTalentNames(List<TalentVo> list){
+        if(null!=list&&list.size()>0){
+            String result="";
+            for(TalentVo item:list){
+                result+=item.getName()+",";
             }
             return result;
         }

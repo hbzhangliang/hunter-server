@@ -20,6 +20,13 @@ public class ProjectVo extends TBizProject {
     private List<Long> tmpCareerId;
     private String tmpCareerName;
 
+
+    //联系人
+    private List<Long> tmpTalentIds;
+    private String tmpTalentNames;
+    private List<TalentVo> talentVoList;
+
+
     private List<TBizShareProject> shareProjectList;
 
 
@@ -61,5 +68,29 @@ public class ProjectVo extends TBizProject {
 
     public void setShareProjectList(List<TBizShareProject> shareProjectList) {
         this.shareProjectList = shareProjectList;
+    }
+
+    public List<TalentVo> getTalentVoList() {
+        return talentVoList;
+    }
+
+    public void setTalentVoList(List<TalentVo> talentVoList) {
+        this.talentVoList = talentVoList;
+    }
+
+    public List<Long> getTmpTalentIds() {
+        return tmpTalentIds;
+    }
+
+    public void setTmpTalentIds(List<Long> tmpTalentIds) {
+        this.tmpTalentIds = tmpTalentIds;
+    }
+
+    public String getTmpTalentNames() {
+        return tmpTalentNames;
+    }
+
+    public void setTmpTalentNames(String tmpTalentNames) {
+        this.tmpTalentNames = tmpTalentNames;
     }
 }

@@ -7,7 +7,7 @@
     <result column="scount" property="scount" jdbcType="INTEGER" />
     <result column="owner" property="owner" jdbcType="BIGINT" />
     <result column="company_id" property="companyId" jdbcType="BIGINT" />
-    <result column="talent_id" property="talentId" jdbcType="BIGINT" />
+    <result column="talent_ids" property="talentIds" jdbcType="VARCHAR" />
     <result column="city" property="city" jdbcType="VARCHAR" />
     <result column="position" property="position" jdbcType="VARCHAR" />
     <result column="salary" property="salary" jdbcType="DOUBLE" />
@@ -83,7 +83,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, name, scount, owner, company_id, talent_id, city, position, salary, priority, 
+    id, name, scount, owner, company_id, talent_ids, city, position, salary, priority, 
     start_time, end_time, description, pstatus, del_status, status, flag, create_by, 
     create_time, modify_by, modify_time
   </sql>
@@ -113,14 +113,14 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into t_biz_project (name, scount, owner, 
-      company_id, talent_id, city, 
+      company_id, talent_ids, city, 
       position, salary, priority, 
       start_time, end_time, description, 
       pstatus, del_status, status, 
       flag, create_by, create_time, 
       modify_by, modify_time)
     values (#{name,jdbcType=VARCHAR}, #{scount,jdbcType=INTEGER}, #{owner,jdbcType=BIGINT}, 
-      #{companyId,jdbcType=BIGINT}, #{talentId,jdbcType=BIGINT}, #{city,jdbcType=VARCHAR}, 
+      #{companyId,jdbcType=BIGINT}, #{talentIds,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
       #{position,jdbcType=VARCHAR}, #{salary,jdbcType=DOUBLE}, #{priority,jdbcType=VARCHAR}, 
       #{startTime,jdbcType=DATE}, #{endTime,jdbcType=DATE}, #{description,jdbcType=VARCHAR}, 
       #{pstatus,jdbcType=VARCHAR}, #{delStatus,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
@@ -145,8 +145,8 @@
       <if test="companyId != null" >
         company_id,
       </if>
-      <if test="talentId != null" >
-        talent_id,
+      <if test="talentIds != null" >
+        talent_ids,
       </if>
       <if test="city != null" >
         city,
@@ -207,8 +207,8 @@
       <if test="companyId != null" >
         #{companyId,jdbcType=BIGINT},
       </if>
-      <if test="talentId != null" >
-        #{talentId,jdbcType=BIGINT},
+      <if test="talentIds != null" >
+        #{talentIds,jdbcType=VARCHAR},
       </if>
       <if test="city != null" >
         #{city,jdbcType=VARCHAR},
@@ -281,8 +281,8 @@
       <if test="record.companyId != null" >
         company_id = #{record.companyId,jdbcType=BIGINT},
       </if>
-      <if test="record.talentId != null" >
-        talent_id = #{record.talentId,jdbcType=BIGINT},
+      <if test="record.talentIds != null" >
+        talent_ids = #{record.talentIds,jdbcType=VARCHAR},
       </if>
       <if test="record.city != null" >
         city = #{record.city,jdbcType=VARCHAR},
@@ -341,7 +341,7 @@
       scount = #{record.scount,jdbcType=INTEGER},
       owner = #{record.owner,jdbcType=BIGINT},
       company_id = #{record.companyId,jdbcType=BIGINT},
-      talent_id = #{record.talentId,jdbcType=BIGINT},
+      talent_ids = #{record.talentIds,jdbcType=VARCHAR},
       city = #{record.city,jdbcType=VARCHAR},
       position = #{record.position,jdbcType=VARCHAR},
       salary = #{record.salary,jdbcType=DOUBLE},

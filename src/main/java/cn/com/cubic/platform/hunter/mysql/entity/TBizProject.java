@@ -12,7 +12,7 @@ public class TBizProject extends BaseEntity{
 
     private Long companyId;
 
-    private Long talentId;
+    private String talentIds;
 
     private String city;
 
@@ -31,6 +31,7 @@ public class TBizProject extends BaseEntity{
     private String pstatus;
 
     private String delStatus;
+
 
     public String getName() {
         return name;
@@ -64,12 +65,12 @@ public class TBizProject extends BaseEntity{
         this.companyId = companyId;
     }
 
-    public Long getTalentId() {
-        return talentId;
+    public String getTalentIds() {
+        return talentIds;
     }
 
-    public void setTalentId(Long talentId) {
-        this.talentId = talentId;
+    public void setTalentIds(String talentIds) {
+        this.talentIds = talentIds;
     }
 
     public String getCity() {

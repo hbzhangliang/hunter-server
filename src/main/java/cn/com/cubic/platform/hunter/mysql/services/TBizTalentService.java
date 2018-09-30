@@ -29,4 +29,6 @@ public interface TBizTalentService extends BaseService<TBizTalent,TBizTalentExam
     //查询视图信息
     TalentVo findVoById(Long id);
 
+    List<TalentVo> findVoListByIds(List<Long> ids);
+
 }

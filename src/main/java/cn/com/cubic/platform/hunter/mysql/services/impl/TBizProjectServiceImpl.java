@@ -4,6 +4,7 @@ import cn.com.cubic.platform.hunter.mysql.entity.*;
 import cn.com.cubic.platform.hunter.mysql.services.TBizProjectAccountRefService;
 import cn.com.cubic.platform.hunter.mysql.services.TBizProjectService;
 import cn.com.cubic.platform.hunter.mysql.services.TBizShareProjectService;
+import cn.com.cubic.platform.hunter.mysql.services.TBizTalentService;
 import cn.com.cubic.platform.hunter.mysql.vo.CompanyVo;
 import cn.com.cubic.platform.hunter.mysql.vo.PageParams;
 import cn.com.cubic.platform.hunter.mysql.vo.ProjectVo;
@@ -233,11 +234,19 @@ public class TBizProjectServiceImpl extends BaseServiceImpl<TBizProject,TBizProj
             vo.setTmpCareerId(comServers.getSplitIds(vo.getPosition()));
             vo.setTmpCareerName(comServers.getCareerNames(vo.getTmpCareerId()));
         }
+        if(StringUtils.isNotEmpty(vo.getTalentIds())){
+            vo.setTmpTalentIds(comServers.getSplitIds(vo.getTalentIds()));
+            vo.setTalentVoList(talentService.findVoListByIds(vo.getTmpTalentIds()));
+            vo.setTmpTalentNames(comServers.getTalentNames(vo.getTalentVoList()));
+        }
         TBizShareProjectExample example=new TBizShareProjectExample();
         example.createCriteria().andProjectIdEqualTo(id);
         vo.setShareProjectList(shareProjectService.selectByExample(example));
         return vo;
     }
+
+    @Autowired
+    private TBizTalentService talentService;
 
     @Autowired
     private ComServers comServers;
