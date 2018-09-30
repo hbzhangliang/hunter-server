@@ -442,63 +442,73 @@ public class VProjectDocExample extends BaseExample{
             return (Criteria) this;
         }
 
-        public Criteria andTalentIdIsNull() {
-            addCriterion("talent_id is null");
+        public Criteria andTalentIdsIsNull() {
+            addCriterion("talent_ids is null");
             return (Criteria) this;
         }
 
-        public Criteria andTalentIdIsNotNull() {
-            addCriterion("talent_id is not null");
+        public Criteria andTalentIdsIsNotNull() {
+            addCriterion("talent_ids is not null");
             return (Criteria) this;
         }
 
-        public Criteria andTalentIdEqualTo(Long value) {
-            addCriterion("talent_id =", value, "talentId");
+        public Criteria andTalentIdsEqualTo(String value) {
+            addCriterion("talent_ids =", value, "talentIds");
             return (Criteria) this;
         }
 
-        public Criteria andTalentIdNotEqualTo(Long value) {
-            addCriterion("talent_id <>", value, "talentId");
+        public Criteria andTalentIdsNotEqualTo(String value) {
+            addCriterion("talent_ids <>", value, "talentIds");
             return (Criteria) this;
         }
 
-        public Criteria andTalentIdGreaterThan(Long value) {
-            addCriterion("talent_id >", value, "talentId");
+        public Criteria andTalentIdsGreaterThan(String value) {
+            addCriterion("talent_ids >", value, "talentIds");
             return (Criteria) this;
         }
 
-        public Criteria andTalentIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("talent_id >=", value, "talentId");
+        public Criteria andTalentIdsGreaterThanOrEqualTo(String value) {
+            addCriterion("talent_ids >=", value, "talentIds");
             return (Criteria) this;
         }
 
-        public Criteria andTalentIdLessThan(Long value) {
-            addCriterion("talent_id <", value, "talentId");
+        public Criteria andTalentIdsLessThan(String value) {
+            addCriterion("talent_ids <", value, "talentIds");
             return (Criteria) this;
         }
 
-        public Criteria andTalentIdLessThanOrEqualTo(Long value) {
-            addCriterion("talent_id <=", value, "talentId");
+        public Criteria andTalentIdsLessThanOrEqualTo(String value) {
+            addCriterion("talent_ids <=", value, "talentIds");
             return (Criteria) this;
         }
 
-        public Criteria andTalentIdIn(List<Long> values) {
-            addCriterion("talent_id in", values, "talentId");
+        public Criteria andTalentIdsLike(String value) {
+            addCriterion("talent_ids like", value, "talentIds");
             return (Criteria) this;
         }
 
-        public Criteria andTalentIdNotIn(List<Long> values) {
-            addCriterion("talent_id not in", values, "talentId");
+        public Criteria andTalentIdsNotLike(String value) {
+            addCriterion("talent_ids not like", value, "talentIds");
             return (Criteria) this;
         }
 
-        public Criteria andTalentIdBetween(Long value1, Long value2) {
-            addCriterion("talent_id between", value1, value2, "talentId");
+        public Criteria andTalentIdsIn(List<String> values) {
+            addCriterion("talent_ids in", values, "talentIds");
             return (Criteria) this;
         }
 
-        public Criteria andTalentIdNotBetween(Long value1, Long value2) {
-            addCriterion("talent_id not between", value1, value2, "talentId");
+        public Criteria andTalentIdsNotIn(List<String> values) {
+            addCriterion("talent_ids not in", values, "talentIds");
+            return (Criteria) this;
+        }
+
+        public Criteria andTalentIdsBetween(String value1, String value2) {
+            addCriterion("talent_ids between", value1, value2, "talentIds");
+            return (Criteria) this;
+        }
+
+        public Criteria andTalentIdsNotBetween(String value1, String value2) {
+            addCriterion("talent_ids not between", value1, value2, "talentIds");
             return (Criteria) this;
         }
 
@@ -1029,6 +1039,76 @@ public class VProjectDocExample extends BaseExample{
 
         public Criteria andPstatusNotBetween(String value1, String value2) {
             addCriterion("pstatus not between", value1, value2, "pstatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelStatusIsNull() {
+            addCriterion("del_status is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelStatusIsNotNull() {
+            addCriterion("del_status is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelStatusEqualTo(String value) {
+            addCriterion("del_status =", value, "delStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelStatusNotEqualTo(String value) {
+            addCriterion("del_status <>", value, "delStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelStatusGreaterThan(String value) {
+            addCriterion("del_status >", value, "delStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelStatusGreaterThanOrEqualTo(String value) {
+            addCriterion("del_status >=", value, "delStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelStatusLessThan(String value) {
+            addCriterion("del_status <", value, "delStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelStatusLessThanOrEqualTo(String value) {
+            addCriterion("del_status <=", value, "delStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelStatusLike(String value) {
+            addCriterion("del_status like", value, "delStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelStatusNotLike(String value) {
+            addCriterion("del_status not like", value, "delStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelStatusIn(List<String> values) {
+            addCriterion("del_status in", values, "delStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelStatusNotIn(List<String> values) {
+            addCriterion("del_status not in", values, "delStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelStatusBetween(String value1, String value2) {
+            addCriterion("del_status between", value1, value2, "delStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelStatusNotBetween(String value1, String value2) {
+            addCriterion("del_status not between", value1, value2, "delStatus");
             return (Criteria) this;
         }
 

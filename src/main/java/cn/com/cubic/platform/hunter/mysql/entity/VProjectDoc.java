@@ -12,7 +12,7 @@ public class VProjectDoc extends BaseEntity{
 
     private Long companyId;
 
-    private Long talentId;
+    private String talentIds;
 
     private String city;
 
@@ -30,7 +30,11 @@ public class VProjectDoc extends BaseEntity{
 
     private String pstatus;
 
+    private String delStatus;
+
+
     private Long docId;
+
 
     public String getName() {
         return name;
@@ -64,12 +68,12 @@ public class VProjectDoc extends BaseEntity{
         this.companyId = companyId;
     }
 
-    public Long getTalentId() {
-        return talentId;
+    public String getTalentIds() {
+        return talentIds;
     }
 
-    public void setTalentId(Long talentId) {
-        this.talentId = talentId;
+    public void setTalentIds(String talentIds) {
+        this.talentIds = talentIds;
     }
 
     public String getCity() {
@@ -134,6 +138,14 @@ public class VProjectDoc extends BaseEntity{
 
     public void setPstatus(String pstatus) {
         this.pstatus = pstatus;
+    }
+
+    public String getDelStatus() {
+        return delStatus;
+    }
+
+    public void setDelStatus(String delStatus) {
+        this.delStatus = delStatus;
     }
 
     public Long getDocId() {
